@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MagickScrolls">
+    <output-path>$PROJECT_DIR$/../../testpluginserver/plugins</output-path>
+    <root id="archive" name="MagickScrolls.jar">
+      <element id="module-output" name="MagickScrolls" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+    </root>
+  </artifact>
+</component>
