@@ -28,6 +28,7 @@ public class Crafts {
         meta.addEnchant(Enchantment.DAMAGE_ALL, 3,true);
         scrollOfTeleportation.setItemMeta(meta);
 
+        scrollOfTeleportation.setAmount(4);
         ShapedRecipe s = new ShapedRecipe(scrollOfTeleportation);
         s.shape(new String[]{"E E"," P ","E E"});
         s.setIngredient('E', Material.ENDER_PEARL);
