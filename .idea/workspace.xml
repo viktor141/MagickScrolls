@@ -7,20 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagickScrolls.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagickScrolls.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/META-INF/MagickScrolls.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,13 +26,17 @@
   <component name="CoverageViewManager">
     <option name="myElementSize" value="241" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="33" selection-start-column="33" selection-end-column="33" />
+            <state relative-caret-position="210">
+              <caret line="14" column="70" selection-start-line="14" selection-start-column="70" selection-end-line="14" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,8 +47,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+            <state relative-caret-position="1080">
+              <caret line="72" column="26" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#888#896#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="64" column="62" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="102" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+            <state relative-caret-position="149">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,13 +107,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" />
-        <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" />
         <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" />
+        <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" />
+        <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" />
+        <option value="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="458" />
     <option name="y" value="317" />
     <option name="width" value="1400" />
@@ -117,6 +126,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -150,7 +160,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -219,10 +228,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="31" width="1920" height="1049" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="31" width="1920" height="1049" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25985092" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2625133" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -232,7 +240,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.2342048" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39978212" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -264,26 +272,6 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/util/concurrent/FutureTask.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Thread.java" />
-    <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="33" selection-start-column="33" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -293,8 +281,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="48" lean-forward="true" selection-start-line="21" selection-start-column="48" selection-end-line="21" selection-end-column="48" />
+        <state relative-caret-position="149">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="70" selection-start-line="14" selection-start-column="70" selection-end-line="14" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="72" column="26" selection-start-line="72" selection-start-column="26" selection-end-line="72" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#888#896#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="64" column="62" selection-start-line="64" selection-start-column="62" selection-end-line="64" selection-end-column="102" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
