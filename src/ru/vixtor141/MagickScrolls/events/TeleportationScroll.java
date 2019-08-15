@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -32,8 +33,10 @@ public class TeleportationScroll implements Listener {
         }
         player.teleport(newLocation);
 
-        item.setAmount(item.getAmount() -1);
-        player.getInventory().setItemInMainHand(item);
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            item.setAmount(item.getAmount() - 1);
+            event.getPlayer().getInventory().setItemInMainHand(item);
+        }
     }
 
     private Location checkForTeleportation(Player player){

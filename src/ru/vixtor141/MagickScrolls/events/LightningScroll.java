@@ -1,7 +1,7 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -51,8 +51,10 @@ public class LightningScroll implements Listener {
 
 
 
-        item.setAmount(item.getAmount() -1);
-        player.getInventory().setItemInMainHand(item);
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            item.setAmount(item.getAmount() - 1);
+            event.getPlayer().getInventory().setItemInMainHand(item);
+        }
 
     }
 

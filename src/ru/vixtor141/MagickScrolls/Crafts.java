@@ -18,6 +18,7 @@ public class Crafts {
         scrollOfLightning();
         scrollOfLightningPowerTwo();
         scrollOfLightningPowerThree();
+        scrollOfVampirism();
 
     }
 
@@ -93,6 +94,22 @@ public class Crafts {
         Bukkit.getServer().addRecipe(s);
     }
 
+    private static void scrollOfVampirism(){
+        ItemStack scrollOfVampirism = new ItemStack(Material.PAPER);
+        ItemMeta meta = scrollOfVampirism.getItemMeta();
+        meta.setDisplayName(ChatColor.DARK_PURPLE+ "Scroll of teleportation");
+        List<String> lore = new ArrayList<String>();
+        lore.add("Vampirism power");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
+        scrollOfVampirism.setItemMeta(meta);
 
+        scrollOfVampirism.setAmount(4);
+        ShapedRecipe s = new ShapedRecipe(scrollOfVampirism);
+        s.shape(new String[]{"E E"," P ","E E"});
+        s.setIngredient('E', Material.GHAST_TEAR);
+        s.setIngredient('P', Material.PAPER);
+        Bukkit.getServer().addRecipe(s);
+    }
 
 }
