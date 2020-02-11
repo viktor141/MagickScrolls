@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Mana;
 
 import java.util.List;
 
@@ -33,16 +34,18 @@ public class LightningScroll implements Listener {
 
         event.setCancelled(true);
         Player player = event.getPlayer();
+        Mana playerMana = Mana.getPlayerMap().get(player);
+
 
         switch (checkTypeOfScroll(item)){
 
-            case 1: if(!strickeLightningEntity(player, 6, 1)) return;
+            case 1: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 6, 1))) return;
             break;
 
-            case 2: if(!strickeLightningEntity(player, 10, 4)) return;
+            case 2: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 10, 4))) return;
             break;
 
-            case 3: if(!strickeLightningEntity(player, 15, 8)) return;
+            case 3: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 15, 8))) return;
             break;
 
             case 0: player.sendMessage(ChatColor.RED + "Unexpected errore"); return;

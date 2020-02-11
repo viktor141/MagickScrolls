@@ -7,17 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +37,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -44,27 +47,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1OygdtGgpNG9JqlSAot1NltDab5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562188576275" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/townyAddon" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="JAR Application.server on linux">
     <configuration name="server on linux" type="JarApplication">
@@ -72,7 +69,7 @@
       <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8 -Xmx1048M" />
       <option name="WORKING_DIRECTORY" value="$USER_HOME$/testpluginserver/" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8.0_242" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
           <artifact name="MagickScrolls" />
@@ -95,6 +92,18 @@
       <item itemvalue="JAR Application.server on linux" />
       <item itemvalue="JAR Application.server" />
     </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -122,94 +131,94 @@
       </map>
     </option>
   </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <last-edited>MagickScrolls</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>MagickScrolls</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>spigot-1.12.2</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+  <component name="WindowStateProjectService">
+    <state x="560" y="214" key="#Project_Structure" timestamp="1580893039063">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="560" y="214" key="#Project_Structure/0.24.1920.1056@0.24.1920.1056" timestamp="1580893039063" />
+    <state x="424" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581048599223">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="424" y="210" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581048599223" />
+    <state x="689" y="358" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581060066326">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="689" y="358" key="#com.intellij.fileTypes.FileTypeChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1581060066326" />
+    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser" timestamp="1581440052045">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1581440052045" />
+    <state x="815" y="444" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581048360508">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="815" y="444" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581048360508" />
+    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581446930985">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581446930985" />
+    <state x="100" y="124" width="1720" height="856" key="DiffContextDialog" timestamp="1580881191337">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="100" y="124" width="1720" height="856" key="DiffContextDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1580881191337" />
+    <state x="747" y="296" key="FileChooserDialogImpl" timestamp="1581056322527">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="747" y="296" key="FileChooserDialogImpl/0.24.1920.1056@0.24.1920.1056" timestamp="1581056322527" />
+    <state width="1874" height="280" key="GridCell.Tab.0.bottom" timestamp="1581456349254">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="280" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349254" />
+    <state width="1874" height="280" key="GridCell.Tab.0.center" timestamp="1581456349253">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="280" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349253" />
+    <state width="1874" height="280" key="GridCell.Tab.0.left" timestamp="1581456349252">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="280" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349252" />
+    <state width="1874" height="280" key="GridCell.Tab.0.right" timestamp="1581456349253">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="280" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349253" />
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom" timestamp="1580913401430">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
+    <state width="1874" height="345" key="GridCell.Tab.1.center" timestamp="1580913401430">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="345" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
+    <state width="1874" height="345" key="GridCell.Tab.1.left" timestamp="1580913401430">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="345" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
+    <state width="1874" height="345" key="GridCell.Tab.1.right" timestamp="1580913401430">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state width="1874" height="345" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
+    <state x="548" y="298" key="IDE.errors.dialog" timestamp="1580907410791">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="548" y="298" key="IDE.errors.dialog/0.24.1920.1056@0.24.1920.1056" timestamp="1580907410791" />
+    <state x="839" y="184" key="SettingsEditor" timestamp="1581048574715">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="839" y="184" key="SettingsEditor/0.24.1920.1056@0.24.1920.1056" timestamp="1581048574715" />
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1581412402123">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581412402123" />
+    <state x="646" y="292" width="628" height="520" key="find.popup" timestamp="1580893023693">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="646" y="292" width="628" height="520" key="find.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1580893023693" />
+    <state x="340" y="165" key="new project wizard" timestamp="1576778271802">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="340" y="165" key="new project wizard/0.24.1920.1056@0.24.1920.1056" timestamp="1576778271802" />
+    <state x="624" y="253" key="run.anything.popup" timestamp="1581419080235">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="624" y="253" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1581419080235" />
   </component>
 </project>

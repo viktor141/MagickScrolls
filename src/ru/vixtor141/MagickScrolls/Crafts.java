@@ -29,12 +29,12 @@ public class Crafts {
         List<String> lore = new ArrayList<String>();
         lore.add("Scroll for teleportation in dimension");
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.DAMAGE_ALL, 3,true);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
         scrollOfTeleportation.setItemMeta(meta);
 
         scrollOfTeleportation.setAmount(4);
         ShapedRecipe s = new ShapedRecipe(scrollOfTeleportation);
-        s.shape(new String[]{"E E"," P ","E E"});
+        s.shape("EPE","P P","EPE");
         s.setIngredient('E', Material.ENDER_PEARL);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);
@@ -47,12 +47,12 @@ public class Crafts {
         List<String> lore = new ArrayList<String>();
         lore.add("Scroll for lightning strike");
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.DAMAGE_ALL, 3,true);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
         scrollOfLightning.setItemMeta(meta);
 
         scrollOfLightning.setAmount(8);
         ShapedRecipe s = new ShapedRecipe(scrollOfLightning);
-        s.shape(new String[]{"PPP","PNP","PPP"});
+        s.shape("PPP","PNP","PPP");
         s.setIngredient('N', Material.NETHER_STAR);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);
@@ -65,12 +65,12 @@ public class Crafts {
         List<String> lore = new ArrayList<String>();
         lore.add("Scroll for lightning strike power two");
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.DAMAGE_ALL, 3,true);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
         scrollOfLightningPowerTwo.setItemMeta(meta);
 
         scrollOfLightningPowerTwo.setAmount(8);
         ShapedRecipe s = new ShapedRecipe(scrollOfLightningPowerTwo);
-        s.shape(new String[]{"PNP","PNP","PNP"});
+        s.shape("PNP","PNP","PNP");
         s.setIngredient('N', Material.NETHER_STAR);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);
@@ -83,12 +83,12 @@ public class Crafts {
         List<String> lore = new ArrayList<String>();
         lore.add("Scroll for lightning strike power three");
         meta.setLore(lore);
-        meta.addEnchant(Enchantment.DAMAGE_ALL, 3,true);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
         scrollOfLightningPowerThree.setItemMeta(meta);
 
         scrollOfLightningPowerThree.setAmount(8);
         ShapedRecipe s = new ShapedRecipe(scrollOfLightningPowerThree);
-        s.shape(new String[]{"PNP","NNN","PNP"});
+        s.shape("PNP","NNN","PNP");
         s.setIngredient('N', Material.NETHER_STAR);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);
@@ -97,7 +97,7 @@ public class Crafts {
     private static void scrollOfVampirism(){
         ItemStack scrollOfVampirism = new ItemStack(Material.PAPER);
         ItemMeta meta = scrollOfVampirism.getItemMeta();
-        meta.setDisplayName(ChatColor.DARK_PURPLE+ "Scroll of teleportation");
+        meta.setDisplayName(ChatColor.DARK_PURPLE+ "Scroll of Vampirism");
         List<String> lore = new ArrayList<String>();
         lore.add("Vampirism power");
         meta.setLore(lore);
@@ -106,8 +106,8 @@ public class Crafts {
 
         scrollOfVampirism.setAmount(4);
         ShapedRecipe s = new ShapedRecipe(scrollOfVampirism);
-        s.shape(new String[]{"E E"," P ","E E"});
-        s.setIngredient('E', Material.GHAST_TEAR);
+        s.shape("T T"," P ","T T");
+        s.setIngredient('T', Material.GHAST_TEAR);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);
     }

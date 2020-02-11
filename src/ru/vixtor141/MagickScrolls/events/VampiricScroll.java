@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Mana;
 
 public class VampiricScroll implements Listener {
 
@@ -19,6 +20,9 @@ public class VampiricScroll implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if (!item.getItemMeta().hasLore()) return;
         if (!item.getItemMeta().getLore().get(0).equals("Vampirism power")) return;
+
+        Mana playerMana = Mana.getPlayerMap().get(player);
+        playerMana.consumeMana(3);
 
         event.setDamage(3);
         if(player.getHealth() <= player.getHealthScale() - 1.5) {

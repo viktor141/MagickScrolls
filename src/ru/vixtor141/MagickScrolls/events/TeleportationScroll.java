@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Mana;
 
 import static java.lang.Math.*;
 
@@ -31,6 +32,10 @@ public class TeleportationScroll implements Listener {
             player.sendMessage(ChatColor.RED + "Вы не можете туда попасть");
             return;
         }
+
+        Mana playerMana = Mana.getPlayerMap().get(player);
+        if(!playerMana.consumeMana(2))return;
+
         player.teleport(newLocation);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
