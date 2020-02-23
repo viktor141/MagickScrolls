@@ -31,6 +31,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TeleportationScroll(), this);
         Bukkit.getPluginManager().registerEvents(new VampiricScroll(), this);
         Bukkit.getPluginManager().registerEvents(new SaveAndLoad(), this);
+        Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){
             getConfig().options().copyDefaults(true);

@@ -7,18 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Mana.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Mana.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/SaveAndLoad.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/SaveAndLoad.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562188576275" />
-    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/townyAddon" />
+    <property name="last_opened_file_path" value="$USER_HOME$/myProjects" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -118,6 +117,16 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -132,6 +141,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="560" y="214" key="#Inspections" timestamp="1582047002937">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="560" y="214" key="#Inspections/0.24.1920.1056@0.24.1920.1056" timestamp="1582047002937" />
     <state x="560" y="214" key="#Project_Structure" timestamp="1580893039063">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -156,46 +169,50 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581446930985" />
+    <state x="698" y="302" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1581527761022">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="698" y="302" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581527761022" />
     <state x="100" y="124" width="1720" height="856" key="DiffContextDialog" timestamp="1580881191337">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="100" y="124" width="1720" height="856" key="DiffContextDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1580881191337" />
-    <state x="747" y="296" key="FileChooserDialogImpl" timestamp="1581056322527">
+    <state x="747" y="296" key="FileChooserDialogImpl" timestamp="1581505020908">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="747" y="296" key="FileChooserDialogImpl/0.24.1920.1056@0.24.1920.1056" timestamp="1581056322527" />
-    <state width="1874" height="280" key="GridCell.Tab.0.bottom" timestamp="1581456349254">
+    <state x="747" y="296" key="FileChooserDialogImpl/0.24.1920.1056@0.24.1920.1056" timestamp="1581505020908" />
+    <state width="1874" height="280" key="GridCell.Tab.0.bottom" timestamp="1582459779226">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="280" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349254" />
-    <state width="1874" height="280" key="GridCell.Tab.0.center" timestamp="1581456349253">
+    <state width="1874" height="280" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1582459779226" />
+    <state width="1874" height="280" key="GridCell.Tab.0.center" timestamp="1582459779226">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="280" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349253" />
-    <state width="1874" height="280" key="GridCell.Tab.0.left" timestamp="1581456349252">
+    <state width="1874" height="280" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1582459779226" />
+    <state width="1874" height="280" key="GridCell.Tab.0.left" timestamp="1582459779225">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="280" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349252" />
-    <state width="1874" height="280" key="GridCell.Tab.0.right" timestamp="1581456349253">
+    <state width="1874" height="280" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1582459779225" />
+    <state width="1874" height="280" key="GridCell.Tab.0.right" timestamp="1582459779226">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="280" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1581456349253" />
-    <state width="1874" height="345" key="GridCell.Tab.1.bottom" timestamp="1580913401430">
+    <state width="1874" height="280" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1582459779226" />
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom" timestamp="1581513095725">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
-    <state width="1874" height="345" key="GridCell.Tab.1.center" timestamp="1580913401430">
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1581513095725" />
+    <state width="1874" height="345" key="GridCell.Tab.1.center" timestamp="1581513095725">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
-    <state width="1874" height="345" key="GridCell.Tab.1.left" timestamp="1580913401430">
+    <state width="1874" height="345" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1581513095725" />
+    <state width="1874" height="345" key="GridCell.Tab.1.left" timestamp="1581513095725">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
-    <state width="1874" height="345" key="GridCell.Tab.1.right" timestamp="1580913401430">
+    <state width="1874" height="345" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1581513095725" />
+    <state width="1874" height="345" key="GridCell.Tab.1.right" timestamp="1581513095725">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1580913401430" />
+    <state width="1874" height="345" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1581513095725" />
     <state x="548" y="298" key="IDE.errors.dialog" timestamp="1580907410791">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -204,21 +221,25 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="839" y="184" key="SettingsEditor/0.24.1920.1056@0.24.1920.1056" timestamp="1581048574715" />
-    <state x="659" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1581412402123">
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1582458715508">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="659" y="380" key="com.intellij.ide.util.TipDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581412402123" />
-    <state x="646" y="292" width="628" height="520" key="find.popup" timestamp="1580893023693">
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1582458715508" />
+    <state x="164" y="107" width="1637" height="887" key="find.popup" timestamp="1582044207159">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="646" y="292" width="628" height="520" key="find.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1580893023693" />
+    <state x="164" y="107" width="1637" height="887" key="find.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1582044207159" />
     <state x="340" y="165" key="new project wizard" timestamp="1576778271802">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="340" y="165" key="new project wizard/0.24.1920.1056@0.24.1920.1056" timestamp="1576778271802" />
-    <state x="624" y="253" key="run.anything.popup" timestamp="1581419080235">
+    <state x="624" y="253" key="run.anything.popup" timestamp="1581512826567">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="624" y="253" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1581419080235" />
+    <state x="624" y="253" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1581512826567" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1581528526958">
+      <screen x="0" y="24" width="1920" height="1056" />
+    </state>
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1581528526958" />
   </component>
 </project>

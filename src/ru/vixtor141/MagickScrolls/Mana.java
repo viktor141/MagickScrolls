@@ -15,6 +15,15 @@ public class Mana implements Runnable{
     private static Map<Player, Mana> PlayerMap = new HashMap<Player, Mana>();
     private double manaRegenUnit = 1.5;
     private BukkitTask bukkitTask;
+    private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
+
+    public long getTupaFixCalledTwice() {
+        return tupaFixCalledTwice;
+    }
+
+    public void setTupaFixCalledTwice(long tupaFixCalledTwice) {
+        this.tupaFixCalledTwice = tupaFixCalledTwice;
+    }
 
     public static Map<Player, Mana> getPlayerMap() {
         return PlayerMap;
@@ -57,14 +66,13 @@ public class Mana implements Runnable{
             player.sendMessage(Double.toString(currentMana));
             return true;
         }else{
-            player.sendMessage("you don't have mana" + currentMana);
+            player.sendMessage("you don't have mana " + currentMana);
             return false;
         }
     }
 
     public void addMana(double amount){
         this.currentMana += amount;
-        player.sendMessage(Double.toString(this.currentMana));
     }
 
     @Override
