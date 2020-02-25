@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -40,9 +41,14 @@ public class VortexScroll implements Listener {
         }
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if (!playerMana.consumeMana(2)) return;
+        if (!playerMana.consumeMana(10)) return;
 
         targetEntity.setVelocity(new Vector(0,2,0));
+
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            item.setAmount(item.getAmount() - 1);
+            event.getPlayer().getInventory().setItemInMainHand(item);
+        }
     }
 
     public void entityInteract(EntityInteractEvent event) {
@@ -65,7 +71,7 @@ public class VortexScroll implements Listener {
         }
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if (!playerMana.consumeMana(2)) return;
+        if (!playerMana.consumeMana(10)) return;
 
         targetEntity.setVelocity(new Vector(0,2,0));
     }

@@ -32,10 +32,10 @@ public class VampiricScroll implements Listener {
         }
 
 
-            if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
                 item.setAmount(item.getAmount() - 1);
                 player.getInventory().setItemInMainHand(item);
-            }
+        }
 
     }
 

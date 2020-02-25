@@ -21,6 +21,7 @@ public class Crafts {
         scrollOfLightningPowerThree();
         scrollOfVampirism();
         scrollOfVortex();
+        scrollOfArrowStorm();
     }
 
     private static void scrollOfTeleportation(){
@@ -140,4 +141,23 @@ public class Crafts {
         Bukkit.getServer().addRecipe(s);
     }
 
+    private static void scrollOfArrowStorm(){
+        ItemStack scrollOfArrowStorm = new ItemStack(Material.PAPER);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfArrowStorm");
+        ItemMeta meta = scrollOfArrowStorm.getItemMeta();
+        meta.setDisplayName(ChatColor.DARK_PURPLE+ "scroll Of Arrow Storm");
+        List<String> lore = new ArrayList<String>();
+        lore.add("Arrow Storm scroll");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
+        scrollOfArrowStorm.setItemMeta(meta);
+
+        scrollOfArrowStorm.setAmount(4);
+        ShapedRecipe s = new ShapedRecipe(key, scrollOfArrowStorm);
+        s.shape("PAP","ANA","PAP");
+        s.setIngredient('A', Material.ARROW);
+        s.setIngredient('N', Material.NETHER_STAR);
+        s.setIngredient('P', Material.PAPER);
+        Bukkit.getServer().addRecipe(s);
+    }
 }
