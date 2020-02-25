@@ -1,12 +1,10 @@
 package ru.vixtor141.MagickScrolls.events;
 
-import jdk.internal.org.objectweb.asm.tree.FrameNode;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,9 +19,7 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import static java.lang.Math.max;
 import static java.lang.Math.pow;
 
 public class ArrowStormScroll implements Listener, Runnable {

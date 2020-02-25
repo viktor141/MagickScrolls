@@ -1,6 +1,5 @@
 package ru.vixtor141.MagickScrolls.tasks;
 
-import com.mysql.fabric.xmlrpc.base.Array;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import ru.vixtor141.MagickScrolls.Main;

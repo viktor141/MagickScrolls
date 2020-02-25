@@ -7,14 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VortexScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VortexScroll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VortexScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VortexScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/tasks/CleanUpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/tasks/CleanUpTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
