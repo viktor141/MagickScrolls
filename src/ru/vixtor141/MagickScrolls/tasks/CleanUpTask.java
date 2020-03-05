@@ -1,15 +1,12 @@
 package ru.vixtor141.MagickScrolls.tasks;
 
-import net.minecraft.server.v1_12_R1.EntityLiving;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import ru.vixtor141.MagickScrolls.Main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class CleanUpTask implements Runnable {
 

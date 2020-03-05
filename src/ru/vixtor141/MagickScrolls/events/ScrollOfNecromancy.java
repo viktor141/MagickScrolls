@@ -22,11 +22,8 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public class ScrollOfNecromancy implements Listener {
-
-
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
