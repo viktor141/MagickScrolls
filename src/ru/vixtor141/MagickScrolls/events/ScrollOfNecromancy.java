@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import net.minecraft.server.v1_12_R1.*;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -23,7 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ScrollOfNecromancy implements Listener {
+public class ScrollOfNecromancy implements Listener,Runnable {
+
+    private Player player;
+    private Player target;
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
@@ -34,7 +39,7 @@ public class ScrollOfNecromancy implements Listener {
         if (!item.getItemMeta().hasLore()) return;
         if (!item.getItemMeta().getLore().get(0).equals("Necromancy scroll")) return;
 
-        Player player = event.getPlayer();
+        player = event.getPlayer();
         Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).stream().filter(e -> e instanceof Player).findFirst();
 
         if(!playerEntity.isPresent()){
@@ -42,12 +47,12 @@ public class ScrollOfNecromancy implements Listener {
             return;
         }
 
-        Player target = (Player) playerEntity.get();
+        target = (Player) playerEntity.get();
         Mana playerMana = Mana.getPlayerMap().get(player);
 
         if (!playerMana.consumeMana(50)) return;
 
-        spawnMinions(player, target);
+        Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
@@ -62,7 +67,8 @@ public class ScrollOfNecromancy implements Listener {
         }
     }
 
-    private void spawnMinions(Player player, Player target){
+    @Override
+    public void run() {
         Location location = player.getLocation();
         List<LivingEntity> Mobs = new ArrayList<>();
 
