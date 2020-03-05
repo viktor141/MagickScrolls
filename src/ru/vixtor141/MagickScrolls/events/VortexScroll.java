@@ -51,6 +51,7 @@ public class VortexScroll implements Listener {
         }
     }
 
+    @EventHandler
     public void entityInteract(EntityInteractEvent event) {
         if(!(event.getEntity() instanceof Player))return;
 

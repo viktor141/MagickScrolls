@@ -1,9 +1,13 @@
 package ru.vixtor141.MagickScrolls;
 
+import net.minecraft.server.v1_12_R1.EntityTypes;
+import net.minecraft.server.v1_12_R1.MinecraftKey;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.vixtor141.MagickScrolls.events.*;
@@ -33,6 +37,8 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SaveAndLoad(), this);
         Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
+
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){
             getConfig().options().copyDefaults(true);

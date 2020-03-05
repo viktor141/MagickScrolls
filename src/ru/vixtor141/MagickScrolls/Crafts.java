@@ -22,6 +22,7 @@ public class Crafts {
         scrollOfVampirism();
         scrollOfVortex();
         scrollOfArrowStorm();
+        scrollOfNecromancy();
     }
 
     private static void scrollOfTeleportation(){
@@ -156,6 +157,29 @@ public class Crafts {
         ShapedRecipe s = new ShapedRecipe(key, scrollOfArrowStorm);
         s.shape("PAP","ANA","PAP");
         s.setIngredient('A', Material.ARROW);
+        s.setIngredient('N', Material.NETHER_STAR);
+        s.setIngredient('P', Material.PAPER);
+        Bukkit.getServer().addRecipe(s);
+    }
+
+    private static void scrollOfNecromancy(){
+        ItemStack scrollOfNecromancy = new ItemStack(Material.PAPER);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfNecromancy");
+        ItemMeta meta = scrollOfNecromancy.getItemMeta();
+        meta.setDisplayName(ChatColor.DARK_PURPLE+ "Scroll Of Necromancy");
+        List<String> lore = new ArrayList<String>();
+        lore.add("Necromancy scroll");
+        meta.setLore(lore);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
+        scrollOfNecromancy.setItemMeta(meta);
+
+        scrollOfNecromancy.setAmount(4);
+        ShapedRecipe s = new ShapedRecipe(key, scrollOfNecromancy);
+        s.shape("PRP","BNS","PGP");
+        s.setIngredient('R', Material.ROTTEN_FLESH);
+        s.setIngredient('B', Material.BONE);
+        s.setIngredient('S', Material.SPIDER_EYE);
+        s.setIngredient('G', Material.SULPHUR);
         s.setIngredient('N', Material.NETHER_STAR);
         s.setIngredient('P', Material.PAPER);
         Bukkit.getServer().addRecipe(s);

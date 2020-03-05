@@ -58,7 +58,7 @@ public class ArrowStormScroll implements Listener, Runnable {
             for(int y = - 14; y < 14; y++){
                 if(x == 0 && y ==0) break;
                 if (pow( x, 2) + pow( y, 2) <= 13*13 && Math.random() * 10 < 6) {
-                    arrows.add(player.getWorld().spawnArrow(new Location(player.getWorld(), player.getLocation().getX() + x, player.getLocation().getY() + 30, player.getLocation().getZ() + y), new Vector(0, -3, 0), (float) 2.2, (float) 0.5));
+                    arrows.add(player.getWorld().spawnArrow(new Location(player.getWorld(), player.getLocation().getX() + x, player.getLocation().getY() + 30, player.getLocation().getZ() + y), new Vector(0, -3, 0), (float) 4, (float) 0.5));
                 }
             }
         }
