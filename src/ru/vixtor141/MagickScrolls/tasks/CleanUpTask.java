@@ -12,6 +12,11 @@ public class CleanUpTask implements Runnable {
 
     private List<Arrow> arrows;
     private List<LivingEntity> mobs;
+    private static List<LivingEntity> existMobs = new ArrayList<>();
+
+    public List<LivingEntity> getExistMobs(){
+        return existMobs;
+    }
 
     public void arrow(List<Arrow> list){
         arrows = new ArrayList<>(list);
@@ -20,6 +25,7 @@ public class CleanUpTask implements Runnable {
 
     public void mob(List<LivingEntity> list){
         mobs = new ArrayList<>(list);
+        existMobs.addAll(list);
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::mobsCleanUp, 3600);
     }
 
@@ -34,9 +40,11 @@ public class CleanUpTask implements Runnable {
         for(LivingEntity livingEntity: mobs){
             if(!livingEntity.isDead()){
                 livingEntity.remove();
+
             }
         }
         mobs.clear();
+        existMobs.removeAll(mobs);
     }
 
     @Override

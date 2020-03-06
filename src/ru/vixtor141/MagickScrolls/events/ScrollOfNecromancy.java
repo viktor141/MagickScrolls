@@ -17,6 +17,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.LazyMetadataValue;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -24,6 +25,7 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 
 public class ScrollOfNecromancy implements Listener,Runnable {
 
@@ -62,7 +64,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
     @EventHandler
     public void targetCorrect(EntityTargetLivingEntityEvent event){
-        if (event.getEntity().getName().equals("huy")){
+        if (event.getEntity().hasMetadata("magicscrolls")){
             event.setCancelled(true);
         }
     }
@@ -71,30 +73,40 @@ public class ScrollOfNecromancy implements Listener,Runnable {
     public void run() {
         Location location = player.getLocation();
         List<LivingEntity> Mobs = new ArrayList<>();
+        LazyMetadataValue metadataValue = new LazyMetadataValue(Main.getPlugin(), new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                return null;
+            }
+        });
 
         for(int i = 0; i < 3; i++) {
             CraftZombie craftZombie = (CraftZombie) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() - 2, location.getY(), location.getZ() + i - 1), EntityType.ZOMBIE);
             craftZombie.setCustomName(player.getName() + "'s Evil Spirit");
             craftZombie.setCustomNameVisible(true);
             craftZombie.getHandle().setGoalTarget((EntityLiving) ((CraftPlayer) target).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, true);
+            craftZombie.setMetadata( "magicscrolls", metadataValue);
             Mobs.add(craftZombie);
 
             CraftSkeleton craftSkeleton = (CraftSkeleton) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + 2, location.getY(), location.getZ() + i - 1), EntityType.SKELETON);
             craftSkeleton.setCustomName(player.getName() + "'s Evil Spirit");
             craftSkeleton.setCustomNameVisible(true);
             craftSkeleton.getHandle().setGoalTarget((EntityLiving) ((CraftPlayer) target).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, true);
+            craftSkeleton.setMetadata( "magicscrolls", metadataValue);
             Mobs.add(craftSkeleton);
 
             CraftSpider craftSpider = (CraftSpider) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + i - 1, location.getY(), location.getZ() + 2), EntityType.SPIDER);
             craftSpider.setCustomName(player.getName() + "'s Evil Spirit");
             craftSpider.setCustomNameVisible(true);
             craftSpider.getHandle().setGoalTarget((EntityLiving) ((CraftPlayer) target).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, true);
+            craftSpider.setMetadata( "magicscrolls", metadataValue);
             Mobs.add(craftSpider);
 
             CraftWitherSkeleton craftWitherSkeleton = (CraftWitherSkeleton) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + i - 1, location.getY(), location.getZ() - 2), EntityType.WITHER_SKELETON);
             craftWitherSkeleton.setCustomName(player.getName() + "'s Evil Spirit");
             craftWitherSkeleton.setCustomNameVisible(true);
             craftWitherSkeleton.getHandle().setGoalTarget((EntityLiving) ((CraftPlayer) target).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, true);
+            craftWitherSkeleton.setMetadata( "magicscrolls", metadataValue);
             Mobs.add(craftWitherSkeleton);
         }
 

@@ -4,9 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.vixtor141.MagickScrolls.events.*;
+import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +53,13 @@ public class Main extends JavaPlugin {
         for (Player player: Bukkit.getOnlinePlayers()){
             savePlayerStats(player);
         }
+        CleanUpTask cleanUpTask = new CleanUpTask();
+        for(LivingEntity livingEntity: cleanUpTask.getExistMobs()){
+            if(!livingEntity.isDead()){
+                livingEntity.remove();
+            }
+        }
+        cleanUpTask.getExistMobs().clear();
         this.getLogger().info(ChatColor.GOLD+"Plugin has been disabled");
     }
 
