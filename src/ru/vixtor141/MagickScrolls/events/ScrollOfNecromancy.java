@@ -54,6 +54,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
         if (!playerMana.consumeMana(50)) return;
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {

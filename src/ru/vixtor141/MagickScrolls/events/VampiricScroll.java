@@ -24,6 +24,7 @@ public class VampiricScroll implements Listener {
         Mana playerMana = Mana.getPlayerMap().get(player);
         playerMana.consumeMana(3);
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         event.setDamage(3);
         if(player.getHealth() <= player.getHealthScale() - 1.5) {
             player.setHealth(player.getHealth() + 1.5);

@@ -37,20 +37,21 @@ public class LightningScroll implements Listener {
         Mana playerMana = Mana.getPlayerMap().get(player);
 
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         switch (checkTypeOfScroll(item)){
 
-            case 1: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 6, 1))) return;
+            case 1: if((playerMana.consumeMana(3)) && (!strickeLightningEntity(player, 6, 1))) return;
             break;
 
-            case 2: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 10, 4))) return;
+            case 2: if((playerMana.consumeMana(12)) && (!strickeLightningEntity(player, 10, 4))) return;
             break;
 
-            case 3: if((!playerMana.consumeMana(2)) && (!strickeLightningEntity(player, 15, 8))) return;
+            case 3: if((playerMana.consumeMana(24)) && (!strickeLightningEntity(player, 15, 8))) return;
             break;
 
             case 0: player.sendMessage(ChatColor.RED + "Unexpected errore"); return;
 
-            }
+        }
 
 
 
@@ -63,12 +64,13 @@ public class LightningScroll implements Listener {
 
     private int checkTypeOfScroll(ItemStack item){
 
-        if(item.getItemMeta().getLore().get(0).equals("Scroll for lightning strike")){
-            return 1;
-        }else if(item.getItemMeta().getLore().get(0).equals("Scroll for lightning strike power two")){
-            return 2;
-        } else if(item.getItemMeta().getLore().get(0).equals("Scroll for lightning strike power three")){
-            return 3;
+        switch (item.getItemMeta().getLore().get(0)) {
+            case "Scroll for lightning strike":
+                return 1;
+            case "Scroll for lightning strike power two":
+                return 2;
+            case "Scroll for lightning strike power three":
+                return 3;
         }
         return 0;
     }
@@ -84,7 +86,7 @@ public class LightningScroll implements Listener {
         for(int i = 0; i < entityLocations.size(); i++) {
 
                 entity = entityLocations.get(i);
-                entity.getLocation().getWorld().strikeLightning(entity.getLocation());
+                entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
                 if(i == NumberOfEntities-1)return true;
         }
         return true;

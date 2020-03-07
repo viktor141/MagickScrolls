@@ -43,6 +43,7 @@ public class VortexScroll implements Listener {
         Mana playerMana = Mana.getPlayerMap().get(player);
         if (!playerMana.consumeMana(10)) return;
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         targetEntity.setVelocity(new Vector(0,2,0));
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
@@ -74,6 +75,7 @@ public class VortexScroll implements Listener {
         Mana playerMana = Mana.getPlayerMap().get(player);
         if (!playerMana.consumeMana(10)) return;
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         targetEntity.setVelocity(new Vector(0,2,0));
     }
 

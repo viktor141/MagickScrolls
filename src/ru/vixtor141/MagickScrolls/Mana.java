@@ -16,6 +16,11 @@ public class Mana implements Runnable{
     private double manaRegenUnit = 1.5;
     private BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
+    private DefaultEffect defaultEffect = new DefaultEffect();
+
+    public DefaultEffect getDefaultEffect() {
+        return defaultEffect;
+    }
 
     public long getTupaFixCalledTwice() {
         return tupaFixCalledTwice;

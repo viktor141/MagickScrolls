@@ -38,6 +38,7 @@ public class TeleportationScroll implements Listener {
 
         if (!playerMana.consumeMana(2)) return;
 
+        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         player.teleport(newLocation); //Из за этой хуеты двойное срабатывание https://hub.spigotmc.org/jira/browse/SPIGOT-2478
 
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
