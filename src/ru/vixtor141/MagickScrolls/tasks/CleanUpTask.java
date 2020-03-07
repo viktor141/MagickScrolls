@@ -31,7 +31,9 @@ public class CleanUpTask implements Runnable {
 
     public void arrowCleanUp() {
         for(Arrow arrow: arrows){
-            arrow.remove();
+            if(!arrow.isDead()) {
+                arrow.remove();
+            }
         }
         arrows.clear();
     }

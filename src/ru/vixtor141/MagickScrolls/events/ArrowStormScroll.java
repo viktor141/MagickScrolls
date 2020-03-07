@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -41,7 +42,8 @@ public class ArrowStormScroll implements Listener, Runnable {
         if (!playerMana.consumeMana(15)) return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
-        player.spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 1.5,0), 20, 0.3,0.3,0.3, 0);
+        player.spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 1.7,0), 30, 0.35,0.35,0.35, 0.03);
+        player.playSound(player.getLocation().add(0,1,0), Sound.ENTITY_ILLUSION_ILLAGER_CAST_SPELL, 5, (float) 0.5);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
@@ -49,6 +51,15 @@ public class ArrowStormScroll implements Listener, Runnable {
         }
     }
 
+    @EventHandler
+    public void hitsOfArrows(EntityDamageByEntityEvent event){
+        if(!(event.getEntity() instanceof Player))return;
+        if(!(event.getDamager() instanceof Arrow))return;
+        Arrow arrow = (Arrow) event.getDamager();
+        if(arrow.getCustomName().equals(event.getEntity().getUniqueId().toString()+"magickscrolls")){
+            event.setCancelled(true);
+        }
+    }
 
     @Override
     public void run() {
@@ -56,7 +67,9 @@ public class ArrowStormScroll implements Listener, Runnable {
             for(int y = - 14; y < 14; y++){
                 if(x == 0 && y ==0) break;
                 if (pow( x, 2) + pow( y, 2) <= 12*12 && Math.random() * 10 < 6) {
-                    arrows.add(player.getWorld().spawnArrow(new Location(player.getWorld(), player.getLocation().getX() + x, player.getLocation().getY() + 30, player.getLocation().getZ() + y), new Vector(0, -3, 0), (float) 4, (float) 0.5));
+                    Arrow arrow = player.getWorld().spawnArrow(new Location(player.getWorld(), player.getLocation().getX() + x, player.getLocation().getY() + 30, player.getLocation().getZ() + y), new Vector(0, -3, 0), (float) 4, (float) 0.5);
+                    arrow.setCustomName(player.getUniqueId().toString()+"magickscrolls");
+                    arrows.add(arrow);
                 }
             }
         }
