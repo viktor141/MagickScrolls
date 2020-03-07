@@ -1,9 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -54,21 +51,21 @@ public class TeleportationScroll implements Listener {
 
     public Location checkForTeleportation(Player player){
         Location locationOfPlayer = player.getLocation();
-        double newX, newZ, newY;
         float yaw = locationOfPlayer.getYaw();
         float pitch = locationOfPlayer.getPitch();
-        newY = 8 * sin(toRadians(pitch));
-        newX = 8 * sin(toRadians(yaw)) * cos(toRadians(pitch));
-        newZ = 8 * cos(toRadians(yaw)) * cos(toRadians(pitch));
 
-        locationOfPlayer.setX(locationOfPlayer.getX() + newX * (-1));
-        locationOfPlayer.setZ(locationOfPlayer.getZ() + newZ);
-        locationOfPlayer.setY(locationOfPlayer.getY() + newY * (-1));
+        double newY = 8 * sin(toRadians(pitch));
+        double newX = 8 * sin(toRadians(yaw)) * cos(toRadians(pitch));
+        double newZ = 8 * cos(toRadians(yaw)) * cos(toRadians(pitch));
+
+        locationOfPlayer.add(newX * (-1), newY * (-1), newZ);
+
         return locationOfPlayer;
     }
 
     public boolean checkBlock(Location newLocation){
         return newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY(), newLocation.getBlockZ()).getType() == Material.AIR || newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY() + 1, newLocation.getBlockZ()).getType() == Material.AIR;
     }
+
 
 }
