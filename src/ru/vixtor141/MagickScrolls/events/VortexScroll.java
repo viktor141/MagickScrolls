@@ -48,7 +48,7 @@ public class VortexScroll implements Listener {
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
-            event.getPlayer().getInventory().setItemInMainHand(item);
+            player.getInventory().setItemInMainHand(item);
         }
     }
 
@@ -77,6 +77,11 @@ public class VortexScroll implements Listener {
 
         playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         targetEntity.setVelocity(new Vector(0,2,0));
+
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            item.setAmount(item.getAmount() - 1);
+            player.getInventory().setItemInMainHand(item);
+        }
     }
 
 

@@ -42,7 +42,6 @@ public class CleanUpTask implements Runnable {
         for(LivingEntity livingEntity: mobs){
             if(!livingEntity.isDead()){
                 livingEntity.remove();
-
             }
         }
         mobs.clear();

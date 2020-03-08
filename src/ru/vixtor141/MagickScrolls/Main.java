@@ -44,6 +44,7 @@ public class Main extends JavaPlugin {
         }
 
         crafts();
+
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }
 
