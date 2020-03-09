@@ -13,10 +13,24 @@ public class Mana implements Runnable{
     private double maxMana;
     private Mana manaInst;
     private static Map<Player, Mana> PlayerMap = new HashMap<Player, Mana>();
-    private double manaRegenUnit = 1.5;
+    private double manaRegenUnit = 0.5;
     private BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
-    private DefaultEffect defaultEffect = new DefaultEffect();
+    private DefaultEffect defaultEffect;
+    private CDSystem cdSystem;
+
+    public Mana(Player player) {
+        this.player = player;
+        this.manaInst = this;
+        this.cdSystem = new CDSystem(player);
+        this.defaultEffect = new DefaultEffect(player);
+        PlayerMap.put(player, this);
+        bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+    }
+
+    public CDSystem getCdSystem() {
+        return cdSystem;
+    }
 
     public DefaultEffect getDefaultEffect() {
         return defaultEffect;
@@ -58,13 +72,6 @@ public class Mana implements Runnable{
         this.maxMana = maxMana;
     }
 
-    public Mana(Player player) {
-        this.player = player;
-        this.manaInst = this;
-        PlayerMap.put(player, this);
-        bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 60);
-    }
-
     public boolean consumeMana(double amount){
         if(amount <= this.currentMana){
             this.currentMana -= amount;
@@ -87,6 +94,7 @@ public class Mana implements Runnable{
         }else{
             addMana(manaRegenUnit - ((currentMana + manaRegenUnit) - maxMana));
         }
+        cdSystem.CDUpdate();
     }
 
     public void cancelTask(){

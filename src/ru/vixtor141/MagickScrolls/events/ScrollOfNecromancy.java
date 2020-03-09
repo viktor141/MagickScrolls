@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.LazyMetadataValue;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -42,6 +43,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
         if (!item.getItemMeta().getLore().get(0).equals("Necromancy scroll")) return;
 
         player = event.getPlayer();
+        event.setCancelled(true);
         Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).stream().filter(e -> e instanceof Player).findFirst();
 
         if(!playerEntity.isPresent()){
@@ -51,10 +53,8 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
         target = (Player) playerEntity.get();
         Mana playerMana = Mana.getPlayerMap().get(player);
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.NECROMANCY, playerMana, 50, 120))return;
 
-        if (!playerMana.consumeMana(50)) return;
-
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {

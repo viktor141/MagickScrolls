@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import ru.vixtor141.MagickScrolls.DefaultEffect;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -40,9 +40,8 @@ public class ArrowStormScroll implements Listener, Runnable {
         player = event.getPlayer();
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if (!playerMana.consumeMana(15)) return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM, playerMana, 15, 20))return;
 
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {

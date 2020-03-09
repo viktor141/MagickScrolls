@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Mana;
 
 import java.util.Collection;
@@ -32,37 +33,6 @@ public class VortexScroll implements Listener {
         if (!item.getItemMeta().getLore().get(0).equals("Vortex scroll")) return;
 
         Player player = event.getPlayer();
-
-        Entity targetEntity = searchEntity(player);
-
-        if(targetEntity == null){
-            player.sendMessage("Target not defined");
-            return;
-        }
-
-        Mana playerMana = Mana.getPlayerMap().get(player);
-        if (!playerMana.consumeMana(10)) return;
-
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
-        targetEntity.setVelocity(new Vector(0,2,0));
-
-        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
-            item.setAmount(item.getAmount() - 1);
-            player.getInventory().setItemInMainHand(item);
-        }
-    }
-
-    @EventHandler
-    public void entityInteract(EntityInteractEvent event) {
-        if(!(event.getEntity() instanceof Player))return;
-
-        Player player =(Player)event.getEntity();
-
-        if (player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
-        ItemStack item = player.getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Vortex scroll")) return;
-
         event.setCancelled(true);
 
         Entity targetEntity = searchEntity(player);
@@ -73,17 +43,15 @@ public class VortexScroll implements Listener {
         }
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if (!playerMana.consumeMana(10)) return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VORTEX, playerMana, 20, 30))return;
 
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
-        targetEntity.setVelocity(new Vector(0,2,0));
+        targetEntity.setVelocity(new Vector(0,1.9,0));
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
             player.getInventory().setItemInMainHand(item);
         }
     }
-
 
     public Entity searchEntity(Player player){
         Location locationOfPlayer = player.getLocation();

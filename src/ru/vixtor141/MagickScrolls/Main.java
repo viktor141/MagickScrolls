@@ -12,6 +12,8 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static ru.vixtor141.MagickScrolls.Crafts.crafts;
 
@@ -75,6 +77,11 @@ public class Main extends JavaPlugin {
                 if(playerSF.createNewFile()){
                     playerStats.set("CurrentMana", 50.0);
                     playerStats.set("MaxMana", 50.0);
+                    List<Integer> list = new ArrayList<>(CDSystem.Scrolls.values().length);
+                    for(int i = 0; i < CDSystem.Scrolls.values().length; i++){
+                        list.add(i,0);
+                    }
+                    playerStats.set("CDSystem", list);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,6 +99,8 @@ public class Main extends JavaPlugin {
 
         playerStats.set("CurrentMana", playerMana.getCurrentMana());
         playerStats.set("MaxMana", playerMana.getMaxMana());
+
+        playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
 
         Mana.getPlayerMap().remove(player);
         try {

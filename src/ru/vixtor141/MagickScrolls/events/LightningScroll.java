@@ -9,7 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Mana;
 
 import java.util.List;
@@ -18,7 +20,8 @@ public class LightningScroll implements Listener {
 
     @EventHandler
     public void use(PlayerInteractEvent event){
-        if(event.getAction() != Action.RIGHT_CLICK_AIR) return;
+        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         if(!item.getItemMeta().hasLore())return;
@@ -75,21 +78,18 @@ public class LightningScroll implements Listener {
     }
 
     private boolean strickeLightningEntity(Player player, int bound, int numberOfEntities){
-        List<Entity> entityLocations = player.getNearbyEntities(bound,bound,bound);
+        List<Entity> entitesInLocation = player.getNearbyEntities(bound,bound,bound);
         Entity entity;
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if (entityLocations.isEmpty()) {
+        if (entitesInLocation.isEmpty()) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "No mobs around you");
             return true;
         }
-        if(!playerMana.consumeMana(numberOfEntities * 5)){
-            return true;
-        }
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING, playerMana, numberOfEntities * 5, 20))return true;
 
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
-        for(int i = 0; i < entityLocations.size(); i++) {
+        for(int i = 0; i < entitesInLocation.size(); i++) {
 
-                entity = entityLocations.get(i);
+                entity = entitesInLocation.get(i);
                 entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
                 if(i == numberOfEntities-1)return false;
         }

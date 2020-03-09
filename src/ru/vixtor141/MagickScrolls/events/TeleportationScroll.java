@@ -8,6 +8,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Mana;
 
 import static java.lang.Math.*;
@@ -35,13 +36,10 @@ public class TeleportationScroll implements Listener {
 
         Mana playerMana = Mana.getPlayerMap().get(player);
         if(System.currentTimeMillis() <= playerMana.getTupaFixCalledTwice()) return;
-
-        if (!playerMana.consumeMana(2)) return;
-
-        playerMana.getDefaultEffect().defaultEffectOfScrolls(player);
-        player.teleport(newLocation); //Из за этой хуеты двойное срабатывание https://hub.spigotmc.org/jira/browse/SPIGOT-2478
-
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.TELEPORTATION, playerMana, 5, 3))return;
+
+        player.teleport(newLocation); //Из за этой хуеты двойное срабатывание https://hub.spigotmc.org/jira/browse/SPIGOT-2478
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
