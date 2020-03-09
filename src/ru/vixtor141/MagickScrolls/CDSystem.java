@@ -29,7 +29,7 @@ public class CDSystem{
 
     public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds){
         if(CDs.get(scroll.ordinal()) > 0) {
-            player.sendMessage("Your scroll not ready");
+            player.sendMessage("You can use this scroll after " + CDs.get(scroll.ordinal()) + " seconds");
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;
