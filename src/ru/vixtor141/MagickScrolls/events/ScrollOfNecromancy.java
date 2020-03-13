@@ -44,7 +44,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
         player = event.getPlayer();
         event.setCancelled(true);
-        Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).stream().filter(e -> e instanceof Player).findFirst();
+        Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).parallelStream().filter(e -> e instanceof Player).findFirst();
 
         if(!playerEntity.isPresent()){
             player.sendMessage("Target not defined");
