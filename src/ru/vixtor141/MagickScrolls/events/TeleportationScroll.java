@@ -17,19 +17,19 @@ public class TeleportationScroll implements Listener {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Scroll for teleportation in dimension")) return;
+        if(!item.getItemMeta().hasLore()) return;
+        if(!item.getItemMeta().getLore().get(0).equals("Scroll for teleportation in dimension")) return;
 
 
         Player player = event.getPlayer();
         event.setCancelled(true);
 
         Location newLocation = checkForTeleportation(player);
-        if (!checkBlock(newLocation)) {
+        if(!checkBlock(newLocation)) {
             player.sendMessage(ChatColor.RED + "Вы не можете туда попасть");
             return;
         }

@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.vixtor141.MagickScrolls.commands.GivingScrolls;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.vixtor141.MagickScrolls.Crafts.crafts;
+
 
 public class Main extends JavaPlugin {
 
@@ -39,13 +40,17 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
 
+        this.getCommand("magickScrolls").setExecutor(new GivingScrolls());
+
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
         }
 
-        crafts();
+        for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
+            scrollsCrafts.craftScroll(true);
+        }
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }

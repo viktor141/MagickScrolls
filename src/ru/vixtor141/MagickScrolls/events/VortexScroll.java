@@ -30,11 +30,11 @@ public class VortexScroll implements Listener, Runnable {
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(event.getHand().equals(EquipmentSlot.OFF_HAND))return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Vortex scroll")) return;
+        if(!item.getItemMeta().hasLore()) return;
+        if(!item.getItemMeta().getLore().get(0).equals("Vortex scroll")) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -82,9 +82,9 @@ public class VortexScroll implements Listener, Runnable {
         }
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VORTEX, playerMana, 20, 30))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VORTEX, playerMana, 20, 40))return;
 
-        targetEntity.setVelocity(new Vector(0,1.9,0));
+        targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);

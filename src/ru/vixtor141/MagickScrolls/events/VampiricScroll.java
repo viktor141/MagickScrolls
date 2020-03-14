@@ -1,8 +1,14 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArmorStand;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftFireball;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftItemFrame;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,12 +21,15 @@ public class VampiricScroll implements Listener {
 
     @EventHandler
     public void entityDamage(EntityDamageByEntityEvent event) {
-        if (!event.getDamager().getType().equals(EntityType.PLAYER)) return;
+        if(!event.getDamager().getType().equals(EntityType.PLAYER)) return;
+        if(event.getEntity() instanceof CraftArmorStand)return;
+        if(event.getEntity() instanceof CraftFireball)return;
+        if(event.getEntity() instanceof CraftItemFrame)return;
         Player player = (Player) event.getDamager();
-        if (player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        if(player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Vampirism power")) return;
+        if(!item.getItemMeta().hasLore()) return;
+        if(!item.getItemMeta().getLore().get(0).equals("Vampirism power")) return;
 
         Mana playerMana = Mana.getPlayerMap().get(player);
 

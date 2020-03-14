@@ -1,3 +1,11 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
 version: 1.0
+commands:
+  magickscrolls:
+    description: base command
+    usage: /magickscrolls give [nick] [scroll] [amount]
+    aliases: ms
+permissions:
+  magickscrolls.give:
+    description: giving a permission on /magickscolls give

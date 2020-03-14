@@ -20,12 +20,11 @@ public class LightningScroll implements Listener {
 
     @EventHandler
     public void use(PlayerInteractEvent event){
-        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         if(!item.getItemMeta().hasLore())return;
-
 
         if(!item.getItemMeta().getLore().get(0).equals("Scroll for lightning strike")){
             if(!item.getItemMeta().getLore().get(0).equals("Scroll for lightning strike power two")){
@@ -33,12 +32,8 @@ public class LightningScroll implements Listener {
             }
         }
 
-
-
         event.setCancelled(true);
         Player player = event.getPlayer();
-
-
 
         switch (checkTypeOfScroll(item)){
 
@@ -51,11 +46,8 @@ public class LightningScroll implements Listener {
             case 3: if((strickeLightningEntity(player, 15, 8))) return;
             break;
 
-            case 0: player.sendMessage(ChatColor.RED + "Unexpected errore"); return;
-
+            case 0: player.sendMessage(ChatColor.RED + "Unexpected error"); return;
         }
-
-
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
@@ -85,7 +77,7 @@ public class LightningScroll implements Listener {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "No mobs around you");
             return true;
         }
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING, playerMana, numberOfEntities * 5, 20))return true;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING, playerMana, numberOfEntities * 5, (int) (20 + 30 * Math.log10(numberOfEntities))))return true;
 
         for(int i = 0; i < entitesInLocation.size(); i++) {
 
@@ -93,6 +85,6 @@ public class LightningScroll implements Listener {
                 entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
                 if(i == numberOfEntities-1)return false;
         }
-        return true;
+        return false;
     }
 }

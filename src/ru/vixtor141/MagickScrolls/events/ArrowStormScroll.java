@@ -29,12 +29,12 @@ public class ArrowStormScroll implements Listener, Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Arrow Storm scroll")) return;
+        if(!item.getItemMeta().hasLore()) return;
+        if(!item.getItemMeta().getLore().get(0).equals("Arrow Storm scroll")) return;
 
         event.setCancelled(true);
         player = event.getPlayer();
@@ -55,6 +55,7 @@ public class ArrowStormScroll implements Listener, Runnable {
         if(!(event.getEntity() instanceof Player))return;
         if(!(event.getDamager() instanceof Arrow))return;
         Arrow arrow = (Arrow) event.getDamager();
+        if(arrow.getCustomName() == null)return;
         if(arrow.getCustomName().equals(event.getEntity().getUniqueId().toString()+"magickscrolls")){
             event.setCancelled(true);
         }

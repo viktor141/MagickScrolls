@@ -31,36 +31,21 @@ import java.util.concurrent.Callable;
 public class ScrollOfNecromancy implements Listener,Runnable {
 
     private Player player;
-    private Player target;
+    private ItemStack item;
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
-        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if (!item.getItemMeta().hasLore()) return;
-        if (!item.getItemMeta().getLore().get(0).equals("Necromancy scroll")) return;
+        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        item = event.getPlayer().getInventory().getItemInMainHand();
+        if(!item.getItemMeta().hasLore()) return;
+        if(!item.getItemMeta().getLore().get(0).equals("Necromancy scroll")) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
-        Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).parallelStream().filter(e -> e instanceof Player).findFirst();
-
-        if(!playerEntity.isPresent()){
-            player.sendMessage("Target not defined");
-            return;
-        }
-
-        target = (Player) playerEntity.get();
-        Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.NECROMANCY, playerMana, 50, 120))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
-
-        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
-            item.setAmount(item.getAmount() - 1);
-            event.getPlayer().getInventory().setItemInMainHand(item);
-        }
     }
 
     @EventHandler
@@ -72,6 +57,17 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
     @Override
     public void run() {
+        Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).parallelStream().filter(e -> e instanceof Player).findFirst();
+
+        if(!playerEntity.isPresent()){
+            player.sendMessage("Target not defined");
+            return;
+        }
+
+        Player target = (Player) playerEntity.get();
+        Mana playerMana = Mana.getPlayerMap().get(player);
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.NECROMANCY, playerMana, 50, 120))return;
+
         Location location = player.getLocation();
         List<LivingEntity> Mobs = new ArrayList<>();
         LazyMetadataValue metadataValue = new LazyMetadataValue(Main.getPlugin(), new Callable<Object>() {
@@ -109,6 +105,11 @@ public class ScrollOfNecromancy implements Listener,Runnable {
             craftWitherSkeleton.getHandle().setGoalTarget((EntityLiving) ((CraftPlayer) target).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, true);
             craftWitherSkeleton.setMetadata( "magicscrolls", metadataValue);
             Mobs.add(craftWitherSkeleton);
+        }
+
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            item.setAmount(item.getAmount() - 1);
+            player.getInventory().setItemInMainHand(item);
         }
 
         CleanUpTask cleanUpTask = new CleanUpTask();
