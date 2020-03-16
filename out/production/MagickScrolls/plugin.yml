@@ -4,7 +4,20 @@ version: 1.0
 commands:
   magickscrolls:
     description: base command
-    usage: /magickscrolls give [nick] [scroll] [amount]
+    usage: /magickscrolls help
+    aliases: ms
 permissions:
   magickscrolls.give:
     description: giving a permission on /magickscolls give
+  magickscrolls.heal:
+    description: giving a permission on /magickscolls heal
+  magickscrolls.cdreset:
+    description: giving a permission on /magickscolls cdreset
+  magickscrolls.give.other:
+    description: giving a permission on /magickscolls give other
+  magickscrolls.heal.other:
+    description: giving a permission on /magickscolls heal other
+  magickscrolls.cdreset.other:
+    description: giving a permission on /magickscolls cdreset other
+  magickscrolls.getinfo:
+    description: giving a permission on /magickscolls getinfo

@@ -18,7 +18,7 @@ public class CDSystem{
         VORTEX
     }
 
-    public List<Integer> getCDs() {
+    public List<Integer> getCDs(){
         return CDs;
     }
 
