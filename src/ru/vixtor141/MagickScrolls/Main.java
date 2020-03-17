@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls;
 
+import com.google.common.base.Charsets;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,7 +13,9 @@ import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,18 @@ public class Main extends JavaPlugin {
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
+        File lang = new File(getDataFolder() + File.separator + "Lang" + File.separator + "en_US.yml");
+        FileConfiguration lanfCF  = YamlConfiguration.loadConfiguration(lang);
+        if(!lang.exists()){
+            lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("en_US.yml"), Charsets.UTF_8)));
+            lanfCF.options().copyDefaults(true);
+            try {
+                lanfCF.save(lang);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){
             getConfig().options().copyDefaults(true);
@@ -49,7 +64,9 @@ public class Main extends JavaPlugin {
         }
 
         for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
-            scrollsCrafts.craftScroll(true);
+            if(plugin.getConfig().getBoolean(scrollsCrafts.name())) {
+                scrollsCrafts.craftScroll(true);
+            }
         }
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
@@ -80,8 +97,8 @@ public class Main extends JavaPlugin {
         if(!playerSF.exists()) {
             try {
                 if(playerSF.createNewFile()){
-                    playerStats.set("CurrentMana", 50.0);
-                    playerStats.set("MaxMana", 50.0);
+                    playerStats.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("PlayerDefaultStats.yml"), Charsets.UTF_8)));
+                    playerStats.options().copyDefaults(true);
                     List<Integer> list = new ArrayList<>(CDSystem.Scrolls.values().length);
                     for(int i = 0; i < CDSystem.Scrolls.values().length; i++){
                         list.add(i,0);

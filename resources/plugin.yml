@@ -21,3 +21,19 @@ permissions:
     description: giving a permission on /magickscolls cdreset other
   magickscrolls.getinfo:
     description: giving a permission on /magickscolls getinfo
+  magickscrolls.give.scroll.ARROWSTORM:
+    description: giving a permission on /magickscolls give <nick> ARROWSTORM
+  magickscrolls.give.scroll.LIGHTNINGONE:
+    description: giving a permission on /magickscolls give <nick> LIGHTNINGONE
+  magickscrolls.give.scroll.LIGHTNINGTWO:
+    description: giving a permission on /magickscolls give <nick> LIGHTNINGTWO
+  magickscrolls.give.scroll.LIGHTNINGTHREE:
+    description: giving a permission on /magickscolls give <nick> LIGHTNINGTHREE
+  magickscrolls.give.scroll.NECROMANCY:
+    description: giving a permission on /magickscolls give <nick> NECROMANCY
+  magickscrolls.give.scroll.TELEPORTATION:
+    description: giving a permission on /magickscolls give <nick> TELEPORTATION
+  magickscrolls.give.scroll.VAMPIRIC:
+    description: giving a permission on /magickscolls give <nick> VAMPIRIC
+  magickscrolls.give.scroll.VORTEX:
+    description: giving a permission on /magickscolls give <nick> VORTEX

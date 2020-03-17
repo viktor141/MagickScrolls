@@ -55,7 +55,10 @@ public class Commands implements CommandExecutor {
             return true;
         }
 
-        scrollsCrafts = Crafts.ScrollsCrafts.valueOf(args[2].toUpperCase());
+        if(!commandSender.hasPermission("magickscrolls.give.scroll." + scrollsCrafts.name())){
+            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            return true;
+        }
 
         ItemStack item = scrollsCrafts.craftScroll(false);
         item.setAmount(amount);

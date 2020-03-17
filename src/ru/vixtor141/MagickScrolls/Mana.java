@@ -8,12 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Mana implements Runnable{
+
+    private Main plugin = Main.getPlugin();
     private Player player;
     private double currentMana;
     private double maxMana;
     private Mana manaInst;
     private static Map<Player, Mana> PlayerMap = new HashMap<Player, Mana>();
-    private double manaRegenUnit = 0.5;
+    private double manaRegenUnit = plugin.getConfig().getDouble("manaregenunit");
     private BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
     private DefaultEffect defaultEffect;
