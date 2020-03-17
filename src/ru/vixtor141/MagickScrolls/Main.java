@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.vixtor141.MagickScrolls.commands.GivingScrolls;
+import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -40,7 +40,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
 
-        this.getCommand("magickScrolls").setExecutor(new GivingScrolls());
+        this.getCommand("magickScrolls").setExecutor(new Commands());
 
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){

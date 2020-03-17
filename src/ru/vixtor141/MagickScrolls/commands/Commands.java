@@ -1,9 +1,5 @@
 package ru.vixtor141.MagickScrolls.commands;
 
-import net.minecraft.server.v1_12_R1.ChatBaseComponent;
-import net.minecraft.server.v1_12_R1.ChatClickable;
-import net.minecraft.server.v1_12_R1.ChatComponentText;
-import net.minecraft.server.v1_12_R1.IChatBaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
 
-public class GivingScrolls implements CommandExecutor {
+public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(args.length == 0)return helpMS(commandSender, command, s, args);
