@@ -63,9 +63,7 @@ public class Main extends JavaPlugin {
         }
 
         for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
-            if(plugin.getConfig().getBoolean(scrollsCrafts.name())) {
-                scrollsCrafts.craftScroll(true);
-            }
+                scrollsCrafts.craftScroll(plugin.getConfig().getBoolean(scrollsCrafts.name()));
         }
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
