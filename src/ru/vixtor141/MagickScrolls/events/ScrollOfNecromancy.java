@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -36,9 +37,11 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        checkScrollEvent(event);
+        if(checkScrollEvent(event)){
+            return;
+        }
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.NECROMANCY.name() + "_lore"))) return;
+        if(!Crafts.ScrollsCrafts.NECROMANCY.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -58,7 +61,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
         Optional<Entity> playerEntity = player.getNearbyEntities(10,10,10).parallelStream().filter(e -> e instanceof Player).findFirst();
 
         if(!playerEntity.isPresent()){
-            player.sendMessage("Target not defined");
+            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_tind);
             return;
         }
 

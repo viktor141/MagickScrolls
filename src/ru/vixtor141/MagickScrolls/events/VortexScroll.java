@@ -27,9 +27,11 @@ public class VortexScroll implements Listener, Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        checkScrollEvent(event);
+        if(checkScrollEvent(event)){
+            return;
+        }
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.VORTEX.name() + "_lore"))) return;
+        if(!Crafts.ScrollsCrafts.VORTEX.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 
         player = event.getPlayer();
         event.setCancelled(true);

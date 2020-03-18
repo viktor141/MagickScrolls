@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.pow;
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class ArrowStormScroll implements Listener, Runnable {
@@ -30,9 +29,11 @@ public class ArrowStormScroll implements Listener, Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        checkScrollEvent(event);
+        if(checkScrollEvent(event)){
+            return;
+        }
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.ARROWSTORM.name() + "_lore"))) return;
+        if(!Crafts.ScrollsCrafts.ARROWSTORM.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 
         event.setCancelled(true);
         player = event.getPlayer();

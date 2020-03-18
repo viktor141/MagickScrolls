@@ -44,23 +44,19 @@ public class Main extends JavaPlugin {
         File lang = new File(getDataFolder() + File.separator + "Lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
         FileConfiguration lanfCF  = YamlConfiguration.loadConfiguration(lang);
         if(!lang.exists()){
-            lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("en_US.yml"), Charsets.UTF_8)));
+            lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("lang/en_US.yml"), Charsets.UTF_8)));
             lanfCF.options().copyDefaults(true);
-            try {
-                lanfCF.save(lang);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            this.saveResource("lang/en_US.yml", false);
         }
         readingLangFile = new ReadingLangFile(lanfCF, this);
-
-        registerEventsListenersOfScrolls();
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
         for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
                 scrollsCrafts.craftScroll(plugin.getConfig().getBoolean(scrollsCrafts.name()));
         }
+
+        registerEventsListenersOfScrolls();
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }

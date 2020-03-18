@@ -21,6 +21,8 @@ msg_ycutsa: "You can use this scroll after "
 msg_seconds: "seconds"
 msg_nmay: "No mobs around you"
 msg_yctt: "You cannot teleport there"
+msg_tind: "Target isn't defined"
+
 #Names
 name_nec_scroll_mobs: "'s Evil Spirit"
 
