@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+
 public class SearchPlayerThread extends Thread {
 
     private OfflinePlayer[] offlinePlayer;
@@ -31,20 +33,20 @@ public class SearchPlayerThread extends Thread {
             }
         }
         if(commandSender instanceof Player && !((Player) commandSender).isOnline())return;
-        commandSender.sendMessage("Player not found");
+        commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pnf);
     }
 
     private void sendMessToCS(OfflinePlayer player){
         if(commandSender instanceof Player && !((Player) commandSender).isOnline())return;
         File playerSF = new File(Main.getPlugin().getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId());
         if(!playerSF.exists()){
-            commandSender.sendMessage(ChatColor.RED + "Player doesn't exist");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pdne);
             return;
         }
         FileConfiguration playerStats = YamlConfiguration.loadConfiguration(playerSF);
-        commandSender.sendMessage(ChatColor.AQUA + "Info about player: " + ChatColor.GREEN + player.getName());
-        commandSender.sendMessage(ChatColor.AQUA + "Mana: " + ChatColor.GOLD + playerStats.getDouble("CurrentMana") + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerStats.getDouble("MaxMana"));
-        commandSender.sendMessage(ChatColor.AQUA + "CDs list: " + ChatColor.GOLD + playerStats.getIntegerList("CDSystem"));
+        commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_iap + ChatColor.GREEN + player.getName());
+        commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_m + ChatColor.GOLD + playerStats.getDouble("CurrentMana") + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerStats.getDouble("MaxMana"));
+        commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_cdsl + ChatColor.GOLD + playerStats.getIntegerList("CDSystem"));
     }
 
 }

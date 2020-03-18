@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.events.*;
+import ru.vixtor141.MagickScrolls.lang.ReadingLangFile;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.io.File;
@@ -19,10 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Main extends JavaPlugin {
 
     private static Main plugin;
+    public static ReadingLangFile readingLangFile;
 
     public Main (){
         plugin = this;
@@ -34,17 +35,13 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(new LightningScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new TeleportationScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new VampiricScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new SaveAndLoad(), this);
-        Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
+        File config = new File(getDataFolder() + File.separator + "config.yml");
+        if(!config.exists()){
+            getConfig().options().copyDefaults(true);
+            saveDefaultConfig();
+        }
 
-        this.getCommand("magickScrolls").setExecutor(new Commands());
-
-        File lang = new File(getDataFolder() + File.separator + "Lang" + File.separator + "en_US.yml");
+        File lang = new File(getDataFolder() + File.separator + "Lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
         FileConfiguration lanfCF  = YamlConfiguration.loadConfiguration(lang);
         if(!lang.exists()){
             lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("en_US.yml"), Charsets.UTF_8)));
@@ -55,12 +52,11 @@ public class Main extends JavaPlugin {
                 e.printStackTrace();
             }
         }
+        readingLangFile = new ReadingLangFile(lanfCF, this);
 
-        File config = new File(getDataFolder() + File.separator + "config.yml");
-        if(!config.exists()){
-            getConfig().options().copyDefaults(true);
-            saveDefaultConfig();
-        }
+        registerEventsListenersOfScrolls();
+
+        this.getCommand("magickScrolls").setExecutor(new Commands());
 
         for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
                 scrollsCrafts.craftScroll(plugin.getConfig().getBoolean(scrollsCrafts.name()));
@@ -129,4 +125,13 @@ public class Main extends JavaPlugin {
         }
     }
 
+    private void registerEventsListenersOfScrolls(){
+        Bukkit.getPluginManager().registerEvents(new LightningScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new TeleportationScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new VampiricScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new SaveAndLoad(), this);
+        Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
+    }
 }

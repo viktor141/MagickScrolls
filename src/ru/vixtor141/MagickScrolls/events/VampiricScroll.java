@@ -12,7 +12,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
+import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Mana;
+
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 
 public class VampiricScroll implements Listener {
 
@@ -26,7 +29,7 @@ public class VampiricScroll implements Listener {
         if(player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = player.getInventory().getItemInMainHand();
         if(!item.getItemMeta().hasLore()) return;
-        if(!item.getItemMeta().getLore().get(0).equals("Vampirism power")) return;
+        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.VAMPIRIC.name() + "_lore"))) return;
 
         Mana playerMana = Mana.getPlayerMap().get(player);
 

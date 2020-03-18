@@ -5,13 +5,12 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.CDSystem;
+import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -20,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.pow;
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class ArrowStormScroll implements Listener, Runnable {
 
@@ -29,12 +30,9 @@ public class ArrowStormScroll implements Listener, Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        checkScrollEvent(event);
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().hasLore()) return;
-        if(!item.getItemMeta().getLore().get(0).equals("Arrow Storm scroll")) return;
+        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.ARROWSTORM.name() + "_lore"))) return;
 
         event.setCancelled(true);
         player = event.getPlayer();

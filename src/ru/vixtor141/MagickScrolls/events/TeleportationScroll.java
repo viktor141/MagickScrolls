@@ -4,25 +4,23 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
+import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Mana;
 
 import static java.lang.Math.*;
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class TeleportationScroll implements Listener {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return;
+        checkScrollEvent(event);
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().hasLore()) return;
-        if(!item.getItemMeta().getLore().get(0).equals("Scroll for teleportation in dimension")) return;
+        if(!item.getItemMeta().getLore().equals(readingLangFile.getLang().getStringList(Crafts.ScrollsCrafts.TELEPORTATION.name() + "_lore"))) return;
 
 
         Player player = event.getPlayer();
@@ -30,7 +28,7 @@ public class TeleportationScroll implements Listener {
 
         Location newLocation = checkForTeleportation(player);
         if(!checkBlock(newLocation)) {
-            player.sendMessage(ChatColor.RED + "Вы не можете туда попасть");
+            player.sendMessage(ChatColor.RED + readingLangFile.msg_yctt);
             return;
         }
 
@@ -39,7 +37,7 @@ public class TeleportationScroll implements Listener {
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.TELEPORTATION, playerMana, 5, 3))return;
 
-        player.teleport(newLocation); //Из за этой хуеты двойное срабатывание https://hub.spigotmc.org/jira/browse/SPIGOT-2478
+        player.teleport(newLocation);
 
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);

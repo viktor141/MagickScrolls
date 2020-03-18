@@ -1,10 +1,12 @@
 package ru.vixtor141.MagickScrolls;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 public class CDSystem{
 
     private List<Integer> CDs;
@@ -29,7 +31,7 @@ public class CDSystem{
 
     public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds){
         if(CDs.get(scroll.ordinal()) > 0) {
-            player.sendMessage("You can use this scroll after " + CDs.get(scroll.ordinal()) + " seconds");
+            player.sendMessage(ChatColor.RED + readingLangFile.msg_ycutsa + CDs.get(scroll.ordinal()) + " " + readingLangFile.msg_seconds);
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;

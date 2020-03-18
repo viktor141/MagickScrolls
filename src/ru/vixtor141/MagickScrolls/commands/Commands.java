@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
 
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+
 public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
@@ -26,13 +28,13 @@ public class Commands implements CommandExecutor {
     private boolean givingCommand(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls give [nick] [scroll] -[amount]
         if(args.length < 3 || args.length > 4)return false;
         if(!commandSender.hasPermission("magickscrolls.give")){
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player == null){
-            commandSender.sendMessage(ChatColor.RED + "Player isn't online");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
             return true;
         }
 
@@ -41,7 +43,7 @@ public class Commands implements CommandExecutor {
 
         if(commandSender instanceof Player && commandSender != player){
             if(!commandSender.hasPermission("magickscrolls.give.other")){
-                commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
                 return true;
             }
         }
@@ -51,12 +53,12 @@ public class Commands implements CommandExecutor {
         try {
             scrollsCrafts = Crafts.ScrollsCrafts.valueOf(args[2].toUpperCase());
         }catch (IllegalArgumentException e){
-            commandSender.sendMessage(ChatColor.RED + "Such a scroll doesn't exist");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_sasdne);
             return true;
         }
 
         if(!commandSender.hasPermission("magickscrolls.give.scroll." + scrollsCrafts.name())){
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
             return true;
         }
 
@@ -64,7 +66,7 @@ public class Commands implements CommandExecutor {
         item.setAmount(amount);
 
         player.getInventory().addItem(item);
-        commandSender.sendMessage(ChatColor.AQUA + "The scroll has been added");
+        commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_tshba);
 
         return true;
     }
@@ -72,7 +74,7 @@ public class Commands implements CommandExecutor {
     private boolean manaHealCommand(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls heal -[nick]
         if(args.length > 2)return false;
         if(!commandSender.hasPermission("magickscrolls.heal")){
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
             return true;
         }
 
@@ -82,12 +84,12 @@ public class Commands implements CommandExecutor {
             player = Bukkit.getPlayer(args[1]);
             if(commandSender instanceof Player && commandSender != player){
                 if(!commandSender.hasPermission("magickscrolls.heal.other")){
-                    commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+                    commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
                     return true;
                 }
             }
             if(player == null){
-                commandSender.sendMessage(ChatColor.RED + "Player is offline");
+                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
                 return true;
             }
         }else{
@@ -101,14 +103,14 @@ public class Commands implements CommandExecutor {
         Mana playerMana = Mana.getPlayerMap().get(player);
 
         playerMana.setCurrentMana(50);
-        commandSender.sendMessage(ChatColor.YELLOW + "Mana is now full");
+        commandSender.sendMessage(ChatColor.YELLOW + readingLangFile.msg_minf);
         return true;
     }
 
     private boolean CDReset(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls cdreset -[nick] -[scroll] -[seconds]
         if(args.length > 4)return false;
         if(!commandSender.hasPermission("magickscrolls.cdreset")){
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
             return true;
         }
         Player player;
@@ -116,11 +118,11 @@ public class Commands implements CommandExecutor {
 
         if(args.length > 1){
             if(!commandSender.hasPermission("magickscrolls.cdreset.other")){
-                commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
                 return true;
             }
             if(Bukkit.getPlayer(args[1]) == null){
-                commandSender.sendMessage(ChatColor.RED + "Player is offline");
+                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
                 return true;
             }
             player = Bukkit.getPlayer(args[1]);
@@ -138,11 +140,11 @@ public class Commands implements CommandExecutor {
             try {
                  scroll = CDSystem.Scrolls.valueOf(args[2].toUpperCase());
             }catch (IllegalArgumentException e){
-                commandSender.sendMessage(ChatColor.RED + "Such a scroll doesn't exist");
+                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_sasdne);
                 return true;
             }
             playerMana.getCdSystem().CDSet(scroll, setSecond);
-            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + "CD was set to " + setSecond);
+            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + readingLangFile.msg_cdwst + setSecond);
             return true;
         }
 
@@ -150,7 +152,7 @@ public class Commands implements CommandExecutor {
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.values()[i], setSecond);
         }
 
-        commandSender.sendMessage(ChatColor.GREEN + "CDs was set to " + setSecond);
+        commandSender.sendMessage(ChatColor.GREEN + readingLangFile.msg_cdwst + setSecond);
         return true;
     }
 
@@ -159,18 +161,18 @@ public class Commands implements CommandExecutor {
             return false;
         }
         if(!commandSender.hasPermission("magickscrolls.getinfo")){
-            commandSender.sendMessage(ChatColor.RED + "You don't have permission");
+            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player != null){
             Mana playerMana = Mana.getPlayerMap().get(player);
-            commandSender.sendMessage(ChatColor.AQUA + "Info about player: " + ChatColor.GREEN + player.getName());
-            commandSender.sendMessage(ChatColor.AQUA + "Mana: " + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
-            commandSender.sendMessage(ChatColor.AQUA + "CDs list: " + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
+            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_iap + ChatColor.GREEN + player.getName());
+            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_m + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
+            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_cdsl + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
         }else {
-            commandSender.sendMessage("Player is offline, wait until a file is found");
+            commandSender.sendMessage(readingLangFile.msg_piowuafif);
             SearchPlayerThread searchPlayerThread = new SearchPlayerThread(Bukkit.getOfflinePlayers(), commandSender, args[1]);
             searchPlayerThread.setPriority(Thread.MIN_PRIORITY);
             searchPlayerThread.start();
@@ -180,11 +182,11 @@ public class Commands implements CommandExecutor {
 
     private boolean helpMS(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls help
         String[] string = {
-                ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + " - Giving a scroll which you type",
-                ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + " - regen all your mana",
-                ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + " - sets your CD to the desired seconds or to zero",
-                ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + " - getting info about player",
-                ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + " - this page"
+                ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + readingLangFile.msg_gaswyt,
+                ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + readingLangFile.msg_raym,
+                ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + readingLangFile.msg_sycdttdsotz,
+                ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + readingLangFile.msg_giap,
+                ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + readingLangFile.msg_tp
         };
         commandSender.sendMessage(string);
         return true;

@@ -1,2 +1,58 @@
-huy: her
-vagina: pizda
+#Messages
+msg_ydhp: "You don't have permission"
+msg_pino: "Player isn't online"
+msg_sasdne: "Such a scroll doesn't exist"
+msg_tshba: "The scroll has been added"
+msg_minf: "Mana is now full"
+msg_cdwst: "CD was set to "
+msg_iap: "Info about player: "
+msg_m: "Mana: "
+msg_cdsl: "CDs list: "
+msg_piowuafif: "Player is offline, wait until a file is found"
+msg_gaswyt: " - Giving a scroll which you type"
+msg_raym: " - Regen all your mana"
+msg_sycdttdsotz: " - Sets your CD to the desired seconds or to zero"
+msg_giap: " - Getting info about player"
+msg_tp: " - This page"
+msg_pnf: "Player not found"
+msg_pdne: "Player doesn't exist"
+msg_ydnhm: "you don't have mana "
+msg_ycutsa: "You can use this scroll after "
+msg_seconds: "seconds"
+msg_nmay: "No mobs around you"
+msg_yctt: "You cannot teleport there"
+#Names
+name_nec_scroll_mobs: "'s Evil Spirit"
+
+#Scrolls
+ARROWSTORM_name: "scroll Of Arrow Storm"
+ARROWSTORM_lore:
+  - "Arrow Storm scroll"
+
+LIGHTNINGONE_name: "Scroll of lightning I"
+LIGHTNINGONE_lore:
+  - "Scroll for lightning strike"
+
+LIGHTNINGTWO_name: "Scroll of lightning II"
+LIGHTNINGTWO_lore:
+  - "Scroll for lightning strike power two"
+
+LIGHTNINGTHREE_name: "Scroll of lightning III"
+LIGHTNINGTHREE_lore:
+  - "Scroll for lightning strike power three"
+
+NECROMANCY_name: "Scroll Of Necromancy"
+NECROMANCY_lore:
+  - "Necromancy scroll"
+
+TELEPORTATION_name: "Scroll of teleportation"
+TELEPORTATION_lore:
+  - "Scroll for teleportation in dimension"
+
+VAMPIRIC_name: "Scroll of Vampirism"
+VAMPIRIC_lore:
+  - "Vampirism power"
+
+VORTEX_name: "Scroll of vortex"
+VORTEX_lore:
+  - "Vortex scroll"

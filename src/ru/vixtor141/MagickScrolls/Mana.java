@@ -7,6 +7,8 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+
 public class Mana implements Runnable{
 
     private Main plugin = Main.getPlugin();
@@ -14,7 +16,7 @@ public class Mana implements Runnable{
     private double currentMana;
     private double maxMana;
     private Mana manaInst;
-    private static Map<Player, Mana> PlayerMap = new HashMap<Player, Mana>();
+    private static Map<Player, Mana> PlayerMap = new HashMap<>();
     private double manaRegenUnit = plugin.getConfig().getDouble("manaregenunit");
     private BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
@@ -80,7 +82,7 @@ public class Mana implements Runnable{
             player.sendMessage(Double.toString(currentMana));
             return true;
         }else{
-            player.sendMessage("you don't have mana " + currentMana);
+            player.sendMessage(readingLangFile.msg_ydnhm + currentMana);
             return false;
         }
     }
