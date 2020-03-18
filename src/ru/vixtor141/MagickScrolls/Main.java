@@ -41,7 +41,7 @@ public class Main extends JavaPlugin {
             saveDefaultConfig();
         }
 
-        File lang = new File(getDataFolder() + File.separator + "Lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
+        File lang = new File(getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
         FileConfiguration lanfCF  = YamlConfiguration.loadConfiguration(lang);
         if(!lang.exists()){
             lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("lang/en_US.yml"), Charsets.UTF_8)));

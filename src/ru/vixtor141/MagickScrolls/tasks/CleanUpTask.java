@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.Mana;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class CleanUpTask implements Runnable {
     private List<Arrow> arrows;
     private List<LivingEntity> mobs;
     private static List<LivingEntity> existMobs = new ArrayList<>();
+    private Mana playerMana;
 
     public List<LivingEntity> getExistMobs(){
         return existMobs;
@@ -23,8 +25,9 @@ public class CleanUpTask implements Runnable {
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::arrowCleanUp, 80);
     }
 
-    public void mob(List<LivingEntity> list){
+    public void mob(List<LivingEntity> list, Mana playerMana){
         mobs = new ArrayList<>(list);
+        this.playerMana = playerMana;
         existMobs.addAll(list);
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::mobsCleanUp, 3600);
     }
@@ -46,6 +49,7 @@ public class CleanUpTask implements Runnable {
         }
         mobs.clear();
         existMobs.removeAll(mobs);
+        playerMana.getExistMobs().removeAll(mobs);
     }
 
     @Override

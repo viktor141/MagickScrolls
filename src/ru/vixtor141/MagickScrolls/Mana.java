@@ -1,10 +1,13 @@
 package ru.vixtor141.MagickScrolls;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
@@ -22,6 +25,7 @@ public class Mana implements Runnable{
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
     private DefaultEffect defaultEffect;
     private CDSystem cdSystem;
+    private List<LivingEntity> existMobs = new ArrayList<>();
 
     public Mana(Player player) {
         this.player = player;
@@ -30,6 +34,10 @@ public class Mana implements Runnable{
         this.defaultEffect = new DefaultEffect(player);
         PlayerMap.put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+    }
+
+    public List<LivingEntity> getExistMobs() {
+        return existMobs;
     }
 
     public CDSystem getCdSystem() {

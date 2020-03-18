@@ -30,6 +30,8 @@ public class VampiricScroll implements Listener {
         if(!Crafts.ScrollsCrafts.VAMPIRIC.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 
         Mana playerMana = Mana.getPlayerMap().get(player);
+        
+        if(player.getHealth() == player.getHealthScale())return;
 
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VAMPIRIC, playerMana, 6, 6))return;
 
@@ -37,7 +39,7 @@ public class VampiricScroll implements Listener {
 
         if(player.getHealth() <= player.getHealthScale() - 1.5) {
             player.setHealth(player.getHealth() + 1.5);
-        }else {
+        }else{
             player.setHealth(player.getHealthScale());
         }
 

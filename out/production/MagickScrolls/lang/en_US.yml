@@ -24,7 +24,7 @@ msg_yctt: "You cannot teleport there"
 msg_tind: "Target isn't defined"
 
 #Names
-name_nec_scroll_mobs: "'s Evil Spirit"
+name_nec_scroll_mobs: "Evil Spirit "
 
 #Scrolls
 ARROWSTORM_name: "scroll Of Arrow Storm"
