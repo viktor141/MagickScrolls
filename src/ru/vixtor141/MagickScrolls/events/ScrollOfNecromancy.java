@@ -11,6 +11,7 @@ import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -53,6 +54,13 @@ public class ScrollOfNecromancy implements Listener,Runnable {
     public void targetCorrect(EntityTargetLivingEntityEvent event){
         if (event.getEntity().hasMetadata("magicscrolls")){
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void mobDropRemove(EntityDeathEvent event){
+        if (event.getEntity().hasMetadata("magicscrolls")){
+            event.getDrops().clear();
         }
     }
 
