@@ -1,6 +1,9 @@
 package ru.vixtor141.MagickScrolls.tasks;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import ru.vixtor141.MagickScrolls.Main;
@@ -15,6 +18,8 @@ public class CleanUpTask implements Runnable {
     private List<LivingEntity> mobs;
     private static List<LivingEntity> existMobs = new ArrayList<>();
     private Mana playerMana;
+    private Location location;
+    private BlockState[] blockStates;
 
     public List<LivingEntity> getExistMobs(){
         return existMobs;
@@ -32,7 +37,13 @@ public class CleanUpTask implements Runnable {
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::mobsCleanUp, 3600);
     }
 
-    public void arrowCleanUp() {
+    public void sWeb(Location location, BlockState[] blockStates){
+        this.location = location;
+        this.blockStates = blockStates;
+        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this::sWebCleanUp, 100);
+    }
+
+    private void arrowCleanUp() {
         for(Arrow arrow: arrows){
             if(!arrow.isDead()) {
                 arrow.remove();
@@ -41,7 +52,7 @@ public class CleanUpTask implements Runnable {
         arrows.clear();
     }
 
-    public void mobsCleanUp() {
+    private void mobsCleanUp() {
         for(LivingEntity livingEntity: mobs){
             if(!livingEntity.isDead()){
                 livingEntity.remove();
@@ -50,6 +61,16 @@ public class CleanUpTask implements Runnable {
         mobs.clear();
         existMobs.removeAll(mobs);
         playerMana.getExistMobs().removeAll(mobs);
+    }
+
+    public void sWebCleanUp() {
+        for(int i = 0; i < 2; i++) {
+            if(blockStates[i] == null)continue;
+            Block block = location.add(0, i , 0).getBlock();
+            block.setType(blockStates[i].getType());
+            block.getState().setData(blockStates[i].getData());
+            blockStates[i].update();
+        }
     }
 
     @Override

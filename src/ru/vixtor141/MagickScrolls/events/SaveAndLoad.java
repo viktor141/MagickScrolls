@@ -25,7 +25,11 @@ public class SaveAndLoad implements Listener {
         playerMana.setMaxMana(playerStats.getDouble("MaxMana"));
         List<Integer> CDsList = playerStats.getIntegerList("CDSystem");
         for(int i = 0; i < CDSystem.Scrolls.values().length; i++){
-            playerMana.getCdSystem().getCDs().add(i, CDsList.get(i));
+            if(CDsList.size() <= i){
+                playerMana.getCdSystem().getCDs().add(i,0);
+            }else {
+                playerMana.getCdSystem().getCDs().add(i, CDsList.get(i));
+            }
         }
     }
 

@@ -17,7 +17,8 @@ public class CDSystem{
         NECROMANCY,
         TELEPORTATION,
         VAMPIRIC,
-        VORTEX
+        VORTEX,
+        SPIDERWEB
     }
 
     public List<Integer> getCDs(){

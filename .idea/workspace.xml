@@ -8,19 +8,29 @@
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/lang/en_US.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts$ScrollsCrafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts$ScrollsCrafts.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Crafts.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Mana.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Mana.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/Misc/LightningScrollThread.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/ScrollOfNecromancy$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/LightningScroll.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/ScrollOfNecromancy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/ScrollOfNecromancy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VampiricScroll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/TeleportationScroll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VortexScroll.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MagickScrolls/ru/vixtor141/MagickScrolls/events/VortexScroll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en_US.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/DefaultEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/DefaultEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/CDSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/CDSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Crafts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Misc/LightningScrollThread.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ArrowStormScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/LightningScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ScrollOfNecromancy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ScrollOfNecromancy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VampiricScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/TeleportationScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VortexScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/VortexScroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/tasks/CleanUpTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/tasks/CleanUpTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,18 +180,18 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="689" y="358" key="#com.intellij.fileTypes.FileTypeChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1584439224851" />
-    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser" timestamp="1584568028481">
+    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser" timestamp="1584648151507">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1584568028481" />
+    <state x="773" y="265" key="#com.intellij.ide.util.MemberChooser/0.24.1920.1056@0.24.1920.1056" timestamp="1584648151507" />
     <state x="815" y="444" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581048360508">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="815" y="444" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581048360508" />
-    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581446930985">
+    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584647220304">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1581446930985" />
+    <state x="698" y="302" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1584647220304" />
     <state x="698" y="302" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1581527761022">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -194,38 +204,38 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="747" y="296" key="FileChooserDialogImpl/0.24.1920.1056@0.24.1920.1056" timestamp="1581505020908" />
-    <state width="1874" height="199" key="GridCell.Tab.0.bottom" timestamp="1584568440995">
+    <state width="1874" height="199" key="GridCell.Tab.0.bottom" timestamp="1584826105102">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="199" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1584568440995" />
-    <state width="1874" height="199" key="GridCell.Tab.0.center" timestamp="1584568440994">
+    <state width="1874" height="199" key="GridCell.Tab.0.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1584826105102" />
+    <state width="1874" height="199" key="GridCell.Tab.0.center" timestamp="1584826105101">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="199" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1584568440994" />
-    <state width="1874" height="199" key="GridCell.Tab.0.left" timestamp="1584568440994">
+    <state width="1874" height="199" key="GridCell.Tab.0.center/0.24.1920.1056@0.24.1920.1056" timestamp="1584826105101" />
+    <state width="1874" height="199" key="GridCell.Tab.0.left" timestamp="1584826105100">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="199" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1584568440994" />
-    <state width="1874" height="199" key="GridCell.Tab.0.right" timestamp="1584568440994">
+    <state width="1874" height="199" key="GridCell.Tab.0.left/0.24.1920.1056@0.24.1920.1056" timestamp="1584826105100" />
+    <state width="1874" height="199" key="GridCell.Tab.0.right" timestamp="1584826105101">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="199" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1584568440994" />
-    <state width="1874" height="345" key="GridCell.Tab.1.bottom" timestamp="1584526315914">
+    <state width="1874" height="199" key="GridCell.Tab.0.right/0.24.1920.1056@0.24.1920.1056" timestamp="1584826105101" />
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom" timestamp="1584653202142">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1584526315914" />
-    <state width="1874" height="345" key="GridCell.Tab.1.center" timestamp="1584526315914">
+    <state width="1874" height="345" key="GridCell.Tab.1.bottom/0.24.1920.1056@0.24.1920.1056" timestamp="1584653202142" />
+    <state width="1874" height="345" key="GridCell.Tab.1.center" timestamp="1584653202142">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1584526315914" />
-    <state width="1874" height="345" key="GridCell.Tab.1.left" timestamp="1584526315913">
+    <state width="1874" height="345" key="GridCell.Tab.1.center/0.24.1920.1056@0.24.1920.1056" timestamp="1584653202142" />
+    <state width="1874" height="345" key="GridCell.Tab.1.left" timestamp="1584653202142">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1584526315913" />
-    <state width="1874" height="345" key="GridCell.Tab.1.right" timestamp="1584526315914">
+    <state width="1874" height="345" key="GridCell.Tab.1.left/0.24.1920.1056@0.24.1920.1056" timestamp="1584653202142" />
+    <state width="1874" height="345" key="GridCell.Tab.1.right" timestamp="1584653202142">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state width="1874" height="345" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1584526315914" />
+    <state width="1874" height="345" key="GridCell.Tab.1.right/0.24.1920.1056@0.24.1920.1056" timestamp="1584653202142" />
     <state x="548" y="298" key="IDE.errors.dialog" timestamp="1580907410791">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -238,10 +248,10 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="839" y="184" key="SettingsEditor/0.24.1920.1056@0.24.1920.1056" timestamp="1581048574715" />
-    <state x="659" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1584286528033">
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1584807262786">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="659" y="380" key="com.intellij.ide.util.TipDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1584286528033" />
+    <state x="659" y="380" key="com.intellij.ide.util.TipDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1584807262786" />
     <state x="164" y="107" width="1637" height="887" key="find.popup" timestamp="1582044207159">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
@@ -254,13 +264,13 @@
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
     <state x="710" y="173" key="refactoring.ChangeSignatureDialog/0.24.1920.1056@0.24.1920.1056" timestamp="1582643386266" />
-    <state x="624" y="253" key="run.anything.popup" timestamp="1584566207596">
+    <state x="624" y="253" key="run.anything.popup" timestamp="1584825265689">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="624" y="253" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1584566207596" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1584528509168">
+    <state x="624" y="253" key="run.anything.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1584825265689" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1584635630887">
       <screen x="0" y="24" width="1920" height="1056" />
     </state>
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1584528509168" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.24.1920.1056@0.24.1920.1056" timestamp="1584635630887" />
   </component>
 </project>

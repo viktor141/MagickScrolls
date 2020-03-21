@@ -10,5 +10,6 @@ NECROMANCY: true
 TELEPORTATION: true
 VAMPIRIC: true
 VORTEX: true
+SPIDERWEB: true
 
 lang: 'en_US'

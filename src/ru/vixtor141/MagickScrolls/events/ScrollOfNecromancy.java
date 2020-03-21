@@ -17,7 +17,6 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.LazyMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
@@ -27,7 +26,6 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
@@ -39,9 +37,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if(checkScrollEvent(event)){
-            return;
-        }
+        if(checkScrollEvent(event))return;
         item = event.getPlayer().getInventory().getItemInMainHand();
         if(!Crafts.ScrollsCrafts.NECROMANCY.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 

@@ -151,6 +151,25 @@ public class Crafts {
                 }
                 return itemStack;
             }
+        },
+        SPIDERWEB{
+            public ItemStack craftScroll(boolean check){
+                ItemStack itemStack = setItemMeta(langF.getString("SPIDERWEB_name"), langF.getStringList("SPIDERWEB_lore"));
+                NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfSpiderWeb");
+
+                itemStack.setAmount(4);
+                ShapedRecipe s = new ShapedRecipe(key, itemStack);
+                s.shape("PBP","SGS","PIP");
+                s.setIngredient('B', Material.BLAZE_POWDER);
+                s.setIngredient('S', Material.STRING);
+                s.setIngredient('G', Material.GLOWSTONE_DUST);
+                s.setIngredient('I', Material.GOLD_INGOT);
+                s.setIngredient('P', Material.PAPER);
+                if(check) {
+                    Bukkit.getServer().addRecipe(s);
+                }
+                return itemStack;
+            }
         };
 
         public abstract ItemStack craftScroll(boolean check);

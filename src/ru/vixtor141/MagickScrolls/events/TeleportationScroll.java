@@ -18,9 +18,7 @@ public class TeleportationScroll implements Listener {
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
-        if(checkScrollEvent(event)){
-            return;
-        }
+        if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         if(!Crafts.ScrollsCrafts.TELEPORTATION.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
 

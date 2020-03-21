@@ -1,42 +1,69 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import net.minecraft.server.v1_12_R1.EntityItem;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArmorStand;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftFireball;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftItemFrame;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Crafts;
-import ru.vixtor141.MagickScrolls.Misc.LightningScrollThread;
+import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.Mana;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
-public class LightningScroll implements Listener {
+public class LightningScroll implements Listener, Runnable {
 
+    private Player player;
+    private PlayerInteractEvent event;
+    private double bound;
+    private int numberOfEntities;
+    private ItemStack item;
+    List<Entity> entitesInLocation;
+
+    Mana playerMana;
     @EventHandler
     public void use(PlayerInteractEvent event){
-        if(checkScrollEvent(event)){
-            return;
-        }
+        if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
 
-        Player player = event.getPlayer();
+        player = event.getPlayer();
 
-        LightningScrollThread lightningScrollThread = null;
+        this.event = event;
+        this.item = item;
 
         switch (checkTypeOfScroll(item)){
 
-            case 1: lightningScrollThread = new LightningScrollThread(event, player, 5, 1, item);
+            case 1: bound = 5;
+            numberOfEntities = 1;
             break;
 
-            case 2: lightningScrollThread = new LightningScrollThread(event, player, 8, 4, item);
+            case 2: bound = 8;
+                numberOfEntities = 4;
             break;
 
-            case 3: lightningScrollThread = new LightningScrollThread(event, player, 10, 8, item);
+            case 3: bound = 10;
+                numberOfEntities = 8;
             break;
 
             case 0: return;
         }
-        if(lightningScrollThread != null) lightningScrollThread.start();
+
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this);
+
     }
 
     private int checkTypeOfScroll(ItemStack item){
@@ -48,6 +75,45 @@ public class LightningScroll implements Listener {
             return 3;
         }else {
             return 0;
+        }
+    }
+
+    @Override
+    public void run() {
+        event.setCancelled(true);
+        this.entitesInLocation = player.getNearbyEntities(bound,bound,bound);
+
+        this.playerMana = Mana.getPlayerMap().get(player);
+        if (entitesInLocation.isEmpty()) {
+            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
+            return;
+        }
+        entitesInLocation = entitesInLocation.parallelStream().filter(e ->!(e instanceof CraftItemFrame) && !(e instanceof CraftFireball) && !(e instanceof CraftArmorStand) && !(e instanceof CraftArrow) && !(e instanceof EntityItem)).collect(Collectors.toList());
+        if (entitesInLocation.isEmpty()) {
+            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
+            return;
+        }
+
+        Bukkit.getScheduler().runTask(Main.getPlugin(), this::end);
+
+    }
+
+
+    private void end(){
+        Entity entity;
+
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING, playerMana, numberOfEntities * 5, (int) (20 + 30 * Math.log10(numberOfEntities))))return;
+
+        for(int i = 0; i < entitesInLocation.size(); i++) {
+
+            entity = entitesInLocation.get(i);
+            entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
+            if(i == numberOfEntities-1){
+                if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+                    item.setAmount(item.getAmount() - 1);
+                    event.getPlayer().getInventory().setItemInMainHand(item);
+                }
+            }
         }
     }
 }

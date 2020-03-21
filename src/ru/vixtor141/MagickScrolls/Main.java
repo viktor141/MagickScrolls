@@ -52,8 +52,27 @@ public class Main extends JavaPlugin {
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
+
+        File crafts = new File(getDataFolder() + File.separator  + "crafts.yml");
+        FileConfiguration craftsCF  = YamlConfiguration.loadConfiguration(crafts);
+        if(!crafts.exists()){
+            try {
+                craftsCF.save(crafts);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
-                scrollsCrafts.craftScroll(plugin.getConfig().getBoolean(scrollsCrafts.name()));
+            if(craftsCF.get(scrollsCrafts.name()) == null){
+                craftsCF.set(scrollsCrafts.name(), true);
+            }
+            scrollsCrafts.craftScroll(getConfig().getBoolean(scrollsCrafts.name()));
+        }
+
+        try {
+            craftsCF.save(crafts);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         registerEventsListenersOfScrolls();
@@ -129,5 +148,6 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
+        Bukkit.getPluginManager().registerEvents(new SpiderWebScroll(), this);
     }
 }

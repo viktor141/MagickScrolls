@@ -27,7 +27,7 @@ msg_tind: "Target isn't defined"
 name_nec_scroll_mobs: "Evil Spirit "
 
 #Scrolls
-ARROWSTORM_name: "scroll Of Arrow Storm"
+ARROWSTORM_name: "Scroll Of Arrow Storm"
 ARROWSTORM_lore:
   - "Arrow Storm scroll"
 
@@ -58,3 +58,7 @@ VAMPIRIC_lore:
 VORTEX_name: "Scroll of vortex"
 VORTEX_lore:
   - "Vortex scroll"
+
+SPIDERWEB_name: "Scroll of spider web"
+SPIDERWEB_lore:
+  - "Spider web scroll"
