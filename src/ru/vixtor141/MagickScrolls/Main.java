@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.events.*;
+import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
 import ru.vixtor141.MagickScrolls.lang.ReadingLangFile;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -35,6 +36,10 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new PAPI(this).register();
+        }
+
         File config = new File(getDataFolder() + File.separator + "config.yml");
         if(!config.exists()){
             getConfig().options().copyDefaults(true);

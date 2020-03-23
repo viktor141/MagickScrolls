@@ -1,6 +1,10 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: 1.0
+version: "1.1"
+author: vixtor141
+
+depend: [PlaceholderAPI]
+
 commands:
   magickscrolls:
     description: base command

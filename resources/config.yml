@@ -1,15 +1,4 @@
 #How much mana regen in one second
 manaregenunit: 0.5
 
-#Switching-on crafts of scrolls
-ARROWSTORM: true
-LIGHTNINGONE: true
-LIGHTNINGTWO: true
-LIGHTNINGTHREE: true
-NECROMANCY: true
-TELEPORTATION: true
-VAMPIRIC: true
-VORTEX: true
-SPIDERWEB: true
-
 lang: 'en_US'
