@@ -1,4 +1,31 @@
 #How much mana regen in one second
 manaregenunit: 0.5
 
+messageAboutMana: true
+
+#scrolls settings
+ARROWSTORM:
+  consumedMana: 15.0
+  CDseconds: 20
+LIGHTNING:
+  consumedMana: 5.0 #setting of first type scroll other type generate with this setting
+  CDseconds: 20 #setting of first type scroll other type generate with this setting
+NECROMANCY:
+  consumedMana: 50.0
+  CDseconds: 120
+TELEPORTATION:
+  consumedMana: 5.0
+  CDseconds: 3
+VAMPIRIC:
+  consumedMana: 6.0
+  CDseconds: 6
+VORTEX:
+  consumedMana: 20.0
+  CDseconds: 40
+SPIDERWEB:
+  perThrowConsumedMana: 1.0
+  perThrowCDseconds: 4
+  consumedMana: 7.0
+  CDseconds: 20
+
 lang: 'en_US'

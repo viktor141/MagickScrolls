@@ -24,6 +24,8 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class SpiderWebScroll implements Listener {
 
+    Main plugin = Main.getPlugin();
+    CDSystem.Scrolls scroll = CDSystem.Scrolls.SPIDERWEB;
 
     @EventHandler
     public void use(PlayerInteractEvent event){
@@ -34,7 +36,7 @@ public class SpiderWebScroll implements Listener {
         Player player = event.getPlayer();
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.SPIDERWEB, playerMana, 1, 4))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".perThrowConsumedMana") , plugin.getConfig().getInt(scroll.name() + ".perThrowCDseconds")))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);
         snowball.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), player::getName));
@@ -65,7 +67,7 @@ public class SpiderWebScroll implements Listener {
             }
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
-            if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.SPIDERWEB, playerMana, 7, 20))return;
+            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
             CleanUpTask cleanUpTask = new CleanUpTask();
             cleanUpTask.sWeb(location, blockStates);
         }

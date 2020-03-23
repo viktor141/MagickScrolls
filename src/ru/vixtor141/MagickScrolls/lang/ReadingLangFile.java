@@ -1,11 +1,9 @@
 package ru.vixtor141.MagickScrolls.lang;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import ru.vixtor141.MagickScrolls.Main;
 
 public class ReadingLangFile {
 
-    private Main plugin;
     private FileConfiguration lang;
     public String msg_ydhp;//maybe better add enum
     public String msg_pino;
@@ -31,13 +29,13 @@ public class ReadingLangFile {
     public String name_nec_scroll_mobs;
     public String msg_yctt;
     public String msg_tind;
+    public String msg_ymn;
 
     public FileConfiguration getLang() {
         return lang;
     }
 
-    public ReadingLangFile(FileConfiguration fileConfiguration, Main plugin){
-        this.plugin = plugin;
+    public ReadingLangFile(FileConfiguration fileConfiguration){
         this.lang = fileConfiguration;
         set();
     }
@@ -67,5 +65,6 @@ public class ReadingLangFile {
         name_nec_scroll_mobs = lang.getString("name_nec_scroll_mobs");
         msg_yctt = lang.getString("msg_yctt");
         msg_tind = lang.getString("msg_tind");
+        msg_ymn = lang.getString("msg_ymn");
     }
 }

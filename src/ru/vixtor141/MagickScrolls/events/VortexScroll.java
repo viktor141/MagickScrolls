@@ -76,8 +76,10 @@ public class VortexScroll implements Listener, Runnable {
             return;
         }
 
+        Main plugin = Main.getPlugin();
+        CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VORTEX, playerMana, 20, 40))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
 
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 

@@ -102,7 +102,10 @@ public class LightningScroll implements Listener, Runnable {
     private void end(){
         Entity entity;
 
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING, playerMana, numberOfEntities * 5, (int) (20 + 30 * Math.log10(numberOfEntities))))return;
+        CDSystem.Scrolls scroll = CDSystem.Scrolls.LIGHTNING;
+        Main plugin = Main.getPlugin();
+
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, numberOfEntities * plugin.getConfig().getDouble(scroll.name() + ".consumedMana"), (int) (plugin.getConfig().getDouble(scroll.name() + ".CDseconds") + 30 * Math.log10(numberOfEntities))))return;
 
         for(int i = 0; i < entitesInLocation.size(); i++) {
 

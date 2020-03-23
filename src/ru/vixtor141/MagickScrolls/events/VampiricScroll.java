@@ -13,6 +13,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Crafts;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 
 public class VampiricScroll implements Listener {
@@ -32,8 +33,10 @@ public class VampiricScroll implements Listener {
         Mana playerMana = Mana.getPlayerMap().get(player);
         
         if(player.getHealth() == player.getHealthScale())return;
+        Main plugin = Main.getPlugin();
+        CDSystem.Scrolls scroll = CDSystem.Scrolls.VAMPIRIC;
 
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.VAMPIRIC, playerMana, 6, 6))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
 
         event.setDamage(3);
 

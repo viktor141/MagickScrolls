@@ -81,7 +81,10 @@ public class ScrollOfNecromancy implements Listener,Runnable {
 
         Player target = (Player) playerEntity.get();
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.NECROMANCY, playerMana, 50, 120))return;
+        CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
+        Main plugin = Main.getPlugin();
+
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
 
         Location location = player.getLocation();
         List<LivingEntity> mobs = new ArrayList<>();

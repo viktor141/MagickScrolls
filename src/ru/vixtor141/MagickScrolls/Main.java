@@ -53,7 +53,7 @@ public class Main extends JavaPlugin {
             lanfCF.options().copyDefaults(true);
             this.saveResource("lang/en_US.yml", false);
         }
-        readingLangFile = new ReadingLangFile(lanfCF, this);
+        readingLangFile = new ReadingLangFile(lanfCF);
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
@@ -71,9 +71,8 @@ public class Main extends JavaPlugin {
             if(craftsCF.get(scrollsCrafts.name()) == null){
                 craftsCF.set(scrollsCrafts.name(), true);
             }
-            scrollsCrafts.craftScroll(getConfig().getBoolean(scrollsCrafts.name()));
+            scrollsCrafts.craftScroll(craftsCF.getBoolean(scrollsCrafts.name()));
         }
-
         try {
             craftsCF.save(crafts);
         } catch (IOException e) {
