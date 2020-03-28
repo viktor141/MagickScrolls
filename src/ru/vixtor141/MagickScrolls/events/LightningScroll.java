@@ -4,10 +4,7 @@ import net.minecraft.server.v1_12_R1.EntityItem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArmorStand;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArrow;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftFireball;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftItemFrame;
+import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -88,7 +85,7 @@ public class LightningScroll implements Listener, Runnable {
             player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
             return;
         }
-        entitesInLocation = entitesInLocation.parallelStream().filter(e ->!(e instanceof CraftItemFrame) && !(e instanceof CraftFireball) && !(e instanceof CraftArmorStand) && !(e instanceof CraftArrow) && !(e instanceof EntityItem)).collect(Collectors.toList());
+        entitesInLocation = entitesInLocation.parallelStream().filter(e ->!(e instanceof CraftItemFrame) && !(e instanceof CraftFireball) && !(e instanceof CraftArmorStand) && !(e instanceof CraftArrow) && !(e instanceof CraftItem)).collect(Collectors.toList());
         if (entitesInLocation.isEmpty()) {
             player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
             return;
@@ -105,7 +102,7 @@ public class LightningScroll implements Listener, Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.LIGHTNING;
         Main plugin = Main.getPlugin();
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, numberOfEntities * plugin.getConfig().getDouble(scroll.name() + ".consumedMana"), (int) (plugin.getConfig().getDouble(scroll.name() + ".CDseconds") + 30 * Math.log10(numberOfEntities))))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, numberOfEntities * plugin.getConfig().getDouble(scroll.name() + ".consumedMana"), (int) (plugin.getConfig().getDouble(scroll.name() + ".CDseconds") + 30 * Math.log10(numberOfEntities)), true))return;
 
         for(int i = 0; i < entitesInLocation.size(); i++) {
 

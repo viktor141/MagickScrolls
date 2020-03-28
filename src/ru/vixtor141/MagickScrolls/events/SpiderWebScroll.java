@@ -20,6 +20,7 @@ import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
+import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class SpiderWebScroll implements Listener {
@@ -36,7 +37,7 @@ public class SpiderWebScroll implements Listener {
         Player player = event.getPlayer();
 
         Mana playerMana = Mana.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".perThrowConsumedMana") , plugin.getConfig().getInt(scroll.name() + ".perThrowCDseconds")))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".perThrowConsumedMana") , plugin.getConfig().getInt(scroll.name() + ".perThrowCDseconds"), true))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);
         snowball.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), player::getName));
@@ -56,6 +57,10 @@ public class SpiderWebScroll implements Listener {
             BlockState[] blockStates = new BlockState[2];
             Location location = event.getHitEntity().getLocation();
             Location setBlockLoc;
+            if(playerMana.getCurrentMana() < plugin.getConfig().getDouble(scroll.name() + ".consumedMana")){
+                player.sendMessage(readingLangFile.msg_ydnhm + playerMana.getCurrentMana());
+                return;
+            }
             for(int i = 0; i < 2; i++) {
                 setBlockLoc = new Location(location.getWorld(), location.getX(), location.getY() + i, location.getZ());
                 blockStates[i] = setBlockLoc.getBlock().getState();
@@ -67,9 +72,9 @@ public class SpiderWebScroll implements Listener {
             }
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
-            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
+            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
             CleanUpTask cleanUpTask = new CleanUpTask();
-            cleanUpTask.sWeb(location, blockStates);
+            cleanUpTask.sWeb(location, blockStates, playerMana);
         }
     }
 }

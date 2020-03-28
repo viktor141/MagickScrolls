@@ -2,10 +2,12 @@ package ru.vixtor141.MagickScrolls.tasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 
@@ -17,12 +19,22 @@ public class CleanUpTask implements Runnable {
     private List<Arrow> arrows;
     private List<LivingEntity> mobs;
     private static List<LivingEntity> existMobs = new ArrayList<>();
+    private static List<CleanUpTask> cleanUpTasks = new ArrayList<>();
     private Mana playerMana;
     private Location location;
     private BlockState[] blockStates;
+    private BukkitTask sWebTask;
 
-    public List<LivingEntity> getExistMobs(){
+    public static List<CleanUpTask> getCleanUpTasks(){
+        return cleanUpTasks;
+    }
+
+    public static List<LivingEntity> getExistMobs(){
         return existMobs;
+    }
+
+    public BukkitTask getsWebTask() {
+        return sWebTask;
     }
 
     public void arrow(List<Arrow> list){
@@ -37,10 +49,12 @@ public class CleanUpTask implements Runnable {
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::mobsCleanUp, 3600);
     }
 
-    public void sWeb(Location location, BlockState[] blockStates){
+    public void sWeb(Location location, BlockState[] blockStates, Mana playerMana){
         this.location = location;
         this.blockStates = blockStates;
-        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this::sWebCleanUp, 100);
+        this.playerMana = playerMana;
+        sWebTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this::sWebCleanUp, 200);
+        cleanUpTasks.add(this);
     }
 
     private void arrowCleanUp() {
@@ -67,6 +81,18 @@ public class CleanUpTask implements Runnable {
         for(int i = 0; i < 2; i++) {
             if(blockStates[i] == null)continue;
             Block block = location.add(0, i , 0).getBlock();
+            if(!block.getType().equals(Material.WEB))continue;
+            block.setType(blockStates[i].getType());
+            block.getState().setData(blockStates[i].getData());
+            blockStates[i].update();
+        }
+        cleanUpTasks.remove(this);
+    }
+    public void sWebCleanUpOnDisable() {
+        for(int i = 0; i < 2; i++) {
+            if(blockStates[i] == null)continue;
+            Block block = location.add(0, i , 0).getBlock();
+            if(!block.getType().equals(Material.WEB))continue;
             block.setType(blockStates[i].getType());
             block.getState().setData(blockStates[i].getData());
             blockStates[i].update();
@@ -77,4 +103,5 @@ public class CleanUpTask implements Runnable {
     public void run() {
 
     }
+
 }

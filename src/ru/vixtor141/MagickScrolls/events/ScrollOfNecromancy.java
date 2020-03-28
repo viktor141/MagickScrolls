@@ -58,6 +58,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
     public void mobDropRemove(EntityDeathEvent event){
         if (event.getEntity().hasMetadata("magicscrolls")){
             event.getDrops().clear();
+            event.setDroppedExp(0);
         }
     }
 
@@ -84,7 +85,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
         Main plugin = Main.getPlugin();
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
 
         Location location = player.getLocation();
         List<LivingEntity> mobs = new ArrayList<>();

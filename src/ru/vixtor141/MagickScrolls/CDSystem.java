@@ -30,14 +30,16 @@ public class CDSystem{
         this.CDs = new ArrayList<>(Scrolls.values().length);
     }
 
-    public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds){
+    public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds, boolean defaultEffect){
         if(CDs.get(scroll.ordinal()) > 0) {
             player.sendMessage(ChatColor.RED + readingLangFile.msg_ycutsa + CDs.get(scroll.ordinal()) + " " + readingLangFile.msg_seconds);
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;
         CDSet(scroll, CDSeconds);
-        playerMana.getDefaultEffect().defaultEffectOfScrolls();
+        if(defaultEffect) {
+            playerMana.getDefaultEffect().defaultEffectOfScrolls();
+        }
         return true;
     }
 

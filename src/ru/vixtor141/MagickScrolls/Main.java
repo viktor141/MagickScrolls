@@ -90,13 +90,22 @@ public class Main extends JavaPlugin {
         for (Player player: Bukkit.getOnlinePlayers()){
             savePlayerStats(player);
         }
-        CleanUpTask cleanUpTask = new CleanUpTask();
-        for(LivingEntity livingEntity: cleanUpTask.getExistMobs()){
+        for(CleanUpTask cleanUpTask : CleanUpTask.getCleanUpTasks()){
+            cleanUpTask.getsWebTask().cancel();
+            cleanUpTask.sWebCleanUpOnDisable();
+        }
+        CleanUpTask.getCleanUpTasks().clear();
+        for(DefaultEffect defaultEffect : DefaultEffect.getDefaultEffectList()){
+            defaultEffect.getKillerItemTask().cancel();
+            defaultEffect.getEntityItem().remove();
+        }
+        DefaultEffect.getDefaultEffectList().clear();
+        for(LivingEntity livingEntity: CleanUpTask.getExistMobs()){
             if(!livingEntity.isDead()){
                 livingEntity.remove();
             }
         }
-        cleanUpTask.getExistMobs().clear();
+        CleanUpTask.getExistMobs().clear();
         this.getLogger().info(ChatColor.GOLD+"Plugin has been disabled");
     }
 

@@ -36,7 +36,7 @@ public class VampiricScroll implements Listener {
         Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VAMPIRIC;
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
 
         event.setDamage(3);
 

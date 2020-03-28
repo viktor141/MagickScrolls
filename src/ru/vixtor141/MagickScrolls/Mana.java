@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;

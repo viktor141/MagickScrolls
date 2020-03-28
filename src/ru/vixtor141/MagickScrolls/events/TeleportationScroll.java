@@ -39,7 +39,7 @@ public class TeleportationScroll implements Listener {
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
         Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.TELEPORTATION;
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds")))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
 
         player.teleport(newLocation);
 
