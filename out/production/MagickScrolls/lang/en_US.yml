@@ -28,38 +28,47 @@ msg_ymn: "Your mana now "
 name_nec_scroll_mobs: "Evil Spirit "
 
 #Scrolls
-ARROWSTORM_name: "Scroll Of Arrow Storm"
-ARROWSTORM_lore:
+ARROWSTORM:
+  name: "Scroll Of Arrow Storm"
+  lore:
   - "Arrow Storm scroll"
 
-LIGHTNINGONE_name: "Scroll of lightning I"
-LIGHTNINGONE_lore:
+LIGHTNINGONE:
+  name: "Scroll of lightning I"
+  lore:
   - "Scroll for lightning strike"
 
-LIGHTNINGTWO_name: "Scroll of lightning II"
-LIGHTNINGTWO_lore:
+LIGHTNINGTWO:
+  name: "Scroll of lightning II"
+  lore:
   - "Scroll for lightning strike power two"
 
-LIGHTNINGTHREE_name: "Scroll of lightning III"
-LIGHTNINGTHREE_lore:
+LIGHTNINGTHREE:
+  name: "Scroll of lightning III"
+  lore:
   - "Scroll for lightning strike power three"
 
-NECROMANCY_name: "Scroll Of Necromancy"
-NECROMANCY_lore:
+NECROMANCY:
+  name: "Scroll Of Necromancy"
+  lore:
   - "Necromancy scroll"
 
-TELEPORTATION_name: "Scroll of teleportation"
-TELEPORTATION_lore:
+TELEPORTATION:
+  name: "Scroll of teleportation"
+  lore:
   - "Scroll for teleportation in dimension"
 
-VAMPIRIC_name: "Scroll of Vampirism"
-VAMPIRIC_lore:
+VAMPIRIC:
+  name: "Scroll of Vampirism"
+  lore:
   - "Vampirism power"
 
-VORTEX_name: "Scroll of vortex"
-VORTEX_lore:
+VORTEX:
+  name: "Scroll of vortex"
+  lore:
   - "Vortex scroll"
 
-SPIDERWEB_name: "Scroll of spider web"
-SPIDERWEB_lore:
+SPIDERWEB:
+  name: "Scroll of spider web"
+  lore:
   - "Spider web scroll"

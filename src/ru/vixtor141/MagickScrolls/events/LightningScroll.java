@@ -1,21 +1,27 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import net.minecraft.server.v1_12_R1.EntityItem;
+import net.minecraft.server.v1_12_R1.ItemEnderEye;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +35,7 @@ public class LightningScroll implements Listener, Runnable {
     private double bound;
     private int numberOfEntities;
     private ItemStack item;
-    List<Entity> entitesInLocation;
+    private List<LivingEntity> entitesInLocation;
 
     Mana playerMana;
     @EventHandler
@@ -78,19 +84,16 @@ public class LightningScroll implements Listener, Runnable {
     @Override
     public void run() {
         event.setCancelled(true);
-        this.entitesInLocation = player.getNearbyEntities(bound,bound,bound);
+
+        entitesInLocation = (List<LivingEntity>)(List<?>) player.getNearbyEntities(bound,bound,bound).parallelStream().filter(entity -> (entity instanceof LivingEntity) && !(entity instanceof CraftArmorStand)).collect(Collectors.toList());
+
+        entitesInLocation = entitesInLocation.parallelStream().filter(livingEntity -> !livingEntity.hasPotionEffect(PotionEffectType.INVISIBILITY)).collect(Collectors.toList());
 
         this.playerMana = Mana.getPlayerMap().get(player);
         if (entitesInLocation.isEmpty()) {
             player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
             return;
         }
-        entitesInLocation = entitesInLocation.parallelStream().filter(e ->!(e instanceof CraftItemFrame) && !(e instanceof CraftFireball) && !(e instanceof CraftArmorStand) && !(e instanceof CraftArrow) && !(e instanceof CraftItem)).collect(Collectors.toList());
-        if (entitesInLocation.isEmpty()) {
-            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
-            return;
-        }
-
         Bukkit.getScheduler().runTask(Main.getPlugin(), this::end);
 
     }
@@ -113,6 +116,7 @@ public class LightningScroll implements Listener, Runnable {
                     item.setAmount(item.getAmount() - 1);
                     event.getPlayer().getInventory().setItemInMainHand(item);
                 }
+                return;
             }
         }
     }

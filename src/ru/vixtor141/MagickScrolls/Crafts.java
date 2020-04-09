@@ -18,7 +18,7 @@ public class Crafts {
     public enum ScrollsCrafts{
         ARROWSTORM {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfArrowStorm = setItemMeta(langF.getString("ARROWSTORM_name"), langF.getStringList("ARROWSTORM_lore"));
+                ItemStack scrollOfArrowStorm = setItemMeta(langF.getString("ARROWSTORM.name"), langF.getStringList("ARROWSTORM.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfArrowStorm");
 
                 scrollOfArrowStorm.setAmount(4);
@@ -35,7 +35,7 @@ public class Crafts {
         },
         LIGHTNINGONE {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightning = setItemMeta(langF.getString("LIGHTNINGONE_name"), langF.getStringList("LIGHTNINGONE_lore"));
+                ItemStack scrollOfLightning = setItemMeta(langF.getString("LIGHTNINGONE.name"), langF.getStringList("LIGHTNINGONE.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightning");
 
                 scrollOfLightning.setAmount(8);
@@ -51,7 +51,7 @@ public class Crafts {
         },
         LIGHTNINGTWO {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightningPowerTwo = setItemMeta(langF.getString("LIGHTNINGTWO_name"), langF.getStringList("LIGHTNINGTWO_lore"));
+                ItemStack scrollOfLightningPowerTwo = setItemMeta(langF.getString("LIGHTNINGTWO.name"), langF.getStringList("LIGHTNINGTWO.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightningPowerTwo");
 
                 scrollOfLightningPowerTwo.setAmount(8);
@@ -67,7 +67,7 @@ public class Crafts {
         },
         LIGHTNINGTHREE {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightningPowerThree = setItemMeta(langF.getString("LIGHTNINGTHREE_name"), langF.getStringList("LIGHTNINGTHREE_lore"));
+                ItemStack scrollOfLightningPowerThree = setItemMeta(langF.getString("LIGHTNINGTHREE.name"), langF.getStringList("LIGHTNINGTHREE.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightningPowerThree");
 
                 scrollOfLightningPowerThree.setAmount(8);
@@ -83,7 +83,7 @@ public class Crafts {
         },
         NECROMANCY{
             public ItemStack craftScroll(boolean check){
-                ItemStack scrollOfNecromancy = setItemMeta(langF.getString("NECROMANCY_name"), langF.getStringList("NECROMANCY_lore"));
+                ItemStack scrollOfNecromancy = setItemMeta(langF.getString("NECROMANCY.name"), langF.getStringList("NECROMANCY.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfNecromancy");
 
                 scrollOfNecromancy.setAmount(4);
@@ -103,7 +103,7 @@ public class Crafts {
         },
         TELEPORTATION{
             public ItemStack craftScroll(boolean check){
-                ItemStack scrollOfTeleportation = setItemMeta(langF.getString("TELEPORTATION_name"), langF.getStringList("TELEPORTATION_lore"));
+                ItemStack scrollOfTeleportation = setItemMeta(langF.getString("TELEPORTATION.name"), langF.getStringList("TELEPORTATION.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfTeleportation");
 
                 scrollOfTeleportation.setAmount(4);
@@ -119,10 +119,10 @@ public class Crafts {
         },
         VAMPIRIC{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("VAMPIRIC_name"), langF.getStringList("VAMPIRIC_lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("VAMPIRIC.name"), langF.getStringList("VAMPIRIC.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfVampirism");
 
-                itemStack.setAmount(4);
+                itemStack.setAmount(8);
                 ShapedRecipe s = new ShapedRecipe(key, itemStack);
                 s.shape("T T"," P ","T T");
                 s.setIngredient('T', Material.GHAST_TEAR);
@@ -135,7 +135,7 @@ public class Crafts {
         },
         VORTEX{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("VORTEX_name"), langF.getStringList("VORTEX_lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("VORTEX.name"), langF.getStringList("VORTEX.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfVortex");
 
                 itemStack.setAmount(4);
@@ -154,7 +154,7 @@ public class Crafts {
         },
         SPIDERWEB{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("SPIDERWEB_name"), langF.getStringList("SPIDERWEB_lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("SPIDERWEB.name"), langF.getStringList("SPIDERWEB.lore"));
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfSpiderWeb");
 
                 itemStack.setAmount(4);
