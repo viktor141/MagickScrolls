@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -27,6 +28,7 @@ public class DefaultEffect implements Runnable{
         player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 1.7,0), 30, 0.35,0.35,0.35, 0.03);
         player.getWorld().playSound(player.getLocation().add(0,1,0), Sound.ENTITY_ILLUSION_ILLAGER_CAST_SPELL, 5, (float) 0.5);
         entityItem = player.getWorld().dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.PAPER));
+        entityItem.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), () -> player.getName()));
         entityItem.setVelocity(entityItem.getVelocity().add(new Vector(0,- 0.1,0)));
         entityItem.setGravity(false);
         entityItem.setPickupDelay(81);
