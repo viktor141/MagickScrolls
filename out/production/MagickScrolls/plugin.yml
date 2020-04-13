@@ -3,7 +3,7 @@ main: ru.vixtor141.MagickScrolls.Main
 version: "1.1"
 author: vixtor141
 
-depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
 
 commands:
   magickscrolls:
