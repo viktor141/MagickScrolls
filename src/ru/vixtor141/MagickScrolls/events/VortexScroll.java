@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import com.google.common.base.Predicate;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -13,14 +14,14 @@ import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 
-import java.util.Collection;
+import java.util.*;
 
 import static java.lang.Math.*;
 import static java.lang.Math.toRadians;
 import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
-public class VortexScroll implements Listener, Runnable {
+public class VortexScroll implements Listener {
 
     private Player player;
     private ItemStack item;
@@ -34,11 +35,10 @@ public class VortexScroll implements Listener, Runnable {
         player = event.getPlayer();
         event.setCancelled(true);
 
-        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this);
+        getEntity();
     }
 
-    @Override
-    public void run() {
+    public void getEntity() {
         Location locationOfPlayer = player.getLocation();
         Location newLocation;
 

@@ -89,12 +89,12 @@ public class Mana implements Runnable{
         if(amount <= this.currentMana){
             this.currentMana -= amount;
             if(plugin.getConfig().getBoolean("messageAboutMana")) {
-                double youNeed = amount - currentMana;
-                player.sendMessage(readingLangFile.msg_ymn + youNeed);
+                player.sendMessage(readingLangFile.msg_ymn + currentMana);
             }
             return true;
         }else{
-            player.sendMessage(readingLangFile.msg_ydnhm + currentMana);
+            double youNeed = amount - currentMana;
+            player.sendMessage(readingLangFile.msg_ydnhm + youNeed);
             return false;
         }
     }

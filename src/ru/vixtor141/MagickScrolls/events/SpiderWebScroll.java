@@ -1,13 +1,11 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.Art;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.v1_12_R1.CraftArt;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.ItemFrame;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -50,7 +48,7 @@ public class SpiderWebScroll implements Listener {
         if(event.getHitBlock() != null)return;
         if(event.getEntity().hasMetadata("magickscrolls")){
             Entity entity = event.getHitEntity();
-            if(entity instanceof ItemFrame || entity instanceof CraftArt)return;
+            if(entity instanceof ItemFrame || entity instanceof Painting)return;
             if(!(event.getEntity().getShooter() instanceof Player))return;
             Player player =(Player) event.getEntity().getShooter();
             Mana playerMana = Mana.getPlayerMap().get(player);

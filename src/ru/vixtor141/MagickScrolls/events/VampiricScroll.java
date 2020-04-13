@@ -2,11 +2,7 @@ package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArmorStand;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftFireball;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftItemFrame;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -21,9 +17,9 @@ public class VampiricScroll implements Listener {
     @EventHandler
     public void entityDamage(EntityDamageByEntityEvent event) {
         if(!event.getDamager().getType().equals(EntityType.PLAYER)) return;
-        if(event.getEntity() instanceof CraftArmorStand)return;
-        if(event.getEntity() instanceof CraftFireball)return;
-        if(event.getEntity() instanceof CraftItemFrame)return;
+        if(event.getEntity() instanceof ArmorStand)return;
+        if(event.getEntity() instanceof Fireball)return;
+        if(event.getEntity() instanceof ItemFrame)return;
         Player player = (Player) event.getDamager();
         if(player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = player.getInventory().getItemInMainHand();
