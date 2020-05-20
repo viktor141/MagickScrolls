@@ -4,14 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
-import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 
 public class Mana implements Runnable{
 
@@ -19,8 +14,6 @@ public class Mana implements Runnable{
     private Player player;
     private double currentMana;
     private double maxMana;
-    private Mana manaInst;
-    private static Map<Player, Mana> PlayerMap = new HashMap<>();
     private double manaRegenUnit = plugin.getConfig().getDouble("manaregenunit");
     private BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
@@ -30,10 +23,9 @@ public class Mana implements Runnable{
 
     public Mana(Player player) {
         this.player = player;
-        this.manaInst = this;
         this.cdSystem = new CDSystem(player);
         this.defaultEffect = new DefaultEffect(player);
-        PlayerMap.put(player, this);
+        plugin.getPlayerMap().put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
     }
 
@@ -55,14 +47,6 @@ public class Mana implements Runnable{
 
     public void setTupaFixCalledTwice(long tupaFixCalledTwice) {
         this.tupaFixCalledTwice = tupaFixCalledTwice;
-    }
-
-    public static Map<Player, Mana> getPlayerMap() {
-        return PlayerMap;
-    }
-
-    public Mana getManaInst() {
-        return manaInst;
     }
 
     public Player getPlayer() {
@@ -89,12 +73,12 @@ public class Mana implements Runnable{
         if(amount <= this.currentMana){
             this.currentMana -= amount;
             if(plugin.getConfig().getBoolean("messageAboutMana")) {
-                player.sendMessage(readingLangFile.msg_ymn + currentMana);
+                player.sendMessage(plugin.getReadingLangFile().getMsg("msg_ymn") + currentMana);
             }
             return true;
         }else{
             double youNeed = amount - currentMana;
-            player.sendMessage(readingLangFile.msg_ydnhm + youNeed);
+            player.sendMessage(plugin.getReadingLangFile().getMsg("msg_ydnhm") + youNeed);
             return false;
         }
     }

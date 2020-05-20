@@ -18,19 +18,20 @@ import java.util.*;
 
 import static java.lang.Math.*;
 import static java.lang.Math.toRadians;
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
+
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class VortexScroll implements Listener {
 
     private Player player;
     private ItemStack item;
+    private Main plugin = Main.getPlugin();
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.VORTEX.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
+        if(!Crafts.ScrollsCrafts.VORTEX.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -72,13 +73,12 @@ public class VortexScroll implements Listener {
 
     private void entitySetVelocity(Entity targetEntity){
         if(targetEntity == null){
-            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_tind);
+            player.sendMessage(ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_tind"));
             return;
         }
 
-        Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
         if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
 
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));

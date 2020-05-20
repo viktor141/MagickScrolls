@@ -9,9 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
 
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 
 public class Commands implements CommandExecutor {
+
+    private Main plugin = Main.getPlugin();
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(args.length == 0)return helpMS(commandSender, command, s, args);
@@ -28,13 +30,13 @@ public class Commands implements CommandExecutor {
     private boolean givingCommand(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls give [nick] [scroll] -[amount]
         if(args.length < 3 || args.length > 4)return false;
         if(!commandSender.hasPermission("magickscrolls.give")){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player == null){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_pino"));
             return true;
         }
 
@@ -43,7 +45,7 @@ public class Commands implements CommandExecutor {
 
         if(commandSender instanceof Player && commandSender != player){
             if(!commandSender.hasPermission("magickscrolls.give.other")){
-                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+                commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
                 return true;
             }
         }
@@ -53,12 +55,12 @@ public class Commands implements CommandExecutor {
         try {
             scrollsCrafts = Crafts.ScrollsCrafts.valueOf(args[2].toUpperCase());
         }catch (IllegalArgumentException e){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_sasdne);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_sasdne"));
             return true;
         }
 
         if(!commandSender.hasPermission("magickscrolls.give.scroll." + scrollsCrafts.name())){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
             return true;
         }
 
@@ -66,7 +68,7 @@ public class Commands implements CommandExecutor {
         item.setAmount(amount);
 
         player.getInventory().addItem(item);
-        commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_tshba);
+        commandSender.sendMessage(ChatColor.AQUA + plugin.getReadingLangFile().getMsg("msg_tshba"));
 
         return true;
     }
@@ -74,7 +76,7 @@ public class Commands implements CommandExecutor {
     private boolean manaHealCommand(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls heal -[nick]
         if(args.length > 2)return false;
         if(!commandSender.hasPermission("magickscrolls.heal")){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
             return true;
         }
 
@@ -84,12 +86,12 @@ public class Commands implements CommandExecutor {
             player = Bukkit.getPlayer(args[1]);
             if(commandSender instanceof Player && commandSender != player){
                 if(!commandSender.hasPermission("magickscrolls.heal.other")){
-                    commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+                    commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
                     return true;
                 }
             }
             if(player == null){
-                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
+                commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_pino"));
                 return true;
             }
         }else{
@@ -100,17 +102,17 @@ public class Commands implements CommandExecutor {
             player = (Player) commandSender;
         }
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
 
         playerMana.setCurrentMana(50);
-        commandSender.sendMessage(ChatColor.YELLOW + readingLangFile.msg_minf);
+        commandSender.sendMessage(ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_minf"));
         return true;
     }
 
     private boolean CDReset(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls cdreset -[nick] -[scroll] -[seconds]
         if(args.length > 4)return false;
         if(!commandSender.hasPermission("magickscrolls.cdreset")){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
             return true;
         }
         Player player;
@@ -118,11 +120,11 @@ public class Commands implements CommandExecutor {
 
         if(args.length > 1){
             if(!commandSender.hasPermission("magickscrolls.cdreset.other")){
-                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+                commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
                 return true;
             }
             if(Bukkit.getPlayer(args[1]) == null){
-                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_pino);
+                commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_pino"));
                 return true;
             }
             player = Bukkit.getPlayer(args[1]);
@@ -133,18 +135,18 @@ public class Commands implements CommandExecutor {
             setSecond = Integer.parseInt(args[3]);
         }
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
 
         if(args.length > 2){
             CDSystem.Scrolls scroll;
             try {
                  scroll = CDSystem.Scrolls.valueOf(args[2].toUpperCase());
             }catch (IllegalArgumentException e){
-                commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_sasdne);
+                commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_sasdne"));
                 return true;
             }
             playerMana.getCdSystem().CDSet(scroll, setSecond);
-            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + readingLangFile.msg_cdwst + setSecond);
+            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + plugin.getReadingLangFile().getMsg("msg_cdwst") + setSecond);
             return true;
         }
 
@@ -152,7 +154,7 @@ public class Commands implements CommandExecutor {
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.values()[i], setSecond);
         }
 
-        commandSender.sendMessage(ChatColor.GREEN + readingLangFile.msg_cdwst + setSecond);
+        commandSender.sendMessage(ChatColor.GREEN + plugin.getReadingLangFile().getMsg("msg_cdwst") + setSecond);
         return true;
     }
 
@@ -161,18 +163,18 @@ public class Commands implements CommandExecutor {
             return false;
         }
         if(!commandSender.hasPermission("magickscrolls.getinfo")){
-            commandSender.sendMessage(ChatColor.RED + readingLangFile.msg_ydhp);
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player != null){
-            Mana playerMana = Mana.getPlayerMap().get(player);
-            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_iap + ChatColor.GREEN + player.getName());
-            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_m + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
-            commandSender.sendMessage(ChatColor.AQUA + readingLangFile.msg_cdsl + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
+            Mana playerMana = plugin.getPlayerMap().get(player);
+            commandSender.sendMessage(ChatColor.AQUA + plugin.getReadingLangFile().getMsg("msg_iap") + ChatColor.GREEN + player.getName());
+            commandSender.sendMessage(ChatColor.AQUA + plugin.getReadingLangFile().getMsg("msg_m") + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
+            commandSender.sendMessage(ChatColor.AQUA + plugin.getReadingLangFile().getMsg("msg_cdsl") + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
         }else {
-            commandSender.sendMessage(readingLangFile.msg_piowuafif);
+            commandSender.sendMessage(plugin.getReadingLangFile().getMsg("msg_piowuafif"));
             SearchPlayerThread searchPlayerThread = new SearchPlayerThread(Bukkit.getOfflinePlayers(), commandSender, args[1]);
             searchPlayerThread.setPriority(Thread.MIN_PRIORITY);
             searchPlayerThread.start();
@@ -182,11 +184,11 @@ public class Commands implements CommandExecutor {
 
     private boolean helpMS(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls help
         String[] string = {
-                ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + readingLangFile.msg_gaswyt,
-                ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + readingLangFile.msg_raym,
-                ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + readingLangFile.msg_sycdttdsotz,
-                ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + readingLangFile.msg_giap,
-                ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + readingLangFile.msg_tp
+                ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_gaswyt"),
+                ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_raym"),
+                ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_sycdttdsotz"),
+                ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_giap"),
+                ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_tp")
         };
         commandSender.sendMessage(string);
         return true;

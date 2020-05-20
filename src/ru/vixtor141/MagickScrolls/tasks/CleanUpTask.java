@@ -18,20 +18,12 @@ public class CleanUpTask implements Runnable {
 
     private List<Arrow> arrows;
     private List<LivingEntity> mobs;
-    private static List<LivingEntity> existMobs = new ArrayList<>();
-    private static List<CleanUpTask> cleanUpTasks = new ArrayList<>();
     private Mana playerMana;
     private Location location;
     private BlockState[] blockStates;
     private BukkitTask sWebTask;
+    private Main plugin = Main.getPlugin();
 
-    public static List<CleanUpTask> getCleanUpTasks(){
-        return cleanUpTasks;
-    }
-
-    public static List<LivingEntity> getExistMobs(){
-        return existMobs;
-    }
 
     public BukkitTask getsWebTask() {
         return sWebTask;
@@ -45,7 +37,7 @@ public class CleanUpTask implements Runnable {
     public void mob(List<LivingEntity> list, Mana playerMana){
         mobs = new ArrayList<>(list);
         this.playerMana = playerMana;
-        existMobs.addAll(list);
+        plugin.getExistMobs().addAll(list);
         Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::mobsCleanUp, 3600);
     }
 
@@ -54,7 +46,7 @@ public class CleanUpTask implements Runnable {
         this.blockStates = blockStates;
         this.playerMana = playerMana;
         sWebTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this::sWebCleanUp, 200);
-        cleanUpTasks.add(this);
+        plugin.getCleanUpTasks().add(this);
     }
 
     private void arrowCleanUp() {
@@ -73,7 +65,7 @@ public class CleanUpTask implements Runnable {
             }
         }
         mobs.clear();
-        existMobs.removeAll(mobs);
+        plugin.getExistMobs().removeAll(mobs);
         playerMana.getExistMobs().removeAll(mobs);
     }
 
@@ -86,7 +78,7 @@ public class CleanUpTask implements Runnable {
             block.getState().setData(blockStates[i].getData());
             blockStates[i].update();
         }
-        cleanUpTasks.remove(this);
+        plugin.getCleanUpTasks().remove(this);
     }
     public void sWebCleanUpOnDisable() {
         for(int i = 0; i < 2; i++) {

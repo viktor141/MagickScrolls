@@ -11,14 +11,11 @@ import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DefaultEffect implements Runnable{
     private Player player;
     private Item entityItem;
     private BukkitTask KillerItemTask;
-    private static List<DefaultEffect> defaultEffectList = new ArrayList<>();
+    private Main plugin = Main.getPlugin();
 
     public DefaultEffect(Player player){
         this.player = player;
@@ -33,13 +30,13 @@ public class DefaultEffect implements Runnable{
         entityItem.setGravity(false);
         entityItem.setPickupDelay(81);
         KillerItemTask = Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this, 70);
-        defaultEffectList.add(this);
+        plugin.getDefaultEffectList().add(this);
     }
 
     @Override
     public void run() {
         entityItem.remove();
-        defaultEffectList.remove(this);
+        plugin.getDefaultEffectList().remove(this);
     }
 
     public BukkitTask getKillerItemTask() {
@@ -50,7 +47,4 @@ public class DefaultEffect implements Runnable{
         return entityItem;
     }
 
-    public static List<DefaultEffect> getDefaultEffectList() {
-        return defaultEffectList;
-    }
 }

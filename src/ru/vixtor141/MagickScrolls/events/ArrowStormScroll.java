@@ -25,20 +25,20 @@ public class ArrowStormScroll implements Listener, Runnable {
 
     private Player player;
     private List<Arrow> arrows = new ArrayList<>();
+    private Main plugin = Main.getPlugin();
 
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.ARROWSTORM.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
+        if(!Crafts.ScrollsCrafts.ARROWSTORM.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
         event.setCancelled(true);
         player = event.getPlayer();
-        Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.ARROWSTORM;
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
         if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);

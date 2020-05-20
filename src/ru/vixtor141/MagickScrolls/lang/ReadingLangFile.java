@@ -5,31 +5,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class ReadingLangFile {
 
     private FileConfiguration lang;
-    public String msg_ydhp;//maybe better add enum
-    public String msg_pino;
-    public String msg_sasdne;
-    public String msg_tshba;
-    public String msg_minf;
-    public String msg_cdwst;
-    public String msg_iap;
-    public String msg_m;
-    public String msg_cdsl;
-    public String msg_piowuafif;
-    public String msg_gaswyt;
-    public String msg_raym;
-    public String msg_sycdttdsotz;
-    public String msg_giap;
-    public String msg_tp;
-    public String msg_pnf;
-    public String msg_pdne;
-    public String msg_ydnhm;
-    public String msg_ycutsa;
-    public String msg_seconds;
-    public String msg_nmay;
-    public String name_nec_scroll_mobs;
-    public String msg_yctt;
-    public String msg_tind;
-    public String msg_ymn;
 
     public FileConfiguration getLang() {
         return lang;
@@ -37,34 +12,36 @@ public class ReadingLangFile {
 
     public ReadingLangFile(FileConfiguration fileConfiguration){
         this.lang = fileConfiguration;
-        set();
     }
 
-    private void set() {
-        msg_ydhp = lang.getString("msg_ydhp");
-        msg_pino = lang.getString("msg_pino");
-        msg_sasdne = lang.getString("msg_sasdne");
-        msg_tshba = lang.getString("msg_tshba");
-        msg_minf = lang.getString("msg_minf");
-        msg_cdwst = lang.getString("msg_cdwst");
-        msg_iap = lang.getString("msg_iap");
-        msg_m = lang.getString("msg_m");
-        msg_cdsl = lang.getString("msg_cdsl");
-        msg_piowuafif = lang.getString("msg_piowuafif");
-        msg_gaswyt = lang.getString("msg_gaswyt");
-        msg_raym = lang.getString("msg_raym");
-        msg_sycdttdsotz = lang.getString("msg_sycdttdsotz");
-        msg_giap = lang.getString("msg_giap");
-        msg_tp = lang.getString("msg_tp");
-        msg_pnf = lang.getString("msg_pnf");
-        msg_pdne = lang.getString("msg_pdne");
-        msg_ydnhm = lang.getString("msg_ydnhm");
-        msg_ycutsa = lang.getString("msg_ycutsa");
-        msg_seconds = lang.getString("msg_seconds");
-        msg_nmay = lang.getString("msg_nmay");
-        name_nec_scroll_mobs = lang.getString("name_nec_scroll_mobs");
-        msg_yctt = lang.getString("msg_yctt");
-        msg_tind = lang.getString("msg_tind");
-        msg_ymn = lang.getString("msg_ymn");
+    public String getMsg(String msg){
+        switch(msg){
+            case "msg_ydhp" : return lang.getString("msg_ydhp");
+            case "msg_pino" : return lang.getString("msg_pino");
+            case "msg_sasdne" : return lang.getString("msg_sasdne");
+            case "msg_tshba" : return lang.getString("msg_tshba");
+            case "msg_minf" : return lang.getString("msg_minf");
+            case "msg_cdwst" : return lang.getString("msg_cdwst");
+            case "msg_iap" : return lang.getString("msg_iap");
+            case "msg_m" : return lang.getString("msg_m");
+            case "msg_cdsl" : return lang.getString("msg_cdsl");
+            case "msg_piowuafif" : return lang.getString("msg_piowuafif");
+            case "msg_gaswyt" : return lang.getString("msg_gaswyt");
+            case "msg_raym" : return lang.getString("msg_raym");
+            case "msg_sycdttdsotz" : return lang.getString("msg_sycdttdsotz");
+            case "msg_giap" : return lang.getString("msg_giap");
+            case "msg_tp" : return lang.getString("msg_tp");
+            case "msg_pnf" : return lang.getString("msg_pnf");
+            case "msg_pdne" : return lang.getString("msg_pdne");
+            case "msg_ydnhm" : return lang.getString("msg_ydnhm");
+            case "msg_ycutsa" : return lang.getString("msg_ycutsa");
+            case "msg_seconds" : return lang.getString("msg_seconds");
+            case "msg_nmay" : return lang.getString("msg_nmay");
+            case "name_nec_scroll_mobs" : return lang.getString("name_nec_scroll_mobs");
+            case "msg_yctt" : return lang.getString("msg_yctt");
+            case "msg_tind" : return lang.getString("msg_tind");
+            case "msg_ymn" : return lang.getString("msg_ymn");
+        }
+        return null;
     }
 }

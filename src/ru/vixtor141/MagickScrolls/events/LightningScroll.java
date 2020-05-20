@@ -20,7 +20,6 @@ import ru.vixtor141.MagickScrolls.Mana;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class LightningScroll implements Listener, Runnable {
@@ -31,6 +30,7 @@ public class LightningScroll implements Listener, Runnable {
     private int numberOfEntities;
     private ItemStack item;
     private List<LivingEntity> entitesInLocation;
+    private Main plugin = Main.getPlugin();
 
     Mana playerMana;
     @EventHandler
@@ -65,11 +65,11 @@ public class LightningScroll implements Listener, Runnable {
     }
 
     private int checkTypeOfScroll(ItemStack item){
-        if(Crafts.ScrollsCrafts.LIGHTNINGONE.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())){
+        if(Crafts.ScrollsCrafts.LIGHTNINGONE.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 1;
-        }else if(Crafts.ScrollsCrafts.LIGHTNINGTWO.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())){
+        }else if(Crafts.ScrollsCrafts.LIGHTNINGTWO.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 2;
-        }else if(Crafts.ScrollsCrafts.LIGHTNINGTHREE.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())){
+        }else if(Crafts.ScrollsCrafts.LIGHTNINGTHREE.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 3;
         }else {
             return 0;
@@ -83,9 +83,9 @@ public class LightningScroll implements Listener, Runnable {
 
         entitesInLocation = entitesInLocation.parallelStream().filter(livingEntity -> !livingEntity.hasPotionEffect(PotionEffectType.INVISIBILITY)).collect(Collectors.toList());
 
-        this.playerMana = Mana.getPlayerMap().get(player);
+        this.playerMana = plugin.getPlayerMap().get(player);
         if (entitesInLocation.isEmpty()) {
-            player.sendMessage(ChatColor.YELLOW + readingLangFile.msg_nmay);
+            player.sendMessage(ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_nmay"));
             return;
         }
         Bukkit.getScheduler().runTask(Main.getPlugin(), this::end);
@@ -110,7 +110,7 @@ public class LightningScroll implements Listener, Runnable {
 
             entity = entitesInLocation.get(i);
             entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
-            if(i == numberOfEntities-1){
+            if(i == entitesInLocation.size()-1){
                 if(!player.getGameMode().equals(GameMode.CREATIVE)) {
                     item.setAmount(item.getAmount() - 1);
                     event.getPlayer().getInventory().setItemInMainHand(item);

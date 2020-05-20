@@ -6,19 +6,21 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crafts {
-    private static FileConfiguration langF = Main.readingLangFile.getLang();
+    private static FileConfiguration langF = Main.getPlugin().getReadingLangFile().getLang();
 
     public enum ScrollsCrafts{
         ARROWSTORM {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfArrowStorm = setItemMeta(langF.getString("ARROWSTORM.name"), langF.getStringList("ARROWSTORM.lore"));
+                ItemStack scrollOfArrowStorm = setItemMeta(langF.getString("ARROWSTORM.name"), langF.getStringList("ARROWSTORM.lore"), "ARROWSTORM");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfArrowStorm");
 
                 scrollOfArrowStorm.setAmount(4);
@@ -35,7 +37,7 @@ public class Crafts {
         },
         LIGHTNINGONE {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightning = setItemMeta(langF.getString("LIGHTNINGONE.name"), langF.getStringList("LIGHTNINGONE.lore"));
+                ItemStack scrollOfLightning = setItemMeta(langF.getString("LIGHTNINGONE.name"), langF.getStringList("LIGHTNINGONE.lore"), "LIGHTNINGONE");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightning");
 
                 scrollOfLightning.setAmount(8);
@@ -51,7 +53,7 @@ public class Crafts {
         },
         LIGHTNINGTWO {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightningPowerTwo = setItemMeta(langF.getString("LIGHTNINGTWO.name"), langF.getStringList("LIGHTNINGTWO.lore"));
+                ItemStack scrollOfLightningPowerTwo = setItemMeta(langF.getString("LIGHTNINGTWO.name"), langF.getStringList("LIGHTNINGTWO.lore"), "LIGHTNINGTWO");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightningPowerTwo");
 
                 scrollOfLightningPowerTwo.setAmount(8);
@@ -67,7 +69,7 @@ public class Crafts {
         },
         LIGHTNINGTHREE {
             public ItemStack craftScroll(boolean check) {
-                ItemStack scrollOfLightningPowerThree = setItemMeta(langF.getString("LIGHTNINGTHREE.name"), langF.getStringList("LIGHTNINGTHREE.lore"));
+                ItemStack scrollOfLightningPowerThree = setItemMeta(langF.getString("LIGHTNINGTHREE.name"), langF.getStringList("LIGHTNINGTHREE.lore"), "LIGHTNINGTHREE");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfLightningPowerThree");
 
                 scrollOfLightningPowerThree.setAmount(8);
@@ -83,7 +85,7 @@ public class Crafts {
         },
         NECROMANCY{
             public ItemStack craftScroll(boolean check){
-                ItemStack scrollOfNecromancy = setItemMeta(langF.getString("NECROMANCY.name"), langF.getStringList("NECROMANCY.lore"));
+                ItemStack scrollOfNecromancy = setItemMeta(langF.getString("NECROMANCY.name"), langF.getStringList("NECROMANCY.lore"), "NECROMANCY");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfNecromancy");
 
                 scrollOfNecromancy.setAmount(4);
@@ -103,7 +105,7 @@ public class Crafts {
         },
         TELEPORTATION{
             public ItemStack craftScroll(boolean check){
-                ItemStack scrollOfTeleportation = setItemMeta(langF.getString("TELEPORTATION.name"), langF.getStringList("TELEPORTATION.lore"));
+                ItemStack scrollOfTeleportation = setItemMeta(langF.getString("TELEPORTATION.name"), langF.getStringList("TELEPORTATION.lore"), "TELEPORTATION");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfTeleportation");
 
                 scrollOfTeleportation.setAmount(4);
@@ -119,7 +121,7 @@ public class Crafts {
         },
         VAMPIRIC{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("VAMPIRIC.name"), langF.getStringList("VAMPIRIC.lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("VAMPIRIC.name"), langF.getStringList("VAMPIRIC.lore"), "VAMPIRIC");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfVampirism");
 
                 itemStack.setAmount(8);
@@ -135,7 +137,7 @@ public class Crafts {
         },
         VORTEX{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("VORTEX.name"), langF.getStringList("VORTEX.lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("VORTEX.name"), langF.getStringList("VORTEX.lore"), "VORTEX");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfVortex");
 
                 itemStack.setAmount(4);
@@ -154,7 +156,7 @@ public class Crafts {
         },
         SPIDERWEB{
             public ItemStack craftScroll(boolean check){
-                ItemStack itemStack = setItemMeta(langF.getString("SPIDERWEB.name"), langF.getStringList("SPIDERWEB.lore"));
+                ItemStack itemStack = setItemMeta(langF.getString("SPIDERWEB.name"), langF.getStringList("SPIDERWEB.lore"), "SPIDERWEB");
                 NamespacedKey key = new NamespacedKey(Main.getPlugin(), "scrollOfSpiderWeb");
 
                 itemStack.setAmount(4);
@@ -175,13 +177,18 @@ public class Crafts {
         public abstract ItemStack craftScroll(boolean check);
     }
 
-    private static ItemStack setItemMeta(String displayName, List<String> lore){
+    private static ItemStack setItemMeta(String displayName, List<String> lore, String uName){
         ItemStack item = new ItemStack(Material.PAPER);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.DARK_PURPLE + displayName);
-        meta.setLore(lore);
+        List<String> loreL = new ArrayList<String>(lore);
+        loreL.add(ChatColor.BLUE + uName);
+        loreL.add(ChatColor.YELLOW + "Magick Scroll");
+        meta.setLore(loreL);
         meta.addEnchant(Enchantment.DURABILITY, 1,true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
         return item;
     }
 }

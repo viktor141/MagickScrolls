@@ -18,13 +18,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main extends JavaPlugin {
 
+    private Map<Player, Mana> PlayerMap = new HashMap<>();
     private static Main plugin;
-    public static ReadingLangFile readingLangFile;
+    private ReadingLangFile readingLangFile;
+    private List<LivingEntity> existMobs = new ArrayList<>();
+    private List<CleanUpTask> cleanUpTasks = new ArrayList<>();
+    private List<DefaultEffect> defaultEffectList = new ArrayList<>();
 
     public Main (){
         plugin = this;
@@ -32,6 +38,26 @@ public class Main extends JavaPlugin {
 
     public static Main getPlugin(){
         return plugin;
+    }
+
+    public ReadingLangFile getReadingLangFile() {
+        return readingLangFile;
+    }
+
+    public Map<Player, Mana> getPlayerMap() {
+        return PlayerMap;
+    }
+
+    public List<CleanUpTask> getCleanUpTasks(){
+        return cleanUpTasks;
+    }
+
+    public List<LivingEntity> getExistMobs(){
+        return existMobs;
+    }
+
+    public List<DefaultEffect> getDefaultEffectList() {
+        return defaultEffectList;
     }
 
     @Override
@@ -90,22 +116,22 @@ public class Main extends JavaPlugin {
         for (Player player: Bukkit.getOnlinePlayers()){
             savePlayerStats(player);
         }
-        for(CleanUpTask cleanUpTask : CleanUpTask.getCleanUpTasks()){
+        for(CleanUpTask cleanUpTask : getCleanUpTasks()){
             cleanUpTask.getsWebTask().cancel();
             cleanUpTask.sWebCleanUpOnDisable();
         }
-        CleanUpTask.getCleanUpTasks().clear();
-        for(DefaultEffect defaultEffect : DefaultEffect.getDefaultEffectList()){
+        getCleanUpTasks().clear();
+        for(DefaultEffect defaultEffect : getDefaultEffectList()){
             defaultEffect.getKillerItemTask().cancel();
             defaultEffect.getEntityItem().remove();
         }
-        DefaultEffect.getDefaultEffectList().clear();
-        for(LivingEntity livingEntity: CleanUpTask.getExistMobs()){
+        getDefaultEffectList().clear();
+        for(LivingEntity livingEntity: getExistMobs()){
             if(!livingEntity.isDead()){
                 livingEntity.remove();
             }
         }
-        CleanUpTask.getExistMobs().clear();
+        getExistMobs().clear();
         this.getLogger().info(ChatColor.GOLD+"Plugin has been disabled");
     }
 
@@ -134,7 +160,7 @@ public class Main extends JavaPlugin {
     }
 
     public void savePlayerStats(Player player){
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = getPlayerMap().get(player);
         playerMana.cancelTask();
 
         File playerSF = new File(getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId().toString());
@@ -145,7 +171,7 @@ public class Main extends JavaPlugin {
 
         playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
 
-        Mana.getPlayerMap().remove(player);
+        getPlayerMap().remove(player);
         try {
             playerStats.save(playerSF);
         } catch (IOException e) {

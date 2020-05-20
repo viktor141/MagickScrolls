@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.Art;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
@@ -18,23 +19,22 @@ import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class SpiderWebScroll implements Listener {
 
-    Main plugin = Main.getPlugin();
-    CDSystem.Scrolls scroll = CDSystem.Scrolls.SPIDERWEB;
+    private Main plugin = Main.getPlugin();
+    private CDSystem.Scrolls scroll = CDSystem.Scrolls.SPIDERWEB;
 
     @EventHandler
     public void use(PlayerInteractEvent event){
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.SPIDERWEB.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
+        if(!Crafts.ScrollsCrafts.SPIDERWEB.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
         Player player = event.getPlayer();
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
         if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".perThrowConsumedMana") , plugin.getConfig().getInt(scroll.name() + ".perThrowCDseconds"), true))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);
@@ -51,12 +51,12 @@ public class SpiderWebScroll implements Listener {
             if(entity instanceof ItemFrame || entity instanceof Painting)return;
             if(!(event.getEntity().getShooter() instanceof Player))return;
             Player player =(Player) event.getEntity().getShooter();
-            Mana playerMana = Mana.getPlayerMap().get(player);
+            Mana playerMana = plugin.getPlayerMap().get(player);
             BlockState[] blockStates = new BlockState[2];
             Location location = event.getHitEntity().getLocation();
             Location setBlockLoc;
             if(playerMana.getCurrentMana() < plugin.getConfig().getDouble(scroll.name() + ".consumedMana")){
-                player.sendMessage(readingLangFile.msg_ydnhm + playerMana.getCurrentMana());
+                player.sendMessage(plugin.getReadingLangFile().getMsg("msg_ydnhm") + playerMana.getCurrentMana());
                 return;
             }
             for(int i = 0; i < 2; i++) {
@@ -71,6 +71,11 @@ public class SpiderWebScroll implements Listener {
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
             if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
+            if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+                ItemStack item = player.getInventory().getItemInMainHand();
+                item.setAmount(item.getAmount() - 1);
+                player.getInventory().setItemInMainHand(item);
+            }
             CleanUpTask cleanUpTask = new CleanUpTask();
             cleanUpTask.sWeb(location, blockStates, playerMana);
         }

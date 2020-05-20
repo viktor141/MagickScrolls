@@ -105,7 +105,7 @@ public class PAPI extends PlaceholderExpansion {
 
         if(!player.isOnline())return "";
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
 
         // %someplugin_placeholder1%
         if (identifier.equals("сmana")) {

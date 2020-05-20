@@ -13,7 +13,7 @@ public class CheckUp {
         if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return true;
         if(event.getPlayer().getInventory().getItemInMainHand().getType() != Material.PAPER) return true;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!item.getItemMeta().hasLore()) return true;
+        if(!item.getItemMeta().hasLore() || item.getItemMeta().getLore().size() != 3) return true;
 
         return false;
     }

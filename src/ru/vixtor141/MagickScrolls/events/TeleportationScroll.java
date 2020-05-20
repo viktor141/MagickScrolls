@@ -12,16 +12,16 @@ import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 
 import static java.lang.Math.*;
-import static ru.vixtor141.MagickScrolls.Main.readingLangFile;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class TeleportationScroll implements Listener {
+    private Main plugin = Main.getPlugin();
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.TELEPORTATION.craftScroll(false).getItemMeta().getLore().equals(item.getItemMeta().getLore())) return;
+        if(!Crafts.ScrollsCrafts.TELEPORTATION.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
 
         Player player = event.getPlayer();
@@ -29,15 +29,14 @@ public class TeleportationScroll implements Listener {
 
         Location newLocation = checkForTeleportation(player);
         if(!checkBlock(newLocation)) {
-            player.sendMessage(ChatColor.RED + readingLangFile.msg_yctt);
+            player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_yctt"));
             return;
         }
 
 
-        Mana playerMana = Mana.getPlayerMap().get(player);
+        Mana playerMana = plugin.getPlayerMap().get(player);
         if(System.currentTimeMillis() <= playerMana.getTupaFixCalledTwice()) return;
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
-        Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.TELEPORTATION;
         if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
 
