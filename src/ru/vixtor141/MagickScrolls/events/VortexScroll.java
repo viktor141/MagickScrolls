@@ -1,6 +1,5 @@
 package ru.vixtor141.MagickScrolls.events;
 
-import com.google.common.base.Predicate;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -79,7 +78,7 @@ public class VortexScroll implements Listener {
 
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
 
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 

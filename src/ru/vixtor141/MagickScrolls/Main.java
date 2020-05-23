@@ -105,6 +105,7 @@ public class Main extends JavaPlugin {
             e.printStackTrace();
         }
 
+        Crafts.magicStuffCraft();
         registerEventsListenersOfScrolls();
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");

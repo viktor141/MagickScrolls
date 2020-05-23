@@ -6,9 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -190,6 +188,29 @@ public class Crafts {
         item.setItemMeta(meta);
 
         return item;
+    }
+
+    public static void magicStuffCraft(){
+        ItemStack item = new ItemStack(Material.STICK);
+        ItemMeta meta = item.getItemMeta();
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(), "MagicStuff");
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "displayName");
+        List<String> loreL = new ArrayList<String>();
+        loreL.add(ChatColor.BLUE + "uName");
+        loreL.add(ChatColor.BLUE + "magick stuff");
+        loreL.add(ChatColor.YELLOW + "Magick Scroll");
+        meta.setLore(loreL);
+        meta.addEnchant(Enchantment.DURABILITY, 1,true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        item.setItemMeta(meta);
+
+        item.setAmount(1);
+
+        ShapelessRecipe shapelessRecipe = new ShapelessRecipe(key, item);
+        shapelessRecipe.addIngredient(Material.NETHER_STAR);
+        shapelessRecipe.addIngredient(Material.STICK);
+
+        Bukkit.getServer().addRecipe(shapelessRecipe);
     }
 }
 
