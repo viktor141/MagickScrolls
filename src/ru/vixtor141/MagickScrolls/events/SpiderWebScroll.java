@@ -5,7 +5,6 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.craftbukkit.v1_12_R1.CraftArt;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,23 +13,23 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.LazyMetadataValue;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class SpiderWebScroll implements Listener {
 
-    private Main plugin = Main.getPlugin();
-    private CDSystem.Scrolls scroll = CDSystem.Scrolls.SPIDERWEB;
+    private final Main plugin = Main.getPlugin();
+    private final CDSystem.Scrolls scroll = CDSystem.Scrolls.SPIDERWEB;
 
     @EventHandler
     public void use(PlayerInteractEvent event){
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.SPIDERWEB.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!ACCrafts.CraftsOfScrolls.SPIDERWEB.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
         Player player = event.getPlayer();
 

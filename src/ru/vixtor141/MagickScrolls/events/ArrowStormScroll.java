@@ -9,10 +9,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.Misc.CheckUp;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.util.ArrayList;
@@ -26,14 +26,14 @@ public class ArrowStormScroll implements Listener, Runnable {
 
     private Player player;
     private List<Arrow> arrows = new ArrayList<>();
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!CheckUp.checkItemLore(Crafts.ScrollsCrafts.ARROWSTORM, item)) return;
+        if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.ARROWSTORM, item)) return;
 
         event.setCancelled(true);
         player = event.getPlayer();

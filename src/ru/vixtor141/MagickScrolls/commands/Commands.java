@@ -8,11 +8,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 
 public class Commands implements CommandExecutor {
 
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
@@ -50,10 +51,10 @@ public class Commands implements CommandExecutor {
             }
         }
 
-        Crafts.ScrollsCrafts scrollsCrafts;
+        ACCrafts.CraftsOfScrolls scrollsCrafts;
 
         try {
-            scrollsCrafts = Crafts.ScrollsCrafts.valueOf(args[2].toUpperCase());
+            scrollsCrafts = ACCrafts.CraftsOfScrolls.valueOf(args[2].toUpperCase());
         }catch (IllegalArgumentException e){
             commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_sasdne"));
             return true;
@@ -64,7 +65,7 @@ public class Commands implements CommandExecutor {
             return true;
         }
 
-        ItemStack item = scrollsCrafts.craftScroll(false);
+        ItemStack item = scrollsCrafts.craftAltarResult();
         item.setAmount(amount);
 
         player.getInventory().addItem(item);

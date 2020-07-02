@@ -22,7 +22,7 @@ public class CleanUpTask implements Runnable {
     private Location location;
     private BlockState[] blockStates;
     private BukkitTask sWebTask;
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
 
     public BukkitTask getsWebTask() {

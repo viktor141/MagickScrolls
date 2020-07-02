@@ -10,6 +10,10 @@ public class ReadingLangFile {
         return lang;
     }
 
+    public void setLang(FileConfiguration lang){
+        this.lang = lang;
+    }
+
     public ReadingLangFile(FileConfiguration fileConfiguration){
         this.lang = fileConfiguration;
     }

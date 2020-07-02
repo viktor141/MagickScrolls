@@ -10,21 +10,19 @@ import java.util.List;
 
 public class Mana implements Runnable{
 
-    private Main plugin = Main.getPlugin();
-    private Player player;
+    private final Main plugin = Main.getPlugin();
+    private final Player player;
     private double currentMana;
     private double maxMana;
     private double manaRegenUnit = plugin.getConfig().getDouble("manaregenunit");
-    private BukkitTask bukkitTask;
+    private final BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
-    private DefaultEffect defaultEffect;
-    private CDSystem cdSystem;
+    private final CDSystem cdSystem;
     private List<LivingEntity> existMobs = new ArrayList<>();
 
     public Mana(Player player) {
         this.player = player;
         this.cdSystem = new CDSystem(player);
-        this.defaultEffect = new DefaultEffect(player);
         plugin.getPlayerMap().put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
     }
@@ -35,10 +33,6 @@ public class Mana implements Runnable{
 
     public CDSystem getCdSystem() {
         return cdSystem;
-    }
-
-    public DefaultEffect getDefaultEffect() {
-        return defaultEffect;
     }
 
     public long getTupaFixCalledTwice() {

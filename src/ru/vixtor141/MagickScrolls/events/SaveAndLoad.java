@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SaveAndLoad implements Listener {
 
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     @EventHandler
     public void load(PlayerJoinEvent event){

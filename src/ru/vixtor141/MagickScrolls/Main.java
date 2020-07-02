@@ -31,6 +31,7 @@ public class Main extends JavaPlugin {
     private List<LivingEntity> existMobs = new ArrayList<>();
     private List<CleanUpTask> cleanUpTasks = new ArrayList<>();
     private List<DefaultEffect> defaultEffectList = new ArrayList<>();
+    private FileConfiguration recipesCF;
 
     public Main (){
         plugin = this;
@@ -38,6 +39,10 @@ public class Main extends JavaPlugin {
 
     public static Main getPlugin(){
         return plugin;
+    }
+
+    public FileConfiguration getRecipesCF() {
+        return recipesCF;
     }
 
     public ReadingLangFile getReadingLangFile() {
@@ -79,33 +84,23 @@ public class Main extends JavaPlugin {
             lanfCF.options().copyDefaults(true);
             this.saveResource("lang/en_US.yml", false);
         }
+        if(lanfCF.getString("MAGIC_STAFF.name") == null){
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[MagickScrolls]" + ChatColor.RED + "WARNING! SOME LINES IN YOUR LANG FILE ARE MISSING!");
+        }
+
         readingLangFile = new ReadingLangFile(lanfCF);
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
 
-        File crafts = new File(getDataFolder() + File.separator  + "crafts.yml");
-        FileConfiguration craftsCF  = YamlConfiguration.loadConfiguration(crafts);
-        if(!crafts.exists()){
-            try {
-                craftsCF.save(crafts);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        for(Crafts.ScrollsCrafts scrollsCrafts : Crafts.ScrollsCrafts.values()){
-            if(craftsCF.get(scrollsCrafts.name()) == null){
-                craftsCF.set(scrollsCrafts.name(), true);
-            }
-            scrollsCrafts.craftScroll(craftsCF.getBoolean(scrollsCrafts.name()));
-        }
-        try {
-            craftsCF.save(crafts);
-        } catch (IOException e) {
-            e.printStackTrace();
+        File recipes = new File(getDataFolder() + File.separator + "recipes.yml");
+        recipesCF  = YamlConfiguration.loadConfiguration(recipes);
+        if(!recipes.exists()){
+            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("recipes.yml"), Charsets.UTF_8)));
+            recipesCF.options().copyDefaults(true);
+            this.saveResource("recipes.yml", false);
         }
 
-        Crafts.magicStuffCraft();
         registerEventsListenersOfScrolls();
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
@@ -189,5 +184,6 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
         Bukkit.getPluginManager().registerEvents(new SpiderWebScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new CraftStartEvent(), this);
     }
 }

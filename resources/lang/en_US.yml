@@ -72,3 +72,45 @@ SPIDERWEB:
   name: "Scroll of spider web"
   lore:
   - "Spider web scroll"
+
+
+#Items
+MAGIC_STAFF:
+  name: "Magic staff"
+  lore:
+    - "This staff spreads the magic"
+
+ARROWSTORM_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal for arrow storm scrolls"
+
+LIGHTNING_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal lightning scrolls"
+
+NECROMANCY_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal Scroll for necromancy scrolls"
+
+TELEPORTATION_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal for teleportation scrolls"
+
+VAMPIRIC_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal for vampirism scrolls"
+
+VORTEX_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal vortex scrolls"
+
+SPIDERWEB_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal spiderweb scrolls"

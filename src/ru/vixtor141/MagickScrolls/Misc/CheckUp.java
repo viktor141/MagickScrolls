@@ -1,12 +1,11 @@
 package ru.vixtor141.MagickScrolls.Misc;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import ru.vixtor141.MagickScrolls.Crafts;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class CheckUp {
         return false;
     }
 
-    public static boolean checkItemLore(Crafts.ScrollsCrafts scrollsCrafts, ItemStack item){
-        List<String> tLore = scrollsCrafts.craftScroll(false).getItemMeta().getLore();
+    public static boolean checkItemLore(ACCrafts.CraftsOfScrolls craftsOfScrolls, ItemStack item){
+        List<String> tLore = craftsOfScrolls.craftAltarResult().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
         return tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2));
     }

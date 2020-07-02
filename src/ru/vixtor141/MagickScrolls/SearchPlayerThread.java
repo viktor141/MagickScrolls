@@ -12,10 +12,10 @@ import java.io.File;
 
 public class SearchPlayerThread extends Thread {
 
-    private OfflinePlayer[] offlinePlayer;
-    private CommandSender commandSender;
-    private String name;
-    private Main plugin = Main.getPlugin();
+    private final OfflinePlayer[] offlinePlayer;
+    private final CommandSender commandSender;
+    private final String name;
+    private final Main plugin = Main.getPlugin();
 
     public SearchPlayerThread(OfflinePlayer[] offlinePlayer, CommandSender commandSender, String name){
         this.offlinePlayer = offlinePlayer;

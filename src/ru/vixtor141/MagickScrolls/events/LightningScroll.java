@@ -13,9 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +30,7 @@ public class LightningScroll implements Listener, Runnable {
     private int numberOfEntities;
     private ItemStack item;
     private List<LivingEntity> entitesInLocation;
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     Mana playerMana;
     @EventHandler
@@ -65,11 +65,11 @@ public class LightningScroll implements Listener, Runnable {
     }
 
     private int checkTypeOfScroll(ItemStack item){
-        if(Crafts.ScrollsCrafts.LIGHTNINGONE.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 1;
-        }else if(Crafts.ScrollsCrafts.LIGHTNINGTWO.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        }else if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 2;
-        }else if(Crafts.ScrollsCrafts.LIGHTNINGTHREE.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        }else if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
             return 3;
         }else {
             return 0;

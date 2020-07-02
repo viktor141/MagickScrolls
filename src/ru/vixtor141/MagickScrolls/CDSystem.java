@@ -8,10 +8,10 @@ import java.util.List;
 
 public class CDSystem{
 
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     private List<Integer> CDs;
-    private Player player;
+    private final Player player;
     public enum Scrolls{
         ARROWSTORM,
         LIGHTNING,
@@ -31,15 +31,16 @@ public class CDSystem{
         this.CDs = new ArrayList<>(Scrolls.values().length);
     }
 
-    public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds, boolean defaultEffect){
+    public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds, boolean isDefaultEffect){
         if(CDs.get(scroll.ordinal()) > 0) {
             player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ycutsa") + CDs.get(scroll.ordinal()) + " " + plugin.getReadingLangFile().getMsg("msg_seconds"));
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;
         CDSet(scroll, CDSeconds);
-        if(defaultEffect) {
-            playerMana.getDefaultEffect().defaultEffectOfScrolls();
+        if(isDefaultEffect) {
+           DefaultEffect defaultEffect = new DefaultEffect(player);
+           defaultEffect.defaultEffectOfScrolls();
         }
         return true;
     }

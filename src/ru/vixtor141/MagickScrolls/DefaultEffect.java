@@ -12,10 +12,10 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 public class DefaultEffect implements Runnable{
-    private Player player;
+    private final Player player;
     private Item entityItem;
     private BukkitTask KillerItemTask;
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     public DefaultEffect(Player player){
         this.player = player;
@@ -25,7 +25,7 @@ public class DefaultEffect implements Runnable{
         player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 1.7,0), 30, 0.35,0.35,0.35, 0.03);
         player.getWorld().playSound(player.getLocation().add(0,1,0), Sound.BLOCK_CHEST_OPEN, 5, (float) 0.5);
         entityItem = player.getWorld().dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.PAPER));
-        entityItem.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), () -> player.getName()));
+        entityItem.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), player::getName));
         entityItem.setVelocity(entityItem.getVelocity().add(new Vector(0,- 0.1,0)));
         entityItem.setGravity(false);
         entityItem.setPickupDelay(81);
@@ -35,7 +35,9 @@ public class DefaultEffect implements Runnable{
 
     @Override
     public void run() {
-        entityItem.remove();
+        if( Math.random() * 10 > 2) {
+            entityItem.remove();
+        }
         plugin.getDefaultEffectList().remove(this);
     }
 

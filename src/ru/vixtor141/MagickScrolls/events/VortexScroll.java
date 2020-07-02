@@ -9,9 +9,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.*;
 
@@ -24,13 +24,13 @@ public class VortexScroll implements Listener {
 
     private Player player;
     private ItemStack item;
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.VORTEX.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!ACCrafts.CraftsOfScrolls.VORTEX.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -39,19 +39,24 @@ public class VortexScroll implements Listener {
     }
 
     public void getEntity() {
-        Location locationOfPlayer = player.getLocation();
+        Location locationOfPlayer = player.getEyeLocation();
         Location newLocation;
 
         double newX, newZ, newY;
         float yaw = locationOfPlayer.getYaw();
         float pitch = locationOfPlayer.getPitch();
-        for(int i = 0; i < 10; i++) {
-            newY = i * sin(toRadians(pitch));
-            newX = i * sin(toRadians(yaw)) * cos(toRadians(pitch));
-            newZ = i * cos(toRadians(yaw)) * cos(toRadians(pitch));
+        newY = 10 * sin(toRadians(pitch));
+        newX = 10 * sin(toRadians(yaw)) * cos(toRadians(pitch));
+        newZ = 10 * cos(toRadians(yaw)) * cos(toRadians(pitch));
+        newLocation = new Location(player.getWorld(), locationOfPlayer.getX() + newX * ((double)-1), locationOfPlayer.getY() + newY * ((double)-1), locationOfPlayer.getZ() + newZ);
+        Location start = locationOfPlayer.clone();
+        Vector dir = newLocation.clone().subtract(start).toVector();
+        for(int i = 1; i < 10; i++) {
+            dir.normalize();
+            dir.multiply(i);
+            start.add(dir);
 
-            newLocation = new Location(player.getWorld(), locationOfPlayer.getX() + newX * ((double)-1), locationOfPlayer.getY() + newY * ((double)-1), locationOfPlayer.getZ() + newZ);
-            Collection<Entity> collectionEntities = player.getWorld().getNearbyEntities(newLocation, 1,1,1);
+            Collection<Entity> collectionEntities = player.getWorld().getNearbyEntities(start, 0.5,0.5,0.5);
 
             if(!collectionEntities.isEmpty()) {
                 for(Entity entity : collectionEntities){
@@ -66,6 +71,8 @@ public class VortexScroll implements Listener {
                     }
                 }
             }
+            start.subtract(dir);
+
         }
         entitySetVelocity(null);
     }

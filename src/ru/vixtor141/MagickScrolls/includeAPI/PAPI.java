@@ -8,7 +8,7 @@ import ru.vixtor141.MagickScrolls.Mana;
 
 public class PAPI extends PlaceholderExpansion {
 
-    private Main plugin;
+    private final Main plugin;
 
     /**
      * Since we register the expansion inside our own plugin, we

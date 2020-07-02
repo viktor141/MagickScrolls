@@ -7,21 +7,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Crafts;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import static java.lang.Math.*;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 
 public class TeleportationScroll implements Listener {
-    private Main plugin = Main.getPlugin();
+    private final Main plugin = Main.getPlugin();
 
     @EventHandler
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!Crafts.ScrollsCrafts.TELEPORTATION.craftScroll(false).getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!ACCrafts.CraftsOfScrolls.TELEPORTATION.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
 
 
         Player player = event.getPlayer();
@@ -50,7 +50,7 @@ public class TeleportationScroll implements Listener {
     }
 
     public Location checkForTeleportation(Player player){
-        Location locationOfPlayer = player.getLocation();
+        Location locationOfPlayer = player.getEyeLocation();
         float yaw = locationOfPlayer.getYaw();
         float pitch = locationOfPlayer.getPitch();
 
@@ -64,7 +64,7 @@ public class TeleportationScroll implements Listener {
     }
 
     public boolean checkBlock(Location newLocation){
-        return newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY(), newLocation.getBlockZ()).getType() == Material.AIR || newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY() + 1, newLocation.getBlockZ()).getType() == Material.AIR;
+        return newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY(), newLocation.getBlockZ()).getType() == Material.AIR || newLocation.getWorld().getBlockAt(newLocation.getBlockX(), newLocation.getBlockY() - 1, newLocation.getBlockZ()).getType() == Material.AIR;
     }
 
 
