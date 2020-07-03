@@ -34,33 +34,52 @@ public class AltarCrafting implements Runnable{
         this.location = block.getLocation();
 
         location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX(), location.getY() + 0.875, location.getZ()),1,0.25, 1).stream().filter(entity -> entity instanceof Item).forEach(entity -> nearbyItemsIng.add(((Item)entity)));
-        if(nearbyItemsIng.size() < 2)return;
+        if(nearbyItemsIng.size() != 2)return;
+        for(Item ingr : nearbyItemsIng){
+            ingr.setPickupDelay(2000);
+        }
         Optional<Item> optionalItemStack = nearbyItemsIng.parallelStream().filter(item -> !(item.getItemStack().getType().equals(Material.PAPER))).findFirst();
         Optional<Item> optionalItemStackPaper = nearbyItemsIng.parallelStream().filter(item -> (item.getItemStack().getType().equals(Material.PAPER))).findFirst();
 
-        if(!optionalItemStack.isPresent() || !optionalItemStackPaper.isPresent())return;
+        if(!optionalItemStack.isPresent() || !optionalItemStackPaper.isPresent()){
+            for(Item ingr : nearbyItemsIng){
+                ingr.setPickupDelay(0);
+            }
+            return;
+        }
 
         ing = optionalItemStack.get();
         paper = optionalItemStackPaper.get();
 
 
         List<String> checkingItemLore;
+        boolean checkup = false;
+
+        if(ing.getItemStack().getItemMeta().getLore() == null){
+            setPickupDelayToZero();
+            return;
+        }
 
         for(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts: ACCrafts.ItemsCauldronCrafts.values()){
             checkingItemLore = itemsCauldronCrafts.craftCauldronGetItem().getItemMeta().getLore();
-            if(ing.getItemStack().getItemMeta().getLore() == null)return;
             List<String> ingLore = ing.getItemStack().getItemMeta().getLore();
             if(ingLore.get(ingLore.size() - 2).equals(checkingItemLore.get(checkingItemLore.size() - 2))){
                 craftStart(itemsCauldronCrafts);
+                checkup = true;
                 break;
             }
         }
+        if(!checkup)setPickupDelayToZero();
 
     }
 
+    private void setPickupDelayToZero(){
+        ing.setPickupDelay(0);
+        paper.setPickupDelay(0);
+    }
+
     private void craftStart(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts){
-        paper.setPickupDelay(2000);
-        ing.setPickupDelay(2000);
+
         for(ACCrafts.CraftsOfScrolls scroll : itemsCauldronCrafts.getScroll()){
             if((plugin.getRecipesCF().getList(scroll.name())).isEmpty())continue;
             recipe.put(new ArrayList<> ((List<ItemStack>) plugin.getRecipesCF().getList(scroll.name())), scroll);

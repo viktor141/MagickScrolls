@@ -65,11 +65,16 @@ public class LightningScroll implements Listener, Runnable {
     }
 
     private int checkTypeOfScroll(ItemStack item){
-        if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        List<String> itemLore = item.getItemMeta().getLore();
+        List<String> lightningOne = ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore();
+        List<String> lightningTwo = ACCrafts.CraftsOfScrolls.LIGHTNINGTWO.craftAltarResult().getItemMeta().getLore();
+        List<String> lightningThree = ACCrafts.CraftsOfScrolls.LIGHTNINGTHREE.craftAltarResult().getItemMeta().getLore();
+
+        if(lightningOne.get(lightningOne.size() - 2).equals(itemLore.get(itemLore.size()-2))){
             return 1;
-        }else if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        }else if(lightningTwo.get(lightningTwo.size() - 2).equals(itemLore.get(itemLore.size()-2))){
             return 2;
-        }else if(ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))){
+        }else if(lightningThree.get(lightningThree.size() - 2).equals(itemLore.get(itemLore.size()-2))){
             return 3;
         }else {
             return 0;
@@ -106,7 +111,7 @@ public class LightningScroll implements Listener, Runnable {
 
         if(!playerMana.getCdSystem().CDStat(scroll, playerMana, numberOfEntities * plugin.getConfig().getDouble(scroll.name() + ".consumedMana"), (int) (plugin.getConfig().getDouble(scroll.name() + ".CDseconds") + 30 * Math.log10(numberOfEntities)), true))return;
 
-        for(int i = 0; i < entitesInLocation.size(); i++) {
+        for(int i = 0; i < numberOfEntities; i++) {
 
             entity = entitesInLocation.get(i);
             entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
