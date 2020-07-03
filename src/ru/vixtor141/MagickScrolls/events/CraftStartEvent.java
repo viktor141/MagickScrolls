@@ -36,13 +36,13 @@ public class CraftStartEvent implements Listener {
 
     @EventHandler
     public void cauldronUse(PlayerInteractEvent event){
-        if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if(event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
         if(!event.getMaterial().equals(Material.BLAZE_POWDER)) return;
         if(!event.getClickedBlock().getType().equals(Material.CAULDRON)) return;
         if(((Cauldron)(event.getClickedBlock().getState().getData())).isEmpty())return;
         Material material = event.getClickedBlock().getLocation().add(0,-1, 0).getBlock().getState().getType();
-        if((!material.equals(Material.STATIONARY_LAVA)) && (!material.equals(Material.FIRE)))return;
+        if((!material.equals(Material.STATIONARY_LAVA)) && (!material.equals(Material.LAVA)) && (!material.equals(Material.FIRE)))return;
 
         event.setCancelled(true);
 
