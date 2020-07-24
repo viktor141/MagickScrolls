@@ -11,6 +11,7 @@ import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.*;
@@ -30,7 +31,7 @@ public class VortexScroll implements Listener {
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!ACCrafts.CraftsOfScrolls.VORTEX.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.VORTEX, item)) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -85,7 +86,7 @@ public class VortexScroll implements Listener {
 
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", true))return;
 
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 

@@ -327,3 +327,41 @@ SPIDERWEB:
   - ==: org.bukkit.inventory.ItemStack
     type: WEB
     damage: 0
+
+TRAP:
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STRING
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STICK
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: STICK
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: INK_SACK
+    damage: 15
+  - ==: org.bukkit.inventory.ItemStack
+    type: INK_SACK
+    damage: 15
+  - ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: WEB
+    damage: 0

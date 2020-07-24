@@ -15,6 +15,7 @@ import org.bukkit.metadata.LazyMetadataValue;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -29,12 +30,12 @@ public class SpiderWebScroll implements Listener {
     public void use(PlayerInteractEvent event){
         if(checkScrollEvent(event))return;
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!ACCrafts.CraftsOfScrolls.SPIDERWEB.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.SPIDERWEB, item)) return;
 
         Player player = event.getPlayer();
 
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".perThrowConsumedMana") , plugin.getConfig().getInt(scroll.name() + ".perThrowCDseconds"), true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".perThrowConsumedMana", ".perThrowCDseconds", true))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);
         snowball.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), player::getName));
@@ -69,7 +70,7 @@ public class SpiderWebScroll implements Listener {
             }
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
-            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
+            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", false))return;
             if(!player.getGameMode().equals(GameMode.CREATIVE)) {
                 ItemStack item = player.getInventory().getItemInMainHand();
                 item.setAmount(item.getAmount() - 1);

@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.List;
@@ -65,16 +66,12 @@ public class LightningScroll implements Listener, Runnable {
     }
 
     private int checkTypeOfScroll(ItemStack item){
-        List<String> itemLore = item.getItemMeta().getLore();
-        List<String> lightningOne = ACCrafts.CraftsOfScrolls.LIGHTNINGONE.craftAltarResult().getItemMeta().getLore();
-        List<String> lightningTwo = ACCrafts.CraftsOfScrolls.LIGHTNINGTWO.craftAltarResult().getItemMeta().getLore();
-        List<String> lightningThree = ACCrafts.CraftsOfScrolls.LIGHTNINGTHREE.craftAltarResult().getItemMeta().getLore();
 
-        if(lightningOne.get(lightningOne.size() - 2).equals(itemLore.get(itemLore.size()-2))){
+        if(CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.LIGHTNINGONE, item)){
             return 1;
-        }else if(lightningTwo.get(lightningTwo.size() - 2).equals(itemLore.get(itemLore.size()-2))){
+        }else if(CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.LIGHTNINGTWO, item)){
             return 2;
-        }else if(lightningThree.get(lightningThree.size() - 2).equals(itemLore.get(itemLore.size()-2))){
+        }else if(CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.LIGHTNINGTHREE, item)){
             return 3;
         }else {
             return 0;
@@ -107,9 +104,8 @@ public class LightningScroll implements Listener, Runnable {
         Entity entity;
 
         CDSystem.Scrolls scroll = CDSystem.Scrolls.LIGHTNING;
-        Main plugin = Main.getPlugin();
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, numberOfEntities * plugin.getConfig().getDouble(scroll.name() + ".consumedMana"), (int) (plugin.getConfig().getDouble(scroll.name() + ".CDseconds") + 30 * Math.log10(numberOfEntities)), true))return;
+        if(!playerMana.getCdSystem().CDStatE(scroll, playerMana, ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
 
         for(int i = 0; i < numberOfEntities; i++) {
 

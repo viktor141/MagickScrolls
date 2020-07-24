@@ -137,6 +137,21 @@ public class ACCrafts {
                 craftsOfScrolls[0] = CraftsOfScrolls.SPIDERWEB;
                 return craftsOfScrolls;
             }
+        },
+        TRAP_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.SPIDER_EYE;
+            }
+
+            public ItemStack craftCauldronGetItem(){
+                return setItemMeta(langF.getString("TRAP_MAGICSEAL.name"), langF.getStringList("TRAP_MAGICSEAL.lore"), "TRAP_MAGICSEAL", this.craftCauldronGetMaterial());
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                CraftsOfScrolls[] craftsOfScrolls = new CraftsOfScrolls[1];
+                craftsOfScrolls[0] = CraftsOfScrolls.TRAP;
+                return craftsOfScrolls;
+            }
         };
 
         public abstract Material craftCauldronGetMaterial();
@@ -202,6 +217,12 @@ public class ACCrafts {
 
             public ItemStack craftAltarResult(){
                 return setItemMeta(langF.getString("SPIDERWEB.name"), langF.getStringList("SPIDERWEB.lore"), "SPIDERWEB", Material.PAPER);
+            }
+        },
+        TRAP{
+
+            public ItemStack craftAltarResult(){
+                return setItemMeta(langF.getString("TRAP.name"), langF.getStringList("TRAP.lore"), "TRAP", Material.PAPER);
             }
         };
 

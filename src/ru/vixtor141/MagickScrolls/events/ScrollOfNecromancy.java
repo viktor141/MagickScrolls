@@ -17,6 +17,7 @@ import org.bukkit.metadata.LazyMetadataValue;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
@@ -36,7 +37,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
     public void use(PlayerInteractEvent event) {
         if(checkScrollEvent(event))return;
         item = event.getPlayer().getInventory().getItemInMainHand();
-        if(!ACCrafts.CraftsOfScrolls.NECROMANCY.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.NECROMANCY, item)) return;
 
         player = event.getPlayer();
         event.setCancelled(true);
@@ -82,7 +83,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
 
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", true))return;
 
         Location location = player.getLocation();
         List<LivingEntity> mobs = new ArrayList<>();

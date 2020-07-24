@@ -40,7 +40,7 @@ public class ArrowStormScroll implements Listener, Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.ARROWSTORM;
 
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana,".consumedMana", ".CDseconds", true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 

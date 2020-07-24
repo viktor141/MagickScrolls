@@ -27,5 +27,8 @@ SPIDERWEB:
   perThrowCDseconds: 4
   consumedMana: 7.0
   CDseconds: 20
+TRAP:
+  consumedMana: 17.0
+  CDseconds: 30
 
 lang: 'en_US'

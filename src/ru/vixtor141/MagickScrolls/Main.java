@@ -86,6 +86,7 @@ public class Main extends JavaPlugin {
         }
         if(lanfCF.getString("MAGIC_STAFF.name") == null){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[MagickScrolls]" + ChatColor.RED + "WARNING! SOME LINES IN YOUR LANG FILE ARE MISSING!");
+            lanfCF.options().copyDefaults(true);
         }
 
         readingLangFile = new ReadingLangFile(lanfCF);
@@ -185,5 +186,6 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
         Bukkit.getPluginManager().registerEvents(new SpiderWebScroll(), this);
         Bukkit.getPluginManager().registerEvents(new CraftStartEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new TrapScroll(), this);
     }
 }

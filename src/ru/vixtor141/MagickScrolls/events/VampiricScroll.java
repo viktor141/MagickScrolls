@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 public class VampiricScroll implements Listener {
@@ -27,7 +28,7 @@ public class VampiricScroll implements Listener {
         if(player.getInventory().getItemInMainHand().getType() != Material.PAPER) return;
         ItemStack item = player.getInventory().getItemInMainHand();
         if(!item.getItemMeta().hasLore()) return;
-        if(!ACCrafts.CraftsOfScrolls.VAMPIRIC.craftAltarResult().getItemMeta().getLore().get(1).equals(item.getItemMeta().getLore().get(1))) return;
+        if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.VAMPIRIC, item)) return;
 
         Mana playerMana = plugin.getPlayerMap().get(player);
         
@@ -35,7 +36,7 @@ public class VampiricScroll implements Listener {
         Main plugin = Main.getPlugin();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VAMPIRIC;
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, plugin.getConfig().getDouble(scroll.name() + ".consumedMana") , plugin.getConfig().getInt(scroll.name() + ".CDseconds"), false))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", false))return;
 
         event.setDamage(3);
 

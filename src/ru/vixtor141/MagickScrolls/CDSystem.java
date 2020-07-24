@@ -19,7 +19,8 @@ public class CDSystem{
         TELEPORTATION,
         VAMPIRIC,
         VORTEX,
-        SPIDERWEB
+        SPIDERWEB,
+        TRAP
     }
 
     public List<Integer> getCDs(){
@@ -31,7 +32,31 @@ public class CDSystem{
         this.CDs = new ArrayList<>(Scrolls.values().length);
     }
 
-    public boolean CDStat(Scrolls scroll, Mana playerMana, double consumedMana, int CDSeconds, boolean isDefaultEffect){
+    public boolean CDStatE(Scrolls scroll, Mana playerMana, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
+        double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
+        int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
+
+        consumedMana *= extraConsumedMana;
+        CDSeconds += extraCDSeconds;
+
+        if(CDs.get(scroll.ordinal()) > 0) {
+            player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ycutsa") + CDs.get(scroll.ordinal()) + " " + plugin.getReadingLangFile().getMsg("msg_seconds"));
+            return false;
+        }
+        if(!playerMana.consumeMana(consumedMana))return false;
+        CDSet(scroll, CDSeconds);
+        if(isDefaultEffect) {
+            DefaultEffect defaultEffect = new DefaultEffect(player);
+            defaultEffect.defaultEffectOfScrolls();
+        }
+        return true;
+
+    }
+
+    public boolean CDStat(Scrolls scroll, Mana playerMana, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){
+        double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
+        int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
+
         if(CDs.get(scroll.ordinal()) > 0) {
             player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ycutsa") + CDs.get(scroll.ordinal()) + " " + plugin.getReadingLangFile().getMsg("msg_seconds"));
             return false;
