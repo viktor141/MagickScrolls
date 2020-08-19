@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
@@ -21,12 +22,21 @@ public class Mana implements Runnable{
     private final CDSystem cdSystem;
     private List<LivingEntity> existMobs = new ArrayList<>();
     private Inventory inventory;
+    private ItemStack trapScroll;
 
     public Mana(Player player) {
         this.player = player;
-        this.cdSystem = new CDSystem(player);
+        this.cdSystem = new CDSystem(player, this);
         plugin.getPlayerMap().put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+    }
+
+    public ItemStack getTrapScroll() {
+        return trapScroll;
+    }
+
+    public void setTrapScroll(ItemStack trapScroll) {
+        this.trapScroll = trapScroll;
     }
 
     public Inventory getInventory() {

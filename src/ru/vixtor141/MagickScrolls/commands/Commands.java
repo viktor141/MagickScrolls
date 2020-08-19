@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.commands;
 
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
-
 
 public class Commands implements CommandExecutor {
 
@@ -23,6 +23,7 @@ public class Commands implements CommandExecutor {
             case "heal": return manaHealCommand(commandSender, command, s, args);
             case "cdreset": return CDReset(commandSender, command, s, args);
             case "getinfo": return getInfo(commandSender, command, s, args);
+            case "list": return listOfScrolls(commandSender, command, s, args);
             case "help": return helpMS(commandSender, command, s, args);
         }
         return false;
@@ -183,12 +184,28 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
+    private boolean listOfScrolls(CommandSender commandSender, Command command, String s, String[] args){
+        if(!(commandSender instanceof Player))return false;
+        if(!commandSender.hasPermission("magickscrolls.list")){
+            commandSender.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ydhp"));
+            return true;
+        }
+        for(int i = 0; i < ACCrafts.CraftsOfScrolls.values().length; i++){
+            TextComponent message = new TextComponent(ChatColor.YELLOW + Main.getPlugin().getReadingLangFile().getLang().getString(ACCrafts.CraftsOfScrolls.values()[i].name() + ".name"));
+            message.setClickEvent( new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ms give " + commandSender.getName() + " " + ACCrafts.CraftsOfScrolls.values()[i].name()));
+            message.setHoverEvent( new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to give").create()));
+            commandSender.spigot().sendMessage(message);
+        }
+        return true;
+    }
+
     private boolean helpMS(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls help
         String[] string = {
                 ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_gaswyt"),
                 ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_raym"),
                 ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_sycdttdsotz"),
                 ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_giap"),
+                ChatColor.GREEN + "/magickscrolls list" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_los"),
                 ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + plugin.getReadingLangFile().getMsg("msg_tp")
         };
         commandSender.sendMessage(string);

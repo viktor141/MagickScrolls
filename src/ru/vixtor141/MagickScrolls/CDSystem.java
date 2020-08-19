@@ -12,6 +12,8 @@ public class CDSystem{
 
     private List<Integer> CDs;
     private final Player player;
+    private final Mana playerMana;
+
     public enum Scrolls{
         ARROWSTORM,
         LIGHTNING,
@@ -20,19 +22,22 @@ public class CDSystem{
         VAMPIRIC,
         VORTEX,
         SPIDERWEB,
-        TRAP
+        TRAP,
+        EARTH,
+        ASTRAL_PET
     }
 
     public List<Integer> getCDs(){
         return CDs;
     }
 
-    public CDSystem(Player player){
+    public CDSystem(Player player, Mana playerMana){
         this.player = player;
+        this.playerMana = playerMana;
         this.CDs = new ArrayList<>(Scrolls.values().length);
     }
 
-    public boolean CDStatE(Scrolls scroll, Mana playerMana, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
+    public boolean CDStatE(Scrolls scroll, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
         double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
         int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
 
@@ -53,7 +58,7 @@ public class CDSystem{
 
     }
 
-    public boolean CDStat(Scrolls scroll, Mana playerMana, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){
+    public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){
         double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
         int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
 

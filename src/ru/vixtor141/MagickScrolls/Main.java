@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.vixtor141.MagickScrolls.Misc.UpdateConfig;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
@@ -76,18 +77,21 @@ public class Main extends JavaPlugin {
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
         }
+        loadConf(config, "config.yml");
 
-        File lang = new File(getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
-        FileConfiguration lanfCF  = YamlConfiguration.loadConfiguration(lang);
-        if(!lang.exists()){
-            lanfCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("lang/en_US.yml"), Charsets.UTF_8)));
-            lanfCF.options().copyDefaults(true);
-            this.saveResource("lang/en_US.yml", false);
+        if(!new File(getDataFolder() + File.separator + "lang").exists()) {
+            new File(getDataFolder() + File.separator + "lang").mkdir();
         }
-        if(lanfCF.getString("MAGIC_STAFF.name") == null){
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[MagickScrolls]" + ChatColor.RED + "WARNING! SOME LINES IN YOUR LANG FILE ARE MISSING!");
-            lanfCF.options().copyDefaults(true);
+
+        File langFile = new File(getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
+        if(!langFile.exists()){
+            try {
+                langFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        FileConfiguration lanfCF  = loadConf(langFile, "lang" + File.separator + "en_US.yml");
 
         readingLangFile = new ReadingLangFile(lanfCF);
 
@@ -100,6 +104,14 @@ public class Main extends JavaPlugin {
             recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("recipes.yml"), Charsets.UTF_8)));
             recipesCF.options().copyDefaults(true);
             this.saveResource("recipes.yml", false);
+        }else {
+            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("recipes.yml"), Charsets.UTF_8)));
+            recipesCF.options().copyDefaults(true);
+            try {
+                recipesCF.save(recipes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         registerEventsListenersOfScrolls();
@@ -176,6 +188,16 @@ public class Main extends JavaPlugin {
         }
     }
 
+    private FileConfiguration loadConf(File file, String  name){
+            try {
+                UpdateConfig updateConfig = new UpdateConfig();
+                updateConfig.update(this, name, file, new ArrayList<>());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return YamlConfiguration.loadConfiguration(file);
+    }
+
     private void registerEventsListenersOfScrolls(){
         Bukkit.getPluginManager().registerEvents(new LightningScroll(), this);
         Bukkit.getPluginManager().registerEvents(new TeleportationScroll(), this);
@@ -187,5 +209,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SpiderWebScroll(), this);
         Bukkit.getPluginManager().registerEvents(new CraftStartEvent(), this);
         Bukkit.getPluginManager().registerEvents(new TrapScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new EarthScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new AstralPetScroll(), this);
     }
 }

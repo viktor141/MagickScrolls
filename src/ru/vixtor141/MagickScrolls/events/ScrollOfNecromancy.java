@@ -83,7 +83,7 @@ public class ScrollOfNecromancy implements Listener,Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
 
 
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll , ".consumedMana", ".CDseconds", true))return;
 
         Location location = player.getLocation();
         List<LivingEntity> mobs = new ArrayList<>();

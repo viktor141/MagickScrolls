@@ -45,6 +45,7 @@ public class ReadingLangFile {
             case "msg_yctt" : return lang.getString("msg_yctt");
             case "msg_tind" : return lang.getString("msg_tind");
             case "msg_ymn" : return lang.getString("msg_ymn");
+            case "msg_los" : return lang.getString("msg_los");
         }
         return null;
     }

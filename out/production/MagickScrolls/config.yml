@@ -30,5 +30,13 @@ SPIDERWEB:
 TRAP:
   consumedMana: 17.0
   CDseconds: 30
+EARTH:
+  consumedMana: 37.0
+  CDseconds: 60
+ASTRAL_PET:
+  consumedMana: 43
+  CDseconds: 300
+  damage: 7
+  secondsLive: 120
 
 lang: 'en_US'

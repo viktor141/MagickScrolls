@@ -1,6 +1,6 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: "1.3"
+version: "1.4"
 author: vixtor141
 
 softdepend: [PlaceholderAPI]
@@ -25,6 +25,8 @@ permissions:
     description: giving a permission on /magickscolls cdreset other
   magickscrolls.getinfo:
     description: giving a permission on /magickscolls getinfo
+  magickscrolls.list:
+    description: giving a permission on /magickscolls list
   magickscrolls.give.scroll.ARROWSTORM:
     description: giving a permission on /magickscolls give <nick> ARROWSTORM
   magickscrolls.give.scroll.LIGHTNINGONE:
@@ -41,3 +43,11 @@ permissions:
     description: giving a permission on /magickscolls give <nick> VAMPIRIC
   magickscrolls.give.scroll.VORTEX:
     description: giving a permission on /magickscolls give <nick> VORTEX
+  magickscrolls.give.scroll.SPIDERWEB:
+    description: giving a permission on /magickscolls give <nick> SPIDERWEB
+  magickscrolls.give.scroll.TRAP:
+    description: giving a permission on /magickscolls give <nick> TRAP
+  magickscrolls.give.scroll.EARTH:
+    description: giving a permission on /magickscolls give <nick> EARTH
+  magickscrolls.give.scroll.ASTRAL_PET:
+    description: giving a permission on /magickscolls give <nick> ASTRAL_PET

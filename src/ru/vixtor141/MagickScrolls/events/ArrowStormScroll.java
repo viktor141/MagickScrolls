@@ -25,7 +25,7 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkScrollEvent;
 public class ArrowStormScroll implements Listener, Runnable {
 
     private Player player;
-    private List<Arrow> arrows = new ArrayList<>();
+    private final List<Arrow> arrows = new ArrayList<>();
     private final Main plugin = Main.getPlugin();
 
 
@@ -37,10 +37,9 @@ public class ArrowStormScroll implements Listener, Runnable {
 
         event.setCancelled(true);
         player = event.getPlayer();
-        CDSystem.Scrolls scroll = CDSystem.Scrolls.ARROWSTORM;
 
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana,".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM ,".consumedMana", ".CDseconds", true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 

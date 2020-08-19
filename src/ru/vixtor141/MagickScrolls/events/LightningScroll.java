@@ -105,7 +105,7 @@ public class LightningScroll implements Listener, Runnable {
 
         CDSystem.Scrolls scroll = CDSystem.Scrolls.LIGHTNING;
 
-        if(!playerMana.getCdSystem().CDStatE(scroll, playerMana, ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
+        if(!playerMana.getCdSystem().CDStatE(scroll , ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
 
         for(int i = 0; i < numberOfEntities; i++) {
 

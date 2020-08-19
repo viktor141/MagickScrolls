@@ -35,7 +35,7 @@ public class SpiderWebScroll implements Listener {
         Player player = event.getPlayer();
 
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".perThrowConsumedMana", ".perThrowCDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, ".perThrowConsumedMana", ".perThrowCDseconds", true))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);
         snowball.setMetadata("magickscrolls", new LazyMetadataValue(Main.getPlugin(), player::getName));
@@ -70,7 +70,7 @@ public class SpiderWebScroll implements Listener {
             }
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
-            if(!playerMana.getCdSystem().CDStat(scroll, playerMana, ".consumedMana", ".CDseconds", false))return;
+            if(!playerMana.getCdSystem().CDStat(scroll, ".consumedMana", ".CDseconds", false))return;
             if(!player.getGameMode().equals(GameMode.CREATIVE)) {
                 ItemStack item = player.getInventory().getItemInMainHand();
                 item.setAmount(item.getAmount() - 1);

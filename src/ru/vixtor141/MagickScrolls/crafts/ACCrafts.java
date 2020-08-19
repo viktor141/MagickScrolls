@@ -140,7 +140,7 @@ public class ACCrafts {
         },
         TRAP_MAGICSEAL{
             public Material craftCauldronGetMaterial(){
-                return Material.SPIDER_EYE;
+                return Material.EYE_OF_ENDER;
             }
 
             public ItemStack craftCauldronGetItem(){
@@ -150,6 +150,36 @@ public class ACCrafts {
             public CraftsOfScrolls[] getScroll(){
                 CraftsOfScrolls[] craftsOfScrolls = new CraftsOfScrolls[1];
                 craftsOfScrolls[0] = CraftsOfScrolls.TRAP;
+                return craftsOfScrolls;
+            }
+        },
+        EARTH_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.DIRT;
+            }
+
+            public ItemStack craftCauldronGetItem(){
+                return setItemMeta(langF.getString("EARTH_MAGICSEAL.name"), langF.getStringList("EARTH_MAGICSEAL.lore"), "EARTH_MAGICSEAL", this.craftCauldronGetMaterial());
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                CraftsOfScrolls[] craftsOfScrolls = new CraftsOfScrolls[1];
+                craftsOfScrolls[0] = CraftsOfScrolls.EARTH;
+                return craftsOfScrolls;
+            }
+        },
+        ASTRAL_PET_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.SHULKER_SHELL;
+            }
+
+            public ItemStack craftCauldronGetItem(){
+                return setItemMeta(langF.getString("ASTRAL_PET_MAGICSEAL.name"), langF.getStringList("ASTRAL_PET_MAGICSEAL.lore"), "ASTRAL_PET_MAGICSEAL", this.craftCauldronGetMaterial());
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                CraftsOfScrolls[] craftsOfScrolls = new CraftsOfScrolls[1];
+                craftsOfScrolls[0] = CraftsOfScrolls.ASTRAL_PET;
                 return craftsOfScrolls;
             }
         };
@@ -223,6 +253,18 @@ public class ACCrafts {
 
             public ItemStack craftAltarResult(){
                 return setItemMeta(langF.getString("TRAP.name"), langF.getStringList("TRAP.lore"), "TRAP", Material.PAPER);
+            }
+        },
+        EARTH{
+
+            public ItemStack craftAltarResult(){
+                return setItemMeta(langF.getString("EARTH.name"), langF.getStringList("EARTH.lore"), "EARTH", Material.PAPER);
+            }
+        },
+        ASTRAL_PET{
+
+            public ItemStack craftAltarResult(){
+                return setItemMeta(langF.getString("ASTRAL_PET.name"), langF.getStringList("ASTRAL_PET.lore"), "ASTRAL_PET", Material.PAPER);
             }
         };
 
