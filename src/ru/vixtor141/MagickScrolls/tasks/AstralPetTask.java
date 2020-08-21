@@ -16,7 +16,7 @@ public class AstralPetTask implements Runnable{
 
     private final Player player;
     private int count;
-    private final int high = 10;
+    private final int high = 6;
     private final BukkitTask liveTask, damageTask;
     private boolean damageCheck = false;
     private final Main plugin = Main.getPlugin();
