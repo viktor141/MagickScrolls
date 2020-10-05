@@ -38,7 +38,7 @@ public class CDSystem{
         this.CDs = new ArrayList<>(Scrolls.values().length);
     }
 
-    public boolean CDStatE(Scrolls scroll, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
+    public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
         double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
         int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
 

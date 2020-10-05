@@ -78,7 +78,7 @@ public class Lightning implements Scroll, Runnable {
     private void end(){
         Entity entity;
 
-        if(!playerMana.getCdSystem().CDStatE(CDSystem.Scrolls.LIGHTNING , ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING , ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
 
         for(int i = 0; i < numberOfEntities; i++) {
 
