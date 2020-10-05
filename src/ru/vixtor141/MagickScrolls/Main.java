@@ -7,12 +7,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.vixtor141.MagickScrolls.Misc.BookCreator;
+import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.Misc.UpdateConfig;
 import ru.vixtor141.MagickScrolls.commands.Commands;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
-import ru.vixtor141.MagickScrolls.lang.ReadingLangFile;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.io.File;
@@ -26,13 +29,14 @@ import java.util.Map;
 
 public class Main extends JavaPlugin {
 
-    private Map<Player, Mana> PlayerMap = new HashMap<>();
+    private final Map<Player, Mana> PlayerMap = new HashMap<>();
     private static Main plugin;
-    private ReadingLangFile readingLangFile;
-    private List<LivingEntity> existMobs = new ArrayList<>();
-    private List<CleanUpTask> cleanUpTasks = new ArrayList<>();
-    private List<DefaultEffect> defaultEffectList = new ArrayList<>();
-    private FileConfiguration recipesCF;
+    private final List<LivingEntity> existMobs = new ArrayList<>();
+    private final List<CleanUpTask> cleanUpTasks = new ArrayList<>();
+    private final List<DefaultEffect> defaultEffectList = new ArrayList<>();
+    private FileConfiguration recipesCF, lanfCF, ritualsCF;
+    private ItemStack ritualBook;
+    private boolean manaMessage;
 
     public Main (){
         plugin = this;
@@ -42,12 +46,12 @@ public class Main extends JavaPlugin {
         return plugin;
     }
 
-    public FileConfiguration getRecipesCF() {
-        return recipesCF;
+    public boolean getManaMessage(){
+        return manaMessage;
     }
 
-    public ReadingLangFile getReadingLangFile() {
-        return readingLangFile;
+    public FileConfiguration getRecipesCF() {
+        return recipesCF;
     }
 
     public Map<Player, Mana> getPlayerMap() {
@@ -64,6 +68,18 @@ public class Main extends JavaPlugin {
 
     public List<DefaultEffect> getDefaultEffectList() {
         return defaultEffectList;
+    }
+
+    public ItemStack getRitualBook(){
+        return ritualBook;
+    }
+
+    public FileConfiguration getLangCF(){
+        return lanfCF;
+    }
+
+    public FileConfiguration getRitualsCF(){
+        return ritualsCF;
     }
 
     @Override
@@ -91,30 +107,33 @@ public class Main extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        FileConfiguration lanfCF  = loadConf(langFile, "lang" + File.separator + "en_US.yml");
-
-        readingLangFile = new ReadingLangFile(lanfCF);
+        lanfCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
+        ritualBook = new BookCreator().getBook();
 
-        File recipes = new File(getDataFolder() + File.separator + "recipes.yml");
-        recipesCF  = YamlConfiguration.loadConfiguration(recipes);
-        if(!recipes.exists()){
-            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("recipes.yml"), Charsets.UTF_8)));
-            recipesCF.options().copyDefaults(true);
-            this.saveResource("recipes.yml", false);
-        }else {
-            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("recipes.yml"), Charsets.UTF_8)));
-            recipesCF.options().copyDefaults(true);
-            try {
-                recipesCF.save(recipes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        manaMessage = plugin.getConfig().getBoolean("messageAboutMana");
+
+        loadRecipes();
+
+        loadRituals();
+
+        registerEventListeners();
+
+        for(ACCrafts.CraftsOfScrolls scroll : ACCrafts.CraftsOfScrolls.values()){
+            List<?> list = recipesCF.getList(scroll.name());
+            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + scroll.name() + " is empty");
+            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in recipe for " + scroll.name());
+
         }
 
-        registerEventsListenersOfScrolls();
+        for(RitualEnum.Rituals ritual : RitualEnum.Rituals.values()){
+            List<?> list = ritualsCF.getList(ritual.name());
+            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + ritual.name() + " is empty");
+            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in ritual recipe for " + ritual.name());
+
+        }
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }
@@ -172,6 +191,12 @@ public class Main extends JavaPlugin {
         Mana playerMana = getPlayerMap().get(player);
         playerMana.cancelTask();
 
+        if(playerMana.getInRitualChecker()) {//ritual stop if player leave
+
+            playerMana.setInRitualChecker(false);
+            playerMana.getRitual().getAltar().ritualBrake();
+        }
+
         File playerSF = new File(getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId().toString());
         FileConfiguration playerStats = YamlConfiguration.loadConfiguration(playerSF);
 
@@ -198,18 +223,57 @@ public class Main extends JavaPlugin {
             return YamlConfiguration.loadConfiguration(file);
     }
 
-    private void registerEventsListenersOfScrolls(){
-        Bukkit.getPluginManager().registerEvents(new LightningScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new TeleportationScroll(), this);
+    private void loadRecipes(){
+        String recPath = "recipes.yml";
+        File file = new File(getDataFolder() + File.separator + recPath);
+        recipesCF  = YamlConfiguration.loadConfiguration(file);
+        if(!file.exists()){
+            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(recPath), Charsets.UTF_8)));
+            recipesCF.options().copyDefaults(true);
+            this.saveResource(recPath, false);
+        }else {
+            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(recPath), Charsets.UTF_8)));
+            recipesCF.options().copyDefaults(true);
+            try {
+                recipesCF.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadRituals(){
+        String ritPath = "rituals.yml";
+        File file = new File(getDataFolder() + File.separator + ritPath);
+        ritualsCF  = YamlConfiguration.loadConfiguration(file);
+        if(!file.exists()){
+            ritualsCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(ritPath), Charsets.UTF_8)));
+            ritualsCF.options().copyDefaults(true);
+            this.saveResource(ritPath, false);
+        }else {
+            ritualsCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(ritPath), Charsets.UTF_8)));
+            ritualsCF.options().copyDefaults(true);
+            try {
+                ritualsCF.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void registerEventListeners(){
         Bukkit.getPluginManager().registerEvents(new VampiricScroll(), this);
         Bukkit.getPluginManager().registerEvents(new SaveAndLoad(), this);
-        Bukkit.getPluginManager().registerEvents(new VortexScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ArrowStormScroll(), this);
         Bukkit.getPluginManager().registerEvents(new ScrollOfNecromancy(), this);
         Bukkit.getPluginManager().registerEvents(new SpiderWebScroll(), this);
         Bukkit.getPluginManager().registerEvents(new CraftStartEvent(), this);
         Bukkit.getPluginManager().registerEvents(new TrapScroll(), this);
         Bukkit.getPluginManager().registerEvents(new EarthScroll(), this);
-        Bukkit.getPluginManager().registerEvents(new AstralPetScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new RitualStartEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new RitualBreakingEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new ScrollUseEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new WitchAdd(), this);
+        Bukkit.getPluginManager().registerEvents(new StartBuildEvent(), this);
     }
 }

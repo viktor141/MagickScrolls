@@ -14,7 +14,6 @@ import ru.vixtor141.MagickScrolls.crafts.CauldronCrafting;
 
 import java.util.List;
 
-
 public class CraftStartEvent implements Listener {
 
     @EventHandler
@@ -23,7 +22,7 @@ public class CraftStartEvent implements Listener {
         if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
         if(!event.getClickedBlock().getType().equals(Material.ENCHANTMENT_TABLE))return;
         if(!event.getMaterial().equals(Material.STICK)) return;
-        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
+        ItemStack item = event.getItem();
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 2))return;
         List<String> tLore = ACCrafts.ItemsCauldronCrafts.MAGIC_STAFF.craftCauldronGetItem().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
@@ -47,7 +46,7 @@ public class CraftStartEvent implements Listener {
         event.setCancelled(true);
 
         Location location = event.getClickedBlock().getLocation().add(0.125,0.125,0.125);
-        CauldronCrafting cauldronCrafting = new CauldronCrafting(event.getClickedBlock().getWorld().getNearbyEntities(location, 0.75,0.875,0.75), location.add(0.375,1.375,0.375), event.getPlayer().getInventory().getItemInMainHand());
+        CauldronCrafting cauldronCrafting = new CauldronCrafting(event.getClickedBlock().getWorld().getNearbyEntities(location, 0.75,0.875,0.75), location.add(0.375,1.375,0.375), event.getItem());
         //0.125 cauldron wall size
     }
 

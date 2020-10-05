@@ -22,7 +22,7 @@ public class AltarCrafting implements Runnable{
     private final Location location;
     private BukkitTask craftCheckTask, effectTask;
     private List<Item>  droppedItems = new ArrayList<>(0);
-    private Map<List<ItemStack>, ACCrafts.CraftsOfScrolls> recipe = new HashMap<>();
+    private final Map<List<ItemStack>, ACCrafts.CraftsOfScrolls> recipe = new HashMap<>();
     private Item ing;
     private Item paper;
     private boolean failCheck = true;
@@ -79,7 +79,6 @@ public class AltarCrafting implements Runnable{
     }
 
     private void craftStart(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts){
-
         for(ACCrafts.CraftsOfScrolls scroll : itemsCauldronCrafts.getScroll()){
             if((plugin.getRecipesCF().getList(scroll.name())).isEmpty())continue;
             recipe.put(new ArrayList<> ((List<ItemStack>) plugin.getRecipesCF().getList(scroll.name())), scroll);
@@ -106,10 +105,8 @@ public class AltarCrafting implements Runnable{
             for(int j = - 2; j <= 2; j= j+2){
                 optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + i + 0.5, location.getY() + 1, location.getZ() + j + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
                 searchingProcess(optionalEntity, location.getX() + i + 0.5, location.getY() + 1 + 0.5, location.getZ() + j + 0.5);
-                optionalEntity = Optional.empty();
                 optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + j + 0.5, location.getY() + 1, location.getZ() + i + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
                 searchingProcess(optionalEntity, location.getX() + j + 0.5, location.getY() + 1 + 0.5, location.getZ() + i + 0.5);
-                optionalEntity = Optional.empty();
             }
         }
         craftCheckupFinish();
@@ -192,11 +189,8 @@ public class AltarCrafting implements Runnable{
         if(k < 3.51) {
             for (int i = 0; i < 360; i += 36) {
                 for (int j = 0; j < 360; j += 36) {
-                    double newY = 3.2 * sin(toRadians(i));
-                    double newX = 3.2 * sin(toRadians(j)) * cos(toRadians(i));
-                    double newZ = 3.2 * cos(toRadians(j)) * cos(toRadians(i));
 
-                    Location start = new Location(location.getWorld(), location.getX() + newX + 0.5, location.getY() + newY + 3.5, location.getZ() + newZ + 0.5);
+                    Location start = new Location(location.getWorld(), location.getX() + (3.2 * sin(toRadians(j)) * cos(toRadians(i))) + 0.5, location.getY() + (3.2 * sin(toRadians(i))) + 3.5, location.getZ() + (3.2 * cos(toRadians(j)) * cos(toRadians(i))) + 0.5);
 
                     Vector dir = new Location(location.getWorld(), location.getX() +  0.5, location.getY() + 3.5, location.getZ() + 0.5).subtract(start).toVector();
                     dir.normalize();

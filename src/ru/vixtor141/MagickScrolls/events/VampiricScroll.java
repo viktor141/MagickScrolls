@@ -1,22 +1,16 @@
 package ru.vixtor141.MagickScrolls.events;
 
-import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Main;
-import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.Misc.CheckUp;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
+import ru.vixtor141.MagickScrolls.scrolls.Vampiric;
 
 public class VampiricScroll implements Listener {
-
-    private final Main plugin = Main.getPlugin();
 
     @EventHandler
     public void entityDamage(EntityDamageByEntityEvent event) {
@@ -30,28 +24,7 @@ public class VampiricScroll implements Listener {
         if(!item.getItemMeta().hasLore()) return;
         if(!CheckUp.checkItemLore(ACCrafts.CraftsOfScrolls.VAMPIRIC, item)) return;
 
-        Mana playerMana = plugin.getPlayerMap().get(player);
-        
-        if(player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())return;
-        Main plugin = Main.getPlugin();
-        CDSystem.Scrolls scroll = CDSystem.Scrolls.VAMPIRIC;
-
-        if(!playerMana.getCdSystem().CDStat(scroll, ".consumedMana", ".CDseconds", false))return;
-
-        event.setDamage(3);
-
-        if(player.getHealth() <= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1.5) {
-            player.setHealth(player.getHealth() + 1.5);
-        }else{
-            player.setHealth(player.getHealthScale());
-        }
-
-
-        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
-                item.setAmount(item.getAmount() - 1);
-                player.getInventory().setItemInMainHand(item);
-        }
-
+        new Vampiric(player, item, event);
     }
 
 }

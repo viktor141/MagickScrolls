@@ -19,6 +19,7 @@ TELEPORTATION:
 VAMPIRIC:
   consumedMana: 6.0
   CDseconds: 6
+  damge: 4.0
 VORTEX:
   consumedMana: 20.0
   CDseconds: 40
@@ -38,5 +39,12 @@ ASTRAL_PET:
   CDseconds: 300
   damage: 7
   secondsLive: 120
+
+#rituals setting
+MANAUPFIRST:
+  witchesNeed: 0
+  state: 80
+VILLAGER_CAST:
+  witchesNeed: 2
 
 lang: 'en_US'

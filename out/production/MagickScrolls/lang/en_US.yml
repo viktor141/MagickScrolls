@@ -24,6 +24,26 @@ msg_yctt: "You cannot teleport there"
 msg_tind: "Target isn't defined"
 msg_ymn: "Your mana now "
 msg_los: " - List of scrolls"
+msg_rin: "Ritual is null"
+msg_rins: "Ritual is not selected"
+msg_yhamw: "You have a maximum witches"
+msg_wha: "Witch has added"
+msg_wnor: "Wrong name of ritual"
+msg_ira: "Incorrect ritual altar"
+msg_nitr: "No items to ritual"
+msg_ycrtr: "You can't repeat this ritual"
+msg_newit: "Not enough witches"
+msg_n: "Need: "
+rb_sa: "MagickScrolls"
+rb_st: "Rituals"
+rb_titleMUF: "§5Mana up Ritual"
+rb_needMUF: "\n§11 Diamond\n§11 Iron block\n§11 Gold ingot\n§11 Redstone"
+rb_s: "\n\nSelect Ritual"
+rb_sh: "click to select"
+s_ti: "Trap Item"
+rb_titleVC: "§5Villager Cast"
+rb_needVC: "\n§11 Bone\n§11 Iron block\n§11 Emerald\n§11 Golden apple"
+
 
 #Names
 name_nec_scroll_mobs: "Evil Spirit "
@@ -145,3 +165,14 @@ ASTRAL_PET_MAGICSEAL:
   name: "Magic seal"
   lore:
     - "Magic seal astral pet scrolls"
+
+WITCH_ARTIFACT:
+  name: "Witch Artifact"
+  lore:
+    - "Allow you starts a rituals"
+    - "And take a witches in your Coven"
+
+RITUAL_ALTAR_BUILDER:
+  name: "Ritual builder"
+  lore:
+    - "Builds a ritual altar"

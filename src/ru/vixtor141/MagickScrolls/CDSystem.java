@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class CDSystem{
         CDSeconds += extraCDSeconds;
 
         if(CDs.get(scroll.ordinal()) > 0) {
-            player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ycutsa") + CDs.get(scroll.ordinal()) + " " + plugin.getReadingLangFile().getMsg("msg_seconds"));
+            player.sendMessage(ChatColor.RED + LangVar.msg_ycutsa.getVar() + CDs.get(scroll.ordinal()) + " " + LangVar.msg_seconds.getVar());
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;
@@ -63,7 +64,7 @@ public class CDSystem{
         int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
 
         if(CDs.get(scroll.ordinal()) > 0) {
-            player.sendMessage(ChatColor.RED + plugin.getReadingLangFile().getMsg("msg_ycutsa") + CDs.get(scroll.ordinal()) + " " + plugin.getReadingLangFile().getMsg("msg_seconds"));
+            player.sendMessage(ChatColor.RED + LangVar.msg_ycutsa.getVar() + CDs.get(scroll.ordinal()) + " " + LangVar.msg_seconds.getVar());
             return false;
         }
         if(!playerMana.consumeMana(consumedMana))return false;

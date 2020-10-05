@@ -1,6 +1,6 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: "1.4"
+version: "1.5"
 author: vixtor141
 
 softdepend: [PlaceholderAPI]
