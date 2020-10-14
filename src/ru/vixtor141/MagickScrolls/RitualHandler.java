@@ -31,14 +31,16 @@ public class RitualHandler {
             player.sendMessage(ChatColor.RED + LangVar.msg_nitr.getVar());
             return;
         }
-        if(!ritual.canExec()){
-            player.sendMessage(ChatColor.RED + LangVar.msg_ycrtr.getVar());
-            return;
-        }
         int needW = Main.getPlugin().getConfig().getInt(ritual.getEnumRitual().name() + ".witchesNeed");
         if(needW > witchCount){
             player.sendMessage(ChatColor.RED + LangVar.msg_newit.getVar());
             player.sendMessage(ChatColor.RED + LangVar.msg_n.getVar() + needW);
+            return;
+        }
+        if(!ritual.canExec(player)){
+            return;
+        }
+        if(!playerMana.consumeMana(Main.getPlugin().getConfig().getDouble(ritual.getEnumRitual().name() + ".needMana"))){
             return;
         }
 

@@ -108,7 +108,7 @@ public class Commands implements CommandExecutor {
 
         Mana playerMana = plugin.getPlayerMap().get(player);
 
-        playerMana.setCurrentMana(50);
+        playerMana.setCurrentMana(playerMana.getMaxMana());
         commandSender.sendMessage(ChatColor.YELLOW + LangVar.msg_minf.getVar());
         return true;
     }

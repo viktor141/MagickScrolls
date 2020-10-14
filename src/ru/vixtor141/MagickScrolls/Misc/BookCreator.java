@@ -23,7 +23,7 @@ public class BookCreator {
             TextComponent select = new TextComponent(ChatColor.GREEN + lang.getString("rb_s").replace("\\n", "\n"));
             select.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ms rs " + ritual.name()));
             select.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GREEN + LangVar.rb_sh.getVar()).create()));
-            bm.spigot().addPage(new BaseComponent[]{ritual.getTitle(), ritual.getNeed(), select});
+            bm.spigot().addPage(new BaseComponent[]{ritual.getTitle(), ritual.getDescription(), ritual.getNeed(), select});
         }
         book.setItemMeta(bm);
     }

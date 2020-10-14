@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls.rituals;
 
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
@@ -58,7 +59,12 @@ public class VillagerCast implements Ritual {
     }
 
     @Override
-    public boolean canExec() {
+    public boolean canExec(Player player) {
         return true;
+    }
+
+    @Override
+    public void repeatingEffect() {
+
     }
 }

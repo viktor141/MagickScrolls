@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.interfaces;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 
@@ -14,5 +15,6 @@ public interface Ritual {
     AltarFace getAltar();
     RitualEnum.Rituals getEnumRitual();
     boolean ObjectIsPlayer();
-    boolean canExec();
+    boolean canExec(Player player);
+    void repeatingEffect();
 }

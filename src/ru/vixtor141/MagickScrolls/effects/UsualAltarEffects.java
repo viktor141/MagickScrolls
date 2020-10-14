@@ -77,6 +77,7 @@ public class UsualAltarEffects implements Runnable {
             return;
         }
         new CircleAroundAltarEffect(location, r + 1, (360/9) * j);
+        ritual.repeatingEffect();
         j++;
     }
 

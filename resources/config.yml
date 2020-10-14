@@ -44,7 +44,16 @@ ASTRAL_PET:
 MANAUPFIRST:
   witchesNeed: 0
   state: 80
+  needMana: 50
 VILLAGER_CAST:
   witchesNeed: 2
+  needMana: 35
+COOK:
+  witchesNeed: 1
+  needMana: 20
+MANAUPSECOND:
+  witchesNeed: 3
+  state: 180
+  needMana: 80
 
 lang: 'en_US'
