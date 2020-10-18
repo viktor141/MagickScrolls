@@ -95,25 +95,13 @@ public class Main extends JavaPlugin {
         }
         loadConf(config, "config.yml");
 
-        if(!new File(getDataFolder() + File.separator + "lang").exists()) {
-            new File(getDataFolder() + File.separator + "lang").mkdir();
-        }
-
-        File langFile = new File(getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
-        if(!langFile.exists()){
-            try {
-                langFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        lanfCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
+        loadLangConfiguration();
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
-        ritualBook = new BookCreator().getBook();
+        createBook();
 
-        manaMessage = plugin.getConfig().getBoolean("messageAboutMana");
+        readManaMessageSetting();
 
         loadRecipes();
 
@@ -121,19 +109,7 @@ public class Main extends JavaPlugin {
 
         registerEventListeners();
 
-        for(ACCrafts.CraftsOfScrolls scroll : ACCrafts.CraftsOfScrolls.values()){
-            List<?> list = recipesCF.getList(scroll.name());
-            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + scroll.name() + " is empty");
-            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in recipe for " + scroll.name());
-
-        }
-
-        for(RitualEnum.Rituals ritual : RitualEnum.Rituals.values()){
-            List<?> list = ritualsCF.getList(ritual.name());
-            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + ritual.name() + " is empty");
-            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in ritual recipe for " + ritual.name());
-
-        }
+        checkCrafts();
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }
@@ -223,7 +199,7 @@ public class Main extends JavaPlugin {
             return YamlConfiguration.loadConfiguration(file);
     }
 
-    private void loadRecipes(){
+    public void loadRecipes(){
         String recPath = "recipes.yml";
         File file = new File(getDataFolder() + File.separator + recPath);
         recipesCF  = YamlConfiguration.loadConfiguration(file);
@@ -242,7 +218,7 @@ public class Main extends JavaPlugin {
         }
     }
 
-    private void loadRituals(){
+    public void loadRituals(){
         String ritPath = "rituals.yml";
         File file = new File(getDataFolder() + File.separator + ritPath);
         ritualsCF  = YamlConfiguration.loadConfiguration(file);
@@ -276,4 +252,45 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new WitchAdd(), this);
         Bukkit.getPluginManager().registerEvents(new StartBuildEvent(), this);
     }
+
+    public void loadLangConfiguration(){
+        if(!new File(getDataFolder() + File.separator + "lang").exists()) {
+            new File(getDataFolder() + File.separator + "lang").mkdir();
+        }
+
+        File langFile = new File(getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
+        if(!langFile.exists()){
+            try {
+                langFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        lanfCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
+    }
+
+    public void createBook(){
+        ritualBook = new BookCreator().getBook();
+    }
+
+    public void readManaMessageSetting(){
+        manaMessage = plugin.getConfig().getBoolean("messageAboutMana");
+    }
+
+    public void checkCrafts(){
+        for(ACCrafts.CraftsOfScrolls scroll : ACCrafts.CraftsOfScrolls.values()){
+            List<?> list = recipesCF.getList(scroll.name());
+            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + scroll.name() + " is empty");
+            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in recipe for " + scroll.name());
+
+        }
+
+        for(RitualEnum.Rituals ritual : RitualEnum.Rituals.values()){
+            List<?> list = ritualsCF.getList(ritual.name());
+            if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + ritual.name() + " is empty");
+            if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in ritual recipe for " + ritual.name());
+
+        }
+    }
+
 }

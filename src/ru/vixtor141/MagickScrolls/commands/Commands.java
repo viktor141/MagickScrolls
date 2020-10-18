@@ -27,6 +27,9 @@ public class Commands implements CommandExecutor {
             case "list": return listOfScrolls(commandSender, command, s, args);
             case "help": return helpMS(commandSender, command, s, args);
             case "rs": return ritualSelector(commandSender, command, s, args);
+            case "reload": return reloadConfiguration(commandSender, command, s, args);
+            case "setcur": return setCurrentMana(commandSender, command, s, args);
+            case "setmax": return setMaxMana(commandSender, command, s, args);
         }
         return false;
     }
@@ -162,7 +165,7 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
-    private boolean getInfo(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls getinfo [nick]
+    private boolean getInfo(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls getinfo <nick>
         if(args.length != 2){
             return false;
         }
@@ -208,6 +211,9 @@ public class Commands implements CommandExecutor {
                 ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + LangVar.msg_sycdttdsotz.getVar(),
                 ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + LangVar.msg_giap.getVar(),
                 ChatColor.GREEN + "/magickscrolls list" + ChatColor.YELLOW + LangVar.msg_los.getVar(),
+                ChatColor.GREEN + "/magickscrolls setmax <nick> <number>" + ChatColor.YELLOW + LangVar.msg_smmfp.getVar(),
+                ChatColor.GREEN + "/magickscrolls setcur <nick> <number>" + ChatColor.YELLOW + LangVar.msg_scmfp.getVar(),
+                ChatColor.GREEN + "/magickscrolls reload" + ChatColor.YELLOW + LangVar.msg_rac.getVar(),
                 ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + LangVar.msg_tp.getVar()
         };
         commandSender.sendMessage(string);
@@ -230,4 +236,60 @@ public class Commands implements CommandExecutor {
         playerMana.setRitual(args[1]);
         return true;
     }
+
+    private boolean reloadConfiguration(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls reload
+        if(!commandSender.hasPermission("magickscrolls.reload")){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+
+        plugin.reloadConfig();
+
+        plugin.loadLangConfiguration();
+
+        plugin.createBook();
+
+        plugin.readManaMessageSetting();
+
+        plugin.loadRecipes();
+
+        plugin.loadRituals();
+
+        plugin.checkCrafts();
+
+        commandSender.sendMessage(ChatColor.GREEN + "Reloaded!");
+
+        return true;
+    }
+
+    private boolean setMaxMana(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls setmax <player> <number>
+        if(args.length != 3){
+            return false;
+        }
+
+        if(!commandSender.hasPermission("magickscrolls.setmax")){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+        Player player = Bukkit.getPlayer(args[1]);
+        plugin.getPlayerMap().get(player).setMaxMana(Integer.parseInt(args[2]));
+        commandSender.sendMessage("Max mana seted");
+        return true;
+    }
+
+    private boolean setCurrentMana(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls setcur <player> <number>
+        if(args.length != 3){
+            return false;
+        }
+
+        if(!commandSender.hasPermission("magickscrolls.setcurrent")){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+        Player player = Bukkit.getPlayer(args[1]);
+        plugin.getPlayerMap().get(player).setCurrentMana(Integer.parseInt(args[2]));
+        commandSender.sendMessage("Seted");
+        return true;
+    }
+
 }

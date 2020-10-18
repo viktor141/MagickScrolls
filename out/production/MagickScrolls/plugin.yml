@@ -1,6 +1,6 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: "1.5"
+version: "1.6"
 author: vixtor141
 
 softdepend: [PlaceholderAPI]
@@ -27,6 +27,12 @@ permissions:
     description: giving a permission on /magickscolls getinfo
   magickscrolls.list:
     description: giving a permission on /magickscolls list
+  magickscrolls.reload:
+    description: giving a permission on /magickscolls reload
+  magickscrolls.setcurrent:
+    description: giving a permission on /magickscolls setcurrent
+  magickscrolls.setmax:
+    description: giving a permission on /magickscolls setmax
   magickscrolls.give.scroll.ARROWSTORM:
     description: giving a permission on /magickscolls give <nick> ARROWSTORM
   magickscrolls.give.scroll.LIGHTNINGONE:

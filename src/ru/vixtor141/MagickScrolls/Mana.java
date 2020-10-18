@@ -117,7 +117,9 @@ public class Mana implements Runnable{
             return true;
         }else{
             double youNeed = amount - currentMana;
-            player.sendMessage(LangVar.msg_ydnhm.getVar() + youNeed);
+            if(plugin.getManaMessage()) {
+                player.sendMessage(LangVar.msg_ydnhm.getVar() + youNeed);
+            }
             return false;
         }
     }
