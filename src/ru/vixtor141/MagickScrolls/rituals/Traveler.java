@@ -76,6 +76,6 @@ public class Traveler implements Ritual {
 
     @Override
     public void repeatingEffect() {
-        new RandomParticleGenerator(location.clone().add(0.5,2.5,0.5), Particle.WATER_DROP, 10, 10);
+        new RandomParticleGenerator(location.clone().add(0.5,2.5,0.5), Particle.TOTEM, 10, 10);
     }
 }
