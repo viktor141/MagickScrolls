@@ -7,6 +7,8 @@ import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
+import java.util.ArrayList;
+
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.checkReqItems;
 
 public class RitualHandler {
@@ -27,7 +29,7 @@ public class RitualHandler {
             player.sendMessage(ChatColor.RED + LangVar.msg_ira.getVar());
             return;
         }
-        if(!checkReqItems(ritual.getRequiredItems(), altar.itemChecker())){
+        if(!checkReqItems(new ArrayList<>(ritual.getRequiredItems()), new ArrayList<>(altar.itemChecker()))){
             player.sendMessage(ChatColor.RED + LangVar.msg_nitr.getVar());
             return;
         }
@@ -47,7 +49,6 @@ public class RitualHandler {
         if(ritual.ObjectIsPlayer())player.teleport(location.clone().add(0.5,1,0.5));
         playerMana.setInRitualChecker(ritual.ObjectIsPlayer());
         altar.behavior(this, needW);
-
     }
 
     public void ritualEnd(){

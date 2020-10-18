@@ -273,7 +273,7 @@ public class Commands implements CommandExecutor {
         }
         Player player = Bukkit.getPlayer(args[1]);
         plugin.getPlayerMap().get(player).setMaxMana(Integer.parseInt(args[2]));
-        commandSender.sendMessage("Max mana seted");
+        commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }
 
@@ -288,7 +288,7 @@ public class Commands implements CommandExecutor {
         }
         Player player = Bukkit.getPlayer(args[1]);
         plugin.getPlayerMap().get(player).setCurrentMana(Integer.parseInt(args[2]));
-        commandSender.sendMessage("Seted");
+        commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }
 

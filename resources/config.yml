@@ -3,13 +3,13 @@ manaregenunit: 0.5
 
 messageAboutMana: true
 
-#scrolls settings
+#Scrolls settings
 ARROWSTORM:
   consumedMana: 15.0
   CDseconds: 20
 LIGHTNING:
-  consumedMana: 5.0 #setting of first type scroll other type generate with this setting
-  CDseconds: 20 #setting of first type scroll other type generate with this setting
+  consumedMana: 5.0 #setting of first type of scroll, other types generate from this setting
+  CDseconds: 20 #setting of first type of scroll, other types generate from this setting
 NECROMANCY:
   consumedMana: 50.0
   CDseconds: 120
@@ -40,13 +40,13 @@ ASTRAL_PET:
   damage: 7
   secondsLive: 120
 
-#rituals setting
+#Rituals setting
 MANAUPFIRST:
   witchesNeed: 0
   state: 80
   needMana: 50
 VILLAGER_CAST:
-  witchesNeed: 2
+  witchesNeed: 3
   needMana: 35
 COOK:
   witchesNeed: 1
@@ -55,5 +55,8 @@ MANAUPSECOND:
   witchesNeed: 3
   state: 180
   needMana: 80
+HEALING:
+  witchesNeed: 2
+  needMana: 20
 
 lang: 'en_US'

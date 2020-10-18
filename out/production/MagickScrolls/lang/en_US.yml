@@ -55,6 +55,9 @@ rb_needC: "\n§11 Blaze powder\n§11 Iron ingot\n§11 Flint\n§11 Glowstone dust
 rb_titleMUS: "§5Mana up Ritual II"
 rb_DescriptionMUS: "\nIncrease your mana much more."
 rb_needMUS: "\n§11 Diamond\n§11 Nether star\n§11 Gold block\n§11 Glowstone"
+rb_titleH: "§5Healing Ritual"
+rb_DescriptionH: "\nHeal you and remove all potion effects. Also regenerate your mana"
+rb_needH: "\n§11 Diamond\n§11 Speckled melon\n§11 Glowstone dust\n§11 Rotten flesh"
 s_ti: "Trap Item"
 
 

@@ -50,3 +50,16 @@ MANAUPSECOND:
   - ==: org.bukkit.inventory.ItemStack
     type: GLOWSTONE
     damage: 0
+HEALING:
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SPECKLED_MELON
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: ROTTEN_FLESH
+    damage: 0

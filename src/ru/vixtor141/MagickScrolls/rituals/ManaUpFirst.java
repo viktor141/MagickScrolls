@@ -37,7 +37,7 @@ public class ManaUpFirst implements Ritual {
 
     @Override
     public List<ItemStack> getRequiredItems() {
-        return new ArrayList<>(reqItems);
+        return reqItems;
     }
 
     @Override

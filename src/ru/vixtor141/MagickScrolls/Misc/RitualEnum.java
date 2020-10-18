@@ -5,10 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
-import ru.vixtor141.MagickScrolls.rituals.Cook;
-import ru.vixtor141.MagickScrolls.rituals.ManaUpFirst;
-import ru.vixtor141.MagickScrolls.rituals.ManaUpSecond;
-import ru.vixtor141.MagickScrolls.rituals.VillagerCast;
+import ru.vixtor141.MagickScrolls.rituals.*;
 
 public class RitualEnum {
 
@@ -100,6 +97,28 @@ public class RitualEnum {
             @Override
             public TextComponent getNeed() {
                 return new TextComponent(get("rb_needMUS"));
+            }
+
+        },
+        HEALING{
+            @Override
+            public Ritual getRitual(Mana playerMana) {
+                return new Healing(playerMana);
+            }
+
+            @Override
+            public TextComponent getTitle() {
+                return new TextComponent(get("rb_titleH"));
+            }
+
+            @Override
+            public TextComponent getDescription() {
+                return new TextComponent(get("rb_DescriptionH"));
+            }
+
+            @Override
+            public TextComponent getNeed() {
+                return new TextComponent(get("rb_needH"));
             }
 
         };

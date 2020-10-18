@@ -118,7 +118,7 @@ public class UsualAltar implements AltarFace, Runnable {
             }
         }
         items.parallelStream().forEach(item -> ItemStackList.add(item.getItemStack()));
-        return new ArrayList<>(ItemStackList);
+        return ItemStackList;
     }
 
     private void altarBuilder() {
