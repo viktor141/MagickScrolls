@@ -63,3 +63,55 @@ HEALING:
   - ==: org.bukkit.inventory.ItemStack
     type: ROTTEN_FLESH
     damage: 0
+DIVER:
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLD_INGOT
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: RAW_FISH
+    damage: 3
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+MINER:
+  - ==: org.bukkit.inventory.ItemStack
+    type: GOLD_BLOCK
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: MAGMA_CREAM
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+TRAVELER:
+  - ==: org.bukkit.inventory.ItemStack
+    type: FERMENTED_SPIDER_EYE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GHAST_TEAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+WARRIOR:
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GHAST_TEAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: BLAZE_ROD
+    damage: 0

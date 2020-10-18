@@ -62,7 +62,8 @@ public class ManaUpFirst implements Ritual {
     }
 
     @Override
-    public boolean canExec(Player player) {
+    public boolean canExec() {
+        Player player = playerMana.getPlayer();
         if(playerMana.getMaxMana() < state){
             return true;
         }

@@ -46,7 +46,7 @@ public class Necromancy implements Scroll, Runnable {
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
 
 
-        if(!playerMana.getCdSystem().CDStat(scroll , ".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll , true))return;
 
         Location location = player.getLocation();
         List<LivingEntity> mobs = new ArrayList<>();

@@ -66,7 +66,8 @@ public class ManaUpSecond implements Ritual {
     }
 
     @Override
-    public boolean canExec(Player player) {
+    public boolean canExec() {
+        Player player = playerMana.getPlayer();
         if(playerMana.getMaxMana() >= state){
             player.sendMessage(ChatColor.RED + LangVar.msg_ycrtr.getVar());
             return false;

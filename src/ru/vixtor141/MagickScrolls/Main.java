@@ -150,8 +150,8 @@ public class Main extends JavaPlugin {
                 if(playerSF.createNewFile()){
                     playerStats.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(getResource("PlayerDefaultStats.yml"), Charsets.UTF_8)));
                     playerStats.options().copyDefaults(true);
-                    List<Integer> list = new ArrayList<>(CDSystem.Scrolls.values().length);
-                    for(int i = 0; i < CDSystem.Scrolls.values().length; i++){
+                    List<Integer> list = new ArrayList<>();
+                    for(int i = 0; i < CDSystem.CDsValuesLength(); i++){
                         list.add(i,0);
                     }
                     playerStats.set("CDSystem", list);

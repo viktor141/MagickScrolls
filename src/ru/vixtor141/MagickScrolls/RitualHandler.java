@@ -39,7 +39,7 @@ public class RitualHandler {
             player.sendMessage(ChatColor.RED + LangVar.msg_n.getVar() + needW);
             return;
         }
-        if(!ritual.canExec(player)){
+        if(!ritual.canExec()){
             return;
         }
         if(!playerMana.consumeMana(Main.getPlugin().getConfig().getDouble(ritual.getEnumRitual().name() + ".needMana"))){
@@ -52,8 +52,8 @@ public class RitualHandler {
     }
 
     public void ritualEnd(){
-        ritual.action();
         playerMana.setInRitualChecker(false);
+        ritual.action();
     }
 
 }

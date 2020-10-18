@@ -19,7 +19,7 @@ public class Vampiric implements Scroll {
         if(player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue())return;
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VAMPIRIC;
 
-        if(!playerMana.getCdSystem().CDStat(scroll, ".consumedMana", ".CDseconds", false))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, false))return;
 
         event.setDamage(Main.getPlugin().getConfig().getDouble(scroll.name() + ".damge"));
 

@@ -168,6 +168,20 @@ public class ACCrafts {
             public CraftsOfScrolls[] getScroll() {
                 return new CraftsOfScrolls[0];
             }
+        },
+        RITUAL_BOOK_REWRITER{
+            public Material craftCauldronGetMaterial() {
+                return Material.WRITTEN_BOOK;
+            }
+
+            public CraftsOfScrolls[] getScroll() {
+                return new CraftsOfScrolls[0];
+            }
+
+            @Override
+            public ItemStack craftCauldronGetItem(){
+                return Main.getPlugin().getRitualBook();
+            }
         };
 
         public abstract Material craftCauldronGetMaterial();

@@ -30,8 +30,10 @@ public class Cook implements Ritual {
     private List<Item> items;
     private int sumOverCooked = 0;
     private ItemStack itemStack;
+    private final Player player;
 
-    public Cook(){
+    public Cook(Player player){
+        this.player = player;
         reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
@@ -104,7 +106,7 @@ public class Cook implements Ritual {
     }
 
     @Override
-    public boolean canExec(Player player) {
+    public boolean canExec() {
         items =(List<Item>)(List<?>) location.getWorld().getNearbyEntities(location.clone().add(0.5,1.5,0.5), 1.5,1,1.5).parallelStream().filter(entity -> entity instanceof Item).collect(Collectors.toList());
         if(items.isEmpty()){
             player.sendMessage(LangVar.msg_nffc.getVar());

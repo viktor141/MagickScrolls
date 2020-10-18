@@ -28,7 +28,7 @@ public class ArrowStorm implements Scroll, Runnable {
         this.player = player;
 
         Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM ,".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM ,true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
 

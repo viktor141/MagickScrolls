@@ -29,6 +29,7 @@ public class UsualAltarEffects implements Runnable {
     private final List<BukkitTask> bukkitTaskList = new ArrayList<>();
     private final int witchCount;
     private final List<WitchSpawner> witchSpawners = new ArrayList<>();
+    private BukkitTask ritualEndTask;
 
     public UsualAltarEffects(Ritual ritual, float r, Location location, List<Item> list, RitualHandler ritualHandler, int witchCount){
         this.r = r;
@@ -54,6 +55,7 @@ public class UsualAltarEffects implements Runnable {
 
 
     public void ritualBreaking(){
+        if(ritualEndTask != null)ritualEndTask.cancel();
         repeaterEffects.cancel();
         itemsRepeaterEffects.cancel();
         witchSpawnerEffect.cancel();
@@ -64,7 +66,7 @@ public class UsualAltarEffects implements Runnable {
     private void onItemsRepeaterEffects(){
         if(i > list.size() - 1){
             itemsRepeaterEffects.cancel();
-            Bukkit.getScheduler().runTaskLater(Main.getPlugin(), ritualHandler::ritualEnd, 140);
+            ritualEndTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), ritualHandler::ritualEnd, 140);
             return;
         }
         new ItemEffectsHandler(list.get(i), location.clone().add(0 ,1,0), ritualHandler, bukkitTaskList);

@@ -2,10 +2,7 @@ package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
@@ -57,7 +54,7 @@ public class Lightning implements Scroll, Runnable {
 
     public void getEntities() {
 
-        entitesInLocation = (List<LivingEntity>)(List<?>) player.getNearbyEntities(bound,bound,bound).parallelStream().filter(entity -> (entity instanceof LivingEntity) && !(entity instanceof ArmorStand)).collect(Collectors.toList());
+        entitesInLocation = (List<LivingEntity>)(List<?>) player.getNearbyEntities(bound,bound,bound).parallelStream().filter(entity -> (entity instanceof LivingEntity) && !(entity instanceof ArmorStand) && !(entity instanceof Villager)).collect(Collectors.toList());
 
         entitesInLocation = entitesInLocation.parallelStream().filter(livingEntity -> !livingEntity.hasPotionEffect(PotionEffectType.INVISIBILITY)).collect(Collectors.toList());
 
@@ -78,7 +75,7 @@ public class Lightning implements Scroll, Runnable {
     private void end(){
         Entity entity;
 
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING , ".consumedMana", ".CDseconds", numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.LIGHTNING , numberOfEntities, (int) (30 * Math.log10(numberOfEntities)), true))return;
 
         for(int i = 0; i < numberOfEntities; i++) {
 

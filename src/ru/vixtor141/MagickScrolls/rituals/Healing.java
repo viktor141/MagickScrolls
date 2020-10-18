@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls.rituals;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -69,7 +68,7 @@ public class Healing implements Ritual {
     }
 
     @Override
-    public boolean canExec(Player player) {
+    public boolean canExec() {
         return true;
     }
 

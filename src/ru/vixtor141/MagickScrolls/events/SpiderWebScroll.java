@@ -48,7 +48,7 @@ public class SpiderWebScroll implements Listener {
             }
             if(blockStates[0] == null && blockStates[1] == null)return;
             playerMana.getCdSystem().CDSet(CDSystem.Scrolls.SPIDERWEB, 0);
-            if(!playerMana.getCdSystem().CDStat(scroll, ".consumedMana", ".CDseconds", false))return;
+            if(!playerMana.getCdSystem().CDStat(scroll, false))return;
             itemConsumer(player, (ItemStack) event.getEntity().getMetadata("magickscrolls").get(0).value());
             CleanUpTask cleanUpTask = new CleanUpTask();
             cleanUpTask.sWeb(location, blockStates, playerMana);

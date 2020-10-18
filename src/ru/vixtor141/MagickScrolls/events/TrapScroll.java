@@ -79,7 +79,7 @@ public class TrapScroll implements Listener {
         Item trapItem = location.getWorld().dropItem(location, item);
         trapItem.setPickupDelay(20);
 
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.TRAP, ".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.TRAP, true))return;
 
         ItemStack trapScroll = playerMana.getTrapScroll();
 

@@ -46,7 +46,7 @@ MANAUPFIRST:
   state: 80
   needMana: 50
 VILLAGER_CAST:
-  witchesNeed: 3
+  witchesNeed: 5
   needMana: 35
 COOK:
   witchesNeed: 1
@@ -58,5 +58,21 @@ MANAUPSECOND:
 HEALING:
   witchesNeed: 2
   needMana: 20
+DIVER:
+  witchesNeed: 2
+  needMana: 60
+  CDseconds: 1800
+MINER:
+  witchesNeed: 3
+  needMana: 80
+  CDseconds: 2400
+TRAVELER:
+  witchesNeed: 3
+  needMana: 90
+  CDseconds: 3000
+WARRIOR:
+  witchesNeed: 4
+  needMana: 120
+  CDseconds: 3600
 
 lang: 'en_US'

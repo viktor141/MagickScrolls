@@ -59,7 +59,7 @@ public class RitualEnum {
         COOK{
             @Override
             public Ritual getRitual(Mana playerMana) {
-                return new Cook();
+                return new Cook(playerMana.getPlayer());
             }
 
             @Override
@@ -119,6 +119,94 @@ public class RitualEnum {
             @Override
             public TextComponent getNeed() {
                 return new TextComponent(get("rb_needH"));
+            }
+
+        },
+        DIVER{
+            @Override
+            public Ritual getRitual(Mana playerMana) {
+                return new Diver(playerMana);
+            }
+
+            @Override
+            public TextComponent getTitle() {
+                return new TextComponent(get("rb_titleD"));
+            }
+
+            @Override
+            public TextComponent getDescription() {
+                return new TextComponent(get("rb_DescriptionD"));
+            }
+
+            @Override
+            public TextComponent getNeed() {
+                return new TextComponent(get("rb_needD"));
+            }
+
+        },
+        MINER{
+            @Override
+            public Ritual getRitual(Mana playerMana) {
+                return new Miner(playerMana);
+            }
+
+            @Override
+            public TextComponent getTitle() {
+                return new TextComponent(get("rb_titleM"));
+            }
+
+            @Override
+            public TextComponent getDescription() {
+                return new TextComponent(get("rb_DescriptionM"));
+            }
+
+            @Override
+            public TextComponent getNeed() {
+                return new TextComponent(get("rb_needM"));
+            }
+
+        },
+        TRAVELER{
+            @Override
+            public Ritual getRitual(Mana playerMana) {
+                return new Traveler(playerMana);
+            }
+
+            @Override
+            public TextComponent getTitle() {
+                return new TextComponent(get("rb_titleT"));
+            }
+
+            @Override
+            public TextComponent getDescription() {
+                return new TextComponent(get("rb_DescriptionT"));
+            }
+
+            @Override
+            public TextComponent getNeed() {
+                return new TextComponent(get("rb_needT"));
+            }
+
+        },
+        WARRIOR{
+            @Override
+            public Ritual getRitual(Mana playerMana) {
+                return new Warrior(playerMana);
+            }
+
+            @Override
+            public TextComponent getTitle() {
+                return new TextComponent(get("rb_titleW"));
+            }
+
+            @Override
+            public TextComponent getDescription() {
+                return new TextComponent(get("rb_DescriptionW"));
+            }
+
+            @Override
+            public TextComponent getNeed() {
+                return new TextComponent(get("rb_needW"));
             }
 
         };

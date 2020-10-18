@@ -71,7 +71,7 @@ public class Vortex implements Scroll {
 
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
         Mana playerMana = plugin.getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(scroll, ".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(scroll, true))return;
 
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 

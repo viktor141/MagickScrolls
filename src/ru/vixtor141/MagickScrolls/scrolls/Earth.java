@@ -33,7 +33,7 @@ public class Earth implements Scroll, Runnable {
         this.player = player;
         Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
 
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.EARTH , ".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.EARTH, true))return;
 
         Location locationOfP = player.getLocation();
 

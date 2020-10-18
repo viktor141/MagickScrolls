@@ -28,6 +28,13 @@ public class CDSystem{
         ASTRAL_PET
     }
 
+    public enum RitualsCD{
+        MINER,
+        WARRIOR,
+        DIVER,
+        TRAVELER
+    }
+
     public List<Integer> getCDs(){
         return CDs;
     }
@@ -35,16 +42,33 @@ public class CDSystem{
     public CDSystem(Player player, Mana playerMana){
         this.player = player;
         this.playerMana = playerMana;
-        this.CDs = new ArrayList<>(Scrolls.values().length);
+        this.CDs = new ArrayList<>(CDsValuesLength());
     }
 
-    public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
-        double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
-        int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
+    public boolean CDStat(Scrolls scroll, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
+        return CDStatResult(scroll, getConsumedMana(scroll, ".consumedMana") * extraConsumedMana, getCDSeconds(scroll, ".CDseconds") * extraCDSeconds, isDefaultEffect);
+    }
 
-        consumedMana *= extraConsumedMana;
-        CDSeconds += extraCDSeconds;
+    public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){
+        return CDStatResult(scroll, getConsumedMana(scroll, sConsumedMana),  getCDSeconds(scroll, sCDSeconds), isDefaultEffect);
+    }
 
+    public boolean CDStat(Scrolls scroll, boolean isDefaultEffect){
+        return CDStatResult(scroll, getConsumedMana(scroll, ".consumedMana"), getCDSeconds(scroll, ".CDseconds"), isDefaultEffect);
+    }
+
+    public boolean CDStat(RitualsCD ritualsCD){
+        int CDSeconds = plugin.getConfig().getInt(ritualsCD.name() + ".CDseconds", plugin.getConfig().getDefaults().getInt(ritualsCD.name() + ".CDseconds"));
+
+        if(CDs.get(Scrolls.values().length + ritualsCD.ordinal()) > 0) {
+            player.sendMessage(ChatColor.RED + LangVar.msg_ycutsa.getVar() + CDs.get(Scrolls.values().length + ritualsCD.ordinal()) + " " + LangVar.msg_seconds.getVar());
+            return false;
+        }
+        CDs.set(Scrolls.values().length + ritualsCD.ordinal(), CDSeconds);
+        return true;
+    }
+
+    private boolean CDStatResult(Scrolls scroll, double consumedMana, int CDSeconds, boolean isDefaultEffect){
         if(CDs.get(scroll.ordinal()) > 0) {
             player.sendMessage(ChatColor.RED + LangVar.msg_ycutsa.getVar() + CDs.get(scroll.ordinal()) + " " + LangVar.msg_seconds.getVar());
             return false;
@@ -54,24 +78,6 @@ public class CDSystem{
         if(isDefaultEffect) {
             DefaultEffect defaultEffect = new DefaultEffect(player);
             defaultEffect.defaultEffectOfScrolls();
-        }
-        return true;
-
-    }
-
-    public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){
-        double consumedMana = plugin.getConfig().getDouble(scroll.name() + sConsumedMana, plugin.getConfig().getDefaults().getDouble(scroll.name() + sConsumedMana));
-        int CDSeconds = plugin.getConfig().getInt(scroll.name() + sCDSeconds, plugin.getConfig().getDefaults().getInt(scroll.name() + sCDSeconds));
-
-        if(CDs.get(scroll.ordinal()) > 0) {
-            player.sendMessage(ChatColor.RED + LangVar.msg_ycutsa.getVar() + CDs.get(scroll.ordinal()) + " " + LangVar.msg_seconds.getVar());
-            return false;
-        }
-        if(!playerMana.consumeMana(consumedMana))return false;
-        CDSet(scroll, CDSeconds);
-        if(isDefaultEffect) {
-           DefaultEffect defaultEffect = new DefaultEffect(player);
-           defaultEffect.defaultEffectOfScrolls();
         }
         return true;
     }
@@ -86,6 +92,18 @@ public class CDSystem{
 
     public void CDSet(Scrolls scrolls, int seconds){
         CDs.set(scrolls.ordinal(), seconds);
+    }
+
+    public static int CDsValuesLength(){
+        return Scrolls.values().length + RitualsCD.values().length;
+    }
+
+    private double getConsumedMana(Scrolls scroll, String path){
+        return plugin.getConfig().getDouble(scroll.name() + path, plugin.getConfig().getDefaults().getDouble(scroll.name() + path));
+    }
+
+    private int getCDSeconds(Scrolls scroll, String path){
+        return plugin.getConfig().getInt(scroll.name() + path, plugin.getConfig().getDefaults().getInt(scroll.name() + path));
     }
 
 }

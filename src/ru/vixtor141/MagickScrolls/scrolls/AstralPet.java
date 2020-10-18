@@ -35,7 +35,7 @@ public class AstralPet implements Scroll, Runnable {
     public AstralPet (Player player, ItemStack item){
         this.player = player;
         Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
-        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ASTRAL_PET ,".consumedMana", ".CDseconds", true))return;
+        if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ASTRAL_PET , true))return;
 
         liveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this::liveTask, 0, 5);
         damageTask = Bukkit.getScheduler().runTaskTimer(Main.getPlugin(), this::damageTask, 0, 20);
