@@ -12,16 +12,12 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 public class DefaultEffect implements Runnable{
-    private final Player player;
+
     private Item entityItem;
     private BukkitTask KillerItemTask;
     private final Main plugin = Main.getPlugin();
 
     public DefaultEffect(Player player){
-        this.player = player;
-    }
-
-    public void defaultEffectOfScrolls(){
         player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation().add(0, 1.7,0), 30, 0.35,0.35,0.35, 0.03);
         player.getWorld().playSound(player.getLocation().add(0,1,0), Sound.BLOCK_CHEST_OPEN, 5, (float) 0.5);
         entityItem = player.getWorld().dropItem(player.getLocation().add(0, 2, 0), new ItemStack(Material.PAPER));

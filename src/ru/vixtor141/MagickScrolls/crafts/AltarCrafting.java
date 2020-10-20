@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.effects.ShootingStarEffect;
 
 import java.util.*;
 
@@ -28,6 +29,7 @@ public class AltarCrafting implements Runnable{
     private boolean failCheck = true;
     private ACCrafts.CraftsOfScrolls scroll;
     private double k = 0.01;
+    private final int radiusOfSpawnMeteor = 15;
 
 
     public AltarCrafting(Block block){
@@ -141,7 +143,7 @@ public class AltarCrafting implements Runnable{
     private void equalsLists(List<ItemStack> itemStacks, List<ItemStack> itemStacks1, ACCrafts.CraftsOfScrolls craftsOfScrolls){
         if(itemStacks == itemStacks1){
             scroll = craftsOfScrolls;
-            Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 138);
+            Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 228);
             effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 5);
             failCheck = false;
         }
@@ -180,6 +182,8 @@ public class AltarCrafting implements Runnable{
     }
 
     private void craftResultSuccessfulEffects(){
+        new ShootingStarEffect(location.clone().add(0.5,3.3,0.5).clone().add(radiusOfSpawnMeteor * sin(toRadians(new Random().nextInt(181) - 90)), radiusOfSpawnMeteor, radiusOfSpawnMeteor * sin(toRadians(new Random().nextInt(181) - 90))), location.clone().add(0.5,3.3,0.5),14);
+
         location.getWorld().spawnParticle(Particle.END_ROD, location.getX(), location.getY() + 4, location.getZ(), 4, 1.5, 1, 1.5, 0.1);
         location.getWorld().spawnParticle(Particle.PORTAL, location.getX(), location.getY() + 4, location.getZ(), 4, 1.5, 1, 1.5, 0.1);
         location.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, location.getX(), location.getY() + 4, location.getZ(), 7, 1.5, 1, 1.5, 0.1);
@@ -196,7 +200,7 @@ public class AltarCrafting implements Runnable{
                     dir.normalize();
                     dir.multiply(k);
                     start.add(dir);
-                    location.getWorld().spawnParticle(Particle.SPELL_WITCH, start, 1, 0,0,0);
+                    location.getWorld().spawnParticle(Particle.SPELL_WITCH, start, 0, 0,0,0);
 
                 }
             }

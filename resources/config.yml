@@ -39,6 +39,9 @@ ASTRAL_PET:
   CDseconds: 300
   damage: 7
   secondsLive: 120
+METEORITE:
+  consumedMana: 30
+  CDseconds: 40
 
 #Rituals setting
 MANAUPFIRST:

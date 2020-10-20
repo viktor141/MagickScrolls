@@ -120,6 +120,15 @@ public class ACCrafts {
                 return new CraftsOfScrolls[]{CraftsOfScrolls.ASTRAL_PET};
             }
         },
+        METEORITE_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.NETHERRACK;
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                return new CraftsOfScrolls[]{CraftsOfScrolls.METEORITE};
+            }
+        },
         WITCH_ARTIFACT{
             public Material craftCauldronGetMaterial() {
                 return Material.EMERALD;
@@ -198,78 +207,58 @@ public class ACCrafts {
     public enum CraftsOfScrolls{
         ARROWSTORM {
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new ArrowStorm(player, item);
-            }
+            public void start(Player player, ItemStack item) {new ArrowStorm(player, item);}
         },
         LIGHTNINGONE {
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Lightning(player, item, Lightning.Type.ONE);
-            }
+            public void start(Player player, ItemStack item) {new Lightning(player, item, Lightning.Type.ONE);}
         },
         LIGHTNINGTWO {
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Lightning(player, item, Lightning.Type.TWO);
-            }
+            public void start(Player player, ItemStack item) {new Lightning(player, item, Lightning.Type.TWO);}
         },
         LIGHTNINGTHREE {
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Lightning(player, item, Lightning.Type.THREE);
-            }
+            public void start(Player player, ItemStack item) {new Lightning(player, item, Lightning.Type.THREE);}
         },
         NECROMANCY{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Necromancy(player, item);
-            }
+            public void start(Player player, ItemStack item) {new Necromancy(player, item);}
         },
         TELEPORTATION{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Teleportation(player, item);
-            }
+            public void start(Player player, ItemStack item) {new Teleportation(player, item);}
         },
         VAMPIRIC{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return null;
-            }
+            public void start(Player player, ItemStack item) {}
         },
         VORTEX{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Vortex(player, item);
-            }
+            public void start(Player player, ItemStack item) {new Vortex(player, item);}
         },
         SPIDERWEB{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new SpiderWeb(player, item);
-            }
+            public void start(Player player, ItemStack item) {new SpiderWeb(player, item);}
         },
         TRAP{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Trap(player, item);
-            }
+            public void start(Player player, ItemStack item) {new Trap(player, item);}
         },
         EARTH{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new Earth(player, item);
-            }
+            public void start(Player player, ItemStack item) {new Earth(player, item);}
         },
         ASTRAL_PET{
             @Override
-            public Scroll start(Player player, ItemStack item) {
-                return new AstralPet(player, item);
-            }
+            public void start(Player player, ItemStack item) {new AstralPet(player, item); }
+        },
+        METEORITE{
+            @Override
+            public void start(Player player, ItemStack item) {new Meteorite(player, item);}
         };
 
-        public abstract Scroll start(Player player, ItemStack item);
+        public abstract void start(Player player, ItemStack item);
 
         public ItemStack craftAltarResult(){
             return setItemMeta(langF.getString(this.name() + ".name"), langF.getStringList(this.name() + ".lore"), this.name(), Material.PAPER);

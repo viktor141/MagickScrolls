@@ -75,7 +75,9 @@ public class AstralPet implements Scroll, Runnable {
         Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), () -> {
             Location start = player.getLocation().clone().add(0, high,0);
             Vector dir = toEntity.clone().subtract(start).toVector();
-            for(int i = 1; i < 20; i++) {
+            int amountOfSteps = 10;
+            float distance = (float) start.distance(toEntity),  step = distance/amountOfSteps;
+            for(float i = step; i < distance; i+= step) {
                 dir.normalize();
                 dir.multiply(i);
                 start.add(dir);

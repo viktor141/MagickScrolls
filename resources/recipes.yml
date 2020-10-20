@@ -441,3 +441,41 @@ ASTRAL_PET:
   - ==: org.bukkit.inventory.ItemStack
     type: ROTTEN_FLESH
     damage: 0
+
+METEORITE:
+  - ==: org.bukkit.inventory.ItemStack
+    type: SNOW_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SNOW_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SNOW_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SNOW_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: EGG
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: EGG
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: QUARTZ
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_BLOCK
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: IRON_BLOCK
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: PUMPKIN
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: BONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: ROTTEN_FLESH
+    damage: 0

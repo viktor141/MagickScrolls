@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
@@ -25,7 +26,8 @@ public class CDSystem{
         SPIDERWEB,
         TRAP,
         EARTH,
-        ASTRAL_PET
+        ASTRAL_PET,
+        METEORITE
     }
 
     public enum RitualsCD{
@@ -76,8 +78,8 @@ public class CDSystem{
         if(!playerMana.consumeMana(consumedMana))return false;
         CDSet(scroll, CDSeconds);
         if(isDefaultEffect) {
-            DefaultEffect defaultEffect = new DefaultEffect(player);
-            defaultEffect.defaultEffectOfScrolls();
+
+            Bukkit.getScheduler().runTask(plugin, () -> new DefaultEffect(player));
         }
         return true;
     }
