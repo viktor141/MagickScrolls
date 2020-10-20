@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -42,6 +43,7 @@ public class SpiderWebScroll implements Listener {
                 blockStates[i] = setBlockLoc.getBlock().getState();
                 if(blockStates[i].getType().equals(Material.AIR)) {
                     setBlockLoc.getBlock().setType(Material.WEB);
+                    setBlockLoc.getWorld().spawnParticle(Particle.END_ROD, setBlockLoc, 10, 0,0,0, 0.2);
                 }else {
                     blockStates[i] = null;
                 }

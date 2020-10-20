@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.pow;
+import static java.lang.Math.*;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class ArrowStorm implements Scroll, Runnable {
@@ -31,6 +32,8 @@ public class ArrowStorm implements Scroll, Runnable {
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM ,true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::effectFlameIn);
+        Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::effectFlameOut);
 
         itemConsumer(player, item);
     }
@@ -51,6 +54,22 @@ public class ArrowStorm implements Scroll, Runnable {
         }
         CleanUpTask cleanUpTask = new CleanUpTask();
         cleanUpTask.arrow(arrows);
+    }
+
+    private  void  effectFlameIn(){
+        int r = 13;
+        for(int i = 0; i <= 360; i+=6){
+            Location location = player.getLocation().clone().add(r * sin(toRadians(i)), 0.1 ,r *cos(toRadians(i)));
+            Vector dir =player.getLocation().clone().subtract(location).toVector();
+            location.getWorld().spawnParticle(Particle.FLAME, location, 0, dir.getX(), 3, dir.getZ(), 0.05);
+        }
+    }
+
+    private  void  effectFlameOut(){
+        for(int i = 3; i <= 363; i+=6){
+            Location location = player.getLocation().clone();
+            location.getWorld().spawnParticle(Particle.FLAME, location, 0, sin(toRadians(i)), 0.3, cos(toRadians(i)), 0.65);
+        }
     }
 }
 
