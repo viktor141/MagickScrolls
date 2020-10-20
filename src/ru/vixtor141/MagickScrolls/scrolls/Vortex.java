@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,15 +27,12 @@ public class Vortex implements Scroll {
         this.player = player;
         this.item = item;
 
-        Location locationOfPlayer = player.getEyeLocation();
-        Location newLocation;
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::searchTarget);
+    }
 
-        int r = 10;
-        float yaw = locationOfPlayer.getYaw();
-        float pitch = locationOfPlayer.getPitch();
-        newLocation = new Location(player.getWorld(), locationOfPlayer.getX() + (r * sin(toRadians(yaw)) * cos(toRadians(pitch)) * ((double)-1)), locationOfPlayer.getY() + (r * sin(toRadians(pitch)) * ((double)-1)), locationOfPlayer.getZ() + (r * cos(toRadians(yaw)) * cos(toRadians(pitch))));
-        Location start = locationOfPlayer.clone();
-        Vector dir = newLocation.clone().subtract(start).toVector();
+    private void searchTarget(){
+        Location start = player.getEyeLocation().clone();
+        Vector dir = player.getEyeLocation().getDirection();
         for(int i = 1; i < 10; i++) {
             dir.normalize();
             dir.multiply(i);
@@ -46,15 +42,11 @@ public class Vortex implements Scroll {
 
             if(!collectionEntities.isEmpty()) {
                 for(Entity entity : collectionEntities){
-                    if(entity instanceof Player){
-                        if((Player)entity != player){
-                            entitySetVelocity(entity);
-                            return;
-                        }
-                    }else{
-                        entitySetVelocity(entity);
-                        return;
+                    if(entity == player){
+                        continue;
                     }
+                    entitySetVelocity(entity);
+                    return;
                 }
             }
             start.subtract(dir);
@@ -73,8 +65,23 @@ public class Vortex implements Scroll {
         Mana playerMana = plugin.getPlayerMap().get(player);
         if(!playerMana.getCdSystem().CDStat(scroll, true))return;
 
+        vortexEffect(targetEntity);
         targetEntity.setVelocity(targetEntity.getVelocity().add(new Vector(0,1.9,0)));
 
         itemConsumer(player, item);
+    }
+
+    private void vortexEffect(Entity entity){
+        for(int i = 1; i < 4; i++){
+            vortexEffectR(entity, i);
+        }
+    }
+
+    private void vortexEffectR(Entity entity, int r){
+        for(int i =0; i<=360; i+=24){
+            Location particleLocation = entity.getLocation().clone().add(sin(toRadians(i)), 2 - r ,cos(toRadians(i)));
+            Vector vector = particleLocation.clone().subtract(entity.getLocation()).toVector();
+            particleLocation.getWorld().spawnParticle(Particle.CLOUD, particleLocation, 0, vector.getX()/r, 5, vector.getZ()/r, 0.15);
+        }
     }
 }

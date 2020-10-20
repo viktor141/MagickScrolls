@@ -79,32 +79,32 @@ name_nec_scroll_mobs: "Evil Spirit "
 
 #Scrolls
 ARROWSTORM:
-  name: "Scroll Of Arrow Storm"
+  name: "Scroll of Arrow Storm"
   lore:
   - "Arrow Storm scroll"
 
 LIGHTNINGONE:
-  name: "Scroll of lightning I"
+  name: "Scroll of Lightning I"
   lore:
-  - "Scroll for lightning strike"
+  - "Scroll for Lightning strike"
 
 LIGHTNINGTWO:
-  name: "Scroll of lightning II"
+  name: "Scroll of Lightning II"
   lore:
-  - "Scroll for lightning strike power two"
+  - "Scroll for Lightning strike power two"
 
 LIGHTNINGTHREE:
-  name: "Scroll of lightning III"
+  name: "Scroll of Lightning III"
   lore:
-  - "Scroll for lightning strike power three"
+  - "Scroll for Lightning strike power three"
 
 NECROMANCY:
-  name: "Scroll Of Necromancy"
+  name: "Scroll of Necromancy"
   lore:
   - "Necromancy scroll"
 
 TELEPORTATION:
-  name: "Scroll of teleportation"
+  name: "Scroll of Teleportation"
   lore:
   - "Scroll for teleportation in dimension"
 
@@ -114,29 +114,34 @@ VAMPIRIC:
   - "Vampirism power"
 
 VORTEX:
-  name: "Scroll of vortex"
+  name: "Scroll of Vortex"
   lore:
   - "Vortex scroll"
 
 SPIDERWEB:
-  name: "Scroll of spider web"
+  name: "Scroll of Spider web"
   lore:
   - "Spider web scroll"
 
 TRAP:
-  name: "Scroll of trap"
+  name: "Scroll of Trap"
   lore:
     - "Trap scroll"
 
 EARTH:
-  name: "Scroll of earth"
+  name: "Scroll of Earth"
   lore:
     - "Earth scroll"
 
 ASTRAL_PET:
-  name: "Scroll of astral pet"
+  name: "Scroll of Astral pet"
   lore:
     - "Astral pet scroll"
+
+METEORITE:
+  name: "Scroll of Meteorite"
+  lore:
+    - "Meteorite scroll"
 
 
 #Items
@@ -194,6 +199,11 @@ ASTRAL_PET_MAGICSEAL:
   name: "Magic seal"
   lore:
     - "Magic seal astral pet scrolls"
+
+METEORITE_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal Meteorite scrolls"
 
 WITCH_ARTIFACT:
   name: "Witch Artifact"
