@@ -16,7 +16,14 @@ public class RandomParticleGenerator {
         }
     }
 
-    public RandomParticleGenerator(Location location, int r, int count, short red, short green, short blue){
+    public RandomParticleGenerator(Location location, int r, int count, int red, int green, int blue){
+        this.r = r;
+        for(int i = 0; i < count; i++){
+            location.getWorld().spawnParticle(Particle.REDSTONE, location.clone().add(randValue(),randValue(),randValue()), 0, red, green, blue);
+        }
+    }
+
+    public RandomParticleGenerator(Location location, int r, int count, double red, double green, double blue){
         this.r = r;
         for(int i = 0; i < count; i++){
             location.getWorld().spawnParticle(Particle.REDSTONE, location.clone().add(randValue(),randValue(),randValue()), 0, red, green, blue);

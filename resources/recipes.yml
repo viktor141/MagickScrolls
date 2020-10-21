@@ -444,38 +444,38 @@ ASTRAL_PET:
 
 METEORITE:
   - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
+    type: NETHERRACK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
+    type: NETHER_BRICK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
+    type: NETHER_STAR
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
+    type: REDSTONE_BLOCK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: EGG
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EGG
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: QUARTZ
+    type: REDSTONE_BLOCK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
     type: IRON_BLOCK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
+    type: BLAZE_POWDER
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: PUMPKIN
+    type: BLAZE_POWDER
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: BONE
+    type: GOLD_BLOCK
     damage: 0
   - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
+    type: EMERALD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: MAGMA_CREAM
     damage: 0

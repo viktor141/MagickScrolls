@@ -48,7 +48,7 @@ public class CDSystem{
     }
 
     public boolean CDStat(Scrolls scroll, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){
-        return CDStatResult(scroll, getConsumedMana(scroll, ".consumedMana") * extraConsumedMana, getCDSeconds(scroll, ".CDseconds") * extraCDSeconds, isDefaultEffect);
+        return CDStatResult(scroll, getConsumedMana(scroll, ".consumedMana") * extraConsumedMana, getCDSeconds(scroll, ".CDseconds") + extraCDSeconds, isDefaultEffect);
     }
 
     public boolean CDStat(Scrolls scroll, String sConsumedMana, String sCDSeconds, boolean isDefaultEffect){

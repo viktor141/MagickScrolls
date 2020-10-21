@@ -1,7 +1,9 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -24,6 +26,8 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 
 public class TrapScroll implements Listener {
+
+    private Item item;
 
     @EventHandler
     public void trap(EntityPickupItemEvent event){
@@ -83,10 +87,16 @@ public class TrapScroll implements Listener {
 
         ItemStack trapScroll = playerMana.getTrapScroll();
 
+        this.item = trapItem;
+        Bukkit.getScheduler().runTaskLaterAsynchronously(Main.getPlugin(), this::itemEffect, 60);
         trapItem.setPickupDelay(60);
         trapItem.setMetadata("magickscrolls_trapitem", new LazyMetadataValue(Main.getPlugin(), player::getUniqueId));
 
         itemConsumer(player, trapScroll);
+    }
+
+    private void itemEffect(){
+        item.getWorld().spawnParticle(Particle.SPELL_WITCH, item.getLocation().clone().add(0,1,0), 10, 0.2,0.2,0.2, 0.1);
     }
 
 }

@@ -8,6 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.effects.RandomParticleGenerator;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
@@ -32,7 +33,7 @@ public class Lightning implements Scroll, Runnable {
         THREE(new int[]{10, 8});
 
         private final int[] i;
-        private Type(int[] i){
+        Type(int[] i){
             this.i = i;
         }
         public int[] getData(){
@@ -81,6 +82,7 @@ public class Lightning implements Scroll, Runnable {
 
             entity = entitesInLocation.get(i);
             entity.getLocation().getWorld().strikeLightning(entity.getLocation()).setSilent(true);
+            new RandomParticleGenerator(entity.getLocation().clone().add(0,1.5,0), 10, 15, (double)143/255, (double)220/255, (double)255/255);
             if(i == entitesInLocation.size()-1){
                 itemConsumer(player, item);
                 return;

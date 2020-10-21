@@ -3,6 +3,7 @@ package ru.vixtor141.MagickScrolls.scrolls;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
@@ -11,8 +12,6 @@ import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
-import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Teleportation implements Scroll {
@@ -32,17 +31,14 @@ public class Teleportation implements Scroll {
         if(!playerMana.getCdSystem().CDStat(scroll, true))return;
 
         player.teleport(newLocation);
+        newLocation.getWorld().spawnParticle(Particle.SPELL_INSTANT, newLocation.clone().add(0,1,0), 15,1,1,1, 2);
 
         itemConsumer(player, item);
     }
 
     public Location checkForTeleportation(Player player){
-        Location locationOfPlayer = player.getEyeLocation();
-        float yaw = locationOfPlayer.getYaw();
-        float pitch = locationOfPlayer.getPitch();
-
-        locationOfPlayer.add(8 * sin(toRadians(yaw)) * cos(toRadians(pitch)) * (-1), 8 * sin(toRadians(pitch)) * (-1), 8 * cos(toRadians(yaw)) * cos(toRadians(pitch)));
-
+        Location locationOfPlayer = player.getLocation();
+        locationOfPlayer.add(player.getEyeLocation().getDirection().clone().normalize().multiply(8));
         return locationOfPlayer;
     }
 

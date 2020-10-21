@@ -1,8 +1,6 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.LazyMetadataValue;
@@ -24,6 +22,10 @@ public class Necromancy implements Scroll, Runnable {
     private final Player player;
     private final ItemStack item;
     private final Main plugin = Main.getPlugin();
+    private final List<LivingEntity> mobs = new ArrayList<>();
+    private LazyMetadataValue metadataValue;
+    private String mobNames;
+    private Player target;
 
     public Necromancy(Player player, ItemStack item){
         this.player = player;
@@ -41,48 +43,25 @@ public class Necromancy implements Scroll, Runnable {
             return;
         }
 
-        Player target = (Player) playerEntity.get();
+        target = (Player) playerEntity.get();
         Mana playerMana = plugin.getPlayerMap().get(player);
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
-
 
         if(!playerMana.getCdSystem().CDStat(scroll , true))return;
 
         Location location = player.getLocation();
-        List<LivingEntity> mobs = new ArrayList<>();
-        LazyMetadataValue metadataValue = new LazyMetadataValue(Main.getPlugin(), () -> player.getName());
-        String mobNames = LangVar.name_nec_scroll_mobs.getVar() + player.getName();
 
-
+        metadataValue = new LazyMetadataValue(Main.getPlugin(), () -> player.getName());
+        mobNames = LangVar.name_nec_scroll_mobs.getVar() + player.getName();
 
         for(int i = 0; i < 3; i++) {
-            Creature craftZombie = (Creature) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() - 2, location.getY(), location.getZ() + i - 1), EntityType.ZOMBIE);
-            craftZombie.setCustomName(mobNames);
-            craftZombie.setCustomNameVisible(true);
-            craftZombie.setTarget(target);
-            craftZombie.setMetadata( "magicscrolls", metadataValue);
-            mobs.add(craftZombie);
+            spawnMob(EntityType.ZOMBIE, location.clone().add(-2, 0, i - 1));
 
-            Creature craftSkeleton = (Creature) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + 2, location.getY(), location.getZ() + i - 1), EntityType.SKELETON);
-            craftSkeleton.setCustomName(mobNames);
-            craftSkeleton.setCustomNameVisible(true);
-            craftSkeleton.setTarget(target);
-            craftSkeleton.setMetadata( "magicscrolls", metadataValue);
-            mobs.add(craftSkeleton);
+            spawnMob(EntityType.SKELETON, location.clone().add(2, 0, i - 1));
 
-            Creature craftSpider = (Creature) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + i - 1, location.getY(), location.getZ() + 2), EntityType.SPIDER);
-            craftSpider.setCustomName(mobNames);
-            craftSpider.setCustomNameVisible(true);
-            craftSpider.setTarget(target);
-            craftSpider.setMetadata( "magicscrolls", metadataValue);
-            mobs.add(craftSpider);
+            spawnMob(EntityType.SPIDER, location.clone().add(i - 1, 0, 2));
 
-            Creature craftWitherSkeleton = (Creature) player.getWorld().spawnEntity(new Location(location.getWorld(), location.getX() + i - 1, location.getY(), location.getZ() - 2), EntityType.WITHER_SKELETON);
-            craftWitherSkeleton.setCustomName(mobNames);
-            craftWitherSkeleton.setCustomNameVisible(true);
-            craftWitherSkeleton.setTarget(target);
-            craftWitherSkeleton.setMetadata( "magicscrolls", metadataValue);
-            mobs.add(craftWitherSkeleton);
+            spawnMob(EntityType.WITHER_SKELETON, location.clone().add(i-1, 0, -2));
         }
 
         itemConsumer(player, item);
@@ -90,5 +69,16 @@ public class Necromancy implements Scroll, Runnable {
         playerMana.getExistMobs().addAll(mobs);
         CleanUpTask cleanUpTask = new CleanUpTask();
         cleanUpTask.mob(mobs, playerMana);
+    }
+
+    private void spawnMob(EntityType type, Location spawnLocation){
+        Creature creature = (Creature) player.getWorld().spawnEntity(spawnLocation, type);
+        creature.setCustomName(mobNames);
+        creature.setCustomNameVisible(true);
+        creature.setTarget(target);
+        creature.setMetadata( "magicscrolls", metadataValue);
+        mobs.add(creature);
+
+        spawnLocation.getWorld().spawnParticle(Particle.SMOKE_LARGE, spawnLocation.clone().add(0,1.5,0), 5,1,1,1, 0.1);//тест
     }
 }

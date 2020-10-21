@@ -1,7 +1,5 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
-import org.bukkit.Color;
-import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -24,7 +22,7 @@ public class Vampiric implements Scroll {
 
         if(!playerMana.getCdSystem().CDStat(scroll, false))return;
 
-        new RandomParticleGenerator(event.getEntity().getLocation().clone().add(0,1.5,0), 10, 10, (short)130, (short)0, (short)0);
+        new RandomParticleGenerator(event.getEntity().getLocation().clone().add(0,1.5,0), 10, 10, 130, 0,0);
         event.setDamage(Main.getPlugin().getConfig().getDouble(scroll.name() + ".damge"));
 
         if(player.getHealth() <= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1.5) {
