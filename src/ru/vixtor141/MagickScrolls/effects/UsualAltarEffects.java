@@ -21,8 +21,8 @@ public class UsualAltarEffects implements Runnable {
     private final float r;
     private final Ritual ritual;
     private final Location location;
-    private int j = 0, i = 0, k = 0;
-    private final BukkitTask repeaterEffects, itemsRepeaterEffects, witchSpawnerEffect;
+    private int j = 0, i = 0, k = 0, d = 0;
+    private final BukkitTask repeaterEffects, itemsRepeaterEffects, witchSpawnerEffect, shootingStarEffect;
     private final int secondsOfRitual = 10 * 2;
     private final List<Item> list;
     private final RitualHandler ritualHandler;
@@ -41,6 +41,7 @@ public class UsualAltarEffects implements Runnable {
         repeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::repeaterEffects, 0, 10);
         itemsRepeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::onItemsRepeaterEffects, 0, 20);
         witchSpawnerEffect = Bukkit.getScheduler().runTaskTimer(plugin, this::witchSpawning, 0, 20);
+        shootingStarEffect = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::shootingStarEffect, 0, 2);
     }
 
     private void witchSpawning(){
@@ -59,6 +60,7 @@ public class UsualAltarEffects implements Runnable {
         repeaterEffects.cancel();
         itemsRepeaterEffects.cancel();
         witchSpawnerEffect.cancel();
+        shootingStarEffect.cancel();
         for(BukkitTask bukkitTask: bukkitTaskList)bukkitTask.cancel();
         for(WitchSpawner witchSpawner : witchSpawners)witchSpawner.killall();
     }
@@ -76,11 +78,21 @@ public class UsualAltarEffects implements Runnable {
     private void repeaterEffects(){
         if(j > secondsOfRitual){
             repeaterEffects.cancel();//можно убивать все таски
+            shootingStarEffect.cancel();
             return;
         }
         new CircleAroundAltarEffect(location, r + 1, (360/9) * j);
         ritual.repeatingEffect();
         j++;
+    }
+
+    private void shootingStarEffect(){
+        new ShootingStarEffect(list.get(d).getLocation().clone().add(0,0.2,0), 20, 6, 25);
+        d++;
+        if(d == list.size()){
+            d = 0;
+        }
+
     }
 
     @Override

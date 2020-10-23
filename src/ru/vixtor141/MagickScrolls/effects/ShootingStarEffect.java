@@ -7,6 +7,11 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
 
+import java.util.Random;
+
+import static java.lang.Math.sin;
+import static java.lang.Math.toRadians;
+
 public class ShootingStarEffect {
 
     private final BukkitTask ray;
@@ -32,6 +37,10 @@ public class ShootingStarEffect {
 
     public ShootingStarEffect(Location startRay, Location endRay, int amountOfSteps){
         this(startRay, endRay, amountOfSteps, 0.05f, 4, 5);
+    }
+
+    public ShootingStarEffect(Location endRay, int amountOfSteps, double r, double high){
+        this(endRay.clone().add(r * sin(toRadians(new Random().nextInt(181) - 90)), high, r * sin(toRadians(new Random().nextInt(181) - 90))), endRay, amountOfSteps, 0.05f, 4, 5);
     }
 
     private void ray(){
