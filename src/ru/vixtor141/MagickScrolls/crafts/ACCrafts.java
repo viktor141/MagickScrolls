@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.vixtor141.MagickScrolls.Main;
-import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.scrolls.*;
 
 import java.util.ArrayList;
@@ -127,6 +126,15 @@ public class ACCrafts {
 
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.METEORITE};
+            }
+        },
+        SPECTRAL_SHIELD_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.DIAMOND_CHESTPLATE;
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                return new CraftsOfScrolls[]{CraftsOfScrolls.SPECTRAL_SHIELD};
             }
         },
         WITCH_ARTIFACT{
@@ -256,6 +264,10 @@ public class ACCrafts {
         METEORITE{
             @Override
             public void start(Player player, ItemStack item) {new Meteorite(player, item);}
+        },
+        SPECTRAL_SHIELD{
+            @Override
+            public void start(Player player, ItemStack item) {new SpectralShield(player, item);}
         };
 
         public abstract void start(Player player, ItemStack item);

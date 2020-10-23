@@ -27,7 +27,8 @@ public class CDSystem{
         TRAP,
         EARTH,
         ASTRAL_PET,
-        METEORITE
+        METEORITE,
+        SPECTRAL_SHIELD
     }
 
     public enum RitualsCD{

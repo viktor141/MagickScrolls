@@ -159,6 +159,9 @@ public class Main extends JavaPlugin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            playerStats.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource("PlayerDefaultStats.yml"), Charsets.UTF_8)));
+            playerStats.options().copyDefaults(false);
         }
         return playerStats;
     }
@@ -167,17 +170,13 @@ public class Main extends JavaPlugin {
         Mana playerMana = getPlayerMap().get(player);
         playerMana.cancelTask();
 
-        if(playerMana.getInRitualChecker()) {//ritual stop if player leave
-
-            playerMana.setInRitualChecker(false);
-            playerMana.getRitual().getAltar().ritualBrake();
-        }
-
         File playerSF = new File(getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId().toString());
         FileConfiguration playerStats = YamlConfiguration.loadConfiguration(playerSF);
 
         playerStats.set("CurrentMana", playerMana.getCurrentMana());
         playerStats.set("MaxMana", playerMana.getMaxMana());
+        playerStats.set("SpectralShield", playerMana.getSpectralShield().get());
+        playerStats.set("SpectralShieldSeconds", playerMana.getSpectralShieldSeconds());
 
         playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
 
@@ -251,6 +250,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ScrollUseEvent(), this);
         Bukkit.getPluginManager().registerEvents(new WitchAdd(), this);
         Bukkit.getPluginManager().registerEvents(new StartBuildEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new SpectralShieldScroll(), this);
     }
 
     public void loadLangConfiguration(){

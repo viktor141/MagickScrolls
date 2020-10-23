@@ -42,6 +42,10 @@ ASTRAL_PET:
 METEORITE:
   consumedMana: 30
   CDseconds: 40
+SPECTRAL_SHIELD:
+  consumedMana: 29
+  CDseconds: 300
+  seconds: 180
 
 #Rituals setting
 MANAUPFIRST:

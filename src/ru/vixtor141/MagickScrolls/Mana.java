@@ -8,11 +8,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
+import ru.vixtor141.MagickScrolls.Misc.StartEffectForSpectralShield;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Mana implements Runnable{
 
@@ -28,12 +30,35 @@ public class Mana implements Runnable{
     private ItemStack trapScroll;
     private Ritual ritual = null;
     private boolean inRitualChecker = false;
+    private int spectralShieldSeconds = 0;
+    private final AtomicBoolean spectralShield = new AtomicBoolean(false);
+    private BukkitTask spectralShieldEffectTask;
 
     public Mana(Player player) {
         this.player = player;
         this.cdSystem = new CDSystem(player, this);
         plugin.getPlayerMap().put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+    }
+
+    public void setSpectralShieldSeconds(int spectralShieldSeconds) {
+        if(spectralShieldSeconds > 0){
+            spectralShieldEffectTask = new StartEffectForSpectralShield(player).getBukkitTask();
+        }
+        spectralShield.set(true);
+        this.spectralShieldSeconds = spectralShieldSeconds;
+    }
+
+    public BukkitTask getSpectralShieldEffectTask(){
+        return spectralShieldEffectTask;
+    }
+
+    public int getSpectralShieldSeconds(){
+        return spectralShieldSeconds;
+    }
+
+    public AtomicBoolean getSpectralShield(){
+        return spectralShield;
     }
 
     public boolean getInRitualChecker(){
@@ -134,6 +159,13 @@ public class Mana implements Runnable{
             addMana(manaRegenUnit);
         }else{
             addMana(manaRegenUnit - ((currentMana + manaRegenUnit) - maxMana));
+        }
+        if(spectralShieldSeconds > 1){
+            spectralShieldSeconds--;
+        }else if(spectralShieldSeconds == 1){
+            spectralShieldSeconds--;
+            spectralShield.set(false);
+            spectralShieldEffectTask.cancel();
         }
         cdSystem.CDUpdate();
     }

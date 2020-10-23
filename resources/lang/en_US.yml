@@ -38,6 +38,7 @@ msg_ymptpr: "You must perform the previous ritual"
 msg_rac: " - Reloading all configurations"
 msg_smmfp: " - set max mana for player"
 msg_scmfp: " - set current mana for player"
+msg_aa: "Already active"
 msg_s: "Seted"
 msg_n: "Need: "
 rb_sa: "MagickScrolls"
@@ -143,6 +144,11 @@ METEORITE:
   lore:
     - "Meteorite scroll"
 
+SPECTRAL_SHIELD:
+  name: "Scroll of Spectral shield"
+  lore:
+    - "Spectral shield scroll"
+
 
 #Items
 MAGIC_STAFF:
@@ -204,6 +210,11 @@ METEORITE_MAGICSEAL:
   name: "Magic seal"
   lore:
     - "Magic seal Meteorite scrolls"
+
+SPECTRAL_SHIELD_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal Spectral shield scrolls"
 
 WITCH_ARTIFACT:
   name: "Witch Artifact"

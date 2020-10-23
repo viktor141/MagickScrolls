@@ -479,3 +479,41 @@ METEORITE:
   - ==: org.bukkit.inventory.ItemStack
     type: MAGMA_CREAM
     damage: 0
+
+SPECTRAL_SHIELD:
+  - ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENDER_PEARL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: ENDER_PEARL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SNOW_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: BONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SHIELD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SHULKER_SHELL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SHULKER_SHELL
+    damage: 0

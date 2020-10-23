@@ -29,11 +29,6 @@ public enum LangVar {
     msg_tind,
     msg_ymn,
     msg_los,
-    rb_sa,
-    rb_st,
-    rb_titleMUF,
-    rb_needMUF,
-    rb_s,
     rb_sh,
     msg_rin,
     msg_rins,
@@ -51,6 +46,7 @@ public enum LangVar {
     msg_rac,
     msg_smmfp,
     msg_scmfp,
-    msg_s;
+    msg_s,
+    msg_aa;
     public String getVar(){ return Main.getPlugin().getLangCF().getString(this.name());}
 }
