@@ -264,8 +264,7 @@ public class Main extends JavaPlugin {
                 langFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-        }
+            }        }
         lanfCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
     }
 

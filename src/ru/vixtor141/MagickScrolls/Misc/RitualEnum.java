@@ -9,8 +9,6 @@ import ru.vixtor141.MagickScrolls.rituals.*;
 
 public class RitualEnum {
 
-    private static final FileConfiguration lang = Main.getPlugin().getLangCF();
-
     public enum Rituals{
         MANAUPFIRST{
             @Override
@@ -218,6 +216,6 @@ public class RitualEnum {
     }
 
     private static String get(String string){
-        return lang.getString(string).replace("\\n", "\n");
+        return Main.getPlugin().getLangCF().getString(string).replace("\\n", "\n");
     }
 }

@@ -13,9 +13,9 @@ public class BookCreator {
 
     private final FileConfiguration lang = Main.getPlugin().getLangCF();
     private final ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
-    private final BookMeta bm = (BookMeta)book.getItemMeta();
 
     public BookCreator(){
+        BookMeta bm = (BookMeta) book.getItemMeta();
         bm.setAuthor(lang.getString("rb_sa"));
         bm.setTitle(lang.getString("rb_st"));
 
