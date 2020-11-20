@@ -13,6 +13,7 @@ import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.effects.CircleEffect;
 import ru.vixtor141.MagickScrolls.effects.ShootingStarEffect;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
+import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,7 @@ public class Meteorite implements Scroll, Runnable {
             start.subtract(dir);
         }
 
-        player.sendMessage(ChatColor.RED + "Invalid location");
+        player.sendMessage(ChatColor.RED + LangVar.msg_il.getVar());
     }
 
     private void meteoriteEffects(){

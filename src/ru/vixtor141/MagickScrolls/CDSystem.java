@@ -28,7 +28,9 @@ public class CDSystem{
         EARTH,
         ASTRAL_PET,
         METEORITE,
-        SPECTRAL_SHIELD
+        SPECTRAL_SHIELD,
+        AIR_TRAP,
+        CONFUSED
     }
 
     public enum RitualsCD{

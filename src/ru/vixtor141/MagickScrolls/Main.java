@@ -251,6 +251,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new WitchAdd(), this);
         Bukkit.getPluginManager().registerEvents(new StartBuildEvent(), this);
         Bukkit.getPluginManager().registerEvents(new SpectralShieldScroll(), this);
+        Bukkit.getPluginManager().registerEvents(new AirTrapScroll(), this);
     }
 
     public void loadLangConfiguration(){
@@ -279,6 +280,10 @@ public class Main extends JavaPlugin {
     public void checkCrafts(){
         for(ACCrafts.CraftsOfScrolls scroll : ACCrafts.CraftsOfScrolls.values()){
             List<?> list = recipesCF.getList(scroll.name());
+            if(list == null){
+                this.getLogger().info(ChatColor.RED + "Recipe for " + scroll.name() + " is null. Test build?");
+                continue;
+            }
             if(list.isEmpty())this.getLogger().info(ChatColor.RED + "Recipe for " + scroll.name() + " is empty");
             if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in recipe for " + scroll.name());
 

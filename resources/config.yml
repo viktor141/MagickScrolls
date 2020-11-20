@@ -40,12 +40,18 @@ ASTRAL_PET:
   damage: 7
   secondsLive: 120
 METEORITE:
-  consumedMana: 30
+  consumedMana: 43
   CDseconds: 40
 SPECTRAL_SHIELD:
   consumedMana: 29
   CDseconds: 300
   seconds: 180
+AIR_TRAP:
+  consumedMana: 32
+  CDseconds: 47
+CONFUSED:
+  consumedMana: 27
+  CDseconds: 34
 
 #Rituals setting
 MANAUPFIRST:

@@ -1,6 +1,6 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: "1.6"
+version: "1.7"
 author: vixtor141
 
 softdepend: [PlaceholderAPI]
@@ -56,4 +56,10 @@ permissions:
   magickscrolls.give.scroll.EARTH:
     description: giving a permission on /magickscolls give <nick> EARTH
   magickscrolls.give.scroll.ASTRAL_PET:
-    description: giving a permission on /magickscolls give <nick> ASTRAL_PET
+    description: giving a permission on /magickscolls give <nick> ASTRAL PET
+  magickscrolls.give.scroll.SPECTRAL_SHIELD:
+    description: giving a permission on /magickscolls give <nick> SPECTRAL SHIELD
+  magickscrolls.give.scroll.AIR_TRAP:
+    description: giving a permission on /magickscolls give <nick> AIR TRAP
+  magickscrolls.give.scroll.CONFUSED:
+    description: giving a permission on /magickscolls give <nick> CONFUSED

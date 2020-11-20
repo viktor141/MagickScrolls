@@ -52,15 +52,10 @@ public class Vortex implements Scroll {
             start.subtract(dir);
 
         }
-        entitySetVelocity(null);
+        player.sendMessage(ChatColor.YELLOW + LangVar.msg_tind.getVar());
     }
 
     private void entitySetVelocity(Entity targetEntity){
-        if(targetEntity == null){
-            player.sendMessage(ChatColor.YELLOW + LangVar.msg_tind.getVar());
-            return;
-        }
-
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
         Mana playerMana = plugin.getPlayerMap().get(player);
         if(!playerMana.getCdSystem().CDStat(scroll, true))return;

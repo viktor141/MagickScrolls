@@ -199,6 +199,24 @@ public class ACCrafts {
             public ItemStack craftCauldronGetItem(){
                 return Main.getPlugin().getRitualBook();
             }
+        },
+        AIR_TRAP_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.DEAD_BUSH;
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                return new CraftsOfScrolls[]{CraftsOfScrolls.AIR_TRAP};
+            }
+        },
+        CONFUSED_MAGICSEAL{
+            public Material craftCauldronGetMaterial(){
+                return Material.RABBIT_FOOT;
+            }
+
+            public CraftsOfScrolls[] getScroll(){
+                return new CraftsOfScrolls[]{CraftsOfScrolls.CONFUSED};
+            }
         };
 
         public abstract Material craftCauldronGetMaterial();
@@ -268,6 +286,14 @@ public class ACCrafts {
         SPECTRAL_SHIELD{
             @Override
             public void start(Player player, ItemStack item) {new SpectralShield(player, item);}
+        },
+        AIR_TRAP{
+            @Override
+            public void start(Player player, ItemStack item) {new AirTrap(player, item);}
+        },
+        CONFUSED{
+            @Override
+            public void start(Player player, ItemStack item) {new Confused(player, item);}
         };
 
         public abstract void start(Player player, ItemStack item);

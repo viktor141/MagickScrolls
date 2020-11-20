@@ -517,3 +517,79 @@ SPECTRAL_SHIELD:
   - ==: org.bukkit.inventory.ItemStack
     type: SHULKER_SHELL
     damage: 0
+
+AIR_TRAP:
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SUGAR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SULPHUR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SULPHUR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SULPHUR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SULPHUR
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+    damage: 0
+
+CONFUSED:
+  - ==: org.bukkit.inventory.ItemStack
+    type: REDSTONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: REDSTONE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: GLOWSTONE_DUST
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SPIDER_EYE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SPIDER_EYE
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: PRISMARINE_SHARD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: PRISMARINE_SHARD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: PRISMARINE_SHARD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: PRISMARINE_SHARD
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SLIME_BALL
+    damage: 0
+  - ==: org.bukkit.inventory.ItemStack
+    type: SLIME_BALL
+    damage: 0

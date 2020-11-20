@@ -47,6 +47,7 @@ public enum LangVar {
     msg_smmfp,
     msg_scmfp,
     msg_s,
-    msg_aa;
+    msg_aa,
+    msg_il;
     public String getVar(){ return Main.getPlugin().getLangCF().getString(this.name());}
 }

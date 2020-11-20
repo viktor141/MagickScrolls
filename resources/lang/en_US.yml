@@ -39,6 +39,7 @@ msg_rac: " - Reloading all configurations"
 msg_smmfp: " - set max mana for player"
 msg_scmfp: " - set current mana for player"
 msg_aa: "Already active"
+msg_il: "Invalid location"
 msg_s: "Seted"
 msg_n: "Need: "
 rb_sa: "MagickScrolls"
@@ -149,6 +150,16 @@ SPECTRAL_SHIELD:
   lore:
     - "Spectral shield scroll"
 
+AIR_TRAP:
+  name: "Scroll of Air Trap"
+  lore:
+    - "Air Trap scroll"
+
+CONFUSED:
+  name: "Scroll of Confuse"
+  lore:
+    - "Confused scroll"
+
 
 #Items
 MAGIC_STAFF:
@@ -226,3 +237,13 @@ RITUAL_ALTAR_BUILDER:
   name: "Ritual builder"
   lore:
     - "Builds a ritual altar"
+
+AIR_TRAP_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal Air Trap scrolls"
+
+CONFUSED_MAGICSEAL:
+  name: "Magic seal"
+  lore:
+    - "Magic seal Confused scrolls"
