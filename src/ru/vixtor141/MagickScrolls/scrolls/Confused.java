@@ -3,6 +3,7 @@ package ru.vixtor141.MagickScrolls.scrolls;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.effects.RandomParticleGenerator;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
@@ -26,7 +28,7 @@ public class Confused implements Scroll {
     private final Main plugin = Main.getPlugin();
     private final Player player;
     private final ItemStack item;
-    private BukkitTask stop, start;
+    private BukkitTask stop, start, effect;
     private Entity entity;
 
     public Confused(Player player, ItemStack item){
@@ -69,6 +71,7 @@ public class Confused implements Scroll {
         this.entity = entity;
 
         start = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::setRandomVector, 0, 20);
+        effect = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::effect, 0, 3);
         stop = Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, this::stop, 201);
     }
 
@@ -76,7 +79,12 @@ public class Confused implements Scroll {
         entity.setVelocity(new Vector(new Random().nextInt(10) - 5, new Random().nextInt(5), new Random().nextInt(10) - 5).normalize());
     }
 
+    private void effect(){
+        new RandomParticleGenerator(entity.getLocation(), Particle.SPELL, 12, 7);//TEST AND COMMIT
+    }
+
     private void stop(){
         start.cancel();
+        effect.cancel();
     }
 }
