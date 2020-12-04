@@ -80,7 +80,7 @@ public class Confused implements Scroll {
     }
 
     private void effect(){
-        new RandomParticleGenerator(entity.getLocation(), Particle.SPELL, 12, 7);//TEST AND COMMIT
+        new RandomParticleGenerator(entity.getLocation(), Particle.SPELL, 12, 7);
     }
 
     private void stop(){

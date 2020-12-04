@@ -20,135 +20,78 @@ public class ACCrafts {
 
     public enum ItemsCauldronCrafts{
         MAGIC_STAFF{
-            public Material craftCauldronGetMaterial(){
-                return Material.STICK;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[0];
             }
-
         },
         ARROWSTORM_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.ARROW;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.ARROWSTORM};
             }
         },
         LIGHTNING_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.NETHER_STAR;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.LIGHTNINGONE, CraftsOfScrolls.LIGHTNINGTWO, CraftsOfScrolls.LIGHTNINGTHREE};
             }
         },
         NECROMANCY_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.BONE;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.NECROMANCY};
             }
         },
         TELEPORTATION_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.ENDER_PEARL;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.TELEPORTATION};
             }
         },
         VAMPIRIC_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.GHAST_TEAR;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.VAMPIRIC};
             }
         },
         VORTEX_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.DIAMOND;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.VORTEX};
             }
         },
         SPIDERWEB_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.SPIDER_EYE;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.SPIDERWEB};
             }
         },
         TRAP_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.EYE_OF_ENDER;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.TRAP};
             }
         },
         EARTH_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.DIRT;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.EARTH};
             }
         },
         ASTRAL_PET_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.SHULKER_SHELL;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.ASTRAL_PET};
             }
         },
         METEORITE_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.NETHERRACK;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.METEORITE};
             }
         },
         SPECTRAL_SHIELD_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.DIAMOND_CHESTPLATE;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.SPECTRAL_SHIELD};
             }
         },
         WITCH_ARTIFACT{
-            public Material craftCauldronGetMaterial() {
-                return Material.EMERALD;
-            }
-
             public CraftsOfScrolls[] getScroll() {
                 return new CraftsOfScrolls[0];
             }
 
             @Override
             public ItemStack craftCauldronGetItem(){
-                ItemStack item = new ItemStack(this.craftCauldronGetMaterial());
+                ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
                 List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
@@ -164,10 +107,6 @@ public class ACCrafts {
             }
         },
         RITUAL_BOOK{
-            public Material craftCauldronGetMaterial() {
-                return Material.BOOK;
-            }
-
             public CraftsOfScrolls[] getScroll() {
                 return new CraftsOfScrolls[0];
             }
@@ -178,19 +117,11 @@ public class ACCrafts {
             }
         },
         RITUAL_ALTAR_BUILDER{
-            public Material craftCauldronGetMaterial() {
-                return Material.BLAZE_ROD;
-            }
-
             public CraftsOfScrolls[] getScroll() {
                 return new CraftsOfScrolls[0];
             }
         },
         RITUAL_BOOK_REWRITER{
-            public Material craftCauldronGetMaterial() {
-                return Material.WRITTEN_BOOK;
-            }
-
             public CraftsOfScrolls[] getScroll() {
                 return new CraftsOfScrolls[0];
             }
@@ -201,29 +132,34 @@ public class ACCrafts {
             }
         },
         AIR_TRAP_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.DEAD_BUSH;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.AIR_TRAP};
             }
         },
         CONFUSED_MAGICSEAL{
-            public Material craftCauldronGetMaterial(){
-                return Material.RABBIT_FOOT;
-            }
-
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.CONFUSED};
             }
         };
 
-        public abstract Material craftCauldronGetMaterial();
         public abstract CraftsOfScrolls[] getScroll();
 
+        public Material craftCauldronGetMaterial(){
+            return Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result").getType();
+        }
+
         public ItemStack craftCauldronGetItem(){
-            return setItemMeta(langF.getString(this.name() + ".name"), langF.getStringList( this.name() +".lore"), this.name(), this.craftCauldronGetMaterial());
+            ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
+            List<String> loreL = new ArrayList<String>(langF.getStringList( this.name() +".lore"));
+            loreL.add(ChatColor.BLUE + this.name());
+            loreL.add(ChatColor.YELLOW + "Magick Scrolls");
+            meta.setLore(loreL);
+            meta.addEnchant(Enchantment.DURABILITY, 1,true);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
+            return item;
         }
 
     }

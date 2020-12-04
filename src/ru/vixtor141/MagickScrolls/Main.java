@@ -3,17 +3,20 @@ package ru.vixtor141.MagickScrolls;
 import com.google.common.base.Charsets;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.vixtor141.MagickScrolls.Misc.BookCreator;
 import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.Misc.UpdateConfig;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
+import ru.vixtor141.MagickScrolls.crafts.CauldronCraftsStorage;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -21,10 +24,7 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Main extends JavaPlugin {
@@ -34,9 +34,10 @@ public class Main extends JavaPlugin {
     private final List<LivingEntity> existMobs = new ArrayList<>();
     private final List<CleanUpTask> cleanUpTasks = new ArrayList<>();
     private final List<DefaultEffect> defaultEffectList = new ArrayList<>();
-    private FileConfiguration recipesCF, lanfCF, ritualsCF;
+    private FileConfiguration recipesCF, lanfCF, ritualsCF, cauldronCF;
     private ItemStack ritualBook;
     private boolean manaMessage;
+    private CauldronCraftsStorage cauldronCraftsStorage;
 
     public Main (){
         plugin = this;
@@ -82,34 +83,31 @@ public class Main extends JavaPlugin {
         return ritualsCF;
     }
 
+    public CauldronCraftsStorage getCauldronCraftsStorage(){
+        return cauldronCraftsStorage;
+    }
+
+    public FileConfiguration getCauldronCF() {
+        return cauldronCF;
+    }
+
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
             new PAPI(this).register();
         }
 
-        File config = new File(getDataFolder() + File.separator + "config.yml");
-        if(!config.exists()){
-            getConfig().options().copyDefaults(true);
-            saveDefaultConfig();
-        }
-        loadConf(config, "config.yml");
+        loadConfigStuff();
 
-        loadLangConfiguration();
-
-        this.getCommand("magickScrolls").setExecutor(new Commands());
+        checkCrafts();
 
         createBook();
 
-        readManaMessageSetting();
+        loadCauldronRecipes();
 
-        loadRecipes();
-
-        loadRituals();
+        this.getCommand("magickScrolls").setExecutor(new Commands());
 
         registerEventListeners();
-
-        checkCrafts();
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }
@@ -137,6 +135,26 @@ public class Main extends JavaPlugin {
         }
         getExistMobs().clear();
         this.getLogger().info(ChatColor.GOLD+"Plugin has been disabled");
+    }
+
+    public void loadConfigStuff(){
+        File config = new File(getDataFolder() + File.separator + "config.yml");
+        if(!config.exists()){
+            getConfig().options().copyDefaults(true);
+            saveDefaultConfig();
+        }
+
+        loadConf(config, "config.yml");
+
+        loadLangConfiguration();
+
+        readManaMessageSetting();
+
+        loadRecipes();
+
+        loadRituals();
+
+        loadCauldronCrafting();
     }
 
     public FileConfiguration loadPlayerStats(String playerUUID){
@@ -198,7 +216,7 @@ public class Main extends JavaPlugin {
             return YamlConfiguration.loadConfiguration(file);
     }
 
-    public void loadRecipes(){
+    private void loadRecipes(){
         String recPath = "recipes.yml";
         File file = new File(getDataFolder() + File.separator + recPath);
         recipesCF  = YamlConfiguration.loadConfiguration(file);
@@ -217,7 +235,7 @@ public class Main extends JavaPlugin {
         }
     }
 
-    public void loadRituals(){
+    private void loadRituals(){
         String ritPath = "rituals.yml";
         File file = new File(getDataFolder() + File.separator + ritPath);
         ritualsCF  = YamlConfiguration.loadConfiguration(file);
@@ -230,6 +248,25 @@ public class Main extends JavaPlugin {
             ritualsCF.options().copyDefaults(true);
             try {
                 ritualsCF.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadCauldronCrafting(){
+        String ritPath = "cauldron.yml";
+        File file = new File(getDataFolder() + File.separator + ritPath);
+        cauldronCF = YamlConfiguration.loadConfiguration(file);
+        if(!file.exists()){
+            cauldronCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(ritPath), Charsets.UTF_8)));
+            cauldronCF.options().copyDefaults(true);
+            this.saveResource(ritPath, false);
+        }else {
+            cauldronCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(this.getResource(ritPath), Charsets.UTF_8)));
+            cauldronCF.options().copyDefaults(true);
+            try {
+                cauldronCF.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -254,7 +291,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AirTrapScroll(), this);
     }
 
-    public void loadLangConfiguration(){
+    private void loadLangConfiguration(){
         if(!new File(getDataFolder() + File.separator + "lang").exists()) {
             new File(getDataFolder() + File.separator + "lang").mkdir();
         }
@@ -273,7 +310,7 @@ public class Main extends JavaPlugin {
         ritualBook = new BookCreator().getBook();
     }
 
-    public void readManaMessageSetting(){
+    private void readManaMessageSetting(){
         manaMessage = plugin.getConfig().getBoolean("messageAboutMana");
     }
 
@@ -295,6 +332,36 @@ public class Main extends JavaPlugin {
             if(!list.parallelStream().allMatch(o -> o instanceof ItemStack))this.getLogger().info(ChatColor.RED + "Something wrong in ritual recipe for " + ritual.name());
 
         }
+    }
+
+    public void loadCauldronRecipes(){
+        int max = 0, current;
+        for(ACCrafts.ItemsCauldronCrafts craft : ACCrafts.ItemsCauldronCrafts.values()){
+            if(cauldronCF.getList(craft.name() + ".recipe") == null){
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Not Found " + craft.name() + " recipe. Check the cauldron.yml and fix that!");
+                continue;
+            }
+            current = cauldronCF.getList(craft.name() + ".recipe").size();
+            if(max < current)max = current;
+        }
+        cauldronCraftsStorage = new CauldronCraftsStorage(max);
+
+        for(ACCrafts.ItemsCauldronCrafts craft : ACCrafts.ItemsCauldronCrafts.values()){
+            List<ItemStack> list = new ArrayList<>();
+            List<Map<String, String>> recipeList =((List<Map<String, String>>)cauldronCF.getList(craft.name() + ".recipe"));
+            current = recipeList.size();
+            for(int i = 0; i < current; i++){
+                ItemStack itemStack = new ItemStack(Material.valueOf(recipeList.get(i).get("type")), Integer.parseInt(recipeList.get(i).get("amount")));
+                if(recipeList.get(i).get("mstype") != null){
+                    ItemMeta itemMeta = itemStack.getItemMeta();
+                    itemMeta.setLore(Collections.singletonList(recipeList.get(i).get("mstype")));
+                    itemStack.setItemMeta(itemMeta);
+                }
+                list.add(itemStack);
+            }
+            cauldronCraftsStorage.filling(list, craft);
+        }
+
     }
 
 }

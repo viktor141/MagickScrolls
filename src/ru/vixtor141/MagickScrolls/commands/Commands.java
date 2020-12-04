@@ -245,17 +245,13 @@ public class Commands implements CommandExecutor {
 
         plugin.reloadConfig();
 
-        plugin.loadLangConfiguration();
+        plugin.loadConfigStuff();
 
         plugin.createBook();
 
-        plugin.readManaMessageSetting();
-
-        plugin.loadRecipes();
-
-        plugin.loadRituals();
-
         plugin.checkCrafts();
+
+        plugin.loadCauldronRecipes();
 
         commandSender.sendMessage(ChatColor.GREEN + "Reloaded!");
 

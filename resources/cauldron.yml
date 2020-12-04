@@ -1,0 +1,266 @@
+MAGIC_STAFF:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: STICK
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: STICK
+ARROWSTORM_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: ARROW
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: ARROW
+LIGHTNING_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: NETHER_STAR
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: NETHER_STAR
+NECROMANCY_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: BONE
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: BONE
+TELEPORTATION_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: ENDER_PEARL
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: ENDER_PEARL
+VAMPIRIC_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: GHAST_TEAR
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: GHAST_TEAR
+VORTEX_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: DIAMOND
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND
+SPIDERWEB_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: SPIDER_EYE
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: SPIDER_EYE
+TRAP_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: EYE_OF_ENDER
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: EYE_OF_ENDER
+EARTH_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: DIRT
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: DIRT
+ASTRAL_PET_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: SHULKER_SHELL
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: SHULKER_SHELL
+METEORITE_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: NETHERRACK
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: NETHERRACK
+SPECTRAL_SHIELD_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: DIAMOND_CHESTPLATE
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: DIAMOND_CHESTPLATE
+WITCH_ARTIFACT:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: EMERALD
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: EMERALD
+RITUAL_BOOK:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: BOOK
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: AIR
+RITUAL_ALTAR_BUILDER:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: BLAZE_ROD
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: BLAZE_ROD
+RITUAL_BOOK_REWRITER:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: WRITTEN_BOOK
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: AIR
+AIR_TRAP_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: DEAD_BUSH
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: DEAD_BUSH
+CONFUSED_MAGICSEAL:
+  recipe:
+    - type: REDSTONE
+      amount: '1'
+      mstype: null
+    - type: GLOWSTONE_DUST
+      amount: '1'
+      mstype: null
+    - type: RABBIT_FOOT
+      amount: '1'
+      mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: RABBIT_FOOT

@@ -8,57 +8,78 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 public class CauldronCrafting implements Runnable{
 
-    private final HashMap<Material, Entity> listItems = new HashMap<>();
+    private final HashMap<ItemStack, Entity> listItems = new HashMap<>();
     private final Location location;
-    private ItemStack craftResult, itemInHand;
+    private ItemStack craftResult;
+    private final ItemStack itemInHand;
     private BukkitTask bukkitTask;
     private int taskCounter = 0;
+    private final CauldronCraftsStorage cauldronCraftsStorage = Main.getPlugin().getCauldronCraftsStorage();
+    private Map<List<ItemStack>, ACCrafts.ItemsCauldronCrafts> map;
+    private ACCrafts.ItemsCauldronCrafts craft;
+    private List<ItemStack> itemRecipe = new ArrayList<>();
 
     public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand){
         this.location = location;
         this.itemInHand = itemInHand;
-        if(collection.isEmpty())return;
-        if(checking(collection))startCraftingProcess();
+        if(checking(collection)) {
+            map = cauldronCraftsStorage.getRecipes().get(listItems.size()-1);
+            Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::check);
+        }
     }
 
     private boolean checking(Collection<Entity> entities){
-        entities.parallelStream().filter(entityI -> entityI instanceof Item).forEach(entity -> listItems.put(((Item) entity).getItemStack().getType(), entity));
+        if(entities.isEmpty())return false;
+        for(Entity entity : entities){
+            if(entity instanceof Item){
+                listItems.put(((Item) entity).getItemStack(), entity);
+            }
+            if(listItems.size() == cauldronCraftsStorage.getMaxIngredients())break;
+        }
+
         return !listItems.isEmpty();
     }
-
     private void startCraftingProcess(){
-        if(!(listItems.containsKey(Material.REDSTONE) && listItems.containsKey(Material.GLOWSTONE_DUST)))return;
-        int ing1, ingR, ingG, maxIFC;
-        Item redstone = (Item)listItems.remove(Material.REDSTONE), glowstone = (Item)listItems.remove(Material.GLOWSTONE_DUST), item3;
-        ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts = isIngredientExist();
+        List<ItemStack> realItems = new ArrayList<>(listItems.keySet());
+        int cur;
+        int min = realItems.get(0).getAmount();
+        for(int i = 0; i < listItems.size(); i++){
+            cur = realItems.get(i).getAmount();
+            if(min > (cur/itemRecipe.get(i).getAmount())){
+                min = cur/itemRecipe.get(i).getAmount();
+            }
+        }
+        int curCount = 0;
+        for(Entity entity : listItems.values()){
+            ((Item)entity).setPickupDelay(1000);
+            curCount++;
+            if(entity.isDead()){
+                for(int i = 0; i <=curCount; i++){
+                    ((Item)listItems.values().toArray()[i]).setPickupDelay(0);
+                }
+                return;
+            }
+        }
 
-        if(itemsCauldronCrafts == null)return;
+        for(int i = 0; i< realItems.size(); i++){
+            realItems.get(i).setAmount(realItems.get(i).getAmount() - (min*itemRecipe.get(i).getAmount()));
+        }
 
-        item3 =(Item) listItems.get(itemsCauldronCrafts.craftCauldronGetMaterial());
-        ingR = redstone.getItemStack().getAmount();
-        ingG = glowstone.getItemStack().getAmount();
-        ing1 = item3.getItemStack().getAmount();
+        for(Entity entity: listItems.values()){
+            if(!entity.isDead())((Item)entity).setPickupDelay(0);
+        }
 
-
-        if(ingR < ingG){
-            maxIFC = ingR;
-        }else maxIFC = Math.min(ingG, ing1);
-
-        redstone.getItemStack().setAmount(ingR - maxIFC);
-        glowstone.getItemStack().setAmount(ingG - maxIFC);
-        item3.getItemStack().setAmount(ing1 - maxIFC);
-
-        craftResult = itemsCauldronCrafts.craftCauldronGetItem();
-        craftResult.setAmount(maxIFC);
+        craftResult = craft.craftCauldronGetItem();
+        craftResult.setAmount(min);
         itemRemoveFromHand();
 
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this::smokeEffect ,0,7);
         Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this,27);
+
     }
 
     private void smokeEffect(){
@@ -88,12 +109,34 @@ public class CauldronCrafting implements Runnable{
         itemInHand.setAmount(itemInHand.getAmount() - 1);
     }
 
-    private ACCrafts.ItemsCauldronCrafts isIngredientExist(){
-        for(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts : ACCrafts.ItemsCauldronCrafts.values()){
-            if(listItems.containsKey(itemsCauldronCrafts.craftCauldronGetMaterial())){
-                return itemsCauldronCrafts;
+    private void check(){
+        for(List<ItemStack> list : map.keySet()){
+            if(checkItem(new ArrayList<>(list))){
+                craft = map.get(list);
+                startCraftingProcess();
+            }else {
+                itemRecipe.clear();
             }
         }
-        return null;
+    }
+
+    private boolean checkItem(List<ItemStack> list){
+        List<ItemStack> checkList = new ArrayList<>(listItems.keySet());
+        for(ItemStack itemStack1 : checkList ){
+            for(ItemStack itemStack: list){
+                if(itemStack.getType().equals(itemStack1.getType()) && itemStack.getAmount() <= itemStack1.getAmount()){
+                    if(!itemStack1.getItemMeta().hasLore() && !itemStack.getItemMeta().hasLore()){
+                        itemRecipe.add(itemStack);
+                        list.remove(itemStack);
+                        break;
+                    }else if(itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2))){
+                        itemRecipe.add(itemStack);
+                        list.remove(itemStack);
+                        break;
+                    }
+                }
+            }
+        }
+        return list.isEmpty();
     }
 }
