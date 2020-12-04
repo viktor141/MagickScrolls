@@ -21,7 +21,7 @@ public class CauldronCrafting implements Runnable{
     private final CauldronCraftsStorage cauldronCraftsStorage = Main.getPlugin().getCauldronCraftsStorage();
     private Map<List<ItemStack>, ACCrafts.ItemsCauldronCrafts> map;
     private ACCrafts.ItemsCauldronCrafts craft;
-    private List<ItemStack> itemRecipe = new ArrayList<>();
+    private final List<ItemStack> itemRecipe = new ArrayList<>();
 
     public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand){
         this.location = location;
