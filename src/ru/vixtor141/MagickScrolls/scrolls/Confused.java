@@ -76,7 +76,7 @@ public class Confused implements Scroll {
     }
 
     private void setRandomVector(){
-        entity.setVelocity(new Vector(new Random().nextInt(10) - 5, new Random().nextInt(5), new Random().nextInt(10) - 5).normalize());
+        entity.setVelocity(new Vector(new Random().nextInt(10) - 5, new Random().nextInt(4) + 1, new Random().nextInt(10) - 5).normalize());
     }
 
     private void effect(){

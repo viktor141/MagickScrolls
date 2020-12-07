@@ -46,7 +46,7 @@ public class CraftStartEvent implements Listener {
         event.setCancelled(true);
 
         Location location = event.getClickedBlock().getLocation().add(0.125,0.125,0.125);
-        CauldronCrafting cauldronCrafting = new CauldronCrafting(event.getClickedBlock().getWorld().getNearbyEntities(location, 0.75,0.875,0.75), location.add(0.375,1.375,0.375), event.getItem());
+        new CauldronCrafting(event.getClickedBlock().getWorld().getNearbyEntities(location, 0.75,0.875,0.75), location.add(0.375,1.375,0.375), event.getItem());
         //0.125 cauldron wall size
     }
 

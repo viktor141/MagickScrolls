@@ -146,19 +146,26 @@ public class Commands implements CommandExecutor {
 
         if(args.length > 2){
             CDSystem.Scrolls scroll;
+            CDSystem.RitualsCD ritual;
             try {
-                 scroll = CDSystem.Scrolls.valueOf(args[2].toUpperCase());
-            }catch (IllegalArgumentException e){
-                commandSender.sendMessage(ChatColor.RED + LangVar.msg_sasdne.getVar());
-                return true;
+                scroll = CDSystem.Scrolls.valueOf(args[2].toUpperCase());
+                playerMana.getCdSystem().CDSet(scroll, setSecond);
+            }catch (IllegalArgumentException | NullPointerException e){
+                try {
+                    ritual = CDSystem.RitualsCD.valueOf(args[2].toUpperCase());
+                    playerMana.getCdSystem().CDSet(ritual, setSecond);
+                }catch (IllegalArgumentException | NullPointerException e1) {
+                    commandSender.sendMessage(ChatColor.RED + LangVar.msg_sasdne.getVar());
+                    return true;
+                }
             }
-            playerMana.getCdSystem().CDSet(scroll, setSecond);
+
             commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + LangVar.msg_cdwst.getVar() + setSecond);
             return true;
         }
 
-        for(int i = 0; i < CDSystem.Scrolls.values().length; i++) {
-            playerMana.getCdSystem().CDSet(CDSystem.Scrolls.values()[i], setSecond);
+        for(int i = 0; i < CDSystem.CDsValuesLength(); i++) {
+            playerMana.getCdSystem().CDSet(i, setSecond);
         }
 
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_cdwst.getVar() + setSecond);

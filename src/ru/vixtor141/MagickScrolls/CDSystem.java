@@ -95,8 +95,16 @@ public class CDSystem{
         }
     }
 
-    public void CDSet(Scrolls scrolls, int seconds){
-        CDs.set(scrolls.ordinal(), seconds);
+    public void CDSet(Scrolls scroll, int seconds){
+        CDs.set(scroll.ordinal(), seconds);
+    }
+
+    public void CDSet(RitualsCD ritual, int seconds){
+        CDs.set(Scrolls.values().length + ritual.ordinal(), seconds);
+    }
+
+    public void CDSet(int i, int seconds){
+        CDs.set(i, seconds);
     }
 
     public static int CDsValuesLength(){

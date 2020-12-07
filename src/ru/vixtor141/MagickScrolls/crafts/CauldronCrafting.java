@@ -73,8 +73,8 @@ public class CauldronCrafting implements Runnable{
             if(!entity.isDead())((Item)entity).setPickupDelay(0);
         }
 
-        craftResult = craft.craftCauldronGetItem();
-        craftResult.setAmount(min);
+        craftResult = craft.craftCauldronGetItem().clone();
+        craftResult.setAmount(min * craftResult.getAmount());
         itemRemoveFromHand();
 
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this::smokeEffect ,0,7);
@@ -129,7 +129,7 @@ public class CauldronCrafting implements Runnable{
                         itemRecipe.add(itemStack);
                         list.remove(itemStack);
                         break;
-                    }else if(itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2))){
+                    }else if(itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2).substring(2))){
                         itemRecipe.add(itemStack);
                         list.remove(itemStack);
                         break;
