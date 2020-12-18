@@ -86,13 +86,13 @@ public class UsualAltar implements AltarFace, Runnable {
     }
 
     @Override
-    public void behavior(RitualHandler ritualHandler, int witches) {
+    public void behavior(RitualHandler ritualHandler, int witches, int[] neededAmounts) {
         for(Item item : items){
             if(!item.isDead()){
                 item.setPickupDelay(9000);
             }
         }
-        usualAltarEffects = new UsualAltarEffects(ritual, r, location, items, ritualHandler, witches);
+        usualAltarEffects = new UsualAltarEffects(ritual, r, location, items, ritualHandler, witches, neededAmounts);
     }
 
     @Override

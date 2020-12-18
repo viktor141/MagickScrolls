@@ -1,11 +1,13 @@
 package ru.vixtor141.MagickScrolls.Misc;
 
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.rituals.*;
+
+import java.util.List;
 
 public class RitualEnum {
 
@@ -213,6 +215,10 @@ public class RitualEnum {
         public abstract TextComponent getDescription();
         public abstract TextComponent getNeed();
         public abstract Ritual getRitual(Mana playerMana);
+
+        public List<ItemStack> getReqItems(){
+            return Main.getPlugin().getRitualsRecipesStorage().getRecipes().get(this.ordinal());
+        }
     }
 
     private static String get(String string){

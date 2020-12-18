@@ -1,117 +1,153 @@
 MANAUPFIRST:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: IRON_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: REDSTONE
+    amount: '1'
+    data: '0'
+    mstype: null
 VILLAGER_CAST:
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLDEN_APPLE
-    damage: 0
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: IRON_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: BONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLDEN_APPLE
+    amount: '1'
+    data: '0'
+    mstype: null
 COOK:
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: FLINT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
+  - type: BLAZE_POWDER
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: FLINT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '1'
+    data: '0'
+    mstype: null
 MANAUPSECOND:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE
-    damage: 0
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: NETHER_STAR
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLD_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE
+    amount: '1'
+    data: '0'
+    mstype: null
 HEALING:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPECKLED_MELON
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SPECKLED_MELON
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: ROTTEN_FLESH
+    amount: '1'
+    data: '0'
+    mstype: null
 DIVER:
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: RAW_FISH
-    damage: 3
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
+  - type: GOLD_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: RAW_FISH
+    amount: '1'
+    data: '3'
+    mstype: null
+  - type: GLOWSTONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SUGAR
+    amount: '1'
+    data: '0'
+    mstype: null
 MINER:
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: MAGMA_CREAM
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
+  - type: GOLD_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: MAGMA_CREAM
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SUGAR
+    amount: '1'
+    data: '0'
+    mstype: null
 TRAVELER:
-  - ==: org.bukkit.inventory.ItemStack
-    type: FERMENTED_SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
+  - type: FERMENTED_SPIDER_EYE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GHAST_TEAR
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SUGAR
+    amount: '1'
+    data: '0'
+    mstype: null
 WARRIOR:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_ROD
-    damage: 0
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GHAST_TEAR
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: BLAZE_ROD
+    amount: '1'
+    data: '0'
+    mstype: null

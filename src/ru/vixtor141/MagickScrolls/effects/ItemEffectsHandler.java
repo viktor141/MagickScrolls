@@ -16,11 +16,13 @@ public class ItemEffectsHandler implements Runnable{
     private int i = 0;
     private final Location midLoc;
     private final RitualHandler ritualHandler;
+    private final int amount;
 
-    public ItemEffectsHandler(Item item, Location midLoc, RitualHandler ritualHandler, List<BukkitTask> bukkitTaskList){
+    public ItemEffectsHandler(Item item, Location midLoc, RitualHandler ritualHandler, List<BukkitTask> bukkitTaskList, int amount){
         this.item = item;
         this.midLoc = midLoc;
         this.ritualHandler = ritualHandler;
+        this.amount = amount;
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 0, 8);
         bukkitTaskList.add(bukkitTask);
     }
@@ -32,7 +34,7 @@ public class ItemEffectsHandler implements Runnable{
                 return;
             }
             if(i > 18){
-                item.remove();
+                item.getItemStack().setAmount(item.getItemStack().getAmount() - amount);
             }
             new UsualAltarItemEffects(item.getLocation(), item.getItemStack(), midLoc.clone().add(0.5,1,0.5));
             i++;

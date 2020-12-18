@@ -30,14 +30,16 @@ public class UsualAltarEffects implements Runnable {
     private final int witchCount;
     private final List<WitchSpawner> witchSpawners = new ArrayList<>();
     private BukkitTask ritualEndTask;
+    private final int[] neededAmounts;
 
-    public UsualAltarEffects(Ritual ritual, float r, Location location, List<Item> list, RitualHandler ritualHandler, int witchCount){
+    public UsualAltarEffects(Ritual ritual, float r, Location location, List<Item> list, RitualHandler ritualHandler, int witchCount, int[] neededAmounts){
         this.r = r;
         this.ritual = ritual;
         this.location = location;
         this.list = new ArrayList<>(list);
         this.ritualHandler = ritualHandler;
         this.witchCount = witchCount;
+        this.neededAmounts = neededAmounts;
         repeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::repeaterEffects, 0, 10);
         itemsRepeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::onItemsRepeaterEffects, 0, 20);
         witchSpawnerEffect = Bukkit.getScheduler().runTaskTimer(plugin, this::witchSpawning, 0, 20);
@@ -71,7 +73,7 @@ public class UsualAltarEffects implements Runnable {
             ritualEndTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), ritualHandler::ritualEnd, 140);
             return;
         }
-        new ItemEffectsHandler(list.get(i), location.clone().add(0 ,1,0), ritualHandler, bukkitTaskList);
+        new ItemEffectsHandler(list.get(i), location.clone().add(0 ,1,0), ritualHandler, bukkitTaskList, neededAmounts[i]);
         i++;
     }
 

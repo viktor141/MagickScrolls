@@ -1,595 +1,396 @@
 ARROWSTORM:
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-
+  - type: ARROW
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
 LIGHTNINGONE:
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-
+  - type: ARROW
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: STICK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: BLAZE_POWDER
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SUGAR
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: NETHER_STAR
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
 LIGHTNINGTWO:
-  - ==: org.bukkit.inventory.ItemStack
-    type: MAGMA_CREAM
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: MAGMA_CREAM
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-
+  - type: MAGMA_CREAM
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: STICK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: NETHER_STAR
+    amount: '2'
+    data: '0'
+    mstype: null
 LIGHTNINGTHREE:
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-
+  - type: NETHER_STAR
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '2'
+    data: '0'
+    mstype: null
 NECROMANCY:
-  - ==: org.bukkit.inventory.ItemStack
-    type: BONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPECKLED_MELON
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPECKLED_MELON
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-
+  - type: BONE
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: ROTTEN_FLESH
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SPIDER_EYE
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SPECKLED_MELON
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: NETHER_STAR
+    amount: '1'
+    data: '0'
+    mstype: null
 TELEPORTATION:
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EYE_OF_ENDER
-    damage: 0
-
+  - type: ENDER_PEARL
+    amount: '6'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: EYE_OF_ENDER
+    amount: '1'
+    data: '0'
+    mstype: null
 VAMPIRIC:
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GHAST_TEAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-
+  - type: GHAST_TEAR
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: ROTTEN_FLESH
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SPIDER_EYE
+    amount: '2'
+    data: '0'
+    mstype: null
 VORTEX:
-  - ==: org.bukkit.inventory.ItemStack
-    type: FEATHER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: FEATHER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: INK_SACK
-    damage: 15
-  - ==: org.bukkit.inventory.ItemStack
-    type: INK_SACK
-    damage: 15
-  - ==: org.bukkit.inventory.ItemStack
-    type: CHORUS_FRUIT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: CHORUS_FRUIT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SHULKER_SHELL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_INGOT
-    damage: 0
-
+  - type: FEATHER
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: INK_SACK
+    amount: '2'
+    data: '15'
+    mstype: null
+  - type: CHORUS_FRUIT
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: BLAZE_POWDER
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SHULKER_SHELL
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: IRON_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
 SPIDERWEB:
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STRING
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: STICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: INK_SACK
-    damage: 15
-  - ==: org.bukkit.inventory.ItemStack
-    type: INK_SACK
-    damage: 15
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: WEB
-    damage: 0
-
+  - type: STRING
+    amount: '6'
+    data: '0'
+    mstype: null
+  - type: STICK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: INK_SACK
+    amount: '2'
+    data: '15'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: WEB
+    amount: '1'
+    data: '0'
+    mstype: null
 TRAP:
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: LAPIS_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: LAPIS_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-
+  - type: EMERALD
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: LAPIS_BLOCK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: REDSTONE
+    amount: '4'
+    data: '0'
+    mstype: null
 EARTH:
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIRT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIRT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIRT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIRT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: QUARTZ
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: QUARTZ
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHERRACK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHERRACK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_INGOT
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-
+  - type: DIRT
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: QUARTZ
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: NETHERRACK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: IRON_BLOCK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLD_INGOT
+    amount: '1'
+    data: '0'
+    mstype: null
 ASTRAL_PET:
-  - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EGG
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EGG
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: QUARTZ
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: PUMPKIN
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ROTTEN_FLESH
-    damage: 0
-
+  - type: SNOW_BALL
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: EGG
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: IRON_BLOCK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: QUARTZ
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: PUMPKIN
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: BONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: ROTTEN_FLESH
+    amount: '1'
+    data: '0'
+    mstype: null
 METEORITE:
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHERRACK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_BRICK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: NETHER_STAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: IRON_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BLAZE_POWDER
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GOLD_BLOCK
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: MAGMA_CREAM
-    damage: 0
-
+  - type: REDSTONE_BLOCK
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: BLAZE_POWDER
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: NETHERRACK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: NETHER_BRICK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: NETHER_STAR
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: IRON_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GOLD_BLOCK
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: EMERALD
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: MAGMA_CREAM
+    amount: '1'
+    data: '0'
+    mstype: null
 SPECTRAL_SHIELD:
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: EMERALD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ENDER_PEARL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: ARROW
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SNOW_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: BONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SHIELD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SHULKER_SHELL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SHULKER_SHELL
-    damage: 0
-
+  - type: EMERALD
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: DIAMOND
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: ENDER_PEARL
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SHULKER_SHELL
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: ARROW
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SNOW_BALL
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: BONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: SHIELD
+    amount: '1'
+    data: '0'
+    mstype: null
 AIR_TRAP:
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SUGAR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SULPHUR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SULPHUR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SULPHUR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SULPHUR
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: DIAMOND
-    damage: 0
-
+  - type: SUGAR
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: SULPHUR
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: DIAMOND
+    amount: '2'
+    data: '0'
+    mstype: null
 CONFUSED:
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: REDSTONE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: GLOWSTONE_DUST
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SPIDER_EYE
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: PRISMARINE_SHARD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: PRISMARINE_SHARD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: PRISMARINE_SHARD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: PRISMARINE_SHARD
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SLIME_BALL
-    damage: 0
-  - ==: org.bukkit.inventory.ItemStack
-    type: SLIME_BALL
-    damage: 0
+  - type: PRISMARINE_SHARD
+    amount: '4'
+    data: '0'
+    mstype: null
+  - type: REDSTONE
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE_DUST
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SPIDER_EYE
+    amount: '2'
+    data: '0'
+    mstype: null
+  - type: SLIME_BALL
+    amount: '2'
+    data: '0'
+    mstype: null

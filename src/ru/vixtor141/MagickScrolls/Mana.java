@@ -11,6 +11,7 @@ import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.Misc.StartEffectForSpectralShield;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.research.PlayerResearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,10 @@ public class Mana implements Runnable{
     private final Main plugin = Main.getPlugin();
     private final Player player;
     private double currentMana, maxMana;
-    private double manaRegenUnit = plugin.getConfig().getDouble("manaregenunit");
     private final BukkitTask bukkitTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
     private final CDSystem cdSystem;
-    private List<LivingEntity> existMobs = new ArrayList<>();
+    private final List<LivingEntity> existMobs = new ArrayList<>();
     private Inventory inventory;
     private ItemStack trapScroll;
     private Ritual ritual = null;
@@ -33,12 +33,18 @@ public class Mana implements Runnable{
     private int spectralShieldSeconds = 0;
     private final AtomicBoolean spectralShield = new AtomicBoolean(false);
     private BukkitTask spectralShieldEffectTask;
+    private final PlayerResearch playerResearch;
 
     public Mana(Player player) {
         this.player = player;
         this.cdSystem = new CDSystem(player, this);
+        this.playerResearch = new PlayerResearch();
         plugin.getPlayerMap().put(player, this);
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+    }
+
+    public PlayerResearch getPlayerResearch() {
+        return playerResearch;
     }
 
     public void setSpectralShieldSeconds(int spectralShieldSeconds) {
@@ -155,10 +161,10 @@ public class Mana implements Runnable{
 
     @Override
     public void run(){
-        if((currentMana + manaRegenUnit) < maxMana) {
-            addMana(manaRegenUnit);
+        if((currentMana + plugin.getManaRegenUnit()) < maxMana) {
+            addMana(plugin.getManaRegenUnit());
         }else{
-            addMana(manaRegenUnit - ((currentMana + manaRegenUnit) - maxMana));
+            addMana(plugin.getManaRegenUnit() - ((currentMana + plugin.getManaRegenUnit()) - maxMana));
         }
         if(spectralShieldSeconds > 1){
             spectralShieldSeconds--;

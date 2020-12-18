@@ -24,7 +24,7 @@ import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.COOK;
 public class Cook implements Ritual {
 
     private final RitualEnum.Rituals ritual = COOK;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private Location location;
     private List<Item> items;
@@ -34,7 +34,6 @@ public class Cook implements Ritual {
 
     public Cook(Player player){
         this.player = player;
-        reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

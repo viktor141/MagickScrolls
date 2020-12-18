@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class SaveAndLoad implements Listener {
     @EventHandler
     public void load(PlayerJoinEvent event){
         Player player = event.getPlayer();
-        FileConfiguration playerStats = plugin.loadPlayerStats(player.getUniqueId().toString());
+        FileConfiguration playerStats = plugin.getIoWork().loadPlayerStats(player.getUniqueId().toString());
         Mana playerMana = new Mana(player);
         playerMana.setCurrentMana(playerStats.getDouble("CurrentMana"));
         playerMana.setMaxMana(playerStats.getDouble("MaxMana"));
@@ -28,10 +29,18 @@ public class SaveAndLoad implements Listener {
         playerMana.setSpectralShieldSeconds(playerStats.getInt("SpectralShieldSeconds"));
         List<Integer> CDsList = playerStats.getIntegerList("CDSystem");
         for(int i = 0; i < CDSystem.CDsValuesLength(); i++){
-            if(CDsList.size() <= i){
+            if(CDsList.size() <= i){//fill up empty CD
                 playerMana.getCdSystem().getCDs().add(i,0);
             }else {
                 playerMana.getCdSystem().getCDs().add(i, CDsList.get(i));
+            }
+        }
+        List<Boolean> ResearchList = playerStats.getBooleanList("Research");
+        for(int i = 0; i < Research.values().length; i++){
+            if(ResearchList.size() <= i){//fill up empty Research
+                playerMana.getPlayerResearch().getResearches().add(i,false);
+            }else {
+                playerMana.getPlayerResearch().getResearches().add(i, ResearchList.get(i));
             }
         }
     }
@@ -41,12 +50,12 @@ public class SaveAndLoad implements Listener {
         Mana playerMana = Main.getPlugin().getPlayerMap().get(event.getPlayer());
         BukkitTask bukkitTask = playerMana.getSpectralShieldEffectTask();
         if(bukkitTask != null && !bukkitTask.isCancelled())bukkitTask.cancel();
-        if(playerMana.getInRitualChecker()) {//ritual stop if player leave
+        if(playerMana.getInRitualChecker()) {
 
             playerMana.setInRitualChecker(false);
             playerMana.getRitual().getAltar().ritualBrake();
         }
-        plugin.savePlayerStats(event.getPlayer());
+        plugin.getIoWork().savePlayerStats(event.getPlayer());
     }
 
 }

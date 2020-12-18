@@ -22,14 +22,13 @@ public class Traveler implements Ritual {
 
     private final RitualEnum.Rituals ritual = RitualEnum.Rituals.TRAVELER;
     private final CDSystem.RitualsCD ritualCD = CDSystem.RitualsCD.TRAVELER;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
     private AltarFace altar;
     private Location location;
     private final Mana playerMana;
 
     public Traveler(Mana playerMana){
         this.playerMana = playerMana;
-        reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

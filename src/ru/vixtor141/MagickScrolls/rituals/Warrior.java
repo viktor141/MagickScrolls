@@ -22,14 +22,13 @@ public class Warrior implements Ritual {
 
     private final RitualEnum.Rituals ritual = RitualEnum.Rituals.WARRIOR;
     private final CDSystem.RitualsCD ritualCD = CDSystem.RitualsCD.WARRIOR;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
     private AltarFace altar;
     private Location location;
     private final Mana playerMana;
 
     public Warrior(Mana playerMana){
         this.playerMana = playerMana;
-        reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

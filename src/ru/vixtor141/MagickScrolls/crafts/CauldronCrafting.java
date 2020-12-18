@@ -3,10 +3,13 @@ package ru.vixtor141.MagickScrolls.crafts;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 import java.util.*;
 
@@ -22,10 +25,12 @@ public class CauldronCrafting implements Runnable{
     private Map<List<ItemStack>, ACCrafts.ItemsCauldronCrafts> map;
     private ACCrafts.ItemsCauldronCrafts craft;
     private final List<ItemStack> itemRecipe = new ArrayList<>();
+    private final Mana playerMana;
 
-    public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand){
+    public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand, Player player){
         this.location = location;
         this.itemInHand = itemInHand;
+        this.playerMana = Main.getPlugin().getPlayerMap().get(player);
         if(checking(collection)) {
             map = cauldronCraftsStorage.getRecipes().get(listItems.size()-1);
             Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::check);
@@ -113,6 +118,12 @@ public class CauldronCrafting implements Runnable{
         for(List<ItemStack> list : map.keySet()){
             if(checkItem(new ArrayList<>(list))){
                 craft = map.get(list);
+                for(Research research : craft.getResearch()){
+                    if(!playerMana.getPlayerResearch().getResearches().get(research.ordinal())){
+                        return;
+                    }
+
+                }
                 startCraftingProcess();
             }else {
                 itemRecipe.clear();
@@ -124,12 +135,8 @@ public class CauldronCrafting implements Runnable{
         List<ItemStack> checkList = new ArrayList<>(listItems.keySet());
         for(ItemStack itemStack1 : checkList ){
             for(ItemStack itemStack: list){
-                if(itemStack.getType().equals(itemStack1.getType()) && itemStack.getAmount() <= itemStack1.getAmount()){
-                    if(!itemStack1.getItemMeta().hasLore() && !itemStack.getItemMeta().hasLore()){
-                        itemRecipe.add(itemStack);
-                        list.remove(itemStack);
-                        break;
-                    }else if(itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2).substring(2))){
+                if(itemStack.getType().equals(itemStack1.getType()) && itemStack.getAmount() <= itemStack1.getAmount() && itemStack.getDurability() == itemStack1.getDurability()){
+                    if((!itemStack1.getItemMeta().hasLore() && !itemStack.getItemMeta().hasLore()) || (itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2).substring(2)))){
                         itemRecipe.add(itemStack);
                         list.remove(itemStack);
                         break;

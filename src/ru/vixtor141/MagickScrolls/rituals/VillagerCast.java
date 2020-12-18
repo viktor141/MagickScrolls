@@ -17,12 +17,11 @@ import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.VILLAGER_CAST;
 public class VillagerCast implements Ritual {
 
     private final RitualEnum.Rituals ritual = VILLAGER_CAST;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
     private AltarFace altar;
     private Location location;
 
     public VillagerCast(){
-        reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

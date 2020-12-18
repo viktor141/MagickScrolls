@@ -23,14 +23,13 @@ public class ManaUpSecond implements Ritual {
 
     private final RitualEnum.Rituals ritual = MANAUPSECOND;
     private final Mana playerMana;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
     private AltarFace altar;
     private Location location;
     private final float state = (float) Main.getPlugin().getConfig().getDouble(ritual.name() + ".state");
 
     public ManaUpSecond(Mana playerMana){
         this.playerMana = playerMana;
-        reqItems = new ArrayList<>((List<ItemStack>)Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

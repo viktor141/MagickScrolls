@@ -22,14 +22,13 @@ import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.HEALING;
 public class Healing implements Ritual {
 
     private final RitualEnum.Rituals ritual = HEALING;
-    private final List<ItemStack> reqItems;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
     private AltarFace altar;
     private Location location;
     private final Mana playerMana;
 
     public Healing(Mana playerMana){
         this.playerMana = playerMana;
-        reqItems = new ArrayList<>((List<ItemStack>) Main.getPlugin().getRitualsCF().getList(ritual.name()));
     }
 
     @Override

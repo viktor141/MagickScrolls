@@ -10,7 +10,7 @@ public interface AltarFace {
 
     void builder(Player player);
     boolean checker();
-    void behavior(RitualHandler ritualHandler, int witches);
+    void behavior(RitualHandler ritualHandler, int witches, int[] neededAmounts);
     List<ItemStack> itemChecker();
     void ritualBrake();
 }

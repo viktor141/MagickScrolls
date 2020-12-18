@@ -8,7 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.artifacts.AncientBottle;
+import ru.vixtor141.MagickScrolls.research.Research;
 import ru.vixtor141.MagickScrolls.scrolls.*;
 
 import java.util.ArrayList;
@@ -20,75 +23,80 @@ public class ACCrafts {
 
     public enum ItemsCauldronCrafts{
         MAGIC_STAFF{
-            public CraftsOfScrolls[] getScroll(){
-                return new CraftsOfScrolls[0];
-            }
         },
         ARROWSTORM_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.ARROWSTORM};
             }
         },
         LIGHTNING_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.LIGHTNINGONE, CraftsOfScrolls.LIGHTNINGTWO, CraftsOfScrolls.LIGHTNINGTHREE};
             }
         },
         NECROMANCY_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.NECROMANCY};
             }
         },
         TELEPORTATION_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.TELEPORTATION};
             }
         },
         VAMPIRIC_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.VAMPIRIC};
             }
         },
         VORTEX_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.VORTEX};
             }
         },
         SPIDERWEB_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.SPIDERWEB};
             }
         },
         TRAP_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.TRAP};
             }
         },
         EARTH_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.EARTH};
             }
         },
         ASTRAL_PET_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.ASTRAL_PET};
             }
         },
         METEORITE_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.METEORITE};
             }
         },
         SPECTRAL_SHIELD_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.SPECTRAL_SHIELD};
             }
         },
         WITCH_ARTIFACT{
-            public CraftsOfScrolls[] getScroll() {
-                return new CraftsOfScrolls[0];
-            }
-
             @Override
             public ItemStack craftCauldronGetItem(){
                 ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
@@ -107,42 +115,58 @@ public class ACCrafts {
             }
         },
         RITUAL_BOOK{
-            public CraftsOfScrolls[] getScroll() {
-                return new CraftsOfScrolls[0];
-            }
-
             @Override
             public ItemStack craftCauldronGetItem(){
                 return Main.getPlugin().getRitualBook();
             }
         },
         RITUAL_ALTAR_BUILDER{
-            public CraftsOfScrolls[] getScroll() {
-                return new CraftsOfScrolls[0];
-            }
         },
         RITUAL_BOOK_REWRITER{
-            public CraftsOfScrolls[] getScroll() {
-                return new CraftsOfScrolls[0];
-            }
-
             @Override
             public ItemStack craftCauldronGetItem(){
                 return Main.getPlugin().getRitualBook();
             }
         },
         AIR_TRAP_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.AIR_TRAP};
             }
         },
         CONFUSED_MAGICSEAL{
+            @Override
             public CraftsOfScrolls[] getScroll(){
                 return new CraftsOfScrolls[]{CraftsOfScrolls.CONFUSED};
             }
+        },
+        ANCIENT_BOTTLE{
+            @Override
+            public Research[] getResearch() {
+                return new Research[]{Research.ANCIENT_BOTTLE};
+            }
+
+            @Override
+            public ItemStack craftCauldronGetItem(){
+                ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
+                ItemMeta meta = item.getItemMeta();
+                meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
+                List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
+                loreL.add(ChatColor.BLUE + "0");
+                loreL.add(ChatColor.BLUE + this.name());
+                loreL.add(ChatColor.YELLOW + "Magick Scrolls");
+                meta.setLore(loreL);
+                meta.addEnchant(Enchantment.DURABILITY, 1,true);
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                item.setItemMeta(meta);
+
+                return item;
+            }
         };
 
-        public abstract CraftsOfScrolls[] getScroll();
+        public CraftsOfScrolls[] getScroll(){return new CraftsOfScrolls[0];}
+
+        public Research[] getResearch(){return new Research[0];}
 
         public Material craftCauldronGetMaterial(){
             return Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result").getType();
@@ -235,6 +259,9 @@ public class ACCrafts {
         public abstract void start(Player player, ItemStack item);
 
         public ItemStack craftAltarResult(){
+
+
+
             return setItemMeta(langF.getString(this.name() + ".name"), langF.getStringList(this.name() + ".lore"), this.name(), Material.PAPER);
         }
     }
@@ -251,6 +278,16 @@ public class ACCrafts {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
 
+        MaterialData materialData = item.getData();
+
         return item;
+    }
+
+    public enum Artifacts{
+        ANCIENT_BOTTLE{
+            @Override
+            public void start(Player player, ItemStack item) {new AncientBottle(player, item);}
+        };
+        public abstract void start(Player player, ItemStack item);
     }
 }

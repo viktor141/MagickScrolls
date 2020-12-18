@@ -82,8 +82,8 @@ public class AltarCrafting implements Runnable{
 
     private void craftStart(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts){
         for(ACCrafts.CraftsOfScrolls scroll : itemsCauldronCrafts.getScroll()){
-            if((plugin.getRecipesCF().getList(scroll.name())).isEmpty())continue;
-            recipe.put(new ArrayList<> ((List<ItemStack>) plugin.getRecipesCF().getList(scroll.name())), scroll);
+            if(plugin.getAltarCraftsStorage().getRecipes().get(scroll.ordinal()).isEmpty())continue;
+            recipe.put(new ArrayList<> (plugin.getAltarCraftsStorage().getRecipes().get(scroll.ordinal())), scroll);
         }
         craftCheckTask = Bukkit.getScheduler().runTask(plugin, this::itemCheckUp);
         Bukkit.getScheduler().runTaskAsynchronously(plugin, this);
@@ -120,7 +120,17 @@ public class AltarCrafting implements Runnable{
         if(optionalEntity.isPresent()){
             ItemFrame itemFrame = (ItemFrame) optionalEntity.get();
             for (List<ItemStack> itemStacks : recipe.keySet()) {
-                if(itemStacks.remove(itemFrame.getItem()))found = true;
+                ItemStack realItem = itemFrame.getItem();
+                for(int i = 0; i< itemStacks.size(); i++){
+                    ItemStack recipeItem = itemStacks.get(i);
+                    if(realItem.getType().equals(recipeItem.getType()) && realItem.getDurability() == recipeItem.getDurability()){
+                        if((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(2)))){
+                            itemStacks.remove(i);
+                            found = true;
+                            break;
+                        }
+                    }
+                }
             }
             if(found){
                 dropItemFromItemFrame(itemFrame);
@@ -135,7 +145,10 @@ public class AltarCrafting implements Runnable{
 
             recipe.forEach((itemStacks1, craftsOfScrolls1) -> equalsLists(itemStacks, itemStacks1, craftsOfScrolls1));
         }
-        if(failCheck){
+        if(!failCheck){
+            Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 228);
+            effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 5);
+        }else{
             craftResultUnsuccessful();
         }
     }
@@ -143,8 +156,6 @@ public class AltarCrafting implements Runnable{
     private void equalsLists(List<ItemStack> itemStacks, List<ItemStack> itemStacks1, ACCrafts.CraftsOfScrolls craftsOfScrolls){
         if(itemStacks == itemStacks1){
             scroll = craftsOfScrolls;
-            Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 228);
-            effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 5);
             failCheck = false;
         }
     }

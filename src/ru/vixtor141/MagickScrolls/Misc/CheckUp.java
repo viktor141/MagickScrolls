@@ -15,11 +15,6 @@ public class CheckUp {
         return tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2));
     }
 
-    public static boolean checkReqItems(List<ItemStack> reqItems, List<ItemStack> items){
-        reqItems.removeIf(items::remove);
-        return reqItems.isEmpty() && items.isEmpty();
-    }
-
     public static void itemConsumer(Player player, ItemStack item){
         if(!player.getGameMode().equals(GameMode.CREATIVE)) {
             item.setAmount(item.getAmount() - 1);
