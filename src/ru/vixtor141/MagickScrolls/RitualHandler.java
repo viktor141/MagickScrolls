@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -13,13 +14,17 @@ import java.util.List;
 
 public class RitualHandler {
 
-    private final Mana playerMana;
-    private final Ritual ritual;
+    private Mana playerMana;
+    private Ritual ritual;
     private int[] neededAmounts;
 
 
     public RitualHandler(Player player, Location location, int witchCount){
-        playerMana = Main.getPlugin().getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         ritual = playerMana.getRitual();
         if(ritual == null){
             player.sendMessage(ChatColor.RED + LangVar.msg_rins.getVar());

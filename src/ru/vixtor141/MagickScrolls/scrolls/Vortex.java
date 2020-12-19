@@ -57,7 +57,11 @@ public class Vortex implements Scroll {
 
     private void entitySetVelocity(Entity targetEntity){
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(!playerMana.getCdSystem().CDStat(scroll, true))return;
 
         vortexEffect(targetEntity);

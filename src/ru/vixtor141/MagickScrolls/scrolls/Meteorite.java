@@ -37,13 +37,18 @@ public class Meteorite implements Scroll, Runnable {
     private final float r = 5;
     private Vector dirRay;
     private final List<BukkitTask> circleEffects = new ArrayList<>();
-    private final Mana playerMana;
+    private Mana playerMana;
 
 
     public Meteorite(Player player, ItemStack item){
         this.player = player;
         this.item = item;
-        playerMana = plugin.getPlayerMap().get(player);
+
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, this);
     }

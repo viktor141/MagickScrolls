@@ -109,7 +109,11 @@ public class Commands implements CommandExecutor {
             player = (Player) commandSender;
         }
 
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return true;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         playerMana.setCurrentMana(playerMana.getMaxMana());
         commandSender.sendMessage(ChatColor.YELLOW + LangVar.msg_minf.getVar());
@@ -142,7 +146,12 @@ public class Commands implements CommandExecutor {
             setSecond = Integer.parseInt(args[3]);
         }
 
-        Mana playerMana = plugin.getPlayerMap().get(player);
+
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return true;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         if(args.length > 2){
             CDSystem.Scrolls scroll;
@@ -183,7 +192,11 @@ public class Commands implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player != null){
-            Mana playerMana = plugin.getPlayerMap().get(player);
+            if(!player.hasMetadata("MagickScrollsMana")){
+                commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+                return true;
+            }
+            Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_iap.getVar() + ChatColor.GREEN + player.getName());
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_m.getVar() + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_cdsl.getVar() + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
@@ -239,7 +252,13 @@ public class Commands implements CommandExecutor {
             return true;
         }
 
-        Mana playerMana = plugin.getPlayerMap().get(commandSender);
+        Player player = (Player) commandSender;
+
+        if(!player.hasMetadata("MagickScrollsMana")){
+            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return true;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         playerMana.setRitual(args[1]);
         return true;
     }
@@ -271,7 +290,13 @@ public class Commands implements CommandExecutor {
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
-        plugin.getPlayerMap().get(player).setMaxMana(Integer.parseInt(args[2]));
+
+        if(!player.hasMetadata("MagickScrollsMana")){
+            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return true;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        playerMana.setMaxMana(Integer.parseInt(args[2]));
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }
@@ -286,7 +311,12 @@ public class Commands implements CommandExecutor {
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
-        plugin.getPlayerMap().get(player).setCurrentMana(Integer.parseInt(args[2]));
+        if(!player.hasMetadata("MagickScrollsMana")){
+            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return true;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        playerMana.setCurrentMana(Integer.parseInt(args[2]));
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }

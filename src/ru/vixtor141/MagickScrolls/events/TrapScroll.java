@@ -1,9 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -50,7 +47,12 @@ public class TrapScroll implements Listener {
     @EventHandler
     public void click(InventoryClickEvent event){
         if(!(event.getWhoClicked() instanceof Player))return;
-        Mana playerMana = Main.getPlugin().getPlayerMap().get((Player)event.getWhoClicked());
+        Player player = (Player)event.getWhoClicked();
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(event.getClickedInventory() == null)return;
         if(!event.getClickedInventory().equals(playerMana.getInventory()))return;
         if(event.getSlot() != 4)event.setCancelled(true);
@@ -59,7 +61,12 @@ public class TrapScroll implements Listener {
     @EventHandler
     public void preventDropScroll(PlayerDropItemEvent event){
         if(event.getPlayer().getOpenInventory().getTopInventory() == null)return;
-        Mana playerMana = Main.getPlugin().getPlayerMap().get(event.getPlayer());
+        Player player = event.getPlayer();
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(!event.getPlayer().getOpenInventory().getTopInventory().equals(playerMana.getInventory()))return;
         event.setCancelled(true);
     }
@@ -73,7 +80,11 @@ public class TrapScroll implements Listener {
     @EventHandler
     public void useScroll(InventoryCloseEvent event){
         Player player = (Player) event.getPlayer();
-        Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(!event.getInventory().equals(playerMana.getInventory()))return;
         Location location = player.getLocation();
         ItemStack item = event.getInventory().getItem(4);

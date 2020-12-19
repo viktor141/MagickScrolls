@@ -106,7 +106,11 @@ public class IOWork {
     }
 
     public void savePlayerStats(Player player){
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta. Data isn't saved");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         playerMana.cancelTask();
 
         File playerSF = new File(plugin.getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId().toString());
@@ -120,7 +124,6 @@ public class IOWork {
         playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
         playerStats.set("Research", playerMana.getPlayerResearch().getResearches());
 
-        plugin.getPlayerMap().remove(player);
         try {
             playerStats.save(playerSF);
         } catch (IOException e) {

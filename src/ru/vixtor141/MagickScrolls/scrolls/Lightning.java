@@ -22,10 +22,10 @@ public class Lightning implements Scroll, Runnable {
 
     private final Player player;
     private final ItemStack item;
-    private final double bound;
-    private final int numberOfEntities;
+    private double bound;
+    private int numberOfEntities;
     private List<LivingEntity> entitesInLocation;
-    private final Mana playerMana;
+    private Mana playerMana;
 
     public enum Type{
         ONE(new int[]{5, 1}),
@@ -44,7 +44,12 @@ public class Lightning implements Scroll, Runnable {
     public Lightning(Player player, ItemStack item, Type type ){
         this.player = player;
         this.item = item;
-        this.playerMana = Main.getPlugin().getPlayerMap().get(player);
+
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        this.playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         bound = type.getData()[0];
         numberOfEntities = type.getData()[1];

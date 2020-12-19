@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
@@ -29,7 +30,12 @@ public class ScrollOfNecromancy implements Listener {
     @EventHandler
     public void mobKillWhenOwnerDie(EntityDeathEvent event){
         if(event.getEntity() instanceof Player){
-            Mana playerMana = Main.getPlugin().getPlayerMap().get(event.getEntity());
+            Player player = (Player) event.getEntity();
+            if(!player.hasMetadata("MagickScrollsMana")){
+                player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+                return;
+            }
+            Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
             playerMana.getExistMobs().parallelStream().forEach(Entity::remove);
             playerMana.getExistMobs().clear();
         }

@@ -25,12 +25,16 @@ public class CauldronCrafting implements Runnable{
     private Map<List<ItemStack>, ACCrafts.ItemsCauldronCrafts> map;
     private ACCrafts.ItemsCauldronCrafts craft;
     private final List<ItemStack> itemRecipe = new ArrayList<>();
-    private final Mana playerMana;
+    private Mana playerMana;
 
     public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand, Player player){
         this.location = location;
         this.itemInHand = itemInHand;
-        this.playerMana = Main.getPlugin().getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        this.playerMana = (Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(checking(collection)) {
             map = cauldronCraftsStorage.getRecipes().get(listItems.size()-1);
             Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::check);

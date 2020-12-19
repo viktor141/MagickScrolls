@@ -44,7 +44,11 @@ public class Necromancy implements Scroll, Runnable {
         }
 
         target = (Player) playerEntity.get();
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
 
         if(!playerMana.getCdSystem().CDStat(scroll , true))return;

@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -18,7 +19,12 @@ public class SpectralShieldScroll implements Listener {
     public void impact(EntityDamageByEntityEvent event){
         if(!(event.getDamager() instanceof Projectile))return;
         if(!(event.getEntity() instanceof Player))return;
-        Mana playerMana = Main.getPlugin().getPlayerMap().get((Player) event.getEntity());
+        Player player =(Player) event.getEntity();
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(!playerMana.getSpectralShield().get())return;
 
         event.setCancelled(true);

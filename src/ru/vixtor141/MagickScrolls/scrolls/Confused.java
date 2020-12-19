@@ -64,7 +64,11 @@ public class Confused implements Scroll {
     }
 
     private void setTarget(Entity entity){
-        Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.CONFUSED ,true))return;
         itemConsumer(player, item);
 

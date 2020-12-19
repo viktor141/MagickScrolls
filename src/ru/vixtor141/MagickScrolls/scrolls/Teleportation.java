@@ -24,7 +24,11 @@ public class Teleportation implements Scroll {
             return;
         }
 
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
         if(System.currentTimeMillis() <= playerMana.getTupaFixCalledTwice()) return;
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
         CDSystem.Scrolls scroll = CDSystem.Scrolls.TELEPORTATION;

@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
@@ -32,7 +33,11 @@ public class Earth implements Scroll, Runnable {
 
     public Earth(Player player, ItemStack item){
         this.player = player;
-        Mana playerMana = Main.getPlugin().getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.EARTH, true))return;
 

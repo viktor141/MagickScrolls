@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.includeAPI;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
@@ -105,7 +106,11 @@ public class PAPI extends PlaceholderExpansion {
 
         if(!player.isOnline())return "";
 
-        Mana playerMana = plugin.getPlayerMap().get(player);
+        if(!player.hasMetadata("MagickScrollsMana")){
+            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            return null;
+        }
+        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
 
         // %someplugin_placeholder1%
         if (identifier.equals("сmana")) {

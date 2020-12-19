@@ -1,5 +1,6 @@
 package ru.vixtor141.MagickScrolls.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -30,7 +31,11 @@ public class SpiderWebScroll implements Listener {
             if(entity instanceof ItemFrame || entity instanceof Painting)return;
             if(!(event.getEntity().getShooter() instanceof Player))return;
             Player player =(Player) event.getEntity().getShooter();
-            Mana playerMana = plugin.getPlayerMap().get(player);
+            if(!player.hasMetadata("MagickScrollsMana")){
+                player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+                return;
+            }
+            Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
             BlockState[] blockStates = new BlockState[2];
             Location location = event.getHitEntity().getLocation();
             Location setBlockLoc;

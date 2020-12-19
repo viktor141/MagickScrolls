@@ -22,7 +22,6 @@ import java.util.*;
 public class Main extends JavaPlugin {
 
     private static Main plugin;
-    private final Map<Player, Mana> PlayerMap = new HashMap<>();
     private double manaRegenUnit;
     private final List<LivingEntity> existMobs = new ArrayList<>();
     private final List<CleanUpTask> cleanUpTasks = new ArrayList<>();
@@ -53,10 +52,6 @@ public class Main extends JavaPlugin {
 
     public FileConfiguration getRecipesCF() {
         return ioWork.getRecipesCF();
-    }
-
-    public Map<Player, Mana> getPlayerMap() {
-        return PlayerMap;
     }
 
     public List<CleanUpTask> getCleanUpTasks(){

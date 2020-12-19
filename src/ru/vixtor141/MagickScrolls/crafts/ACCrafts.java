@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.artifacts.AncientBottle;
 import ru.vixtor141.MagickScrolls.research.Research;
@@ -277,8 +276,6 @@ public class ACCrafts {
         meta.addEnchant(Enchantment.DURABILITY, 1,true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
-
-        MaterialData materialData = item.getData();
 
         return item;
     }
