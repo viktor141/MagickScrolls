@@ -29,6 +29,7 @@ public class AltarCrafting implements Runnable{
     private boolean failCheck = true;
     private ACCrafts.CraftsOfScrolls scroll;
     private double k = 0.01;
+    private int j = 0;
     private final int radiusOfSpawnMeteor = 15;
 
 
@@ -147,7 +148,7 @@ public class AltarCrafting implements Runnable{
         }
         if(!failCheck){
             Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 228);
-            effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 5);
+            effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 4);
         }else{
             craftResultUnsuccessful();
         }
@@ -201,25 +202,18 @@ public class AltarCrafting implements Runnable{
         location.getWorld().spawnParticle(Particle.FLAME, location.getX(), location.getY() + 4, location.getZ(), 7, 1.5, 1, 1.5, 0.1);
 
 
-        if(k < 3.51) {
-            for (int i = 0; i < 360; i += 36) {
-                for (int j = 0; j < 360; j += 36) {
 
-                    Location start = new Location(location.getWorld(), location.getX() + (3.2 * sin(toRadians(j)) * cos(toRadians(i))) + 0.5, location.getY() + (3.2 * sin(toRadians(i))) + 3.5, location.getZ() + (3.2 * cos(toRadians(j)) * cos(toRadians(i))) + 0.5);
+            if(j > 360){
+                j = 0;
+            }
+                for (int i = 0; i < 360; i += 20) {
 
-                    Vector dir = new Location(location.getWorld(), location.getX() +  0.5, location.getY() + 3.5, location.getZ() + 0.5).subtract(start).toVector();
-                    dir.normalize();
-                    dir.multiply(k);
-                    start.add(dir);
-                    location.getWorld().spawnParticle(Particle.SPELL_WITCH, start, 0, 0,0,0);
+                    Location start = new Location(location.getWorld(), location.getX() + (1.5 * sin(toRadians(j)) * cos(toRadians(i))) + 0.5, location.getY() + (1.5 * sin(toRadians(i))) + 3.5, location.getZ() + (1.5 * cos(toRadians(j)) * cos(toRadians(i))) + 0.5);
+
+                    location.getWorld().spawnParticle(Particle.SPELL_WITCH, start, 0, 0 , 0 , 0 ,0.1);
 
                 }
-            }
-            k+=0.5;
-        }else{
-
-            k = 0.01;
-        }
+                j+=20;
     }
 
     private void craftResultSuccessful(){
