@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Cauldron;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.crafts.AltarCrafting;
 import ru.vixtor141.MagickScrolls.crafts.CauldronCrafting;
@@ -24,9 +25,10 @@ public class CraftStartEvent implements Listener {
         if(!event.getMaterial().equals(Material.STICK)) return;
         ItemStack item = event.getItem();
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 2))return;
-        List<String> tLore = ACCrafts.ItemsCauldronCrafts.MAGIC_STAFF.craftCauldronGetItem().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
-        if(!tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2)))return;
+        if(!lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr()).equals(ACCrafts.ItemsCauldronCrafts.MAGIC_STAFF.name()))return;
+
+
 
         event.setCancelled(true);
 

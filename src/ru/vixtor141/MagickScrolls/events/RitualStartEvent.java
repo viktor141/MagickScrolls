@@ -7,6 +7,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.RitualHandler;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
@@ -23,9 +24,8 @@ public class RitualStartEvent implements Listener {
         if(item == null)return;
         if(!item.getType().equals(ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.craftCauldronGetMaterial()))return;
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 3)) return;
-        List<String> tLore = ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.craftCauldronGetItem().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
-        if(!tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2)))return;
+        if(!ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.name().equals(lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr())))return;
 
         event.setCancelled(true);
 

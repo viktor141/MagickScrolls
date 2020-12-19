@@ -140,7 +140,7 @@ public class CauldronCrafting implements Runnable{
         for(ItemStack itemStack1 : checkList ){
             for(ItemStack itemStack: list){
                 if(itemStack.getType().equals(itemStack1.getType()) && itemStack.getAmount() <= itemStack1.getAmount() && itemStack.getDurability() == itemStack1.getDurability()){
-                    if((!itemStack1.getItemMeta().hasLore() && !itemStack.getItemMeta().hasLore()) || (itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2).substring(2)))){
+                    if((!itemStack1.getItemMeta().hasLore() && !itemStack.getItemMeta().hasLore()) || (itemStack1.getItemMeta().hasLore() && itemStack.getItemMeta().hasLore() && itemStack.getItemMeta().getLore().get(0).equals(itemStack1.getItemMeta().getLore().get(itemStack1.getItemMeta().getLore().size() - 2).substring(Main.getPlugin().getSubStr())))){
                         itemRecipe.add(itemStack);
                         list.remove(itemStack);
                         break;

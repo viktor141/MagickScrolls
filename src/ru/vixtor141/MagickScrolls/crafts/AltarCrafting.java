@@ -64,9 +64,8 @@ public class AltarCrafting implements Runnable{
         }
 
         for(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts: ACCrafts.ItemsCauldronCrafts.values()){
-            checkingItemLore = itemsCauldronCrafts.craftCauldronGetItem().getItemMeta().getLore();
             List<String> ingLore = ing.getItemStack().getItemMeta().getLore();
-            if(ingLore.get(ingLore.size() - 2).equals(checkingItemLore.get(checkingItemLore.size() - 2))){
+            if(ingLore.get(ingLore.size() - 2).substring(Main.getPlugin().getSubStr()).equals(itemsCauldronCrafts.name())){
                 craftStart(itemsCauldronCrafts);
                 checkup = true;
                 break;
@@ -125,7 +124,7 @@ public class AltarCrafting implements Runnable{
                 for(int i = 0; i< itemStacks.size(); i++){
                     ItemStack recipeItem = itemStacks.get(i);
                     if(realItem.getType().equals(recipeItem.getType()) && realItem.getDurability() == recipeItem.getDurability()){
-                        if((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(2)))){
+                        if((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(Main.getPlugin().getSubStr())))){
                             itemStacks.remove(i);
                             found = true;
                             break;

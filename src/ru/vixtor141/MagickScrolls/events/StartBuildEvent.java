@@ -29,9 +29,8 @@ public class StartBuildEvent implements Listener {
         if(item == null)return;
         if(!item.getType().equals(ACCrafts.ItemsCauldronCrafts.RITUAL_ALTAR_BUILDER.craftCauldronGetMaterial()))return;
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 2)) return;
-        List<String> tLore = ACCrafts.ItemsCauldronCrafts.RITUAL_ALTAR_BUILDER.craftCauldronGetItem().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
-        if(!tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2)))return;
+        if(!ACCrafts.ItemsCauldronCrafts.RITUAL_ALTAR_BUILDER.name().equals(lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr())))return;
 
         event.setCancelled(true);
 

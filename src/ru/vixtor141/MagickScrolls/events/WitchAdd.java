@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
@@ -24,12 +25,9 @@ public class WitchAdd implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         if(!item.getType().equals(ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.craftCauldronGetMaterial())) return;
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 2)) return;
-        List<String> tLore = ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.craftCauldronGetItem().getItemMeta().getLore();
         List<String> lore = item.getItemMeta().getLore();
-        if(!tLore.get(tLore.size() - 2).equals(lore.get(lore.size() - 2)))return;
+        if(!ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.name().equals(lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr())))return;
         if(event.getRightClicked().hasMetadata("magickscrolls_ritualWitch"))return;
-
-        event.setCancelled(true);
 
         int nb = Integer.parseInt(lore.get(lore.size() - 3));
 

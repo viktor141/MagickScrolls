@@ -72,7 +72,7 @@ public class RitualHandler {
         for (ItemStack realItem : items) {
             for(ItemStack recipeItem : reqItems) {
                 if (realItem.getType().equals(recipeItem.getType()) && recipeItem.getAmount() <= realItem.getAmount() && realItem.getDurability() == recipeItem.getDurability()) {
-                    if ((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(2)))) {
+                    if ((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(Main.getPlugin().getSubStr())))) {
                         reqItems.remove(recipeItem);
                         removingRealList.remove(realItem);
                         neededAmounts[k] = recipeItem.getAmount();

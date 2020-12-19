@@ -103,7 +103,7 @@ public class ACCrafts {
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
                 List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
                 loreL.add("0");
-                loreL.add(ChatColor.BLUE + this.name());
+                loreL.add(ChatColor.BLUE +  "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + "Magick Scrolls");
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
@@ -152,7 +152,7 @@ public class ACCrafts {
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
                 List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
                 loreL.add(ChatColor.BLUE + "0");
-                loreL.add(ChatColor.BLUE + this.name());
+                loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + "Magick Scrolls");
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
@@ -176,7 +176,7 @@ public class ACCrafts {
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
             List<String> loreL = new ArrayList<String>(langF.getStringList( this.name() +".lore"));
-            loreL.add(ChatColor.BLUE + this.name());
+            loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
             loreL.add(ChatColor.YELLOW + "Magick Scrolls");
             meta.setLore(loreL);
             meta.addEnchant(Enchantment.DURABILITY, 1,true);
@@ -258,26 +258,19 @@ public class ACCrafts {
         public abstract void start(Player player, ItemStack item);
 
         public ItemStack craftAltarResult(){
+            ItemStack item = new ItemStack(Material.PAPER);
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
+            List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
+            loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
+            loreL.add(ChatColor.YELLOW + "Magic Item");
+            meta.setLore(loreL);
+            meta.addEnchant(Enchantment.DURABILITY, 1,true);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            item.setItemMeta(meta);
 
-
-
-            return setItemMeta(langF.getString(this.name() + ".name"), langF.getStringList(this.name() + ".lore"), this.name(), Material.PAPER);
+            return item;
         }
-    }
-
-    private static ItemStack setItemMeta(String displayName, List<String> lore, String uName, Material material){
-        ItemStack item = new ItemStack(material);
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.DARK_PURPLE + displayName);
-        List<String> loreL = new ArrayList<String>(lore);
-        loreL.add(ChatColor.BLUE + uName);
-        loreL.add(ChatColor.YELLOW + "Magick Scrolls");
-        meta.setLore(loreL);
-        meta.addEnchant(Enchantment.DURABILITY, 1,true);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(meta);
-
-        return item;
     }
 
     public enum Artifacts{

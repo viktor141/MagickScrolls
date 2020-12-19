@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
     private IOWork ioWork;
     private ItemStack ritualBook;
     private boolean manaMessage;
+    private final int subStr = 4;
 
     public Main (){
         plugin = this;
@@ -36,6 +37,10 @@ public class Main extends JavaPlugin {
 
     public static Main getPlugin(){
         return plugin;
+    }
+
+    public int getSubStr(){
+        return subStr;
     }
 
     public void setManaRegenUnit(double manaRegenUnit){
