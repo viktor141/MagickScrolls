@@ -55,10 +55,6 @@ public class Main extends JavaPlugin {
         return manaMessage;
     }
 
-    public FileConfiguration getRecipesCF() {
-        return ioWork.getRecipesCF();
-    }
-
     public List<CleanUpTask> getCleanUpTasks(){
         return cleanUpTasks;
     }
@@ -78,11 +74,7 @@ public class Main extends JavaPlugin {
     public FileConfiguration getLangCF(){
         return ioWork.getLangCF();
     }
-
-    public FileConfiguration getRitualsCF(){
-        return ioWork.getRitualsCF();
-    }
-
+    
     public CauldronCraftsStorage getCauldronCraftsStorage(){
         return ioWork.getCauldronCraftsStorage();
     }
