@@ -104,7 +104,7 @@ public class ACCrafts {
                 List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
                 loreL.add("0");
                 loreL.add(ChatColor.BLUE +  "" + ChatColor.MAGIC + this.name());
-                loreL.add(ChatColor.YELLOW + "Magick Scrolls");
+                loreL.add(ChatColor.YELLOW + "Magic Item");
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -153,7 +153,7 @@ public class ACCrafts {
                 List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
                 loreL.add(ChatColor.BLUE + "0");
                 loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
-                loreL.add(ChatColor.YELLOW + "Magick Scrolls");
+                loreL.add(ChatColor.YELLOW + "Magic Item");
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -177,7 +177,7 @@ public class ACCrafts {
             meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
             List<String> loreL = new ArrayList<String>(langF.getStringList( this.name() +".lore"));
             loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
-            loreL.add(ChatColor.YELLOW + "Magick Scrolls");
+            loreL.add(ChatColor.YELLOW + "Magic Item");
             meta.setLore(loreL);
             meta.addEnchant(Enchantment.DURABILITY, 1,true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
