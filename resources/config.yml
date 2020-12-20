@@ -19,7 +19,7 @@ TELEPORTATION:
 VAMPIRIC:
   consumedMana: 6.0
   CDseconds: 6
-  damge: 4.0
+  damage: 4.0
 VORTEX:
   consumedMana: 20.0
   CDseconds: 40

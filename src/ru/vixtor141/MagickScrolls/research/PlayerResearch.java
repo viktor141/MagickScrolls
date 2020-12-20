@@ -1,8 +1,5 @@
 package ru.vixtor141.MagickScrolls.research;
 
-import org.bukkit.entity.Player;
-import ru.vixtor141.MagickScrolls.Mana;
-
 import java.util.ArrayList;
 import java.util.List;
 

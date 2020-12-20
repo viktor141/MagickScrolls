@@ -28,7 +28,7 @@ public class Vampiric implements Scroll {
         if(!playerMana.getCdSystem().CDStat(scroll, false))return;
 
         new RandomParticleGenerator(event.getEntity().getLocation().clone().add(0,1.5,0), 10, 10, 130, 0,0);
-        event.setDamage(Main.getPlugin().getConfig().getDouble(scroll.name() + ".damge"));
+        event.setDamage(Main.getPlugin().getConfig().getDouble(scroll.name() + ".damage"));
 
         if(player.getHealth() <= player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 1.5) {
             player.setHealth(player.getHealth() + 1.5);

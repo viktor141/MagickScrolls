@@ -54,8 +54,6 @@ public class AltarCrafting implements Runnable{
         ing = optionalItemStack.get();
         paper = optionalItemStackPaper.get();
 
-
-        List<String> checkingItemLore;
         boolean checkup = false;
 
         if(ing.getItemStack().getItemMeta().getLore() == null){
