@@ -3,20 +3,18 @@ package ru.vixtor141.MagickScrolls.rituals;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.altars.UsualAltar;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.VILLAGER_CAST;
-
 public class VillagerCast implements Ritual {
 
-    private final RitualEnum.Rituals ritual = VILLAGER_CAST;
-    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
+    private final RitualE ritual = RitualE.VILLAGER_CAST;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private Location location;
 
@@ -46,7 +44,7 @@ public class VillagerCast implements Ritual {
     }
 
     @Override
-    public RitualEnum.Rituals getEnumRitual() {
+    public RitualE getEnumRitual() {
         return ritual;
     }
 

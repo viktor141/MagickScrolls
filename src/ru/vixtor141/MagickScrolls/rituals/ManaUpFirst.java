@@ -6,22 +6,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.altars.UsualAltar;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.MANAUPFIRST;
-
 public class ManaUpFirst implements Ritual {
 
-    private final RitualEnum.Rituals ritual = MANAUPFIRST;
+    private final RitualE ritual = RitualE.MANAUPFIRST;
     private final Mana playerMana;
-    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private final float state = (float)Main.getPlugin().getConfig().getDouble(ritual.name() + ".state");
 
@@ -51,7 +49,7 @@ public class ManaUpFirst implements Ritual {
     }
 
     @Override
-    public RitualEnum.Rituals getEnumRitual() {
+    public RitualE getEnumRitual() {
         return ritual;
     }
 

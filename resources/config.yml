@@ -3,6 +3,12 @@ manaregenunit: 0.5
 
 messageAboutMana: true
 
+#Player data save interval in seconds(Default 10 minute)
+saveInterval: 600
+
+#The chance of having the trader nether star(default: 5)
+netherStartTrade: 5
+
 #Scrolls settings
 ARROWSTORM:
   consumedMana: 15.0
@@ -87,5 +93,72 @@ WARRIOR:
   witchesNeed: 4
   needMana: 120
   CDseconds: 3600
+IMP_SUMMON:
+  witchesNeed: 4
+  needMana: 180
+
+ANCIENT_BOTTLE:
+  mobsToKill:
+    ZOMBIE: 180
+  level: 60
+MAGIC_SCROLL:
+  uses: 160
+MANA_SHIELD:
+  mobsToKill:
+    EVOKER: 20
+    PLAYER: 25
+  blockedDamage: 100 #How many times player must block damage
+MAGNET:
+  mobsToKill:
+    CHICKEN: 120
+  handpickedItems: 345 #How many items player must pickup
+
+IMP:
+  skills:
+    MOVE_DODGE:
+      time: 20 #seconds
+      chance: 15 #in percentages per damage
+    ASTRAL_PET_SKILL:
+      time: 20
+      chance: 30
+      damage: 3
+    DAMAGE_DODGE:
+      chance: 30
+      maxDodge: 60 #percentages
+  drop:
+    chance: 7
+  health: 150
+  armor: 7
+
+
+ManaShield:
+  count: #How many times do need to block damage for each mana shield level
+    ZERO: 0
+    FIRST: 100
+    SECOND: 250
+    THIRD: 500
+    FOURTH: 1000
+    FIFTH: 2000
+  damage: #How much damage miss the shield'
+    ZERO: 0.5
+    FIRST: 0.4
+    SECOND: 0.35
+    THIRD: 0.30
+    FOURTH: 0.25
+    FIFTH: 0.15
+  regen:  #How much mana regen the shield
+    ZERO: 0.03
+    FIRST: 0.05
+    SECOND: 0.07
+    THIRD: 0.1
+    FOURTH: 0.12
+    FIFTH: 0.15
+  xplvl: #How much level need to buy
+    ZERO: 0
+    FIRST: 10
+    SECOND: 25
+    THIRD: 35
+    FOURTH: 50
+    FIFTH: 55
 
 lang: 'en_US'

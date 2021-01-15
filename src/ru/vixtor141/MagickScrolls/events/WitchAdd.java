@@ -13,6 +13,7 @@ import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class WitchAdd implements Listener {
@@ -29,11 +30,20 @@ public class WitchAdd implements Listener {
         if(!ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.name().equals(lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr())))return;
         if(event.getRightClicked().hasMetadata("magickscrolls_ritualWitch"))return;
 
+        event.setCancelled(true);
+        ItemStack cloned = null;
+
+
         int nb = Integer.parseInt(lore.get(lore.size() - 3));
 
         if(nb >= 6){
             player.sendMessage(ChatColor.RED + LangVar.msg_yhamw.getVar());
             return;
+        }
+        if(item.getAmount() != 1){
+            cloned = item.clone();
+            cloned.setAmount(cloned.getAmount() - 1);
+            item.setAmount(1);
         }
         event.getRightClicked().remove();
         nb++;
@@ -41,6 +51,12 @@ public class WitchAdd implements Listener {
         ItemMeta meta = item.getItemMeta();
         meta.setLore(lore);
         item.setItemMeta(meta);
+        if(cloned != null){
+            HashMap<Integer, ItemStack> map = player.getInventory().addItem(cloned);
+            if(!map.isEmpty()){
+                player.getWorld().dropItem(player.getLocation(), cloned);
+            }
+        }
         player.sendMessage(ChatColor.GREEN + LangVar.msg_wha.getVar());
 
     }

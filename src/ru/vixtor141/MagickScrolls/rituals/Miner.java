@@ -8,20 +8,20 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Mana;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.altars.UsualAltar;
 import ru.vixtor141.MagickScrolls.effects.RandomParticleGenerator;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Miner implements Ritual {
 
-    private final RitualEnum.Rituals ritual = RitualEnum.Rituals.MINER;
+    private final RitualE ritual = RitualE.MINER;
     private final CDSystem.RitualsCD ritualCD = CDSystem.RitualsCD.MINER;
-    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private Location location;
     private final Mana playerMana;
@@ -57,7 +57,7 @@ public class Miner implements Ritual {
     }
 
     @Override
-    public RitualEnum.Rituals getEnumRitual() {
+    public RitualE getEnumRitual() {
         return ritual;
     }
 

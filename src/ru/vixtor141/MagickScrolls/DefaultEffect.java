@@ -13,8 +13,8 @@ import org.bukkit.util.Vector;
 
 public class DefaultEffect implements Runnable{
 
-    private Item entityItem;
-    private BukkitTask KillerItemTask;
+    private final Item entityItem;
+    private final BukkitTask KillerItemTask;
     private final Main plugin = Main.getPlugin();
 
     public DefaultEffect(Player player){

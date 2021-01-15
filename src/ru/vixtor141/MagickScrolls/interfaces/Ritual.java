@@ -2,7 +2,7 @@ package ru.vixtor141.MagickScrolls.interfaces;
 
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface Ritual {
     List<ItemStack> getRequiredItems();
     AltarFace getAltar(Location location);
     AltarFace getAltar();
-    RitualEnum.Rituals getEnumRitual();
+    RitualE getEnumRitual();
     boolean ObjectIsPlayer();
     boolean canExec();
     void repeatingEffect();

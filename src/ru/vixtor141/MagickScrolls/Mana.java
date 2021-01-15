@@ -1,17 +1,22 @@
 package ru.vixtor141.MagickScrolls;
 
 import org.bukkit.Bukkit;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
+import ru.vixtor141.MagickScrolls.Misc.AncientBottleInventory;
+import ru.vixtor141.MagickScrolls.Misc.FlyingItemsForPlayer;
 import ru.vixtor141.MagickScrolls.Misc.StartEffectForSpectralShield;
+import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 import ru.vixtor141.MagickScrolls.research.PlayerResearch;
+import ru.vixtor141.MagickScrolls.ritual.PlayerRitualInventory;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,24 +27,62 @@ public class Mana implements Runnable{
     private final Main plugin = Main.getPlugin();
     private final Player player;
     private double currentMana, maxMana;
-    private final BukkitTask bukkitTask;
+    private final BukkitTask bukkitTask, saveTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
     private final CDSystem cdSystem;
     private final List<LivingEntity> existMobs = new ArrayList<>();
     private Inventory inventory;
     private ItemStack trapScroll;
     private Ritual ritual = null;
-    private boolean inRitualChecker = false;
+    private boolean inRitualChecker = false, ritualStarted = false;
     private int spectralShieldSeconds = 0;
     private final AtomicBoolean spectralShield = new AtomicBoolean(false);
     private BukkitTask spectralShieldEffectTask;
     private final PlayerResearch playerResearch;
+    private final AncientBottleInventory ancientBottleInventory;
+    private final PlayerRitualInventory playerRitualInventory;
+    private final List<FlyingItemsForPlayer> flyingItemsForPlayer = new ArrayList<>();
+    private final List<Boolean> wearingArtefact = new ArrayList<>(ACCrafts.AccessoryArtefact.values().length);
 
     public Mana(Player player) {
         this.player = player;
         this.cdSystem = new CDSystem(player, this);
-        this.playerResearch = new PlayerResearch();
-        bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this, 20, 20);
+        this.playerResearch = new PlayerResearch(this);
+        this.ancientBottleInventory = new AncientBottleInventory(player);
+        this.playerRitualInventory = new PlayerRitualInventory(this);
+        for(int i = 0; i < ACCrafts.AccessoryArtefact.values().length; i++){
+            wearingArtefact.add(false);
+        }
+        bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this, 20, 20);
+        saveTask = Bukkit.getScheduler().runTaskTimer(plugin, this::save, 0, plugin.getTimeInterval() * 20);
+    }
+    
+    public Mana getMana(){
+        return this;
+    }
+
+    public List<Boolean> getWearingArtefact(){
+        return wearingArtefact;
+    }
+
+    public List<FlyingItemsForPlayer> getFlyingItemsForPlayer(){
+        return flyingItemsForPlayer;
+    }
+
+    public PlayerRitualInventory getPlayerRitualInventory() {
+        return playerRitualInventory;
+    }
+
+    public AncientBottleInventory getAncientBottleInventory() {
+        return ancientBottleInventory;
+    }
+
+    public boolean getRitualStarted(){
+        return ritualStarted;
+    }
+
+    public void setRitualStarted(boolean flag){
+        ritualStarted = flag;
     }
 
     public PlayerResearch getPlayerResearch() {
@@ -49,9 +92,9 @@ public class Mana implements Runnable{
     public void setSpectralShieldSeconds(int spectralShieldSeconds) {
         if(spectralShieldSeconds > 0){
             spectralShieldEffectTask = new StartEffectForSpectralShield(player).getBukkitTask();
+            spectralShield.set(true);
+            this.spectralShieldSeconds = spectralShieldSeconds;
         }
-        spectralShield.set(true);
-        this.spectralShieldSeconds = spectralShieldSeconds;
     }
 
     public BukkitTask getSpectralShieldEffectTask(){
@@ -78,12 +121,8 @@ public class Mana implements Runnable{
         return ritual;
     }
 
-    public void setRitual(String ritual){
-        try {
-            this.ritual = RitualEnum.Rituals.valueOf(ritual).getRitual(this);
-        }catch (IllegalArgumentException e){
-            player.sendMessage(ChatColor.RED + LangVar.msg_wnor.getVar());
-        }
+    public void setRitual(RitualE ritual){
+        this.ritual = ritual.getRitual(this);
     }
 
     public ItemStack getTrapScroll() {
@@ -142,40 +181,57 @@ public class Mana implements Runnable{
         if(amount <= this.currentMana){
             this.currentMana -= amount;
             if(plugin.getManaMessage()) {
-                player.sendMessage(LangVar.msg_ymn.getVar() + currentMana);
+                player.sendMessage(ChatColor.GRAY + LangVar.msg_ymn.getVar() + currentMana);
             }
             return true;
         }else{
-            double youNeed = amount - currentMana;
             if(plugin.getManaMessage()) {
-                player.sendMessage(LangVar.msg_ydnhm.getVar() + youNeed);
+                player.sendMessage(ChatColor.GRAY + LangVar.msg_ydnhm.getVar() + (amount - currentMana));
+            }
+            return false;
+        }
+    }
+
+    public boolean consumeManaForMagnet(double amount){
+        if(amount <= this.currentMana){
+            this.currentMana -= amount;
+            return true;
+        }else{
+            if(plugin.getManaMessage()) {
+                player.sendMessage(ChatColor.GRAY + LangVar.msg_ydnhm.getVar() + (amount - currentMana));
             }
             return false;
         }
     }
 
     public void addMana(double amount){
-        this.currentMana += amount;
+        if((currentMana + amount) < maxMana) {
+            currentMana += amount;
+        }else{
+            currentMana += amount - ((currentMana + amount) - maxMana);
+        }
     }
 
     @Override
     public void run(){
-        if((currentMana + plugin.getManaRegenUnit()) < maxMana) {
-            addMana(plugin.getManaRegenUnit());
-        }else{
-            addMana(plugin.getManaRegenUnit() - ((currentMana + plugin.getManaRegenUnit()) - maxMana));
-        }
-        if(spectralShieldSeconds > 1){
-            spectralShieldSeconds--;
-        }else if(spectralShieldSeconds == 1){
-            spectralShieldSeconds--;
-            spectralShield.set(false);
-            spectralShieldEffectTask.cancel();
+        addMana(plugin.getManaRegenUnit());
+        if(spectralShield.get()) {
+            if (spectralShieldSeconds > 0) {
+                spectralShieldSeconds--;
+            } else {
+                spectralShield.set(false);
+                spectralShieldEffectTask.cancel();
+            }
         }
         cdSystem.CDUpdate();
     }
 
+    private void save(){
+        plugin.getIoWork().savePlayerStats(player);
+    }
+
     public void cancelTask(){
+        saveTask.cancel();
         bukkitTask.cancel();
     }
 }

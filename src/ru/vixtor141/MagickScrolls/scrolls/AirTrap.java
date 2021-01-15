@@ -20,6 +20,7 @@ import ru.vixtor141.MagickScrolls.lang.LangVar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class AirTrap implements Scroll {
@@ -29,7 +30,7 @@ public class AirTrap implements Scroll {
     private final ItemStack item;
     private Entity entity;
     private BukkitTask bukkitTask, stopTask;
-    private CylEffect[] cylEffects = new CylEffect[2];
+    private final CylEffect[] cylEffects = new CylEffect[2];
 
 
     public AirTrap(Player player, ItemStack item){
@@ -47,14 +48,15 @@ public class AirTrap implements Scroll {
             dir.multiply(i);
             start.add(dir);
 
-            List<Entity> entityList = player.getWorld().getNearbyEntities(start, 0.5,0.5,0.5).parallelStream().filter(entity -> entity instanceof LivingEntity).collect(Collectors.toList());
+            List<Entity> entityList = player.getWorld().getNearbyEntities(start, 0.5,0.5,0.5).parallelStream().filter(entity -> entity instanceof LivingEntity && !(entity instanceof Player)).collect(Collectors.toList());
 
             if(!entityList.isEmpty()) {
                 for(Entity entity : entityList){
                     if(entity == player){
                         continue;
                     }
-                    setTarget(entity);
+                    Bukkit.getScheduler().runTask(plugin, this::setTarget);
+                    this.entity = entity;
                     return;
                 }
             }
@@ -64,18 +66,13 @@ public class AirTrap implements Scroll {
         player.sendMessage(ChatColor.YELLOW + LangVar.msg_tind.getVar());
     }
 
-    private void setTarget(Entity entity){
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+    private void setTarget(){
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.AIR_TRAP ,true))return;
         itemConsumer(player, item);
         entity.setGravity(false);
         entity.setVelocity(new Vector(0,0.035,0));
         entity.setMetadata("magickscrolls_Air_Trapped", new LazyMetadataValue(Main.getPlugin(), this::getInstance));
-        this.entity = entity;
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::effect, 0, 18);
         stopTask = Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, this::stop, 200);
     }

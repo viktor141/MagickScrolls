@@ -20,7 +20,7 @@ public class WitchSpawner implements Runnable {
         livingEntity.setInvulnerable(true);
         livingEntity.setAI(false);
         this.livingEntity = livingEntity;
-        bukkitTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this, 180 - (k * 20));
+        bukkitTask = Bukkit.getScheduler().runTaskLater(Main.getPlugin(), this, 180 - (k * 20L));
     }
 
     public void killall() {

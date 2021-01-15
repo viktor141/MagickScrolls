@@ -1,15 +1,15 @@
 #Messages
 msg_ydhp: "You don't have permission"
 msg_pino: "Player isn't online"
-msg_sasdne: "The selected cd does not exist"
-msg_tshba: "The scroll has been added"
+msg_sasdne: "The selected item does not exist"
+msg_tshba: "Item was added"
 msg_minf: "Mana is now full"
-msg_cdwst: " CD was set to "
+msg_cdwst: "CD was set to "
 msg_iap: "Info about player: "
 msg_m: "Mana: "
 msg_cdsl: "CDs list: "
 msg_piowuafif: "Player is offline, wait until a file is found"
-msg_gaswyt: " - Giving a scroll which you type"
+msg_gaswyt: " - Giving a item which you type"
 msg_raym: " - Regen all your mana"
 msg_sycdttdsotz: " - Sets your CD to the desired seconds or to zero"
 msg_giap: " - Getting info about player"
@@ -24,11 +24,9 @@ msg_yctt: "You cannot teleport there"
 msg_tind: "Target isn't defined"
 msg_ymn: "Your mana now "
 msg_los: " - List of scrolls"
-msg_rin: "Ritual is null"
 msg_rins: "Ritual is not selected"
 msg_yhamw: "You have a maximum witches"
 msg_wha: "A witch has been added to your coven"
-msg_wnor: "Wrong name of ritual"
 msg_ira: "Incorrect ritual altar"
 msg_nitr: "No items to ritual"
 msg_ycrtr: "You can't repeat this ritual"
@@ -40,41 +38,62 @@ msg_smmfp: " - set max mana for player"
 msg_scmfp: " - set current mana for player"
 msg_aa: "Already active"
 msg_il: "Invalid location"
-msg_s: "Seted"
+msg_s: "Set"
 msg_n: "Need: "
-rb_sa: "MagickScrolls"
-rb_st: "Rituals"
-rb_s: "\n\nSelect Ritual"
-rb_sh: "click to select"
-rb_titleMUF: "§5§lMana up Ritual I"
-rb_DescriptionMUF: "\nIncrease your mana!"
-rb_needMUF: "\n§11 Diamond\n§11 Iron block\n§11 Gold ingot\n§11 Redstone"
-rb_titleVC: "§5§lVillager Cast"
-rb_DescriptionVC: "\nSummon up the Villager."
-rb_needVC: "\n§11 Bone\n§11 Iron block\n§11 Emerald\n§11 Golden apple"
-rb_titleC: "§5§lCooking"
-rb_DescriptionC: "\nCook faster. \nSome food may be overcooked."
-rb_needC: "\n§11 Blaze powder\n§11 Iron ingot\n§11 Flint\n§11 Glowstone dust"
-rb_titleMUS: "§5§lMana up Ritual II"
-rb_DescriptionMUS: "\nIncrease your mana much more."
-rb_needMUS: "\n§11 Diamond\n§11 Nether star\n§11 Gold block\n§11 Glowstone"
-rb_titleH: "§5§lHealing Ritual"
-rb_DescriptionH: "\nHeal you and remove all potion effects. Also regenerate your mana."
-rb_needH: "\n§11 Diamond\n§11 Speckled melon\n§11 Glowstone dust\n§11 Rotten flesh"
-rb_titleD: "§5§lDiver Ritual"
-rb_DescriptionD: "\nGives you potion effects for effectively diving."
-rb_needD: "\n§11 Gold ingot\n§11 Pufferfish\n§11 Glowstone\n§11 Sugar"
-rb_titleM: "§5§lMiner Ritual"
-rb_DescriptionM: "\nGives you potion effects for effectively digging mines."
-rb_needM: "\n§11 Gold block\n§11 Magma cream\n§11 Glowstone dust\n§11 Sugar"
-rb_titleT: "§5§lTraveler Ritual"
-rb_DescriptionT: "\nGives you potion effects for effectively traveling."
-rb_needT: "\n§11 Fermented spider §1eye\n§11 Ghast tear\n§11 Emerald\n§11 Sugar"
-rb_titleW: "§5§lWarrior Ritual"
-rb_DescriptionW: "\nGives you potion effects for effectively fighting."
-rb_needW: "\n§11 Diamond\n§11 Ghast tear\n§11 Glowstone\n§11 Blaze rod"
+rb_sh: "Click to select"
 s_ti: "Trap Item"
-
+i_mi: "Magic Item"
+msg_lvl: "level"
+msg_lvls: "levels"
+msg_ne: "Not enough"
+msg_yastr: "You already start this research"
+msg_yaltr: "You already learned this"
+msg_mtb: "Move to bottle"
+msg_mtba: "Move to bottle all"
+msg_tfb: "Take from bottle"
+msg_tfba: "Take from bottle all"
+msg_w: "WARNING!!!"
+msg_lpm: "lost plugin meta."
+q_ntk: "Needed to kill"
+q_uyl: "Up your level"
+q_ntu: "Needed to use"
+q_ntba: "Need to block attacks"
+msg_l: "learned"
+in_rt: "Ritual Book"
+in_rb: "Research Book"
+in_msl: "Mana Shield Levels"
+r_nwitcftr: "Needed witches in the coven for the ritual"
+msg_sr: "selected"
+i_rit: "Needed mana:"
+msg_ingtwtoyiweywcm: "I'm not going to waste time on you, it wasn't even you who called me"
+msg_ywidwtwamtoy: "You're worthless, I don't want to waste any more time on you"
+msg_tyaltbofkgyftpas: "Today you are lucky, the book of forbidden knowledge got you for the pain and suffering"
+msg_ybanl: "You bought a new level"
+msg_ydhel: "You don't have enough levels"
+msg_ymbpl: "You must buy previous levels"
+msg_yhabtl: "You have already bought this level"
+ims_otl: "On this level"
+ims_dm: "Damage miss"
+ims_mr: "Mana regen"
+ims_fnlyn: "For the next level you need"
+ims_yhcmts: "You have completely mastered this shield"
+ims_ctbtf: "Click to buy this for"
+ims_b: "Bought"
+ims_nyci: "Now your number of blocked attacks"
+msg_as: "Active scrolls: "
+msg_wa: "Wearing artefacts"
+imp:
+  messages:
+  - "Still think your soul belongs to you?"
+  - "These worthless people are taking my time again"
+  - "I thought we'd meet in hell next time"
+  - "All people are the same, you called me because you want real magic, not these pathetic pieces of paper"
+  - "You again?"
+  - "I can do anything for your pathetic soul, my dear"
+  - "You still realized that you are a nonentity, and decided to give your soul for real magic?"
+  fight:
+  - "That was your mistake"
+  - "Do you want to play with the demons of hell? All right let's play"
 
 #Names
 name_nec_scroll_mobs: "Evil Spirit "
@@ -247,3 +266,144 @@ CONFUSED_MAGICSEAL:
   name: "Magic seal"
   lore:
     - "Magic seal Confused scrolls"
+
+RITUAL_BOOK:
+  name: "Ritual Book"
+  lore:
+    - "Ritual Magic"
+
+RESEARCH_BOOK:
+  name: "Forbidden Book"
+  lore:
+    - "Forbidden knowledge"
+
+#Rituals
+MANAUPFIRST:
+  name: "Mana up Ritual I"
+  lore:
+    - "§6✪ Increase your mana!"
+    - "§3➤1 Diamond"
+    - "§3➤1 Iron block"
+    - "§3➤1 Gold ingot"
+    - "§3➤1 Redstone"
+VILLAGER_CAST:
+  name: "Villager Cast"
+  lore:
+    - "§6✪ Summon up the Villager."
+    - "§3➤1 Bone"
+    - "§3➤1 Iron block"
+    - "§3➤1 Emerald"
+    - "§3➤1 Golden apple"
+COOK:
+  name: "Cooking"
+  lore:
+    - "§6✪ Cook faster."
+    - "§6✪ Some food may be overcooked."
+    - "§3➤1 Blaze powder"
+    - "§3➤1 Iron ingot"
+    - "§3➤1 Flint"
+    - "§3➤1 Glowstone dust"
+MANAUPSECOND:
+  name: "Mana up Ritual II"
+  lore:
+    - "§6✪ Increase your mana much more."
+    - "§3➤1 Diamond"
+    - "§3➤1 Nether star"
+    - "§3➤1 Gold block"
+    - "§3➤1 Glowstone"
+HEALING:
+  name: "Healing Ritual"
+  lore:
+    - "§6✪ Heal you and remove all potion effects."
+    - "§6✪ Also regenerate your mana."
+    - "§3➤1 Diamond"
+    - "§3➤1 Speckled melon"
+    - "§3➤1 Glowstone dust"
+    - "§3➤1 Rotten flesh"
+DIVER:
+  name: "Diver Ritual"
+  lore:
+    - "§6✪ Gives you potion effects for effectively diving."
+    - "§3➤1 Gold ingot"
+    - "§3➤1 Pufferfish"
+    - "§3➤1 Glowstone"
+    - "§3➤1 Sugar"
+MINER:
+  name: "Miner Ritual"
+  lore:
+    - "§6✪ Gives you potion effects for effectively digging mines."
+    - "§3➤1 Gold block"
+    - "§3➤1 Magma cream"
+    - "§3➤1 Glowstone dust"
+    - "§3➤1 Sugar"
+TRAVELER:
+  name: "Traveler Ritual"
+  lore:
+    - "§6✪ Gives you potion effects for effectively traveling."
+    - "§3➤1 Fermented spider eye"
+    - "§3➤1 Ghast tear"
+    - "§3➤1 Emerald"
+    - "§3➤1 Sugar"
+WARRIOR:
+  name: "Warrior Ritual"
+  lore:
+    - "§6✪ Gives you potion effects for effectively fighting."
+    - "§3➤1 Diamond"
+    - "§3➤1 Ghast tear"
+    - "§3➤1 Glowstone"
+    - "§3➤1 Blaze rod"
+IMP_SUMMON:
+  name: "Summon the Imp"
+  lore:
+    - "§6✪ If you want to get access to real magic, this creature is what you need."
+    - "§6✪ This creature will be able to give you a book that gives you access to forbidden knowledge."
+    - "§3➤1 Diamond"
+    - "§3➤1 Fermented spider eye"
+    - "§3➤1 Glowstone"
+    - "§3➤1 Blaze rod"
+
+#Research
+BASIC_RESEARCH:
+  name: "Basic"
+  lore:
+    -
+ANCIENT_BOTTLE:
+  name: "Ancient Bottle"
+  lore:
+    - "Nobody knows where this bottle came from."
+    - "The ability to store and take away experience can be useful."
+MAGIC_SCROLL:
+  name: "Magic of scrolls"
+  lore:
+    - "In your head crept suspicions about how you can make crafting more profitable."
+    - "Increases the number of scrolls that can be produced per craft."
+MANA_SHIELD:
+  name: "Magic shield"
+  lore:
+    - "Now you think about increase regen your mana."
+    - "Regenerate your mana when block damage."
+    - "But miss 25% of the damage take."
+MANA_SHIELD_LEVELS:
+  name: "Magic shield levels"
+  lore:
+    - "I think it can be better."
+    - "Increase your mana shield skill."
+MAGIC_INVENTORY:
+  name: "Magic Inventory"
+  lore:
+    - "Put the magic accessory here."
+MAGNET:
+  name: "Magnet Feather"
+  lore:
+    - "Each time killing the chickens and picking up their feathers."
+    - "You start thinking about how to attract items automatically."
+    - "And the magic magnetic feather is what you need."
+    - "It's accessory"
+
+ManaShield:
+  ZERO: "0 level"
+  FIRST: "I level"
+  SECOND: "II level"
+  THIRD: "III level"
+  FOURTH: "IV level"
+  FIFTH: "V level"

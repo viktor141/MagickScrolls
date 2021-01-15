@@ -10,31 +10,32 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.effects.ShootingStarEffect;
+import ru.vixtor141.MagickScrolls.research.PlayerResearch;
 
 import java.util.*;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class AltarCrafting implements Runnable{
 
-    private List<Item> nearbyItemsIng = new ArrayList<>(0);
+    private final List<Item> nearbyItemsIng = new ArrayList<>(0);
     private final Main plugin = Main.getPlugin();
     private final Location location;
     private BukkitTask craftCheckTask, effectTask;
-    private List<Item>  droppedItems = new ArrayList<>(0);
+    private final List<Item>  droppedItems = new ArrayList<>(0);
     private final Map<List<ItemStack>, ACCrafts.CraftsOfScrolls> recipe = new HashMap<>();
     private Item ing;
     private Item paper;
     private boolean failCheck = true;
     private ACCrafts.CraftsOfScrolls scroll;
-    private double k = 0.01;
     private int j = 0;
     private final int radiusOfSpawnMeteor = 15;
+    private final PlayerResearch playerResearch;
 
 
-    public AltarCrafting(Block block){
+    public AltarCrafting(Block block, PlayerResearch playerResearch){
         this.location = block.getLocation();
+        this.playerResearch = playerResearch;
 
         location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX(), location.getY() + 0.875, location.getZ()),1,0.25, 1).stream().filter(entity -> entity instanceof Item).forEach(entity -> nearbyItemsIng.add(((Item)entity)));
         if(nearbyItemsIng.size() != 2)return;
@@ -168,17 +169,18 @@ public class AltarCrafting implements Runnable{
     private void craftFinishing(){
         ItemStack result = scroll.craftAltarResult();
         ItemStack paperItemStack = paper.getItemStack();
+        int countPaper = playerResearch.getCountOfPaper();
 
         ing.getItemStack().setAmount(ing.getItemStack().getAmount() - 1);
         for(Item item : droppedItems){
             item.remove();
         }
-        if(paperItemStack.getAmount() < 17){
+        if(paperItemStack.getAmount() <= countPaper){
             result.setAmount(paper.getItemStack().getAmount());
             paper.remove();
         }else{
-            result.setAmount(16);
-            paperItemStack.setAmount(paperItemStack.getAmount() - 16);
+            result.setAmount(countPaper);
+            paperItemStack.setAmount(paperItemStack.getAmount() - countPaper);
         }
 
         effectTask.cancel();

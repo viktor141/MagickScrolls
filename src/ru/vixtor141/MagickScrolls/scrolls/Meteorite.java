@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Meteorite implements Scroll, Runnable {
@@ -37,18 +37,14 @@ public class Meteorite implements Scroll, Runnable {
     private final float r = 5;
     private Vector dirRay;
     private final List<BukkitTask> circleEffects = new ArrayList<>();
-    private Mana playerMana;
+    private final Mana playerMana;
 
 
     public Meteorite(Player player, ItemStack item){
         this.player = player;
         this.item = item;
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        playerMana = getPlayerMana(player);
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, this);
     }

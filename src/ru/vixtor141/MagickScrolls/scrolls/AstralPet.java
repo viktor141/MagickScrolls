@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
@@ -20,6 +19,7 @@ import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class AstralPet implements Scroll, Runnable {
@@ -35,11 +35,7 @@ public class AstralPet implements Scroll, Runnable {
 
     public AstralPet (Player player, ItemStack item){
         this.player = player;
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ASTRAL_PET , true))return;
 
         liveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this::liveTask, 0, 5);

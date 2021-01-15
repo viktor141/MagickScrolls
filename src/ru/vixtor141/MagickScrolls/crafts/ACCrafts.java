@@ -10,11 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.artifacts.AncientBottle;
+import ru.vixtor141.MagickScrolls.lang.LangVar;
 import ru.vixtor141.MagickScrolls.research.Research;
 import ru.vixtor141.MagickScrolls.scrolls.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class ACCrafts {
 
@@ -101,10 +104,10 @@ public class ACCrafts {
                 ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
-                List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
+                List<String> loreL = new ArrayList<>(langF.getStringList(this.name() + ".lore"));
                 loreL.add("0");
                 loreL.add(ChatColor.BLUE +  "" + ChatColor.MAGIC + this.name());
-                loreL.add(ChatColor.YELLOW + "Magic Item");
+                loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -114,18 +117,8 @@ public class ACCrafts {
             }
         },
         RITUAL_BOOK{
-            @Override
-            public ItemStack craftCauldronGetItem(){
-                return Main.getPlugin().getRitualBook();
-            }
         },
         RITUAL_ALTAR_BUILDER{
-        },
-        RITUAL_BOOK_REWRITER{
-            @Override
-            public ItemStack craftCauldronGetItem(){
-                return Main.getPlugin().getRitualBook();
-            }
         },
         AIR_TRAP_MAGICSEAL{
             @Override
@@ -150,16 +143,34 @@ public class ACCrafts {
                 ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
-                List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
-                loreL.add(ChatColor.BLUE + "0");
+                List<String> loreL = new ArrayList<>(langF.getStringList(this.name() + ".lore"));
+                loreL.add(ChatColor.GREEN + "0");
                 loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
-                loreL.add(ChatColor.YELLOW + "Magic Item");
+                loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
                 meta.setLore(loreL);
                 meta.addEnchant(Enchantment.DURABILITY, 1,true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
                 item.setItemMeta(meta);
 
                 return item;
+            }
+        },
+        RESEARCH_BOOK{
+            @Override
+            public boolean isIgnoreRecipe(){
+                return true;
+            }
+        },
+        MANA_SHIELD{
+            @Override
+            public Research[] getResearch() {
+                return new Research[]{Research.MANA_SHIELD};
+            }
+        },
+        MAGNET{
+            @Override
+            public Research[] getResearch() {
+                return new Research[]{Research.MAGNET};
             }
         };
 
@@ -175,14 +186,18 @@ public class ACCrafts {
             ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
-            List<String> loreL = new ArrayList<String>(langF.getStringList( this.name() +".lore"));
+            List<String> loreL = new ArrayList<>(langF.getStringList( this.name() +".lore"));
             loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
-            loreL.add(ChatColor.YELLOW + "Magic Item");
+            loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
             meta.setLore(loreL);
             meta.addEnchant(Enchantment.DURABILITY, 1,true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);
             return item;
+        }
+
+        public boolean isIgnoreRecipe(){
+            return false;
         }
 
     }
@@ -261,9 +276,9 @@ public class ACCrafts {
             ItemStack item = new ItemStack(Material.PAPER);
             ItemMeta meta = item.getItemMeta();
             meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
-            List<String> loreL = new ArrayList<String>(langF.getStringList(this.name() + ".lore"));
+            List<String> loreL = new ArrayList<>(langF.getStringList(this.name() + ".lore"));
             loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
-            loreL.add(ChatColor.YELLOW + "Magic Item");
+            loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
             meta.setLore(loreL);
             meta.addEnchant(Enchantment.DURABILITY, 1,true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -274,10 +289,47 @@ public class ACCrafts {
     }
 
     public enum Artifacts{
+        RESEARCH_BOOK{
+            @Override
+            public void use(Player player, ItemStack itemStack) {
+                getPlayerMana(player).getPlayerResearch().openBook();
+            }
+        },
+        RITUAL_BOOK{
+            @Override
+            public void use(Player player, ItemStack itemStack) {
+                getPlayerMana(player).getPlayerRitualInventory().openBook();
+            }
+        },
         ANCIENT_BOTTLE{
             @Override
-            public void start(Player player, ItemStack item) {new AncientBottle(player, item);}
+            public void use(Player player, ItemStack itemStack) {new AncientBottle(player, itemStack);}
+        },
+        MANA_SHIELD{
+            @Override
+            public void use(Player player, ItemStack itemStack){}
+            @Override
+            public boolean isIgnoreUse(){
+                return true;
+            }
         };
-        public abstract void start(Player player, ItemStack item);
+        public abstract void  use(Player player, ItemStack itemStack);
+        public boolean isIgnoreUse(){
+            return false;
+        }
+    }
+
+
+    public enum AccessoryArtefact{
+        MAGNET;
+
+        public static boolean isArtefact(String string){
+            try {
+                AccessoryArtefact.valueOf(string);
+            } catch (IllegalArgumentException exception){
+                return false;
+            }
+            return true;
+        }
     }
 }

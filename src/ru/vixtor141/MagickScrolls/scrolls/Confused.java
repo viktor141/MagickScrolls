@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Confused implements Scroll {
@@ -64,11 +65,7 @@ public class Confused implements Scroll {
     }
 
     private void setTarget(Entity entity){
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.CONFUSED ,true))return;
         itemConsumer(player, item);
 

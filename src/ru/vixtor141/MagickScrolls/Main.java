@@ -5,9 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.vixtor141.MagickScrolls.Misc.BookCreator;
 import ru.vixtor141.MagickScrolls.Misc.RitualsRecipesStorage;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.crafts.AltarCraftsStorage;
@@ -18,6 +16,7 @@ import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
 
 import java.util.*;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class Main extends JavaPlugin {
 
@@ -27,9 +26,9 @@ public class Main extends JavaPlugin {
     private final List<CleanUpTask> cleanUpTasks = new ArrayList<>();
     private final List<DefaultEffect> defaultEffectList = new ArrayList<>();
     private IOWork ioWork;
-    private ItemStack ritualBook;
     private boolean manaMessage;
     private final int subStr = 4;
+    private long timeInterval;
 
     public Main (){
         plugin = this;
@@ -67,10 +66,6 @@ public class Main extends JavaPlugin {
         return defaultEffectList;
     }
 
-    public ItemStack getRitualBook(){
-        return ritualBook;
-    }
-
     public FileConfiguration getLangCF(){
         return ioWork.getLangCF();
     }
@@ -95,6 +90,10 @@ public class Main extends JavaPlugin {
         return ioWork;
     }
 
+    public long getTimeInterval(){
+        return timeInterval;
+    }
+
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
@@ -103,13 +102,13 @@ public class Main extends JavaPlugin {
 
         initIOWork();
 
-        createBook();
-
         readManaMessageSetting();
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
 
         registerEventListeners();
+
+        timeInterval = getConfig().getInt("saveInterval");
 
         this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
     }
@@ -118,6 +117,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Player player: Bukkit.getOnlinePlayers()){
+            getPlayerMana(player).cancelTask();
             ioWork.savePlayerStats(player);
         }
         for(CleanUpTask cleanUpTask : getCleanUpTasks()){
@@ -141,6 +141,7 @@ public class Main extends JavaPlugin {
 
     public void initIOWork(){
         ioWork = new IOWork();
+        ioWork.loadResidualData();
     }
 
     private void registerEventListeners(){
@@ -159,10 +160,13 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new StartBuildEvent(), this);
         Bukkit.getPluginManager().registerEvents(new SpectralShieldScroll(), this);
         Bukkit.getPluginManager().registerEvents(new AirTrapScroll(), this);
-    }
-
-    public void createBook(){
-        ritualBook = new BookCreator().getBook();
+        Bukkit.getPluginManager().registerEvents(new ListenerForResearches(), this);
+        Bukkit.getPluginManager().registerEvents(new BooksInteraction(), this);
+        Bukkit.getPluginManager().registerEvents(new AncientBottleUse(), this);
+        Bukkit.getPluginManager().registerEvents(new ImpEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new ManaShieldEvent(), this);
+        Bukkit.getPluginManager().registerEvents(new MagnetRingEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new AccessoriesInventoryListener(), this);
     }
 
     private void readManaMessageSetting(){

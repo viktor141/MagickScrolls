@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class UsualAltarEffects implements Runnable {
 
@@ -21,7 +20,7 @@ public class UsualAltarEffects implements Runnable {
     private final float r;
     private final Ritual ritual;
     private final Location location;
-    private int j = 0, i = 0, k = 0, d = 0;
+    private int j = 0, i = 0, k = 0, d = 0, rndLoc;
     private final BukkitTask repeaterEffects, itemsRepeaterEffects, witchSpawnerEffect, shootingStarEffect;
     private final int secondsOfRitual = 10 * 2;
     private final List<Item> list;
@@ -40,6 +39,7 @@ public class UsualAltarEffects implements Runnable {
         this.ritualHandler = ritualHandler;
         this.witchCount = witchCount;
         this.neededAmounts = neededAmounts;
+        rndLoc = new Random().nextInt(4);
         repeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::repeaterEffects, 0, 10);
         itemsRepeaterEffects = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::onItemsRepeaterEffects, 0, 20);
         witchSpawnerEffect = Bukkit.getScheduler().runTaskTimer(plugin, this::witchSpawning, 0, 20);
@@ -51,9 +51,9 @@ public class UsualAltarEffects implements Runnable {
             witchSpawnerEffect.cancel();
             return;
         }
-        int rndLoc = new Random().nextInt(4);
         witchSpawners.add(new WitchSpawner(location.clone().add(r * cos(toRadians(rndLoc * 90)) + 0.5, 1, r * sin(toRadians(rndLoc * 90)) + 0.5), ritual, k));
         k++;
+        rndLoc++;
     }
 
 

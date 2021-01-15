@@ -6,23 +6,21 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.altars.UsualAltar;
 import ru.vixtor141.MagickScrolls.effects.RandomParticleGenerator;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.COOK;
-
 public class Cook implements Ritual {
 
-    private final RitualEnum.Rituals ritual = COOK;
+    private final RitualE ritual = RitualE.COOK;
     private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private Location location;
@@ -94,7 +92,7 @@ public class Cook implements Ritual {
     }
 
     @Override
-    public RitualEnum.Rituals getEnumRitual() {
+    public RitualE getEnumRitual() {
         return ritual;
     }
 

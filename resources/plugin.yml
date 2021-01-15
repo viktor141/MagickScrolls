@@ -13,6 +13,8 @@ commands:
 permissions:
   magickscrolls.give:
     description: giving a permission on /magickscolls give
+  magickscrolls.give.artifact:
+    description: giving a permission on /magickscolls give for artifacts(Items crafts in cauldron)
   magickscrolls.heal:
     description: giving a permission on /magickscolls heal
   magickscrolls.cdreset:

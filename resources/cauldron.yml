@@ -13,20 +13,6 @@ MAGIC_STAFF:
         amount: '1'
         data: '0'
         mstype: null
-    -
-      - type: REDSTONE
-        amount: '1'
-        data: '0'
-        mstype: null
-      - type: GLOWSTONE_DUST
-        amount: '1'
-        data: '0'
-        mstype: null
-      - type: STICK
-        amount: '1'
-        data: '0'
-        mstype: null
-
   result:
     ==: org.bukkit.inventory.ItemStack
     type: STICK
@@ -281,7 +267,7 @@ RITUAL_BOOK:
         mstype: null
   result:
     ==: org.bukkit.inventory.ItemStack
-    type: AIR
+    type: BOOK
 RITUAL_ALTAR_BUILDER:
   recipe:
     -
@@ -300,24 +286,6 @@ RITUAL_ALTAR_BUILDER:
   result:
     ==: org.bukkit.inventory.ItemStack
     type: BLAZE_ROD
-RITUAL_BOOK_REWRITER:
-  recipe:
-    -
-      - type: REDSTONE
-        amount: '1'
-        data: '0'
-        mstype: null
-      - type: GLOWSTONE_DUST
-        amount: '1'
-        data: '0'
-        mstype: null
-      - type: WRITTEN_BOOK
-        amount: '1'
-        data: '0'
-        mstype: null
-  result:
-    ==: org.bukkit.inventory.ItemStack
-    type: AIR
 AIR_TRAP_MAGICSEAL:
   recipe:
     -
@@ -354,3 +322,86 @@ CONFUSED_MAGICSEAL:
   result:
     ==: org.bukkit.inventory.ItemStack
     type: RABBIT_FOOT
+RESEARCH_BOOK:
+  recipe:
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: ENCHANTED_BOOK
+ANCIENT_BOTTLE:
+  recipe:
+    -
+      - type: DEAD_BUSH
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: GLOWSTONE_DUST
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: GLASS_BOTTLE
+        amount: '1'
+        data: '0'
+        mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: EXP_BOTTLE
+MANA_SHIELD:
+  recipe:
+    -
+      - type: SHIELD
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: GLOWSTONE
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: QUARTZ
+        amount: '2'
+        data: '0'
+        mstype: null
+      - type: SLIME_BALL
+        amount: '2'
+        data: '0'
+        mstype: null
+      - type: REDSTONE
+        amount: '8'
+        data: '0'
+        mstype: null
+      - type: SOUL_SAND
+        amount: '6'
+        data: '0'
+        mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: SHIELD
+MAGNET:
+  recipe:
+    -
+      - type: FEATHER
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: GLOWSTONE_DUST
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: REDSTONE
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: IRON_BLOCK
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: GOLD_INGOT
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: SULPHUR
+        amount: '1'
+        data: '0'
+        mstype: null
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: FEATHER

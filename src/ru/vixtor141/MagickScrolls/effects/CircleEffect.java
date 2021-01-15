@@ -7,7 +7,6 @@ import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.Main;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class CircleEffect implements Runnable {
 

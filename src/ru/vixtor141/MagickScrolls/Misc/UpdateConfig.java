@@ -120,7 +120,7 @@ public class UpdateConfig {
             Object o = list.get(i);
 
             if (o instanceof String || o instanceof Character) {
-                builder.append(prefixSpaces).append("- '").append(o).append("'");
+                builder.append(prefixSpaces).append("- ").append(o).append("");
             } else if (o instanceof List) {
                 builder.append(prefixSpaces).append("- ").append(yaml.dump(o));
             } else {

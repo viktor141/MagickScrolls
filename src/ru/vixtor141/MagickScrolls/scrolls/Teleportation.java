@@ -7,28 +7,23 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.CDSystem;
-import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Teleportation implements Scroll {
 
     public Teleportation(Player player, ItemStack item){
-        Main plugin = Main.getPlugin();
         Location newLocation = checkForTeleportation(player);
         if(!checkBlock(newLocation)) {
             player.sendMessage(ChatColor.RED + LangVar.msg_yctt.getVar());
             return;
         }
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(System.currentTimeMillis() <= playerMana.getTupaFixCalledTwice()) return;
         playerMana.setTupaFixCalledTwice(System.currentTimeMillis() + 50);
         CDSystem.Scrolls scroll = CDSystem.Scrolls.TELEPORTATION;

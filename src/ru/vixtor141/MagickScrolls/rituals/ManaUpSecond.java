@@ -7,23 +7,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.altars.UsualAltar;
 import ru.vixtor141.MagickScrolls.effects.RandomParticleGenerator;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.vixtor141.MagickScrolls.Misc.RitualEnum.Rituals.MANAUPSECOND;
-
 public class ManaUpSecond implements Ritual {
 
-    private final RitualEnum.Rituals ritual = MANAUPSECOND;
+    private final RitualE ritual = RitualE.MANAUPSECOND;
     private final Mana playerMana;
-    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());;
+    private final List<ItemStack> reqItems = new ArrayList<>(ritual.getReqItems());
     private AltarFace altar;
     private Location location;
     private final float state = (float) Main.getPlugin().getConfig().getDouble(ritual.name() + ".state");
@@ -55,7 +53,7 @@ public class ManaUpSecond implements Ritual {
     }
 
     @Override
-    public RitualEnum.Rituals getEnumRitual() {
+    public RitualE getEnumRitual() {
         return ritual;
     }
 
@@ -71,7 +69,7 @@ public class ManaUpSecond implements Ritual {
             player.sendMessage(ChatColor.RED + LangVar.msg_ycrtr.getVar());
             return false;
         }
-        if(playerMana.getMaxMana() < Main.getPlugin().getConfig().getDouble(RitualEnum.Rituals.MANAUPFIRST.name() + ".state")){
+        if(playerMana.getMaxMana() < Main.getPlugin().getConfig().getDouble(RitualE.MANAUPFIRST.name() + ".state")){
             player.sendMessage(ChatColor.RED + LangVar.msg_ymptpr.getVar());
             return false;
         }

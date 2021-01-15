@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Necromancy implements Scroll, Runnable {
@@ -44,18 +45,14 @@ public class Necromancy implements Scroll, Runnable {
         }
 
         target = (Player) playerEntity.get();
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         CDSystem.Scrolls scroll = CDSystem.Scrolls.NECROMANCY;
 
         if(!playerMana.getCdSystem().CDStat(scroll , true))return;
 
         Location location = player.getLocation();
 
-        metadataValue = new LazyMetadataValue(Main.getPlugin(), () -> player.getName());
+        metadataValue = new LazyMetadataValue(Main.getPlugin(), player::getName);
         mobNames = LangVar.name_nec_scroll_mobs.getVar() + player.getName();
 
         for(int i = 0; i < 3; i++) {
@@ -83,6 +80,6 @@ public class Necromancy implements Scroll, Runnable {
         creature.setMetadata( "magicscrolls", metadataValue);
         mobs.add(creature);
 
-        spawnLocation.getWorld().spawnParticle(Particle.SMOKE_LARGE, spawnLocation.clone().add(0,1.5,0), 5,1,1,1, 0.1);//тест
+        spawnLocation.getWorld().spawnParticle(Particle.SMOKE_LARGE, spawnLocation.clone().add(0,1.5,0), 5,1,1,1, 0.1);
     }
 }

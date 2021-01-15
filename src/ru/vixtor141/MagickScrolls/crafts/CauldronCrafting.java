@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.crafts;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -12,6 +13,8 @@ import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.research.Research;
 
 import java.util.*;
+
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class CauldronCrafting implements Runnable{
 
@@ -25,16 +28,14 @@ public class CauldronCrafting implements Runnable{
     private Map<List<ItemStack>, ACCrafts.ItemsCauldronCrafts> map;
     private ACCrafts.ItemsCauldronCrafts craft;
     private final List<ItemStack> itemRecipe = new ArrayList<>();
-    private Mana playerMana;
+    private final Mana playerMana;
+    private final Block block;
 
-    public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand, Player player){
+    public CauldronCrafting(Collection<Entity> collection, Location location, ItemStack itemInHand, Player player, Block block){
         this.location = location;
         this.itemInHand = itemInHand;
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        this.playerMana = (Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        this.playerMana = getPlayerMana(player);
+        this.block = block;
         if(checking(collection)) {
             map = cauldronCraftsStorage.getRecipes().get(listItems.size()-1);
             Bukkit.getScheduler().runTaskAsynchronously(Main.getPlugin(), this::check);
@@ -108,6 +109,7 @@ public class CauldronCrafting implements Runnable{
         location.getWorld().spawnParticle(Particle.DRAGON_BREATH, location, 15, 0,0,0, 0.1);
         location.getWorld().spawnParticle(Particle.SPELL_WITCH, location, 15, 0,0,0, 0.1);
         location.add(0,-0.3,0);
+        block.setData((byte)( block.getData() - 1));
         Item entityItem = location.getWorld().dropItem(location, craftResult);
         entityItem.setGravity(false);
         entityItem.setVelocity(new Vector(0,0,0));

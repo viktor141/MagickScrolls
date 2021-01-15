@@ -3,7 +3,11 @@ package ru.vixtor141.MagickScrolls;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import ru.vixtor141.MagickScrolls.Misc.TypeOfResearchQuest;
+import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.research.PlayerResearch;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,7 @@ public class CDSystem{
 
     private final Main plugin = Main.getPlugin();
 
-    private List<Integer> CDs;
+    private final List<Integer> CDs;
     private final Player player;
     private final Mana playerMana;
 
@@ -83,6 +87,13 @@ public class CDSystem{
         if(isDefaultEffect) {
 
             Bukkit.getScheduler().runTask(plugin, () -> new DefaultEffect(player));
+        }
+
+        PlayerResearch playerResearch = playerMana.getPlayerResearch();
+        Research research = Research.MAGIC_SCROLL;
+        if(playerResearch.checkResearch(research)){
+            ResearchI researchI = playerMana.getPlayerResearch().getResearch(research);
+            researchI.update(TypeOfResearchQuest.USE_SCROLL, 1, 0);
         }
         return true;
     }

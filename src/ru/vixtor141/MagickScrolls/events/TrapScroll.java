@@ -19,6 +19,7 @@ import ru.vixtor141.MagickScrolls.Mana;
 
 import java.util.UUID;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 
@@ -48,11 +49,7 @@ public class TrapScroll implements Listener {
     public void click(InventoryClickEvent event){
         if(!(event.getWhoClicked() instanceof Player))return;
         Player player = (Player)event.getWhoClicked();
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(event.getClickedInventory() == null)return;
         if(!event.getClickedInventory().equals(playerMana.getInventory()))return;
         if(event.getSlot() != 4)event.setCancelled(true);
@@ -62,11 +59,7 @@ public class TrapScroll implements Listener {
     public void preventDropScroll(PlayerDropItemEvent event){
         if(event.getPlayer().getOpenInventory().getTopInventory() == null)return;
         Player player = event.getPlayer();
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!event.getPlayer().getOpenInventory().getTopInventory().equals(playerMana.getInventory()))return;
         event.setCancelled(true);
     }
@@ -80,11 +73,7 @@ public class TrapScroll implements Listener {
     @EventHandler
     public void useScroll(InventoryCloseEvent event){
         Player player = (Player) event.getPlayer();
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!event.getInventory().equals(playerMana.getInventory()))return;
         Location location = player.getLocation();
         ItemStack item = event.getInventory().getItem(4);

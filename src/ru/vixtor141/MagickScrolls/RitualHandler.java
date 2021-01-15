@@ -1,6 +1,5 @@
 package ru.vixtor141.MagickScrolls;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -8,23 +7,22 @@ import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.interfaces.AltarFace;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
+
 public class RitualHandler {
 
-    private Mana playerMana;
-    private Ritual ritual;
+    private final Mana playerMana;
+    private final Ritual ritual;
     private int[] neededAmounts;
 
 
     public RitualHandler(Player player, Location location, int witchCount){
-        if(!player.hasMetadata("MagickScrollsMana")){
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        playerMana = getPlayerMana(player);
         ritual = playerMana.getRitual();
         if(ritual == null){
             player.sendMessage(ChatColor.RED + LangVar.msg_rins.getVar());
@@ -55,11 +53,14 @@ public class RitualHandler {
 
         if(ritual.ObjectIsPlayer())player.teleport(location.clone().add(0.5,1,0.5));
         playerMana.setInRitualChecker(ritual.ObjectIsPlayer());
+        playerMana.setRitualStarted(true);
+        playerMana.getPlayerResearch().setResearchStatus(Research.BASIC_RESEARCH, true);
         altar.behavior(this, needW, neededAmounts);
     }
 
     public void ritualEnd(){
         playerMana.setInRitualChecker(false);
+        playerMana.setRitualStarted(false);
         ritual.action();
     }
 

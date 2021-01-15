@@ -26,7 +26,6 @@ public class Commands implements CommandExecutor {
             case "getinfo": return getInfo(commandSender, command, s, args);
             case "list": return listOfScrolls(commandSender, command, s, args);
             case "help": return helpMS(commandSender, command, s, args);
-            case "rs": return ritualSelector(commandSender, command, s, args);
             case "reload": return reloadConfiguration(commandSender, command, s, args);
             case "setcur": return setCurrentMana(commandSender, command, s, args);
             case "setmax": return setMaxMana(commandSender, command, s, args);
@@ -62,8 +61,7 @@ public class Commands implements CommandExecutor {
         try {
             scrollsCrafts = ACCrafts.CraftsOfScrolls.valueOf(args[2].toUpperCase());
         }catch (IllegalArgumentException e){
-            commandSender.sendMessage(ChatColor.RED + LangVar.msg_sasdne.getVar());
-            return true;
+            return giveCauldronCrafted(commandSender, args, amount, player);
         }
 
         if(!commandSender.hasPermission("magickscrolls.give.scroll." + scrollsCrafts.name())){
@@ -77,6 +75,27 @@ public class Commands implements CommandExecutor {
         player.getInventory().addItem(item);
         commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_tshba.getVar());
 
+        return true;
+    }
+
+    private boolean giveCauldronCrafted(CommandSender commandSender, String[] args, int amount, Player player){
+        if(!commandSender.hasPermission("magickscrolls.give.artifact")){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+        ACCrafts.ItemsCauldronCrafts cauldronCraft;
+        try{
+            cauldronCraft = ACCrafts.ItemsCauldronCrafts.valueOf(args[2].toUpperCase());
+        }catch (IllegalArgumentException e) {
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_sasdne.getVar());
+            return true;
+        }
+
+        ItemStack item = cauldronCraft.craftCauldronGetItem();
+        item.setAmount(amount);
+
+        player.getInventory().addItem(item);
+        commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_tshba.getVar());
         return true;
     }
 
@@ -109,11 +128,7 @@ public class Commands implements CommandExecutor {
             player = (Player) commandSender;
         }
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return true;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player, commandSender);
 
         playerMana.setCurrentMana(playerMana.getMaxMana());
         commandSender.sendMessage(ChatColor.YELLOW + LangVar.msg_minf.getVar());
@@ -147,11 +162,7 @@ public class Commands implements CommandExecutor {
         }
 
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return true;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player, commandSender);
 
         if(args.length > 2){
             CDSystem.Scrolls scroll;
@@ -169,7 +180,7 @@ public class Commands implements CommandExecutor {
                 }
             }
 
-            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + LangVar.msg_cdwst.getVar() + setSecond);
+            commandSender.sendMessage(ChatColor.GREEN + args[2].toUpperCase() + " " + LangVar.msg_cdwst.getVar() + setSecond);
             return true;
         }
 
@@ -192,14 +203,17 @@ public class Commands implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[1]);
 
         if(player != null){
-            if(!player.hasMetadata("MagickScrollsMana")){
-                commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-                return true;
-            }
-            Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+            Mana playerMana = getPlayerMana(player, commandSender);
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_iap.getVar() + ChatColor.GREEN + player.getName());
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_m.getVar() + ChatColor.GOLD + playerMana.getCurrentMana() + ChatColor.YELLOW + "/" + ChatColor.GOLD + playerMana.getMaxMana());
             commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_cdsl.getVar() + ChatColor.GOLD + playerMana.getCdSystem().getCDs());
+            commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_as.getVar());
+            commandSender.sendMessage(ChatColor.AQUA + ACCrafts.CraftsOfScrolls.SPECTRAL_SHIELD.craftAltarResult().getItemMeta().getDisplayName() + " seconds: " + ChatColor.GOLD + playerMana.getSpectralShieldSeconds());
+            StringBuilder message = new StringBuilder();
+            for(ACCrafts.AccessoryArtefact accessoryArtefact : ACCrafts.AccessoryArtefact.values()){
+                message.append(ChatColor.WHITE).append("(").append(ChatColor.BLUE).append(accessoryArtefact.name()).append(ChatColor.GRAY).append(": ").append(ChatColor.GOLD).append(playerMana.getWearingArtefact().get(accessoryArtefact.ordinal())).append(ChatColor.WHITE).append(") ");
+            }
+            commandSender.sendMessage(ChatColor.AQUA + LangVar.msg_wa.getVar() + ": " + message);
         }else {
             commandSender.sendMessage(LangVar.msg_piowuafif.getVar());
             SearchPlayerThread searchPlayerThread = new SearchPlayerThread(Bukkit.getOfflinePlayers(), commandSender, args[1]);
@@ -240,29 +254,6 @@ public class Commands implements CommandExecutor {
         return true;
     }
 
-    private boolean ritualSelector(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls rs <ritual>
-        if(!(commandSender instanceof Player))return false;
-
-        if(args.length != 2){
-            return false;
-        }
-
-        if(args[1] == null){
-            commandSender.sendMessage(ChatColor.RED + LangVar.msg_rin.getVar());
-            return true;
-        }
-
-        Player player = (Player) commandSender;
-
-        if(!player.hasMetadata("MagickScrollsMana")){
-            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return true;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
-        playerMana.setRitual(args[1]);
-        return true;
-    }
-
     private boolean reloadConfiguration(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls reload
         if(!commandSender.hasPermission("magickscrolls.reload")){
             commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
@@ -272,8 +263,6 @@ public class Commands implements CommandExecutor {
         plugin.reloadConfig();
 
         plugin.initIOWork();
-
-        plugin.createBook();
 
         commandSender.sendMessage(ChatColor.GREEN + "Reloaded!");
 
@@ -291,11 +280,7 @@ public class Commands implements CommandExecutor {
         }
         Player player = Bukkit.getPlayer(args[1]);
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return true;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player, commandSender);
         playerMana.setMaxMana(Integer.parseInt(args[2]));
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
@@ -311,14 +296,18 @@ public class Commands implements CommandExecutor {
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
-        if(!player.hasMetadata("MagickScrollsMana")){
-            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return true;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player, commandSender);
         playerMana.setCurrentMana(Integer.parseInt(args[2]));
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
+    }
+
+    private Mana getPlayerMana(Player player, CommandSender commandSender){
+        if(!player.hasMetadata("MagickScrollsMana")){
+            commandSender.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
+            throw new NullPointerException();
+        }
+        return (Mana) player.getMetadata("MagickScrollsMana").get(0).value();
     }
 
 }

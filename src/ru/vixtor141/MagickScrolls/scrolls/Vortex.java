@@ -14,7 +14,7 @@ import ru.vixtor141.MagickScrolls.lang.LangVar;
 import java.util.Collection;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class Vortex implements Scroll {
@@ -57,11 +57,7 @@ public class Vortex implements Scroll {
 
     private void entitySetVelocity(Entity targetEntity){
         CDSystem.Scrolls scroll = CDSystem.Scrolls.VORTEX;
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(scroll, true))return;
 
         vortexEffect(targetEntity);

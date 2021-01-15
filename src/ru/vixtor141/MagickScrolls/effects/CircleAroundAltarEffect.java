@@ -7,12 +7,12 @@ import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.Main;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class CircleAroundAltarEffect implements Runnable {
 
     private final BukkitTask bukkitTask;
-    private int i = 0, d;
+    private int i = 0;
+    private final int d;
     private final Location location;
     private final float r;
 

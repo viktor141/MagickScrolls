@@ -13,6 +13,8 @@ import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 import java.util.List;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
+
 public class RitualStartEvent implements Listener {
 
     @EventHandler
@@ -26,6 +28,7 @@ public class RitualStartEvent implements Listener {
         if(!item.getItemMeta().hasLore() || !(item.getItemMeta().getLore().size() >= 3)) return;
         List<String> lore = item.getItemMeta().getLore();
         if(!ACCrafts.ItemsCauldronCrafts.WITCH_ARTIFACT.name().equals(lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr())))return;
+        if(getPlayerMana(event.getPlayer()).getRitualStarted())return;
 
         event.setCancelled(true);
 

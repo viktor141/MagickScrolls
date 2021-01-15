@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -11,15 +10,13 @@ import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
+
 
 public class Trap implements Scroll {
 
     public Trap(Player player, ItemStack item){
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
 
         ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)8);
         ItemMeta itemMeta = itemStack.getItemMeta();

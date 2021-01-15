@@ -18,6 +18,8 @@ import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.List;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
+
 public class StartBuildEvent implements Listener {
 
     @EventHandler
@@ -35,11 +37,7 @@ public class StartBuildEvent implements Listener {
         event.setCancelled(true);
 
         Player player = event.getPlayer();
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         Ritual ritual = playerMana.getRitual();
         if(ritual == null){
             player.sendMessage(ChatColor.RED + LangVar.msg_rins.getVar());

@@ -6,23 +6,27 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import ru.vixtor141.MagickScrolls.Misc.RitualEnum;
 import ru.vixtor141.MagickScrolls.Misc.RitualsRecipesStorage;
 import ru.vixtor141.MagickScrolls.Misc.UpdateConfig;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.crafts.AltarCraftsStorage;
 import ru.vixtor141.MagickScrolls.crafts.CauldronCraftsStorage;
+import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
+import ru.vixtor141.MagickScrolls.levels.ManaShieldLevel;
+import ru.vixtor141.MagickScrolls.research.Research;
+import ru.vixtor141.MagickScrolls.research.ResearchDataSaver;
+import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class IOWork {
     private final Main plugin = Main.getPlugin();
@@ -30,6 +34,7 @@ public class IOWork {
     private CauldronCraftsStorage cauldronCraftsStorage;
     private AltarCraftsStorage altarCraftsStorage;
     private RitualsRecipesStorage ritualsRecipesStorage;
+    private ResearchDataSaver researchDataSaver;
 
     public IOWork() {
         File config = new File(plugin.getDataFolder() + File.separator + "config.yml");
@@ -48,23 +53,19 @@ public class IOWork {
 
         loadRituals();
 
-
         loadCauldronCrafting();
         loadCauldronRecipes();
         loadAltarRecipes();
         loadRitualRecipes();
     }
 
-    public FileConfiguration getRecipesCF() {
-        return recipesCF;
+    public void loadResidualData(){
+        LoadResearchData();
+        loadShieldManaLevels();
     }
 
     public FileConfiguration getLangCF(){
         return lanfCF;
-    }
-
-    public FileConfiguration getRitualsCF(){
-        return ritualsCF;
     }
 
     public CauldronCraftsStorage getCauldronCraftsStorage(){
@@ -83,9 +84,50 @@ public class IOWork {
         return cauldronCF;
     }
 
+    public ResearchDataSaver getResearchDataSaver() {
+        return researchDataSaver;
+    }
+
+    private void loadShieldManaLevels(){
+        for(ManaShieldLevel shieldManaLevel : ManaShieldLevel.values()){
+            shieldManaLevel.setCountNumber(plugin.getConfig().getInt("ManaShield.count." + shieldManaLevel.name()));
+        }
+        for(ManaShieldLevel shieldManaLevel : ManaShieldLevel.values()){
+            shieldManaLevel.setDamageAndMana(plugin.getConfig().getDouble("ManaShield.damage." + shieldManaLevel.name()), ManaShieldLevel.TypeDamageOrMana.DAMAGE);
+            shieldManaLevel.setDamageAndMana(plugin.getConfig().getDouble("ManaShield.regen." + shieldManaLevel.name()), ManaShieldLevel.TypeDamageOrMana.MANA);
+            shieldManaLevel.setXpLevels(plugin.getConfig().getInt("ManaShield.xplvl." + shieldManaLevel.name()));
+            shieldManaLevel.setItemForLevel(plugin.getLangCF().getString("ManaShield." + shieldManaLevel.name()));
+        }
+    }
+
+    private void LoadResearchData(){
+        researchDataSaver = new ResearchDataSaver();
+        for(Research research : Research.values()){
+            if(plugin.getConfig().getConfigurationSection(research.name() + ".mobsToKill") == null)continue;
+            Map<String, Object> maps = plugin.getConfig().getConfigurationSection(research.name() + ".mobsToKill").getValues(false);
+            if(maps.isEmpty()){
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! " + research.name() + " Kills Data is NULL fix that!");
+                continue;
+            }
+
+            try {
+                maps.forEach((string, integer) -> researchDataSaver.put(research, EntityType.valueOf(string),(Integer) integer));
+            }catch (IllegalArgumentException exception){
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! " + research.name() + " entity type is wrong");
+            }
+        }
+
+    }
+
+    public int getIntDataForResearch(Research research, String string){
+        return plugin.getConfig().getInt(research.name() + "." + string);
+    }
+
     public FileConfiguration loadPlayerStats(String playerUUID){
         if(!new File(plugin.getDataFolder() + File.separator + "Players").exists()) {
-            new File(plugin.getDataFolder() + File.separator + "Players").mkdir();
+            if(!new File(plugin.getDataFolder() + File.separator + "Players").mkdir()){
+                Bukkit.getConsoleSender().sendMessage("Can't load data of player " + playerUUID);
+            }
         }
         File playerSF = new File(plugin.getDataFolder() + File.separator + "Players" + File.separator + playerUUID);
         FileConfiguration playerStats = YamlConfiguration.loadConfiguration(playerSF);
@@ -106,23 +148,29 @@ public class IOWork {
     }
 
     public void savePlayerStats(Player player){
-        if(!player.hasMetadata("MagickScrollsMana")){
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta. Data isn't saved");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
-        playerMana.cancelTask();
+        Mana playerMana = getPlayerMana(player);
 
         File playerSF = new File(plugin.getDataFolder() + File.separator + "Players" + File.separator + player.getUniqueId().toString());
         FileConfiguration playerStats = YamlConfiguration.loadConfiguration(playerSF);
 
         playerStats.set("CurrentMana", playerMana.getCurrentMana());
         playerStats.set("MaxMana", playerMana.getMaxMana());
-        playerStats.set("SpectralShield", playerMana.getSpectralShield().get());
         playerStats.set("SpectralShieldSeconds", playerMana.getSpectralShieldSeconds());
 
         playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
         playerStats.set("Research", playerMana.getPlayerResearch().getResearches());
+        List<String> activeResearch = new ArrayList<>();
+        List<ResearchI> research = playerMana.getPlayerResearch().getActiveResearch();
+        for(int i = 0; i < research.size(); i++){
+            if(research.get(i) != null) {
+                activeResearch.add(Research.values()[i].name());
+                research.get(i).saveResearchData(playerStats);
+            }
+        }
+        playerStats.set("ActiveResearch", activeResearch);
+        playerStats.set("ShieldLevelCount", playerMana.getPlayerResearch().getShieldManaLevels().getCount());
+        playerStats.set("ManaShieldLevel", playerMana.getPlayerResearch().getShieldManaLevels().getManaShieldLevel().name());
+        playerStats.set("AccessoriesInventory", playerMana.getPlayerResearch().getAccessoriesInventory().getInventory().getContents());
 
         try {
             playerStats.save(playerSF);
@@ -200,13 +248,17 @@ public class IOWork {
 
     private void loadLangConfiguration(){
         if(!new File(plugin.getDataFolder() + File.separator + "lang").exists()) {
-            new File(plugin.getDataFolder() + File.separator + "lang").mkdir();
+            if(!new File(plugin.getDataFolder() + File.separator + "lang").mkdir()){
+                Bukkit.getConsoleSender().sendMessage("Can't load Lang file");
+            }
         }
 
         File langFile = new File(plugin.getDataFolder() + File.separator + "lang" + File.separator + plugin.getConfig().getString("lang") + ".yml");
         if(!langFile.exists()){
             try {
-                langFile.createNewFile();
+                if(!langFile.createNewFile()){
+                    Bukkit.getConsoleSender().sendMessage("Can't create lang file");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }        }
@@ -216,6 +268,7 @@ public class IOWork {
     private void loadCauldronRecipes(){
         int max = 0, current;
         for(ACCrafts.ItemsCauldronCrafts craft : ACCrafts.ItemsCauldronCrafts.values()){
+            if(craft.isIgnoreRecipe())continue;
             if(cauldronCF.getList(craft.name() + ".recipe") == null){
                 Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Not Found " + craft.name() + " recipe. Check the cauldron.yml and fix that!");
                 continue;
@@ -233,6 +286,7 @@ public class IOWork {
         cauldronCraftsStorage = new CauldronCraftsStorage(max);
 
         for(ACCrafts.ItemsCauldronCrafts craft : ACCrafts.ItemsCauldronCrafts.values()){
+            if(craft.isIgnoreRecipe())continue;
             List<List<Map<String, String>>> recipesList =(List<List<Map<String, String>>>)cauldronCF.getList(craft.name() + ".recipe");
             if(recipesList == null){
                 continue;
@@ -292,7 +346,7 @@ public class IOWork {
     private void loadRitualRecipes(){
         ritualsRecipesStorage = new RitualsRecipesStorage();
 
-        for(RitualEnum.Rituals ritual : RitualEnum.Rituals.values()){
+        for(RitualE ritual : RitualE.values()){
             try {
                 List<Map<String, String>> recipesList = (List<Map<String, String>>) ritualsCF.getList(ritual.name());
                 List<ItemStack> list = new ArrayList<>();

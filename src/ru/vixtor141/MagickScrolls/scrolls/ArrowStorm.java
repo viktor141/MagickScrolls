@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Arrow;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.*;
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 public class ArrowStorm implements Scroll, Runnable {
@@ -29,11 +29,7 @@ public class ArrowStorm implements Scroll, Runnable {
     public ArrowStorm(Player player, ItemStack item){
         this.player = player;
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(CDSystem.Scrolls.ARROWSTORM ,true))return;
 
         Bukkit.getScheduler().runTask(Main.getPlugin(), this);

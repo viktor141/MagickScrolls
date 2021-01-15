@@ -15,6 +15,7 @@ import ru.vixtor141.MagickScrolls.lang.LangVar;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.itemConsumer;
 
 
@@ -22,10 +23,10 @@ public class Lightning implements Scroll, Runnable {
 
     private final Player player;
     private final ItemStack item;
-    private double bound;
-    private int numberOfEntities;
+    private final double bound;
+    private final int numberOfEntities;
     private List<LivingEntity> entitesInLocation;
-    private Mana playerMana;
+    private final Mana playerMana;
 
     public enum Type{
         ONE(new int[]{5, 1}),
@@ -45,11 +46,7 @@ public class Lightning implements Scroll, Runnable {
         this.player = player;
         this.item = item;
 
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        this.playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        playerMana = getPlayerMana(player);
 
         bound = type.getData()[0];
         numberOfEntities = type.getData()[1];

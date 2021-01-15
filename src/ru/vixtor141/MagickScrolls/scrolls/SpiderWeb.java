@@ -1,6 +1,5 @@
 package ru.vixtor141.MagickScrolls.scrolls;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.LazyMetadataValue;
@@ -8,6 +7,8 @@ import ru.vixtor141.MagickScrolls.CDSystem;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.interfaces.Scroll;
+
+import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 
 public class SpiderWeb implements Scroll {
@@ -17,11 +18,7 @@ public class SpiderWeb implements Scroll {
 
     public SpiderWeb(Player player, ItemStack item){
         this.item = item;
-        if(!player.hasMetadata("MagickScrollsMana")){
-            player.sendMessage(ChatColor.RED + "WARNING!!! Player: " + player.getDisplayName() + " lost a plugin meta.");
-            return;
-        }
-        Mana playerMana =(Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+        Mana playerMana = getPlayerMana(player);
         if(!playerMana.getCdSystem().CDStat(scroll, ".perThrowConsumedMana", ".perThrowCDseconds", true))return;
 
         Snowball snowball = player.launchProjectile(Snowball.class);

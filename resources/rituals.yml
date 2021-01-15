@@ -151,3 +151,20 @@ WARRIOR:
     amount: '1'
     data: '0'
     mstype: null
+IMP_SUMMON:
+  - type: DIAMOND
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: FERMENTED_SPIDER_EYE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: GLOWSTONE
+    amount: '1'
+    data: '0'
+    mstype: null
+  - type: BLAZE_ROD
+    amount: '1'
+    data: '0'
+    mstype: null
