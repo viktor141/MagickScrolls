@@ -100,84 +100,112 @@ name_nec_scroll_mobs: "Evil Spirit "
 
 #Scrolls
 ARROWSTORM:
-  name: "Scroll of Arrow Storm"
+  name: "Scroll storm of arrows"
   lore:
-  - "Arrow Storm scroll"
+  - "A good tool for killing enemies around you."
+  - "Create a hail of arrows straight from the sky! "
 
 LIGHTNINGONE:
-  name: "Scroll of Lightning I"
+  name: "Lightning scroll I"
   lore:
-  - "Scroll for Lightning strike"
+  - "This scroll is able to hit a single enemy with lightning. "
+  - "Unless, of course, the target is in invisibility"
+  - "or further than five blocks away from you."
 
 LIGHTNINGTWO:
-  name: "Scroll of Lightning II"
+  name: "Lightning scroll II"
   lore:
-  - "Scroll for Lightning strike power two"
+  - "More power, more!"
+  - "Can hit up to four visible victims within an eight-block radius. "
 
 LIGHTNINGTHREE:
-  name: "Scroll of Lightning III"
+  name: "Lightning scroll III"
   lore:
-  - "Scroll for Lightning strike power three"
+  - "Feel like the strongest lightning god."
+  - "But just for a moment."
+  - "Strikes up to eight visible victims with lightning. "
+  - "within a ten-block radius."
 
 NECROMANCY:
   name: "Scroll of Necromancy"
   lore:
-  - "Necromancy scroll"
+  - "Protect yourself from the player's attack."
+  - "Summoning the dead to help!"
+  - "They will harass the goal with enviable devotion."
+  - "And stop only when they devour the flesh of the enemy. "
+  - "Or when they die again."
 
 TELEPORTATION:
   name: "Scroll of Teleportation"
   lore:
-  - "Scroll for teleportation in dimension"
+  - "Break the laws of space and time."
+  - "teleport in any direction you want! "
+  - "But no further than eight blocks."
 
 VAMPIRIC:
   name: "Scroll of Vampirism"
   lore:
-  - "Vampirism power"
+  - "Take this scroll in your hands and hit your enemies with all your might! "
+  - "Then you can take some of the victim's life force for yourself."
 
 VORTEX:
-  name: "Scroll of Vortex"
+  name: "Scroll of the Vortex"
   lore:
-  - "Vortex scroll"
+  - "Raise the enemy to the skies."
+  - "Yes that there is an enemy-even an object, or an arrow flying at you! "
+  - "Don't forget to aim well."
 
 SPIDERWEB:
-  name: "Scroll of Spider web"
+  name: "Spider Web Scroll"
   lore:
-  - "Spider web scroll"
+  - "Release a spider web compressed into a ball at the enemy."
+  - "If you successfully hit the target, the enemy will find himself with his head in a sticky net. "
+  - "For a few seconds without a chance to escape."
 
 TRAP:
   name: "Scroll of Trap"
   lore:
-    - "Trap scroll"
+  - "Want to make fun of a friend, or... an enemy?"
+  - "Use the scroll and put any object in it."
+  - "And then, sharp fangs will sink into anyone who dares to try to pick up this thing. "
+  - "Only you will not be harmed by them."
 
 EARTH:
-  name: "Scroll of Earth"
+  name: "Scroll of the earth"
   lore:
-    - "Earth scroll"
+  - "Feel like a real earth magician."
+  - "Shake the ground, throw it up in front of you, together with all enemies! "
 
 ASTRAL_PET:
   name: "Scroll of Astral pet"
   lore:
-    - "Astral pet scroll"
+    - "Summon a faithful helper over your head!"
+    - "And it will help you defeat hostile creatures. "
 
 METEORITE:
-  name: "Scroll of Meteorite"
+  name: "Meteor Summon Scroll"
   lore:
-    - "Meteorite scroll"
+    - "One wave of this scroll and a meteorite is already falling on the specified place. "
+    - "It's time to hide."
 
 SPECTRAL_SHIELD:
-  name: "Scroll of Spectral shield"
+  name: "Spectral Shield Scroll"
   lore:
-    - "Spectral shield scroll"
+    - "Turn all projectiles flying at you into harmless bats. "
+    - "There are no victims, only creation!"
 
 AIR_TRAP:
-  name: "Scroll of Air Trap"
+  name: "Air Capture Scroll"
   lore:
-    - "Air Trap scroll"
+    - "Slowly lift the enemy up, and then-throw it away from you."
+    - "But if you hit an enemy at this point it will take double damage. "
 
 CONFUSED:
-  name: "Scroll of Confuse"
+  name: "Scroll of Confusion"
   lore:
-    - "Confused scroll"
+    - "Immerse the enemy in a series of chaotic movements."
+    - "Ha-ha! Now he can't control his body!"
+    - "Only a few seconds, though..."
 
 
 #Items
