@@ -144,7 +144,7 @@ public class ACCrafts {
                 ItemMeta meta = item.getItemMeta();
                 meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
                 List<String> loreL = new ArrayList<>(langF.getStringList(this.name() + ".lore"));
-                loreL.add(ChatColor.GREEN + "0");
+                loreL.add(ChatColor.GREEN + "0 " + LangVar.msg_lvl.getVar() + "(0)");
                 loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
                 meta.setLore(loreL);

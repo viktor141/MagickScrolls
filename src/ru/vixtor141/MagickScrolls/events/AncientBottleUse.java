@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.utils.AncientBottleLogic;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,58 +34,51 @@ public class AncientBottleUse implements Listener {
         ItemStack artefact = getPlayerMana(player).getAncientBottleInventory().getArtefact();
         Inventory inventory = event.getClickedInventory();
 
-        ItemStack itemStack = event.getCurrentItem();
-        int levelNeed = itemStack.getAmount();
+        int levelNeed = event.getCurrentItem().getAmount();
         String string = levelNeed == 1? LangVar.msg_lvl.getVar() : LangVar.msg_lvls.getVar();
+        ItemMeta itemMeta = artefact.getItemMeta();
+        List<String> lore = itemMeta.getLore();
+        AncientBottleLogic ancientBottleLogic = new AncientBottleLogic(player, Integer.parseInt(lore.get(lore.size() - 3).substring(2).split(" ")[0]));
+
+        boolean flag = false;
         if(event.getSlot() < 3){
-            if(levelNeed < 64){
-                if(player.getLevel() >= levelNeed){
-                    levelMove(player, levelNeed, artefact, inventory);
-                }else {
-                    player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() + " " + string);
-                }
-            }else {
-                levelMove(player, player.getLevel(), artefact, inventory);
+            switch (levelNeed){
+                case 1:
+                    flag = ancientBottleLogic.moveLevel();
+                break;
+                case 10:
+                    flag = ancientBottleLogic.moveTenLevels();
+                break;
+                case 64:
+                    flag = ancientBottleLogic.moveAll();
+                break;
+            }
+            if(!flag){
+                player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() + " " + string);
             }
         }else if (event.getSlot() > 5){
-            ItemMeta itemMeta = artefact.getItemMeta();
-            int lvlNow = Integer.parseInt(itemMeta.getLore().get(itemMeta.getLore().size() - 3).substring(2));
-            if(levelNeed < 64){
-                if(lvlNow >= levelNeed){
-                    levelTake(player, levelNeed, artefact, inventory);
-                }else {
-                    player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() +" " + string);
-                }
-            }else {
-                levelTake(player, lvlNow, artefact, inventory);
+            switch (levelNeed){
+                case 1:
+                    flag = ancientBottleLogic.takeLevel();
+                    break;
+                case 10:
+                    flag = ancientBottleLogic.takeTenLevels();
+                    break;
+                case 64:
+                    flag = ancientBottleLogic.takeAll();
+                    break;
             }
-
+            if(!flag){
+                player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() + " " + string);
+            }
+        }
+        if(flag){
+            lore.set(lore.size() - 3, ChatColor.GREEN + "" + ancientBottleLogic.getExpInBottle() + " " + LangVar.msg_lvl.getVar() + "(" + ancientBottleLogic.levelCalc() + ")");
+            itemMeta.setLore(lore);
+            artefact.setItemMeta(itemMeta);
+            inventory.setItem(4, artefact);
         }
 
-    }
-
-    private void levelMove(Player player, int lvl, ItemStack itemStack, Inventory inventory){
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        List<String> lore = itemMeta.getLore();
-        int savedLevelInBottle = Integer.parseInt(lore.get(lore.size() - 3).substring(2));
-        savedLevelInBottle += lvl;
-        lore.set(lore.size() - 3, ChatColor.GREEN + "" + savedLevelInBottle);
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-        player.setLevel(player.getLevel() - lvl);
-        inventory.setItem(4, itemStack);
-    }
-
-    private void levelTake(Player player, int lvl, ItemStack itemStack, Inventory inventory){
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        List<String> lore = itemMeta.getLore();
-        int savedLevelInBottle = Integer.parseInt(lore.get(lore.size() - 3).substring(2));
-        savedLevelInBottle -= lvl;
-        lore.set(lore.size() - 3, ChatColor.GREEN + "" + savedLevelInBottle);
-        itemMeta.setLore(lore);
-        itemStack.setItemMeta(itemMeta);
-        player.setLevel(player.getLevel() + lvl);
-        inventory.setItem(4, itemStack);
     }
 
     @EventHandler
@@ -133,4 +127,29 @@ public class AncientBottleUse implements Listener {
         }
 
     }
+
+     /*if(event.getSlot() < 3){
+        if(levelNeed < 64){
+            if(player.getLevel() >= levelNeed){
+                levelMove(player, levelNeed, artefact, inventory);
+            }else {
+                player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() + " " + string);
+            }
+        }else {
+            levelMove(player, player.getLevel(), artefact, inventory);
+        }
+    }else if (event.getSlot() > 5){
+        ItemMeta itemMeta = artefact.getItemMeta();
+        int lvlNow = Integer.parseInt(itemMeta.getLore().get(itemMeta.getLore().size() - 3).substring(2));
+        if(levelNeed < 64){
+            if(lvlNow >= levelNeed){
+                levelTake(player, levelNeed, artefact, inventory);
+            }else {
+                player.sendMessage(ChatColor.RED + LangVar.msg_ne.getVar() +" " + string);
+            }
+        }else {
+            levelTake(player, lvlNow, artefact, inventory);
+        }
+
+    }*/
 }

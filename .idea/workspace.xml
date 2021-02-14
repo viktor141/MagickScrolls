@@ -10,8 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/PlaceholderAPI_2_10_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en_US.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagickScrolls.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagickScrolls.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/commands/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/commands/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AncientBottleUse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AncientBottleUse.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +61,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562188576275" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Шаблоны" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../testpluginserver/plugins/PlaceholderAPI-2.10.9.jar" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -72,11 +80,11 @@
   </component>
   <component name="RunManager" selected="JAR Application.server on linux">
     <configuration name="server on linux" type="JarApplication">
-      <option name="JAR_PATH" value="$USER_HOME$/testpluginserver/spigot-1.12.2.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../testpluginserver/spigot-1.12.2.jar" />
       <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8 -Xmx1048M" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/testpluginserver/" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../testpluginserver/" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="1.8.0_242" />
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8.0" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
           <artifact name="MagickScrolls" />
@@ -84,7 +92,7 @@
       </method>
     </configuration>
     <configuration name="server" type="JarApplication">
-      <option name="JAR_PATH" value="$USER_HOME$/testpluginserver/spigot-1.12.2.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../testpluginserver/spigot-1.12.2.jar" />
       <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8 -Xmx1048M" />
       <option name="WORKING_DIRECTORY" value="C:\Users\vikto\Desktop\testpluginserver\" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -145,5 +153,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

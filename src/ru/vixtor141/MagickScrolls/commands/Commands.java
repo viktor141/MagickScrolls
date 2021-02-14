@@ -240,7 +240,7 @@ public class Commands implements CommandExecutor {
 
     private boolean helpMS(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls help
         String[] string = {
-                ChatColor.GREEN + "/magickscrolls give <nick> <scroll> [amount]" + ChatColor.YELLOW + LangVar.msg_gaswyt.getVar(),
+                ChatColor.GREEN + "/magickscrolls give <nick> <item> [amount]" + ChatColor.YELLOW + LangVar.msg_gaswyt.getVar(),
                 ChatColor.GREEN + "/magickscrolls heal [nick]" + ChatColor.YELLOW + LangVar.msg_raym.getVar(),
                 ChatColor.GREEN + "/magickscrolls cdreset [nick] [scroll] [seconds]" + ChatColor.YELLOW + LangVar.msg_sycdttdsotz.getVar(),
                 ChatColor.GREEN + "/magickscrolls getinfo <nick>" + ChatColor.YELLOW + LangVar.msg_giap.getVar(),
