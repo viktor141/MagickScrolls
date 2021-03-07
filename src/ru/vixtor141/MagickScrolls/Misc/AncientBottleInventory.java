@@ -8,6 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 public class AncientBottleInventory {
 
@@ -25,7 +26,7 @@ public class AncientBottleInventory {
             new ItemStack(Material.CONCRETE, 1, (short) 14)};
 
     public AncientBottleInventory(Player player){
-        inventory = Bukkit.createInventory(player, 9);
+        inventory = Bukkit.createInventory(player, 9, Research.ANCIENT_BOTTLE.getStandName());
         for(int i = 0; i < 3; i++){
             inventory.setItem(i, setAdd(i));
         }

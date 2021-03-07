@@ -7,6 +7,7 @@ import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.updateItemInInventory;
@@ -18,13 +19,12 @@ public class MagicScrollResearch implements ResearchI {
     private int count = 0;
 
     public MagicScrollResearch(PlayerResearch playerResearch){
-        this.playerResearch = playerResearch;
-        upgrade();
+        this(playerResearch, new HashMap<>());
     }
 
-    public MagicScrollResearch(PlayerResearch playerResearch, FileConfiguration fileConfiguration){
+    public MagicScrollResearch(PlayerResearch playerResearch, HashMap<String, Integer>  map){
         this.playerResearch = playerResearch;
-        loadResearchData(fileConfiguration);
+        if(!map.isEmpty())loadResearchData(map);
         upgrade();
     }
 
@@ -55,11 +55,13 @@ public class MagicScrollResearch implements ResearchI {
     }
 
     @Override
-    public void saveResearchData(FileConfiguration fileConfiguration) {
-        fileConfiguration.set(research.name() + ".uses", count);
+    public HashMap<String, Integer> saveResearchData() {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put(research.name() + "_uses", count);
+        return hashMap;
     }
 
-    private void loadResearchData(FileConfiguration fileConfiguration){
-        count = fileConfiguration.getInt(research.name() + ".uses");
+    private void loadResearchData(HashMap<String, Integer>  map){
+        count = map.get(research.name() + "_uses");
     }
 }

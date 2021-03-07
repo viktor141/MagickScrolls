@@ -1,13 +1,14 @@
 package ru.vixtor141.MagickScrolls.research;
 
-import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
+import ru.vixtor141.MagickScrolls.Misc.RandomStuff;
+import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 
 import java.util.List;
 
 public class ResearchBookUpdater {
 
-    public ResearchBookUpdater(Inventory inventory, List<Boolean> researches) {
+    public ResearchBookUpdater(Inventory inventory, List<Boolean> researches, List<ResearchI> activeResearch) {
         for (Research research : Research.values()) {
             boolean flag = true;
             for(Research neededResearch: research.getNeededResearch()) {
@@ -16,15 +17,17 @@ public class ResearchBookUpdater {
                     break;
                 }
             }
-            if (flag) {
+            if (flag && activeResearch.get(research.ordinal()) == null) {
                 if (researches.get(research.ordinal())) {
-                    inventory.setItem(research.getPosition(), research.getResearchItem(ChatColor.GREEN + "✔"));
+                    inventory.setItem(research.getPosition(), research.getResearchItem(true));
                 } else {
-                    if(!inventory.getItem(research.getPosition()).getType().equals(research.getMaterialType())) {
-                        inventory.setItem(research.getPosition(), research.getResearchItem(ChatColor.RED + "✖"));
+                    if(!inventory.getItem(research.getPosition()).equals(research.getResearchItem(false))) {
+                        inventory.setItem(research.getPosition(), research.getResearchItem(false));
                     }
                 }
 
+            }else if(activeResearch.get(research.ordinal()) == null){
+                inventory.setItem(research.getPosition(), RandomStuff.standardGuiCell());
             }
         }
     }

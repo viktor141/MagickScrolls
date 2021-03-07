@@ -107,7 +107,7 @@ public class CauldronCrafting implements Runnable{
         location.getWorld().spawnParticle(Particle.END_ROD, location, 15, 0,0,0, 0.1);
         location.getWorld().spawnParticle(Particle.SPELL_INSTANT, location, 15, 0,0,0, 0.1);
         location.getWorld().spawnParticle(Particle.DRAGON_BREATH, location, 15, 0,0,0, 0.1);
-        location.getWorld().spawnParticle(Particle.SPELL_WITCH, location, 15, 0,0,0, 0.1);
+        location.getWorld().spawnParticle(Particle.SPELL_WITCH, location, 15, 1,1,1, 0.1);
         location.add(0,-0.3,0);
         block.setData((byte)( block.getData() - 1));
         Item entityItem = location.getWorld().dropItem(location, craftResult);

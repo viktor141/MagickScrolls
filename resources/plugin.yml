@@ -1,6 +1,6 @@
 name: MagickScrolls
 main: ru.vixtor141.MagickScrolls.Main
-version: "1.8"
+version: "2.1"
 author: vixtor141
 
 softdepend: [PlaceholderAPI]
@@ -14,7 +14,7 @@ permissions:
   magickscrolls.give:
     description: giving a permission on /magickscolls give
   magickscrolls.give.artifact:
-    description: giving a permission on /magickscolls give for artifacts(Items crafts in cauldron)
+    description: giving a permission on /magickscolls give for artifacts
   magickscrolls.heal:
     description: giving a permission on /magickscolls heal
   magickscrolls.cdreset:
@@ -32,36 +32,48 @@ permissions:
   magickscrolls.reload:
     description: giving a permission on /magickscolls reload
   magickscrolls.setcurrent:
-    description: giving a permission on /magickscolls setcurrent
+    description: giving a permission on /magickscolls setcur
   magickscrolls.setmax:
     description: giving a permission on /magickscolls setmax
+  magickscrolls.aspect.add:
+    description: giving a permission on /magickscolls aspect add
+  magickscrolls.aspect.set:
+    description: giving a permission on /magickscolls aspect set
+  magickscrolls.other.aspect.add:
+    description: giving a permission on /magickscolls aspect add for other players
+  magickscrolls.other.aspect.set:
+    description: giving a permission on /magickscolls aspect set for other players
+  magickscrolls.research:
+    description: giving a permission on /magickscolls aspect set for other players
+  magickscrolls.research.other:
+    description: giving a permission on /magickscolls aspect set for other players
   magickscrolls.give.scroll.ARROWSTORM:
-    description: giving a permission on /magickscolls give <nick> ARROWSTORM
+    description: giving a permission on /magickscolls give <player> ARROWSTORM
   magickscrolls.give.scroll.LIGHTNINGONE:
-    description: giving a permission on /magickscolls give <nick> LIGHTNINGONE
+    description: giving a permission on /magickscolls give <player> LIGHTNINGONE
   magickscrolls.give.scroll.LIGHTNINGTWO:
-    description: giving a permission on /magickscolls give <nick> LIGHTNINGTWO
+    description: giving a permission on /magickscolls give <player> LIGHTNINGTWO
   magickscrolls.give.scroll.LIGHTNINGTHREE:
-    description: giving a permission on /magickscolls give <nick> LIGHTNINGTHREE
+    description: giving a permission on /magickscolls give <player> LIGHTNINGTHREE
   magickscrolls.give.scroll.NECROMANCY:
-    description: giving a permission on /magickscolls give <nick> NECROMANCY
+    description: giving a permission on /magickscolls give <player> NECROMANCY
   magickscrolls.give.scroll.TELEPORTATION:
-    description: giving a permission on /magickscolls give <nick> TELEPORTATION
+    description: giving a permission on /magickscolls give <player> TELEPORTATION
   magickscrolls.give.scroll.VAMPIRIC:
-    description: giving a permission on /magickscolls give <nick> VAMPIRIC
+    description: giving a permission on /magickscolls give <player> VAMPIRIC
   magickscrolls.give.scroll.VORTEX:
-    description: giving a permission on /magickscolls give <nick> VORTEX
+    description: giving a permission on /magickscolls give <player> VORTEX
   magickscrolls.give.scroll.SPIDERWEB:
-    description: giving a permission on /magickscolls give <nick> SPIDERWEB
+    description: giving a permission on /magickscolls give <player> SPIDERWEB
   magickscrolls.give.scroll.TRAP:
-    description: giving a permission on /magickscolls give <nick> TRAP
+    description: giving a permission on /magickscolls give <player> TRAP
   magickscrolls.give.scroll.EARTH:
-    description: giving a permission on /magickscolls give <nick> EARTH
+    description: giving a permission on /magickscolls give <player> EARTH
   magickscrolls.give.scroll.ASTRAL_PET:
-    description: giving a permission on /magickscolls give <nick> ASTRAL PET
+    description: giving a permission on /magickscolls give <player> ASTRAL PET
   magickscrolls.give.scroll.SPECTRAL_SHIELD:
-    description: giving a permission on /magickscolls give <nick> SPECTRAL SHIELD
+    description: giving a permission on /magickscolls give <player> SPECTRAL SHIELD
   magickscrolls.give.scroll.AIR_TRAP:
-    description: giving a permission on /magickscolls give <nick> AIR TRAP
+    description: giving a permission on /magickscolls give <player> AIR TRAP
   magickscrolls.give.scroll.CONFUSED:
-    description: giving a permission on /magickscolls give <nick> CONFUSED
+    description: giving a permission on /magickscolls give <player> CONFUSED

@@ -13,14 +13,15 @@ import java.util.Random;
 public class DodgeMove implements BossSkill {
 
     private final Skill skill = Skill.MOVE_DODGE;
-    private final Entity entity;
+    private final Entity entity, damageE;
     private final BukkitTask bukkitTask;
     private int counter = 0;
     private final Boss boss;
 
-    public DodgeMove(Entity entity, Boss boss){
+    public DodgeMove(Entity entity, Boss boss, Entity damageE){
         this.entity = entity;
         this.boss = boss;
+        this.damageE = damageE;
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getPlugin(), this::setRandomVector, 0, 20);
     }
 
@@ -28,7 +29,9 @@ public class DodgeMove implements BossSkill {
         if(counter > skill.getTime(boss) && entity.isDead()){
             bukkitTask.cancel();
         }
-        entity.setVelocity(new Vector(new Random().nextInt(10) - 5, new Random().nextInt(2) + 0.5, new Random().nextInt(10) - 5).normalize());
+        if(!damageE.isDead()){
+            entity.setVelocity(damageE.getLocation().subtract(entity.getLocation()).toVector().normalize());
+        }
         counter++;
     }
 

@@ -13,6 +13,7 @@ import ru.vixtor141.MagickScrolls.artifacts.AncientBottle;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 import ru.vixtor141.MagickScrolls.research.Research;
 import ru.vixtor141.MagickScrolls.scrolls.*;
+import ru.vixtor141.MagickScrolls.utils.HeadGetter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,13 +165,39 @@ public class ACCrafts {
         MANA_SHIELD{
             @Override
             public Research[] getResearch() {
-                return new Research[]{Research.MANA_SHIELD};
+                return new Research[]{Research.MANA_SHIELD_II};
             }
         },
         MAGNET{
             @Override
             public Research[] getResearch() {
-                return new Research[]{Research.MAGNET};
+                return new Research[]{Research.MAGNET_II};
+            }
+        },
+        BRAIN{
+            @Override
+            public Research[] getResearch() {
+                return new Research[]{};
+            }
+
+            @Override
+            public boolean isIgnoreRecipe(){
+                return true;
+            }
+
+            @Override
+            public ItemStack craftCauldronGetItem(){
+                ItemStack item = new HeadGetter("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmRkM2IwMWVjMzJmM2Y1ZWEyNmFkNGUyMzMwNTQwMWY3M2QxM2YzYzE2YjNmYWNlZmU3MGQ5MjE3NmIzMTEifX19").getHead();
+                ItemMeta meta = item.getItemMeta();
+                meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
+                List<String> loreL = new ArrayList<>(langF.getStringList( this.name() +".lore"));
+                loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
+                loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
+                meta.setLore(loreL);
+                meta.addEnchant(Enchantment.DURABILITY, 1,true);
+                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                item.setItemMeta(meta);
+                return item;
             }
         };
 
@@ -330,6 +357,10 @@ public class ACCrafts {
                 return false;
             }
             return true;
+        }
+
+        public ItemStack getItem(){
+            return ItemsCauldronCrafts.valueOf(this.name()).craftCauldronGetItem();
         }
     }
 }

@@ -9,15 +9,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.*;
+import ru.vixtor141.MagickScrolls.aspects.Aspect;
+import ru.vixtor141.MagickScrolls.aspects.PlayerAspectStorage;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
+import ru.vixtor141.MagickScrolls.research.Research;
 
 public class Commands implements CommandExecutor {
 
     private final Main plugin = Main.getPlugin();
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {//сделать команду релоада
+    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(args.length == 0)return helpMS(commandSender, command, s, args);
         switch (args[0].toLowerCase()){
             case "give": return givingCommand(commandSender, command, s, args);
@@ -29,6 +32,8 @@ public class Commands implements CommandExecutor {
             case "reload": return reloadConfiguration(commandSender, command, s, args);
             case "setcur": return setCurrentMana(commandSender, command, s, args);
             case "setmax": return setMaxMana(commandSender, command, s, args);
+            case "aspect": return aspect(commandSender, command, s, args);
+            case "research": return research(commandSender, command, s, args);
         }
         return false;
     }
@@ -47,7 +52,14 @@ public class Commands implements CommandExecutor {
         }
 
         int amount = 1;
-        if(args.length == 4)amount = Integer.parseInt(args[3]);
+        if(args.length == 4){
+            try{
+                amount = Integer.parseInt(args[3]);
+            }catch (NumberFormatException exception){
+                commandSender.sendMessage(ChatColor.RED + LangVar.msg_nan.getVar());
+                return true;
+            }
+        }
 
         if(commandSender instanceof Player && commandSender != player){
             if(!commandSender.hasPermission("magickscrolls.give.other")){
@@ -158,7 +170,12 @@ public class Commands implements CommandExecutor {
             player = (Player) commandSender;
         }
         if(args.length == 4){
-            setSecond = Integer.parseInt(args[3]);
+            try{
+                setSecond = Integer.parseInt(args[3]);
+            }catch (NumberFormatException exception){
+                commandSender.sendMessage(ChatColor.RED + LangVar.msg_nan.getVar());
+                return true;
+            }
         }
 
 
@@ -248,6 +265,8 @@ public class Commands implements CommandExecutor {
                 ChatColor.GREEN + "/magickscrolls setmax <nick> <number>" + ChatColor.YELLOW + LangVar.msg_smmfp.getVar(),
                 ChatColor.GREEN + "/magickscrolls setcur <nick> <number>" + ChatColor.YELLOW + LangVar.msg_scmfp.getVar(),
                 ChatColor.GREEN + "/magickscrolls reload" + ChatColor.YELLOW + LangVar.msg_rac.getVar(),
+                ChatColor.GREEN + "/magickscrolls research <player> <research/all> <true/false>" + ChatColor.YELLOW + LangVar.msg_srv.getVar(),
+                ChatColor.GREEN + "/magickscrolls aspect <add/set> <player> <aspect/all> <number>" + ChatColor.YELLOW + LangVar.msg_gostav.getVar(),
                 ChatColor.GREEN + "/magickscrolls help" + ChatColor.YELLOW + LangVar.msg_tp.getVar()
         };
         commandSender.sendMessage(string);
@@ -279,14 +298,23 @@ public class Commands implements CommandExecutor {
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
+        if(player == null){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_pino.getVar());
+            return true;
+        }
 
         Mana playerMana = getPlayerMana(player, commandSender);
-        playerMana.setMaxMana(Integer.parseInt(args[2]));
+        try{
+            playerMana.setMaxMana(Integer.parseInt(args[2]));
+        }catch (NumberFormatException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_nan.getVar());
+            return true;
+        }
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }
 
-    private boolean setCurrentMana(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls setcur <player> <number>
+    private boolean setCurrentMana(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls setcur '<player> <number>'
         if(args.length != 3){
             return false;
         }
@@ -296,8 +324,17 @@ public class Commands implements CommandExecutor {
             return true;
         }
         Player player = Bukkit.getPlayer(args[1]);
+        if(player == null){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_pino.getVar());
+            return true;
+        }
         Mana playerMana = getPlayerMana(player, commandSender);
-        playerMana.setCurrentMana(Integer.parseInt(args[2]));
+        try {
+            playerMana.setCurrentMana(Integer.parseInt(args[2]));
+        }catch (NumberFormatException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_nan.getVar());
+            return true;
+        }
         commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_s.getVar());
         return true;
     }
@@ -308,6 +345,133 @@ public class Commands implements CommandExecutor {
             throw new NullPointerException();
         }
         return (Mana) player.getMetadata("MagickScrollsMana").get(0).value();
+    }
+
+    private boolean aspect(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls aspect <add/remove/set> <player> <aspect/all> <number>
+        if(args.length != 5){
+            return false;
+        }
+        Player player = Bukkit.getPlayer(args[2]);
+        if(player == null){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_pino.getVar());
+            return true;
+        }
+        String other = "";
+        if(commandSender instanceof Player && commandSender != player){
+            other = "other.";
+        }
+        Mana playerMana = getPlayerMana(player, commandSender);
+        PlayerAspectStorage playerAspectsStorage = playerMana.getPlayerAspectsStorage();
+
+        try {
+            int num = Integer.parseInt(args[4]);
+            if (!args[3].equals("all")) {
+                String aspectS = args[3].toLowerCase();
+                Aspect aspect = Aspect.valueOf(aspectS.substring(0,1).toUpperCase() + aspectS.substring(1));
+                switch (args[1]) {
+                    case "add":
+                        if (permissionCheck(other + "aspect.add", commandSender)) return true;
+                        if (num < 0 && playerAspectsStorage.getAspects()[aspect.ordinal()] < Math.abs(num)) {
+                            commandSender.sendMessage(ChatColor.RED + LangVar.msg_siltz.getVar());
+                            return true;
+                        }
+                        playerAspectsStorage.addAspect(aspect, num);
+                        break;
+                    case "set":
+                        if (permissionCheck(other + "aspect.set", commandSender)) return true;
+                        if(num < 0){
+                            commandSender.sendMessage(ChatColor.RED + LangVar.msg_niltz.getVar());
+                            return true;
+                        }
+                        playerAspectsStorage.setAspect(aspect, num);
+                        break;
+                }
+            }else {
+                switch (args[1]) {
+                    case "add":
+                        if (permissionCheck(other + "aspect.add", commandSender)) return true;
+                        for(Aspect aspect: Aspect.values()){
+                            if (num < 0 && playerAspectsStorage.getAspects()[aspect.ordinal()] < Math.abs(num)){
+                                playerAspectsStorage.setAspect(aspect, 0);
+                                continue;
+                            }
+                            playerAspectsStorage.addAspect(aspect, num);
+                        }
+                        break;
+                    case "set":
+                        if (permissionCheck(other + "aspect.set", commandSender)) return true;
+                        if(num < 0){
+                            commandSender.sendMessage(ChatColor.RED + LangVar.msg_niltz.getVar());
+                            return true;
+                        }
+                        for(Aspect aspect: Aspect.values()){
+                            playerAspectsStorage.setAspect(aspect, num);
+                        }
+                        break;
+                }
+            }
+        }catch (NumberFormatException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_nan.getVar());
+            return true;
+        }catch (IllegalArgumentException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_tadne.getVar());
+            return true;
+        }
+
+        commandSender.sendMessage(ChatColor.GREEN + LangVar.msg_suc.getVar());
+
+        return true;
+    }
+
+    private boolean permissionCheck(String s, CommandSender commandSender){
+        if(!commandSender.hasPermission("magickscrolls." + s)){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean research(CommandSender commandSender, Command command, String s, String[] args){//magickscrolls research <player> <research> <true/false>
+        if(args.length != 4){
+            return false;
+        }
+
+        Player player = Bukkit.getPlayer(args[1]);
+        if(player == null){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_pino.getVar());
+            return true;
+        }
+        String other = "";
+        if(commandSender instanceof Player && commandSender != player){
+            other = ".other";
+        }
+
+        if(permissionCheck("research" + other, commandSender)){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_ydhp.getVar());
+            return true;
+        }
+
+        try {
+            boolean flag = Boolean.parseBoolean(args[3]);
+            if(!args[2].equals("all")) {
+                Research research = Research.valueOf(args[2].toUpperCase());
+                getPlayerMana(player, commandSender).getPlayerResearch().setResearchStatus(research, flag);
+            }else {
+                for(Research research: Research.values()){
+                    getPlayerMana(player, commandSender).getPlayerResearch().getResearches().set(research.ordinal(), flag);
+                }
+                getPlayerMana(player, commandSender).getPlayerResearch().bookUpdate();
+            }
+        }catch (NumberFormatException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_nabf.getVar());
+            return true;
+        }catch (IllegalArgumentException exception){
+            commandSender.sendMessage(ChatColor.RED + LangVar.msg_trdne.getVar());
+            return true;
+        }
+
+        commandSender.sendMessage(ChatColor.GREEN + args[2] + " " + LangVar.msg_ist.getVar() + " " + args[3]);
+        return true;
     }
 
 }

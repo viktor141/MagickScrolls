@@ -64,7 +64,7 @@ public class Imp {
        int chance = new Random().nextInt(100);
        if(chance < Skill.MOVE_DODGE.getChance(boss)){
            if(dodgeMove == null || dodgeMove.getBukkitTask().isCancelled()) {
-               dodgeMove = new DodgeMove(angryIMP, boss);
+               dodgeMove = new DodgeMove(angryIMP, boss, event.getDamager());
            }
        }
        if(chance < Skill.DAMAGE_DODGE.getChance(boss)){

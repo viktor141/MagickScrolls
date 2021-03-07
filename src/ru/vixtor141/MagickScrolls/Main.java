@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
     private boolean manaMessage;
     private final int subStr = 4;
     private long timeInterval;
+    private DataBase dataBase;
 
     public Main (){
         plugin = this;
@@ -36,6 +37,10 @@ public class Main extends JavaPlugin {
 
     public static Main getPlugin(){
         return plugin;
+    }
+
+    public DataBase getDataBase() {
+        return dataBase;
     }
 
     public int getSubStr(){
@@ -102,6 +107,14 @@ public class Main extends JavaPlugin {
 
         initIOWork();
 
+        if(getConfig().getBoolean("useDB")) {
+            try {
+                dataBase = new DataBase();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
         readManaMessageSetting();
 
         this.getCommand("magickScrolls").setExecutor(new Commands());
@@ -117,8 +130,13 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Player player: Bukkit.getOnlinePlayers()){
-            getPlayerMana(player).cancelTask();
-            ioWork.savePlayerStats(player);
+            Mana playerMana = getPlayerMana(player);
+            playerMana.cancelTask();
+            if(Main.getPlugin().getConfig().getBoolean("useDB")){
+                getDataBase().saveDataToDB(playerMana);
+            }else {
+                ioWork.savePlayerStats(player);
+            }
         }
         for(CleanUpTask cleanUpTask : getCleanUpTasks()){
             cleanUpTask.getsWebTask().cancel();
@@ -167,6 +185,8 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ManaShieldEvent(), this);
         Bukkit.getPluginManager().registerEvents(new MagnetRingEvents(), this);
         Bukkit.getPluginManager().registerEvents(new AccessoriesInventoryListener(), this);
+        Bukkit.getPluginManager().registerEvents(new AspectsAdd(), this);
+        Bukkit.getPluginManager().registerEvents(new DropCustomItems(), this);
     }
 
     private void readManaMessageSetting(){

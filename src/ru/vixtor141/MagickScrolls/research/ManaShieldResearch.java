@@ -1,41 +1,30 @@
 package ru.vixtor141.MagickScrolls.research;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.EntityType;
 import ru.vixtor141.MagickScrolls.Misc.TypeOfResearchQuest;
 import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.updateItemInInventory;
-import static ru.vixtor141.MagickScrolls.Misc.CheckUp.updateKills;
 
 public class ManaShieldResearch implements ResearchI {
 
     private final Research research = Research.MANA_SHIELD;
     private final PlayerResearch playerResearch;
-    private boolean killed = false, blocked = false;
+    private boolean blocked = false;
     private int blockedDamage = 0;
-    private final Map<EntityType, Integer> maxTypeIntegerMap;
-    private final int[] currentKills;
 
     public ManaShieldResearch(PlayerResearch playerResearch){
-        this(playerResearch, null);
+        this(playerResearch, new HashMap<>());
     }
 
-    public ManaShieldResearch(PlayerResearch playerResearch, FileConfiguration fileConfiguration){
+    public ManaShieldResearch(PlayerResearch playerResearch, HashMap<String, Integer>  map){
         this.playerResearch = playerResearch;
-        maxTypeIntegerMap = research.getCountOfMaxMobs();
-        currentKills = new int[maxTypeIntegerMap.size()];
-        for(int i = 0; i < maxTypeIntegerMap.size(); i++){
-            currentKills[i] = 0;
-        }
-        if(fileConfiguration != null)loadResearchData(fileConfiguration);
-        updateKilled();
+        if(!map.isEmpty())loadResearchData(map);
         updateBlockedDamage();
         upgrade();
     }
@@ -47,28 +36,11 @@ public class ManaShieldResearch implements ResearchI {
 
     @Override
     public void update(TypeOfResearchQuest typeOfResearchQuest, int number, int position) {
-        switch (typeOfResearchQuest){
-            case MOB_KIll:
-                currentKills[position] += number;
-                updateKilled();
-                break;
-            case BLOCKED_DAMAGE:
-                blockedDamage += number;
-                updateBlockedDamage();
-                break;
+        if(typeOfResearchQuest == TypeOfResearchQuest.BLOCKED_DAMAGE) {
+            blockedDamage += number;
+            updateBlockedDamage();
         }
         upgrade();
-    }
-
-    private void updateKilled () {
-        boolean currentCheck = true;
-        for (int i = 0; i < maxTypeIntegerMap.size(); i++) {
-            if (currentKills[i] < (int) maxTypeIntegerMap.values().toArray()[i]) {
-                currentCheck = false;
-                break;
-            }
-        }
-        killed = currentCheck;
     }
 
     private void updateBlockedDamage(){
@@ -78,30 +50,27 @@ public class ManaShieldResearch implements ResearchI {
     }
 
     private void upgrade () {
-        updateDataInItem();
-        if (killed && blocked) {
+        if (blocked) {
             playerResearch.endResearch(research);
+        }else {
+            updateDataInItem();
         }
     }
 
     private void updateDataInItem () {
         List<String> lore = new ArrayList<>();
-        updateKills(lore, maxTypeIntegerMap, currentKills);
         lore.add(ChatColor.AQUA + LangVar.q_ntba.getVar() + ": " + blockedDamage + "/" + research.getMaxSpecific("blockedDamage"));
         updateItemInInventory(playerResearch, research, lore);
     }
 
     @Override
-    public void saveResearchData (FileConfiguration fileConfiguration){
-        fileConfiguration.set(research.name() + ".CurrentKills", currentKills);
-        fileConfiguration.set(research.name() + ".BlockedDamage", blockedDamage);
+    public HashMap<String, Integer> saveResearchData(){
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put(research.name() + "_BlockedDamage", blockedDamage);
+        return hashMap;
     }
 
-    private void loadResearchData (FileConfiguration fileConfiguration){
-        List<Integer> list = fileConfiguration.getIntegerList(research.name() + ".CurrentKills");
-        for (int i = 0; i < list.size(); i++) {
-            currentKills[i] = list.get(i);
-        }
-        blockedDamage = fileConfiguration.getInt(research.name() + ".BlockedDamage");
+    private void loadResearchData (HashMap<String, Integer>  map){
+        blockedDamage = map.get(research.name() + "_BlockedDamage");
     }
 }

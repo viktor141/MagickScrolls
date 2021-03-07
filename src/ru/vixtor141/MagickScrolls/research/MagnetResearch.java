@@ -1,18 +1,15 @@
 package ru.vixtor141.MagickScrolls.research;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.EntityType;
 import ru.vixtor141.MagickScrolls.Misc.TypeOfResearchQuest;
 import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.updateItemInInventory;
-import static ru.vixtor141.MagickScrolls.Misc.CheckUp.updateKills;
 
 
 public class MagnetResearch implements ResearchI {
@@ -20,23 +17,15 @@ public class MagnetResearch implements ResearchI {
     private final Research research = Research.MAGNET;
     private final PlayerResearch playerResearch;
     private int itemCount = 0;
-    private final Map<EntityType, Integer> maxTypeIntegerMap;
-    private final int[] currentKills;
-    private boolean killed, items;
+    private boolean items;
 
     public MagnetResearch(PlayerResearch playerResearch){
-        this(playerResearch, null);
+        this(playerResearch, new HashMap<>());
     }
 
-    public MagnetResearch(PlayerResearch playerResearch, FileConfiguration fileConfiguration){
+    public MagnetResearch(PlayerResearch playerResearch, HashMap<String, Integer>  map){
         this.playerResearch = playerResearch;
-        maxTypeIntegerMap = research.getCountOfMaxMobs();
-        currentKills = new int[maxTypeIntegerMap.size()];
-        for(int i = 0; i < maxTypeIntegerMap.size(); i++){
-            currentKills[i] = 0;
-        }
-        if(fileConfiguration != null)loadResearchData(fileConfiguration);
-        updateKilled();
+        if(!map.isEmpty())loadResearchData(map);
         updatePickup();
         upgrade();
     }
@@ -48,29 +37,11 @@ public class MagnetResearch implements ResearchI {
 
     @Override
     public void update(TypeOfResearchQuest typeOfResearchQuest, int number, int position) {
-        switch (typeOfResearchQuest){
-            case MOB_KIll:
-                currentKills[position] += number;
-                updateKilled();
-                break;
-            case PICKUP_ITEMS:
-                itemCount += number;
-                updatePickup();
-                break;
+        if (typeOfResearchQuest.equals(TypeOfResearchQuest.PICKUP_ITEMS)){
+            itemCount += number;
+            updatePickup();
         }
         upgrade();
-    }
-
-
-    private void updateKilled(){
-        boolean currentCheck = true;
-        for(int i = 0;  i < maxTypeIntegerMap.size(); i++){
-            if(currentKills[i] < (int)maxTypeIntegerMap.values().toArray()[i]){
-                currentCheck = false;
-                break;
-            }
-        }
-        killed = currentCheck;
     }
 
     private void updatePickup(){
@@ -80,30 +51,27 @@ public class MagnetResearch implements ResearchI {
     }
 
     private void upgrade(){
-        updateDataInItem();
-        if(killed && items) {
+        if(items) {
             playerResearch.endResearch(research);
+        }else {
+            updateDataInItem();
         }
     }
 
     private void updateDataInItem(){
         List<String> lore = new ArrayList<>();
-        updateKills(lore, maxTypeIntegerMap, currentKills);
         lore.add(ChatColor.AQUA + LangVar.q_uyl.getVar() + ": " + itemCount + "/" + research.getMaxSpecific("handpickedItems"));
         updateItemInInventory(playerResearch, research, lore);
     }
 
     @Override
-    public void saveResearchData(FileConfiguration fileConfiguration) {
-        fileConfiguration.set(research.name() + ".CurrentKills", currentKills);
-        fileConfiguration.set(research.name() + ".itemCount", itemCount);
+    public HashMap<String, Integer> saveResearchData() {
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put(research.name() + "_itemCount", itemCount);
+        return hashMap;
     }
 
-    private void loadResearchData(FileConfiguration fileConfiguration){
-        List<Integer> list = fileConfiguration.getIntegerList(research.name() + ".CurrentKills");
-        for(int i = 0; i < list.size(); i++){
-            currentKills[i] = list.get(i);
-        }
-        itemCount = fileConfiguration.getInt(research.name() + ".itemCount");
+    private void loadResearchData(HashMap<String, Integer>  map){
+        itemCount = map.get(research.name() + "_itemCount");
     }
 }

@@ -52,6 +52,9 @@ public class CDSystem{
         this.player = player;
         this.playerMana = playerMana;
         this.CDs = new ArrayList<>(CDsValuesLength());
+        for(int i = 0; i<CDsValuesLength(); i++){
+            CDs.add(0);
+        }
     }
 
     public boolean CDStat(Scrolls scroll, double extraConsumedMana, int extraCDSeconds, boolean isDefaultEffect){

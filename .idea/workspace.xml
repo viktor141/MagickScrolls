@@ -10,15 +10,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/MagickScrolls.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/PlaceholderAPI_2_10_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/spigot_1_12_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagickScrolls.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagickScrolls.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/cauldron.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/cauldron.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en_US.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/CDSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/CDSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/IOWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/IOWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Mana.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Misc/AncientBottleInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Misc/AncientBottleInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Misc/CheckUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Misc/CheckUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/bosses/Imp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/bosses/Imp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/bossesSkills/DodgeMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/bossesSkills/DodgeMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/commands/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/commands/Commands.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AncientBottleUse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AncientBottleUse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/CauldronCrafting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/CauldronCrafting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AccessoriesInventoryListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/AccessoriesInventoryListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/BooksInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/BooksInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/CraftStartEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/CraftStartEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/SaveAndLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/interfaces/ResearchI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/interfaces/ResearchI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/inventories/AccessoriesInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/inventories/AccessoriesInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/lang/LangVar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/lang/LangVar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/levels/ShieldManaLevels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/levels/ShieldManaLevels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/mobs/VillagerIMP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/mobs/VillagerIMP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/AncientBottleResearch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/MagicScrollResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/MagicScrollResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/MagnetResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/MagnetResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ManaShieldResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ManaShieldResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/PlayerResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/PlayerResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/Research.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/Research.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ResearchBookUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ResearchBookUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ResearchDataSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/research/ResearchDataSaver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/ritual/RitualBookUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/ritual/RitualBookUpdater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/scrolls/Vampiric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/scrolls/Vampiric.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +80,13 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/viktor141/MagickScrolls" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1OygdtGgpNG9JqlSAot1NltDab5" />
   <component name="ProjectViewState">

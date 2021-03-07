@@ -405,3 +405,8 @@ MAGNET:
   result:
     ==: org.bukkit.inventory.ItemStack
     type: FEATHER
+BRAIN:
+  recipe:
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: STICK

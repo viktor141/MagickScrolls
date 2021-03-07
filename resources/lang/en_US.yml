@@ -14,6 +14,8 @@ msg_raym: " - Regen all your mana"
 msg_sycdttdsotz: " - Sets your CD to the desired seconds or to zero"
 msg_giap: " - Getting info about player"
 msg_tp: " - This page"
+msg_srv: " - Set research value"
+msg_gostav: " - Give or set the aspect value"
 msg_pnf: "Player file not found"
 msg_pdne: "Player doesn't exist"
 msg_ydnhm: "You don't have mana "
@@ -62,7 +64,7 @@ msg_l: "learned"
 in_rt: "Ritual Book"
 in_rb: "Research Book"
 in_msl: "Mana Shield Levels"
-r_nwitcftr: "Needed witches in the coven for the ritual"
+r_nwitcftr: "Needed witches in coven for ritual"
 msg_sr: "selected"
 i_rit: "Needed mana:"
 msg_ingtwtoyiweywcm: "I'm not going to waste time on you, it wasn't even you who called me"
@@ -82,6 +84,19 @@ ims_b: "Bought"
 ims_nyci: "Now your number of blocked attacks"
 msg_as: "Active scrolls: "
 msg_wa: "Wearing artefacts"
+msg_nan: "Not a number"
+msg_suc: "Successful"
+msg_ist: "is set to"
+msg_trdne: "This research does not exist"
+msg_nabf: "Not a bool flag"
+msg_tadne: "This aspect does not exist"
+msg_niltz: "Number is less than zero"
+msg_siltz: "Sum is less than zero"
+in_aspec: "Aspects"
+in_ya: "Your Accessories"
+msg_a: "Amount"
+msg_ctsr: "Click to start research"
+msg_yama: "You are missing aspects"
 imp:
   messages:
   - "Still think your soul belongs to you?"
@@ -403,14 +418,11 @@ ANCIENT_BOTTLE:
 MAGIC_SCROLL:
   name: "Magic of scrolls"
   lore:
-    - "In your head crept suspicions about how you can make crafting more profitable."
-    - "Increases the number of scrolls that can be produced per craft."
+    - "Can i do something useful with scrolls?"
 MANA_SHIELD:
   name: "Magic shield"
   lore:
-    - "Now you think about increase regen your mana."
-    - "Regenerate your mana when block damage."
-    - "But miss 25% of the damage take."
+    - "Maybe I can think of something useful for combat conditions?"
 MANA_SHIELD_LEVELS:
   name: "Magic shield levels"
   lore:
@@ -423,10 +435,28 @@ MAGIC_INVENTORY:
 MAGNET:
   name: "Magnet Feather"
   lore:
-    - "Each time killing the chickens and picking up their feathers."
+    - "Maybe I can pick up items more easily?"
+MAGIC_SCROLL_II:
+  name: "Magic of scrolls"
+  lore:
+    - "In your head crept suspicions about how you can make crafting more profitable."
+    - "Increases the number of scrolls that can be produced per craft."
+MANA_SHIELD_II:
+  name: "Magic shield"
+  lore:
+    - "Now you think about increase regen your mana."
+    - "Regenerate your mana when block damage."
+    - "But miss 25% of the damage take."
+MAGNET_II:
+  name: "Magnet Feather"
+  lore:
     - "You start thinking about how to attract items automatically."
     - "And the magic magnetic feather is what you need."
     - "It's accessory"
+ASPECTS:
+  name: "Aspects"
+  lore:
+    - "Your aspects storage."
 
 ManaShield:
   ZERO: "0 level"

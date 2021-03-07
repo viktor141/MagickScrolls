@@ -49,7 +49,7 @@ public class VillagerIMP {
     }
 
     private void recipeSet(){
-        if(new Random().nextInt(100) < Main.getPlugin().getConfig().getInt("netherStartTrade")){
+        if(new Random().nextInt(100) < Main.getPlugin().getConfig().getInt("netherStarTrade")){
             MerchantRecipe recipe = new MerchantRecipe(new ItemStack(Material.NETHER_STAR), 1);
             recipe.addIngredient(randomRecipeItem());
             recipe.addIngredient(randomRecipeItem());

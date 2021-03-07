@@ -1,6 +1,7 @@
 package ru.vixtor141.MagickScrolls.events;
 
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -11,8 +12,10 @@ import org.bukkit.material.Cauldron;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.crafts.AltarCrafting;
+import ru.vixtor141.MagickScrolls.crafts.AspectCraftingCauldron;
 import ru.vixtor141.MagickScrolls.crafts.CauldronCrafting;
 
+import java.util.Collection;
 import java.util.List;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
@@ -39,7 +42,6 @@ public class CraftStartEvent implements Listener {
     public void cauldronUse(PlayerInteractEvent event){
         if(event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if(event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if(!event.getMaterial().equals(Material.BLAZE_POWDER)) return;
         if(!event.getClickedBlock().getType().equals(Material.CAULDRON)) return;
         if(((Cauldron)(event.getClickedBlock().getState().getData())).isEmpty())return;
         Material material = event.getClickedBlock().getLocation().add(0,-1, 0).getBlock().getState().getType();
@@ -48,8 +50,14 @@ public class CraftStartEvent implements Listener {
 
         event.setCancelled(true);
 
-        Location location = event.getClickedBlock().getLocation().add(0.125,0.125,0.125);
-        new CauldronCrafting(event.getClickedBlock().getWorld().getNearbyEntities(location, 0.75,0.875,0.75), location.add(0.375,1.375,0.375), event.getItem(), event.getPlayer(), event.getClickedBlock());
+        Location location = event.getClickedBlock().getLocation().add(0.5, 0, 0.5);
+        Collection<Entity> collection = event.getClickedBlock().getWorld().getNearbyEntities(location.clone().add(0,0.5625,0), 0.75,0.875,0.75);
+        List<String> lore = event.getItem().getItemMeta().getLore();
+        if(event.getMaterial().equals(Material.BLAZE_POWDER)) {
+            new CauldronCrafting(collection, location.add(0, 1.5, 0), event.getItem(), event.getPlayer(), event.getClickedBlock());
+        }else if(event.getMaterial().equals(Material.STICK) && lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr()).equals(ACCrafts.ItemsCauldronCrafts.MAGIC_STAFF.name())){
+            new AspectCraftingCauldron(collection, location.add(0, 1.5, 0), event.getPlayer(), event.getClickedBlock());
+        }
         //0.125 cauldron wall size
     }
 

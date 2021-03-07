@@ -3,12 +3,14 @@ package ru.vixtor141.MagickScrolls.research;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.OtherResearchBookUpdater;
 import ru.vixtor141.MagickScrolls.interfaces.ResearchI;
 import ru.vixtor141.MagickScrolls.inventories.AccessoriesInventory;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 import ru.vixtor141.MagickScrolls.levels.ShieldManaLevels;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerResearch{
@@ -25,6 +27,7 @@ public class PlayerResearch{
         this.player = playerMana.getPlayer();
         this.playerMana = playerMana;
         researches = new ArrayList<>(Research.values().length);
+        Arrays.stream(Research.values()).forEach(research -> researches.add(false));
         activeResearch = new ArrayList<>();
         for(int i = 0; i < Research.values().length; i++){
             activeResearch.add(null);
@@ -32,11 +35,13 @@ public class PlayerResearch{
         researchBookInventory = new ResearchBook(player).getInventory();
         shieldManaLevels = new ShieldManaLevels(player);
         accessoriesInventory = new AccessoriesInventory(player);
+
     }
 
     public void bookUpdate(){
-        new ResearchBookUpdater(researchBookInventory, researches);
+        new ResearchBookUpdater(researchBookInventory, researches, activeResearch);
         playerMana.getPlayerRitualInventory().bookUpdate();
+        new OtherResearchBookUpdater(researchBookInventory, researches);
     }
 
     public List<Boolean> getResearches() {
@@ -67,7 +72,7 @@ public class PlayerResearch{
         researches.set(research.ordinal(), true);
         activeResearch.set(research.ordinal(), null);
         bookUpdate();
-        player.sendMessage(research.getName() + " " + LangVar.msg_l.getVar());
+        player.sendMessage(research.getStandName() + " " + LangVar.msg_l.getVar());
     }
 
     public Player getPlayer() {
@@ -84,7 +89,7 @@ public class PlayerResearch{
     }
 
     public int getCountOfPaper(){
-        if(researches.get(Research.MAGIC_SCROLL.ordinal())){
+        if(researches.get(Research.MAGIC_SCROLL_II.ordinal())){
             return 24;
         }
         return 16;
@@ -96,5 +101,9 @@ public class PlayerResearch{
 
     public AccessoriesInventory getAccessoriesInventory(){
         return accessoriesInventory;
+    }
+
+    public Mana getPlayerMana(){
+        return playerMana;
     }
 }

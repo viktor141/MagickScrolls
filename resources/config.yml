@@ -6,8 +6,24 @@ messageAboutMana: true
 #Player data save interval in seconds(Default 10 minute)
 saveInterval: 600
 
-#The chance of having the trader nether star(default: 5)
-netherStartTrade: 5
+#The chance of having the IMP nether star(Default: 5)
+netherStarTrade: 5
+
+#The chance of drop brain from mobs(Default: 5%) 0 = off
+dropBrainChance: 5
+
+#DataBase settings
+#Use DataBase or save all data in individual player file (Default: true)
+useDB: true
+#Connect to exist database or create and use local db file (Default: true)
+localFileDB: true
+#Connection settings
+host: localhost
+port: 3306
+dbName: database
+user: user
+password: password
+
 
 #Scrolls settings
 ARROWSTORM:
@@ -26,6 +42,7 @@ VAMPIRIC:
   consumedMana: 6.0
   CDseconds: 6
   damage: 4.0
+  regen: 2.0
 VORTEX:
   consumedMana: 20.0
   CDseconds: 40
@@ -97,22 +114,47 @@ IMP_SUMMON:
   witchesNeed: 4
   needMana: 180
 
+#Researches
 ANCIENT_BOTTLE:
-  mobsToKill:
-    ZOMBIE: 180
-  level: 60
+  neededAspects:
+    Experientia: 2200
+    Vetustus: 568
+    Conruptus: 360
+    Alchemiae: 96
+    Veneficus: 380
+    Cerebrum: 52
 MAGIC_SCROLL:
   uses: 160
 MANA_SHIELD:
-  mobsToKill:
-    EVOKER: 20
-    PLAYER: 25
   blockedDamage: 100 #How many times player must block damage
 MAGNET:
-  mobsToKill:
-    CHICKEN: 120
   handpickedItems: 345 #How many items player must pickup
+MAGIC_SCROLL_II:
+  neededAspects:
+    Veneficus: 350
+    Conruptus: 230
+    Vetustus: 145
+    Instrumentum: 93
+    Ridiculum: 18
+MANA_SHIELD_II:
+  neededAspects:
+    Custodia: 768
+    Tenebras: 48
+    Veneficus: 167
+    Tempus: 689
+    Mirum: 4
+MAGNET_II:
+  neededAspects:
+    Magneto: 567
+    Enucleatus: 246
+    Instrumentum: 67
+    Captionem: 34
+    Tenebras: 2
+    Conscientia: 56
+    Sanctus: 23
 
+
+#Mobs
 IMP:
   skills:
     MOVE_DODGE:
@@ -130,7 +172,7 @@ IMP:
   health: 150
   armor: 7
 
-
+#Other
 ManaShield:
   count: #How many times do need to block damage for each mana shield level
     ZERO: 0
@@ -139,21 +181,21 @@ ManaShield:
     THIRD: 500
     FOURTH: 1000
     FIFTH: 2000
-  damage: #How much damage miss the shield'
+  damage: #How many damage miss the shield'
     ZERO: 0.5
     FIRST: 0.4
     SECOND: 0.35
     THIRD: 0.30
     FOURTH: 0.25
     FIFTH: 0.15
-  regen:  #How much mana regen the shield
+  regen:  #How many mana regen the shield
     ZERO: 0.03
     FIRST: 0.05
     SECOND: 0.07
     THIRD: 0.1
     FOURTH: 0.12
     FIFTH: 0.15
-  xplvl: #How much level need to buy
+  xplvl: #How many level need to buy
     ZERO: 0
     FIRST: 10
     SECOND: 25

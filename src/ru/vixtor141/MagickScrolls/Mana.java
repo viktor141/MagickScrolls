@@ -7,10 +7,12 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 import ru.vixtor141.MagickScrolls.Misc.AncientBottleInventory;
 import ru.vixtor141.MagickScrolls.Misc.FlyingItemsForPlayer;
 import ru.vixtor141.MagickScrolls.Misc.StartEffectForSpectralShield;
+import ru.vixtor141.MagickScrolls.aspects.PlayerAspectStorage;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.interfaces.Ritual;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
@@ -26,7 +28,7 @@ public class Mana implements Runnable{
 
     private final Main plugin = Main.getPlugin();
     private final Player player;
-    private double currentMana, maxMana;
+    private double currentMana = 50, maxMana = 50;
     private final BukkitTask bukkitTask, saveTask;
     private long tupaFixCalledTwice; // fixed a bug when teleport scroll used twice
     private final CDSystem cdSystem;
@@ -35,7 +37,7 @@ public class Mana implements Runnable{
     private ItemStack trapScroll;
     private Ritual ritual = null;
     private boolean inRitualChecker = false, ritualStarted = false;
-    private int spectralShieldSeconds = 0;
+    private int spectralShieldSeconds = 0, individualID;
     private final AtomicBoolean spectralShield = new AtomicBoolean(false);
     private BukkitTask spectralShieldEffectTask;
     private final PlayerResearch playerResearch;
@@ -43,6 +45,7 @@ public class Mana implements Runnable{
     private final PlayerRitualInventory playerRitualInventory;
     private final List<FlyingItemsForPlayer> flyingItemsForPlayer = new ArrayList<>();
     private final List<Boolean> wearingArtefact = new ArrayList<>(ACCrafts.AccessoryArtefact.values().length);
+    private final PlayerAspectStorage playerAspectsStorage;
 
     public Mana(Player player) {
         this.player = player;
@@ -50,15 +53,29 @@ public class Mana implements Runnable{
         this.playerResearch = new PlayerResearch(this);
         this.ancientBottleInventory = new AncientBottleInventory(player);
         this.playerRitualInventory = new PlayerRitualInventory(this);
+        this.playerAspectsStorage = new PlayerAspectStorage(this);
         for(int i = 0; i < ACCrafts.AccessoryArtefact.values().length; i++){
             wearingArtefact.add(false);
         }
         bukkitTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this, 20, 20);
-        saveTask = Bukkit.getScheduler().runTaskTimer(plugin, this::save, 0, plugin.getTimeInterval() * 20);
+        saveTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::save, plugin.getTimeInterval() * 20, plugin.getTimeInterval() * 20);
+        player.setMetadata("MagickScrollsMana", new LazyMetadataValue(Main.getPlugin(), this::getMana));
     }
     
     public Mana getMana(){
         return this;
+    }
+
+    public int getIndividualID(){
+        return individualID;
+    }
+
+    public void setIndividualID(int individualID){
+        this.individualID = individualID;
+    }
+
+    public PlayerAspectStorage getPlayerAspectsStorage() {
+        return playerAspectsStorage;
     }
 
     public List<Boolean> getWearingArtefact(){
@@ -227,7 +244,11 @@ public class Mana implements Runnable{
     }
 
     private void save(){
-        plugin.getIoWork().savePlayerStats(player);
+        if(Main.getPlugin().getConfig().getBoolean("useDB")){
+            plugin.getDataBase().saveDataToDB(this);
+        }else {
+            plugin.getIoWork().savePlayerStats(player);
+        }
     }
 
     public void cancelTask(){

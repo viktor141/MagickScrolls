@@ -4,14 +4,16 @@ import com.google.common.base.Charsets;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.vixtor141.MagickScrolls.Misc.RitualsRecipesStorage;
 import ru.vixtor141.MagickScrolls.Misc.UpdateConfig;
+import ru.vixtor141.MagickScrolls.aspects.Aspect;
+import ru.vixtor141.MagickScrolls.aspects.AspectsInItems;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 import ru.vixtor141.MagickScrolls.crafts.AltarCraftsStorage;
 import ru.vixtor141.MagickScrolls.crafts.CauldronCraftsStorage;
@@ -30,11 +32,12 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class IOWork {
     private final Main plugin = Main.getPlugin();
-    private FileConfiguration recipesCF, lanfCF, ritualsCF, cauldronCF;
+    private FileConfiguration recipesCF, langCF, ritualsCF, cauldronCF, recipeA;
     private CauldronCraftsStorage cauldronCraftsStorage;
     private AltarCraftsStorage altarCraftsStorage;
     private RitualsRecipesStorage ritualsRecipesStorage;
     private ResearchDataSaver researchDataSaver;
+    private AspectsInItems aspectsInItems;
 
     public IOWork() {
         File config = new File(plugin.getDataFolder() + File.separator + "config.yml");
@@ -42,21 +45,42 @@ public class IOWork {
             plugin.getConfig().options().copyDefaults(true);
             plugin.saveDefaultConfig();
         }
+        List<String> ignored = new ArrayList<>();
+        for(String str : plugin.getConfig().getDefaults().getKeys(false)){
+            if(plugin.getConfig().isConfigurationSection(str + ".neededAspects"))
+            ignored.add(str + ".neededAspects");
+        }
 
-        loadConf(config, "config.yml");
+        loadConf(config, "config.yml", ignored);
 
         plugin.setManaRegenUnit(plugin.getConfig().getDouble("manaregenunit"));
 
         loadLangConfiguration();
 
-        loadRecipes();
+        String recipesCFPath = "recipes.yml";
+        File fileRecipesCF = new File(plugin.getDataFolder() + File.separator + recipesCFPath);
+        recipesCF = YamlConfiguration.loadConfiguration(fileRecipesCF);
+        loadOrUpdateRecipes(recipesCFPath, recipesCF, fileRecipesCF);
 
-        loadRituals();
+        String ritualsCFPath = "rituals.yml";
+        File fileRitualsCF = new File(plugin.getDataFolder() + File.separator + ritualsCFPath);
+        ritualsCF = YamlConfiguration.loadConfiguration(fileRitualsCF);
+        loadOrUpdateRecipes(ritualsCFPath, ritualsCF, fileRitualsCF);
 
-        loadCauldronCrafting();
+        String cauldronCFPath = "cauldron.yml";
+        File fileCauldronCF = new File(plugin.getDataFolder() + File.separator + cauldronCFPath);
+        cauldronCF = YamlConfiguration.loadConfiguration(fileCauldronCF);
+        loadOrUpdateRecipes(cauldronCFPath, cauldronCF, fileCauldronCF);
+
+        String recipeAPath = "aspects.yml";
+        File fileRecipeA = new File(plugin.getDataFolder() + File.separator + recipeAPath);
+        recipeA = YamlConfiguration.loadConfiguration(fileRecipeA);
+        loadOrUpdateRecipes(recipeAPath, recipeA, fileRecipeA);
+
         loadCauldronRecipes();
         loadAltarRecipes();
         loadRitualRecipes();
+        loadAspectRecipes();
     }
 
     public void loadResidualData(){
@@ -65,7 +89,7 @@ public class IOWork {
     }
 
     public FileConfiguration getLangCF(){
-        return lanfCF;
+        return langCF;
     }
 
     public CauldronCraftsStorage getCauldronCraftsStorage(){
@@ -88,6 +112,10 @@ public class IOWork {
         return researchDataSaver;
     }
 
+    public AspectsInItems getAspectsInItems() {
+        return aspectsInItems;
+    }
+
     private void loadShieldManaLevels(){
         for(ManaShieldLevel shieldManaLevel : ManaShieldLevel.values()){
             shieldManaLevel.setCountNumber(plugin.getConfig().getInt("ManaShield.count." + shieldManaLevel.name()));
@@ -100,7 +128,7 @@ public class IOWork {
         }
     }
 
-    private void LoadResearchData(){
+    /*private void LoadResearchData(){
         researchDataSaver = new ResearchDataSaver();
         for(Research research : Research.values()){
             if(plugin.getConfig().getConfigurationSection(research.name() + ".mobsToKill") == null)continue;
@@ -117,6 +145,85 @@ public class IOWork {
             }
         }
 
+    }*/
+
+    public void playerJoin(Mana playerMana){
+        FileConfiguration playerStats = plugin.getIoWork().loadPlayerStats(playerMana.getPlayer().getUniqueId().toString());
+        playerMana.setCurrentMana(playerStats.getDouble("CurrentMana"));
+        playerMana.setMaxMana(playerStats.getDouble("MaxMana"));
+        playerMana.setSpectralShieldSeconds(playerStats.getInt("SpectralShieldSeconds"));
+
+        List<Integer> CDsList = playerStats.getIntegerList("CDSystem");
+        for(int i = 0; i < CDSystem.CDsValuesLength(); i++){
+            if(CDsList.size() > i){//fill up CD
+                playerMana.getCdSystem().getCDs().add(i, CDsList.get(i));
+            }
+        }
+
+        List<Boolean> researchList = playerStats.getBooleanList("Research");
+        for(int i = 0; i < Research.values().length; i++){
+            if(researchList.size() > i){//fill up empty Research
+                playerMana.getPlayerResearch().getResearches().add(i, researchList.get(i));
+            }
+        }
+        playerMana.getPlayerResearch().bookUpdate();
+
+        List<String> activeResearch = playerStats.getStringList("ActiveResearch");
+        if(!activeResearch.isEmpty()) {
+            HashMap<String, Integer> map = new HashMap<>();
+            for(String key : playerStats.getConfigurationSection("ActiveResearchData").getKeys(false)){
+                map.put(key, playerStats.getInt("ActiveResearchData." + key));
+            }
+            for (String research : activeResearch) {
+                Research.valueOf(research).startFromLoad(playerMana.getPlayerResearch(), map);
+            }
+        }
+
+        playerMana.getPlayerResearch().getShieldManaLevels().setCount(playerStats.getInt("ShieldLevelCount", 0));
+        playerMana.getPlayerResearch().getShieldManaLevels().setManaShieldLevel(playerStats.getString("ManaShieldLevel", "ZERO"));
+
+        List<Boolean> wearingArtefacts = playerStats.getBooleanList("AccessoriesInventory");
+        if(!wearingArtefacts.isEmpty()){
+            for(int i = 0; i< wearingArtefacts.size(); i++){
+                if(wearingArtefacts.get(i)){
+                    playerMana.getPlayerResearch().getAccessoriesInventory().getInventory().addItem(ACCrafts.AccessoryArtefact.values()[i].getItem());
+                    playerMana.getWearingArtefact().set(i, true);
+                }
+            }
+        }
+
+        List<Integer> aspects = playerStats.getIntegerList("Aspects");
+        for(int i = 0; i < Aspect.values().length; i++){
+            if(aspects.isEmpty()){
+                break;
+            }else if(aspects.size() > i){
+                playerMana.getPlayerAspectsStorage().getAspects()[i] = aspects.get(i);
+            }else {
+                break;
+            }
+        }
+        playerMana.getPlayerAspectsStorage().getAspectGui().inventoryFill();
+    }
+
+
+    private void LoadResearchData(){
+        researchDataSaver = new ResearchDataSaver();
+        for(Research research : Research.values()){
+            if(plugin.getConfig().getConfigurationSection(research.name() + ".neededAspects") == null)continue;
+            Map<String, Object> maps = plugin.getConfig().getConfigurationSection(research.name() + ".neededAspects").getValues(false);
+            if(maps.isEmpty()){
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! needed aspects is NULL for research: " + research.name() + " fix that!");
+                continue;
+            }
+
+            try {
+
+                maps.forEach((string, integer) -> researchDataSaver.put(research, Aspect.valueOf(string),(Integer) integer));
+            }catch (IllegalArgumentException exception){
+                String[] split = exception.getMessage().split("\\.");
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! aspect name: " + split[split.length -1] + " isn't exist. In research: " + research.name() + " fix that!");
+            }
+        }
     }
 
     public int getIntDataForResearch(Research research, String string){
@@ -160,17 +267,20 @@ public class IOWork {
         playerStats.set("CDSystem", playerMana.getCdSystem().getCDs());
         playerStats.set("Research", playerMana.getPlayerResearch().getResearches());
         List<String> activeResearch = new ArrayList<>();
-        List<ResearchI> research = playerMana.getPlayerResearch().getActiveResearch();
-        for(int i = 0; i < research.size(); i++){
-            if(research.get(i) != null) {
+        List<ResearchI> researchI = playerMana.getPlayerResearch().getActiveResearch();
+        HashMap<String, Integer> ActiveResearchData = new HashMap<>();
+        for(int i = 0; i < researchI.size(); i++){
+            if(researchI.get(i) != null) {
                 activeResearch.add(Research.values()[i].name());
-                research.get(i).saveResearchData(playerStats);
+                ActiveResearchData.putAll(researchI.get(i).saveResearchData());
             }
         }
         playerStats.set("ActiveResearch", activeResearch);
+        playerStats.set("ActiveResearchData", ActiveResearchData);
         playerStats.set("ShieldLevelCount", playerMana.getPlayerResearch().getShieldManaLevels().getCount());
         playerStats.set("ManaShieldLevel", playerMana.getPlayerResearch().getShieldManaLevels().getManaShieldLevel().name());
-        playerStats.set("AccessoriesInventory", playerMana.getPlayerResearch().getAccessoriesInventory().getInventory().getContents());
+        playerStats.set("AccessoriesInventory", playerMana.getWearingArtefact());
+        playerStats.set("Aspects", playerMana.getPlayerAspectsStorage().getAspects());
 
         try {
             playerStats.save(playerSF);
@@ -189,57 +299,26 @@ public class IOWork {
         return YamlConfiguration.loadConfiguration(file);
     }
 
-    private void loadRecipes(){
-        String recPath = "recipes.yml";
-        File file = new File(plugin.getDataFolder() + File.separator + recPath);
-        recipesCF  = YamlConfiguration.loadConfiguration(file);
-        if(!file.exists()){
-            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(recPath), Charsets.UTF_8)));
-            recipesCF.options().copyDefaults(true);
-            plugin.saveResource(recPath, false);
-        }else {
-            recipesCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(recPath), Charsets.UTF_8)));
-            recipesCF.options().copyDefaults(true);
-            try {
-                recipesCF.save(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    private FileConfiguration loadConf(File file, String  name, List<String> ignored){
+        try {
+            UpdateConfig updateConfig = new UpdateConfig();
+            updateConfig.update(plugin, name, file, ignored);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return YamlConfiguration.loadConfiguration(file);
     }
 
-    private void loadRituals(){
-        String ritPath = "rituals.yml";
-        File file = new File(plugin.getDataFolder() + File.separator + ritPath);
-        ritualsCF  = YamlConfiguration.loadConfiguration(file);
+    private void loadOrUpdateRecipes(String ritPath, FileConfiguration fileConfiguration, File file){
         if(!file.exists()){
-            ritualsCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
-            ritualsCF.options().copyDefaults(true);
+            fileConfiguration.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
+            fileConfiguration.options().copyDefaults(true);
             plugin.saveResource(ritPath, false);
         }else {
-            ritualsCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
-            ritualsCF.options().copyDefaults(true);
+            fileConfiguration.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
+            fileConfiguration.options().copyDefaults(true);
             try {
-                ritualsCF.save(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void loadCauldronCrafting(){
-        String ritPath = "cauldron.yml";
-        File file = new File(plugin.getDataFolder() + File.separator + ritPath);
-        cauldronCF = YamlConfiguration.loadConfiguration(file);
-        if(!file.exists()){
-            cauldronCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
-            cauldronCF.options().copyDefaults(true);
-            plugin.saveResource(ritPath, false);
-        }else {
-            cauldronCF.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource(ritPath), Charsets.UTF_8)));
-            cauldronCF.options().copyDefaults(true);
-            try {
-                cauldronCF.save(file);
+                fileConfiguration.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -262,7 +341,7 @@ public class IOWork {
             } catch (IOException e) {
                 e.printStackTrace();
             }        }
-        lanfCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
+        langCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
     }
 
     private void loadCauldronRecipes(){
@@ -364,5 +443,46 @@ public class IOWork {
                 Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! Some problems with " + ritual.name() + " Illegal Argument or Null argument or Class cast(wrong hierarchy). Fix that");
             }
         }
+    }
+
+    private void loadAspectRecipes(){
+        aspectsInItems = new AspectsInItems();
+        int counter = 0;
+        for(String str : recipeA.getKeys(false)){
+            ConfigurationSection configurationSection = recipeA.getConfigurationSection(str);
+            if(configurationSection.contains("item") && configurationSection.contains("aspects")){
+                try {
+                    ItemStack itemStack;
+                    List<Map<String, Integer>> aspectList = (List<Map<String, Integer>>) configurationSection.getList("aspects");
+                    List<Map<String, String>> itemDataMapInList = (List<Map<String, String>>) configurationSection.getList("item");
+                    Map<Aspect, Integer> aspectIntegerMap = new HashMap<>();
+
+                    Map<String, String> itemDataMap = itemDataMapInList.get(0);
+
+                    if (itemDataMap.get("mstype") != null) {
+                        itemStack = new ItemStack(Material.STICK, 1);
+                        ItemMeta itemMeta = itemStack.getItemMeta();
+                        itemMeta.setLore(Collections.singletonList(itemDataMap.get("mstype")));
+                        itemStack.setItemMeta(itemMeta);
+                    }else {
+                        itemStack = new ItemStack(Material.valueOf(itemDataMap.get("type")), 1, Short.parseShort(itemDataMap.get("data")));
+                    }
+
+                    aspectList.get(0).forEach((string, integer) -> aspectIntegerMap.put(Aspect.valueOf(string), integer));
+
+                    aspectsInItems.addNew(itemStack, aspectIntegerMap);
+                    counter++;
+
+                }catch (NumberFormatException exception){
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! in " + str + " data isn't number! FixThat");
+                }catch (IllegalArgumentException exception){
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! in " + str + " Material or Aspect isn't exist! FixThat");
+                } catch (NullPointerException | ClassCastException exception){
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! in " + str + " something wrong FixThat");
+                }
+
+            }
+        }
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "Stored " + counter + " aspect recipes");
     }
 }

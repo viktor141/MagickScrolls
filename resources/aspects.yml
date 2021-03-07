@@ -1,0 +1,381 @@
+1:
+  item:
+    - type: BOOK
+      data: '0'
+      mstype: null
+  aspects:
+    - Conscientia: 10
+      Veneficus: 1
+2:
+  item:
+    - type: BOOKSHELF
+      data: '0'
+      mstype: null
+  aspects:
+    - Conscientia: 35
+      Veneficus: 5
+      Lignum: 9
+3:
+  item:
+    - type: NETHER_STAR
+      data: '0'
+      mstype: null
+  aspects:
+    - Adtonitus: 58
+      Veneficus: 79
+      Mirum: 1
+4:
+  item:
+    - type: FEATHER
+      data: '0'
+      mstype: null
+  aspects:
+    - Penna: 25
+      Aer: 6
+5:
+  item:
+    - type: ICE
+      data: '0'
+      mstype: null
+  aspects:
+    - Aqua: 21
+      Aer: 1
+6:
+  item:
+    - type: PACKED_ICE
+      data: '0'
+      mstype: null
+  aspects:
+    - Aqua: 189
+      Aer: 2
+7:
+  item:
+    - type: WATER_BUCKET
+      data: '0'
+      mstype: null
+  aspects:
+    - Aqua: 70
+      Metallum: 16
+      Corium: 5
+8:
+  item:
+    - type: SPONGE
+      data: '1'
+      mstype: null
+  aspects:
+    - Aqua: 200
+      Captionem: 70
+9:
+  item:
+    - type: GRASS
+      data: '0'
+      mstype: null
+  aspects:
+    - Terra: 15
+      Herba: 35
+10:
+  item:
+    - type: DIRT
+      data: '0'
+      mstype: null
+  aspects:
+    - Terra: 15
+      Tempus: 2
+      Enucleatus: 10
+11:
+  item:
+    - type: STONE
+      data: '0'
+      mstype: null
+  aspects:
+    - Terra: 19
+      Tempus: 3
+12:
+  item:
+    - type: SANDSTONE
+      data: '0'
+      mstype: null
+  aspects:
+    - Terra: 21
+      Vetustus: 1
+13:
+  item:
+    - type: LONG_GRASS
+      data: '0'
+      mstype: null
+  aspects:
+    - Herba: 14
+      Aer: 3
+14:
+  item:
+    - type: MAGMA_CREAM
+      data: '0'
+      mstype: null
+  aspects:
+    - Ignis: 24
+      Bestia: 1
+      Veneficus: 1
+15:
+  item:
+    - type: FURNACE
+      data: '0'
+      mstype: null
+  aspects:
+    - Ignis: 5
+16:
+  item:
+    - type: COAL
+      data: '0'
+      mstype: null
+  aspects:
+    - Tempus: 21
+17:
+  item:
+    - type: COAL
+      data: '1'
+      mstype: null
+  aspects:
+    - Tempus: 21
+18:
+  item:
+    - type: IRON_CHESTPLATE
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 29
+      Custodia: 4
+19:
+  item:
+    - type: IRON_HELMET
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 19
+      Custodia: 1
+20:
+  item:
+    - type: IRON_LEGGINGS
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 21
+      Custodia: 2
+21:
+  item:
+    - type: IRON_BOOTS
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 15
+      Custodia: 1
+22:
+  item:
+    - type: IRON_PICKAXE
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 9
+      Instrumentum: 15
+23:
+  item:
+    - type: IRON_AXE
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 9
+      Instrumentum: 12
+24:
+  item:
+    - type: IRON_HOE
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 6
+      Instrumentum: 7
+25:
+  item:
+    - type: FLINT_AND_STEEL
+      data: '0'
+      mstype: null
+  aspects:
+    - Ignis: 24
+      Instrumentum: 1
+      Metallum: 2
+26:
+  item:
+    - type: BUCKET
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 13
+      Corium: 5
+      Captionem: 1
+27:
+  item:
+    - type: HOPPER
+      data: '0'
+      mstype: null
+  aspects:
+    - Metallum: 14
+      Magneto: 18
+      Captionem: 1
+28:
+  item:
+    - type: LEAVES
+      data: '0'
+      mstype: null
+  aspects:
+    - Herba: 12
+29:
+  item:
+    - type: VINE
+      data: '0'
+      mstype: null
+  aspects:
+    - Herba: 16
+      Captionem: 8
+      Aer: 1
+30:
+  item:
+    - type: GHAST_TEAR
+      data: '0'
+      mstype: null
+  aspects:
+    - Sancto: 88
+      Moles: 25
+      Alchemiae: 75
+      Mirum: 1
+31:
+  item:
+    - type: SOUL_SAND
+      data: '0'
+      mstype: null
+  aspects:
+    - Sancto: 6
+      Terra: 25
+      Captionem: 18
+32:
+  item:
+    - type: WOOD
+      data: '0'
+      mstype: null
+  aspects:
+    - Lignum: 24
+33:
+  item:
+    - type: WOOD
+      data: '1'
+      mstype: null
+  aspects:
+    - Lignum: 24
+34:
+  item:
+    - type: WOOD
+      data: '2'
+      mstype: null
+  aspects:
+    - Lignum: 24
+35:
+  item:
+    - type: WOOD
+      data: '3'
+      mstype: null
+  aspects:
+    - Lignum: 24
+36:
+  item:
+    - type: BLAZE_POWDER
+      data: '0'
+      mstype: null
+  aspects:
+    - Veneficus: 28
+      Ignis: 19
+      Splendens: 29
+37:
+  item:
+    - type: PAPER
+      data: '0'
+      mstype: "scrolls"
+  aspects:
+    - Veneficus: 59
+      Vetustus: 6
+38:
+  item:
+    - type: NETHER_WARTS
+      data: '0'
+      mstype: null
+  aspects:
+    - Veneficus: 9
+      Herba: 5
+      Conruptus: 8
+39:
+  item:
+    - type: CAULDRON_ITEM
+      data: '0'
+      mstype: null
+  aspects:
+    - Alchemiae: 15
+      Metallum: 12
+40:
+  item:
+    - type: SKULL_ITEM
+      data: '3'
+      mstype: "BRAIN"
+  aspects:
+    - Cerebrum: 12
+      Experientia: 20
+41:
+  item:
+    - type: CHORUS_FLOWER
+      data: '0'
+      mstype: null
+  aspects:
+    - Ridiculum: 12
+42:
+  item:
+    - type: SHIELD
+      data: '0'
+      mstype: null
+  aspects:
+    - Lignum: 7
+      Custodia: 14
+      Instrumentum: 12
+43:
+  item:
+    - type: FIREWORK_CHARGE
+      data: '0'
+      mstype: null
+  aspects:
+    - Tenebras: 7
+44:
+  item:
+    - type: RED_MUSHROOM
+      data: '0'
+      mstype: null
+  aspects:
+    - Tenebras: 12
+      Herba: 4
+45:
+  item:
+    - type: SAND
+      data: '0'
+      mstype: null
+  aspects:
+    - Tempus: 13
+      Terra: 5
+      Enucleatus: 15
+46:
+  item:
+    - type: TRIPWIRE_HOOK
+      data: '0'
+      mstype: null
+  aspects:
+    - Captionem: 3
+47:
+  item:
+    - type: EMERALD
+      data: '0'
+      mstype: null
+  aspects:
+    - Sanctus: 4
+      Veneficus: 2

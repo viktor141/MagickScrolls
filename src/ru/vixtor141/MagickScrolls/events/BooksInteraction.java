@@ -5,7 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 import ru.vixtor141.MagickScrolls.Mana;
+import ru.vixtor141.MagickScrolls.Misc.Menu;
 import ru.vixtor141.MagickScrolls.lang.LangVar;
 import ru.vixtor141.MagickScrolls.levels.ManaShieldLevel;
 import ru.vixtor141.MagickScrolls.levels.ShieldManaLevels;
@@ -13,17 +15,20 @@ import ru.vixtor141.MagickScrolls.research.PlayerResearch;
 import ru.vixtor141.MagickScrolls.research.Research;
 import ru.vixtor141.MagickScrolls.ritual.RitualE;
 
+import java.util.List;
+
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class BooksInteraction implements Listener {
 
     @EventHandler
-    public void clickOnResearch(InventoryClickEvent event){
+    public void onClick(InventoryClickEvent event){
         if(!(event.getWhoClicked() instanceof Player))return;
         Player player = (Player)event.getWhoClicked();
         Mana playerMana = getPlayerMana(player);
         if(event.getClickedInventory() == null)return;
         PlayerResearch playerResearch = playerMana.getPlayerResearch();
+
         if(event.getClickedInventory().equals(playerResearch.getResearchBookInventory())) {
             event.setCancelled(true);
 
@@ -33,10 +38,22 @@ public class BooksInteraction implements Listener {
                         if (playerResearch.checkResearch(research)) {
                             player.sendMessage(ChatColor.RED + LangVar.msg_yastr.getVar());
                         }
+                        for(Research need : research.getNeededResearch()){
+                            if(!playerResearch.getResearches().get(need.ordinal())){
+                                return;
+                            }
+                        }
                         research.start(playerResearch);
                     } else {
                         player.sendMessage(ChatColor.RED + LangVar.msg_yaltr.getVar());
                     }
+                    return;
+                }
+            }
+
+            for(Menu menu : Menu.values()){
+                if (event.getSlot() == menu.getPosition()){
+                    menu.use(playerResearch);
                     return;
                 }
             }
@@ -45,6 +62,8 @@ public class BooksInteraction implements Listener {
             if(event.getSlot() < RitualE.values().length) {
                 playerMana.setRitual(RitualE.values()[event.getSlot()]);
                 player.sendMessage(ChatColor.GREEN + RitualE.values()[event.getSlot()].getRitualName() + " " + LangVar.msg_sr.getVar());
+                List<String> lore = RitualE.values()[event.getSlot()].getItem().getItemMeta().getLore();
+                lore.subList(0, lore.size() -1).forEach(player::sendMessage);
             }
         }else if(event.getClickedInventory().equals(playerMana.getPlayerResearch().getShieldManaLevels().getInventory())){
             event.setCancelled(true);
@@ -67,6 +86,8 @@ public class BooksInteraction implements Listener {
                 }
 
             }
+        }else if(event.getClickedInventory().equals(playerMana.getPlayerAspectsStorage().getAspectGui().getInventory())){
+            event.setCancelled(true);
         }
     }
 }

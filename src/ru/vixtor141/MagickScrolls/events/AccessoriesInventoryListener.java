@@ -12,6 +12,7 @@ import ru.vixtor141.MagickScrolls.Misc.FlyingItemsForPlayer;
 import ru.vixtor141.MagickScrolls.crafts.ACCrafts;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
@@ -19,60 +20,49 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 public class AccessoriesInventoryListener implements Listener{
 
     @EventHandler
-    public void move(InventoryClickEvent event){
+    public void onClick(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
         Mana playerMana = getPlayerMana(player);
         if(!event.getInventory().equals(playerMana.getPlayerResearch().getAccessoriesInventory().getInventory()))return;
-        if(!event.getAction().equals(InventoryAction.MOVE_TO_OTHER_INVENTORY) && !event.getAction().equals(InventoryAction.PICKUP_ALL) && !event.getAction().equals(InventoryAction.PLACE_ALL)){
+        if(!event.getAction().equals(InventoryAction.PICKUP_ALL)){
             event.setCancelled(true);
             return;
         }
+        event.setCancelled(true);
+        ItemStack itemStack = event.getCurrentItem();
+        if(!itemStack.getItemMeta().hasLore())return;
+        List<String> lore = itemStack.getItemMeta().getLore();
+        String name = lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr());
+        if(!ACCrafts.AccessoryArtefact.isArtefact(name))return;
 
-        if(event.getAction().equals(InventoryAction.MOVE_TO_OTHER_INVENTORY)) {
-            ItemStack itemStack = event.getCurrentItem();
-            if(!itemStack.getItemMeta().hasLore())return;
-            List<String> lore = itemStack.getItemMeta().getLore();
-            String name = lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr());
-            if(ACCrafts.AccessoryArtefact.isArtefact(name)){
-                if(event.getClickedInventory().equals(playerMana.getPlayerResearch().getAccessoriesInventory().getInventory())){
-                    removeWearingAcc(playerMana, name);
-                }
-                if(!event.getClickedInventory().equals(playerMana.getPlayerResearch().getAccessoriesInventory().getInventory())){
-                    addWearingAcc(playerMana, name);
-                }
+        ItemStack newForInventory = itemStack.clone();
+
+        newForInventory.setAmount(1);
+        if(event.getClickedInventory() == player.getInventory()){
+            HashMap<Integer, ItemStack> integerItemStackHashMap = playerMana.getPlayerResearch().getAccessoriesInventory().getInventory().addItem(newForInventory);
+            if(integerItemStackHashMap.isEmpty()) {
+                itemStack.setAmount(itemStack.getAmount() - 1);
+                addWearingAcc(playerMana, name);
             }
-            return;
-        }
-
-        if(!event.getClickedInventory().equals(playerMana.getPlayerResearch().getAccessoriesInventory().getInventory()))return;
-        if(event.getAction().equals(InventoryAction.PICKUP_ALL)){
-            ItemStack itemStack = event.getCurrentItem();
-            if(!itemStack.getItemMeta().hasLore())return;
-            List<String> lore = itemStack.getItemMeta().getLore();
-            String name = lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr());
-            if(ACCrafts.AccessoryArtefact.isArtefact(name)){
+        }else{
+            HashMap<Integer, ItemStack> integerItemStackHashMap = player.getInventory().addItem(newForInventory);
+            if(integerItemStackHashMap.isEmpty()) {
+                itemStack.setAmount(itemStack.getAmount() - 1);
                 removeWearingAcc(playerMana, name);
             }
         }
 
-        if(event.getAction().equals(InventoryAction.PLACE_ALL)){
-            ItemStack itemStack = event.getCursor();
-            if(!itemStack.getItemMeta().hasLore())return;
-            List<String> lore = itemStack.getItemMeta().getLore();
-            String name = lore.get(lore.size() - 2).substring(Main.getPlugin().getSubStr());
-            if(ACCrafts.AccessoryArtefact.isArtefact(name)){
-                addWearingAcc(playerMana, name);
-            }
-        }
 
     }
 
     private void removeWearingAcc(Mana playerMana, String string){
         playerMana.getWearingArtefact().set(ACCrafts.AccessoryArtefact.valueOf(string).ordinal(), false);
-        for(FlyingItemsForPlayer flyingItemsForPlayer : playerMana.getFlyingItemsForPlayer()){
-            flyingItemsForPlayer.cancelAll();
+        if(ACCrafts.AccessoryArtefact.valueOf(string).equals(ACCrafts.AccessoryArtefact.MAGNET)) {
+            for (FlyingItemsForPlayer flyingItemsForPlayer : playerMana.getFlyingItemsForPlayer()) {
+                flyingItemsForPlayer.cancelAll();
+            }
+            playerMana.getFlyingItemsForPlayer().clear();
         }
-        playerMana.getFlyingItemsForPlayer().clear();
     }
 
     private void addWearingAcc(Mana playerMana, String string){

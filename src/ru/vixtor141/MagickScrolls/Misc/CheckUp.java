@@ -43,7 +43,7 @@ public class CheckUp {
 
     public static void updateItemInInventory(PlayerResearch playerResearch, Research research, List<String> infoLore){
         Inventory inventory = playerResearch.getResearchBookInventory();
-        ItemStack itemStack = research.getResearchItem("");
+        ItemStack itemStack = research.getResearchItem();
         ItemMeta itemMeta = itemStack.getItemMeta();
         List<String> lore = new ArrayList<>();
         if(itemMeta.hasLore())lore.addAll(itemMeta.getLore());

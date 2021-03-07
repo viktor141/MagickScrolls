@@ -1,6 +1,6 @@
 package ru.vixtor141.MagickScrolls.research;
 
-import org.bukkit.entity.EntityType;
+import ru.vixtor141.MagickScrolls.aspects.Aspect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,20 +9,20 @@ import java.util.Map;
 
 public class ResearchDataSaver {
 
-    private final List<Map<EntityType, Integer>> entitiesKills;
+    private final List<Map<Aspect, Integer>> aspectsNeeded;
 
     public ResearchDataSaver(){
-        entitiesKills = new ArrayList<>();
+        aspectsNeeded = new ArrayList<>();
         for(int i = 0; i<Research.values().length; i++){
-            entitiesKills.add(new HashMap<>());
+            aspectsNeeded.add(new HashMap<>());
         }
     }
 
-    public void put(Research research, EntityType entityType, int count){
-        entitiesKills.get(research.ordinal()).put(entityType, count);
+    public void put(Research research, Aspect aspect, int count){
+        aspectsNeeded.get(research.ordinal()).put(aspect, count);
     }
 
-    public Map<EntityType, Integer> getMapForResearch(Research research) {
-        return entitiesKills.get(research.ordinal());
+    public Map<Aspect, Integer> getMapForResearch(Research research) {
+        return aspectsNeeded.get(research.ordinal());
     }
 }

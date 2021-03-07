@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls.lang;
 
 import ru.vixtor141.MagickScrolls.Main;
 
+@SuppressWarnings("SpellCheckingInspection")
 public enum LangVar {
     msg_ydhp,
     msg_pino,
@@ -86,6 +87,21 @@ public enum LangVar {
     ims_b,
     ims_nyci,
     msg_as,
-    msg_wa;
+    msg_wa,
+    msg_srv,
+    msg_gostav,
+    msg_nan,
+    msg_suc,
+    msg_ist,
+    msg_trdne,
+    msg_nabf,
+    msg_tadne,
+    msg_niltz,
+    msg_siltz,
+    in_aspec,
+    in_ya,
+    msg_a,
+    msg_ctsr,
+    msg_yama;
     public String getVar(){ return Main.getPlugin().getLangCF().getString(this.name());}
 }

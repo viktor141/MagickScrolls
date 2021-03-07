@@ -20,6 +20,7 @@ public class ShieldManaLevels {
     public ShieldManaLevels(Player player){
         this.player = player;
         this.count = 0;
+        this.shieldLevel = ManaShieldLevel.ZERO;
         inventory = Bukkit.createInventory(player, 9, ChatColor.DARK_BLUE + LangVar.in_msl.getVar());
         ItemStack itemStack = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)8);
         ItemMeta itemMeta = itemStack.getItemMeta();
