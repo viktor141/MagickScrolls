@@ -224,101 +224,112 @@ CONFUSED:
 
 
 #Items
-MAGIC_STAFF:
-  name: "Magic staff"
-  lore:
-    - "This staff spreads the magic"
+items:
+  MAGIC_STAFF:
+    name: "Magic staff"
+    lore:
+      - "This staff spreads the magic"
 
-ARROWSTORM_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal for arrow storm scrolls"
+  ARROWSTORM_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal for arrow storm scrolls"
 
-LIGHTNING_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal lightning scrolls"
+  LIGHTNING_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal lightning scrolls"
 
-NECROMANCY_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal Scroll for necromancy scrolls"
+  NECROMANCY_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal Scroll for necromancy scrolls"
 
-TELEPORTATION_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal for teleportation scrolls"
+  TELEPORTATION_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal for teleportation scrolls"
 
-VAMPIRIC_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal for vampirism scrolls"
+  VAMPIRIC_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal for vampirism scrolls"
 
-VORTEX_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal vortex scrolls"
+  VORTEX_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal vortex scrolls"
 
-SPIDERWEB_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal spiderweb scrolls"
+  SPIDERWEB_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal spiderweb scrolls"
 
-TRAP_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal trap scrolls"
+  TRAP_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal trap scrolls"
 
-EARTH_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal earth scrolls"
+  EARTH_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal earth scrolls"
 
-ASTRAL_PET_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal astral pet scrolls"
+  ASTRAL_PET_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal astral pet scrolls"
 
-METEORITE_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal Meteorite scrolls"
+  METEORITE_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal Meteorite scrolls"
 
-SPECTRAL_SHIELD_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal Spectral shield scrolls"
+  SPECTRAL_SHIELD_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal Spectral shield scrolls"
 
-WITCH_ARTIFACT:
-  name: "Witch Artifact"
-  lore:
-    - "Allow you starts a rituals"
-    - "And take a witches in your Coven"
+  WITCH_ARTIFACT:
+    name: "Witch Artifact"
+    lore:
+      - "Allow you starts a rituals"
+      - "And take a witches in your Coven"
 
-RITUAL_ALTAR_BUILDER:
-  name: "Ritual builder"
-  lore:
-    - "Builds a ritual altar"
+  RITUAL_ALTAR_BUILDER:
+    name: "Ritual builder"
+    lore:
+      - "Builds a ritual altar"
 
-AIR_TRAP_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal Air Trap scrolls"
+  AIR_TRAP_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal Air Trap scrolls"
 
-CONFUSED_MAGICSEAL:
-  name: "Magic seal"
-  lore:
-    - "Magic seal Confused scrolls"
+  CONFUSED_MAGICSEAL:
+    name: "Magic seal"
+    lore:
+      - "Magic seal Confused scrolls"
 
-RITUAL_BOOK:
-  name: "Ritual Book"
-  lore:
-    - "Ritual Magic"
+  RITUAL_BOOK:
+    name: "Ritual Book"
+    lore:
+      - "Ritual Magic"
 
-RESEARCH_BOOK:
-  name: "Forbidden Book"
-  lore:
-    - "Forbidden knowledge"
+  RESEARCH_BOOK:
+    name: "Forbidden Book"
+    lore:
+      - "Forbidden knowledge"
+
+  MAGNET:
+    name: "Magnet Feather"
+    lore:
+      - "Looks simple"
+
+  BRAIN:
+    name: "Brain"
+    lore:
+      - "Looks disgusting"
 
 #Rituals
 MANAUPFIRST:

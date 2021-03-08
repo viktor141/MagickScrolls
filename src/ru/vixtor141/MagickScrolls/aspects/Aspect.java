@@ -3,6 +3,7 @@ package ru.vixtor141.MagickScrolls.aspects;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.Mana;
 import ru.vixtor141.MagickScrolls.research.Research;
 import ru.vixtor141.MagickScrolls.utils.HeadGetter;
@@ -14,7 +15,7 @@ public enum Aspect {
     Experientia(new ItemStack(Material.EXP_BOTTLE)), //Experience
     Mortem(new ItemStack(Material.SKULL_ITEM)), //Death
     Conscientia(new ItemStack(Material.BOOK)), //Mind
-    Cerebrum(new HeadGetter("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmRkM2IwMWVjMzJmM2Y1ZWEyNmFkNGUyMzMwNTQwMWY3M2QxM2YzYzE2YjNmYWNlZmU3MGQ5MjE3NmIzMTEifX19").getHead()), //Brain
+    Cerebrum(Main.getPlugin().getHeadGetter().getHeadS(HeadGetter.Head.Brain)), //Brain
     Adtonitus(new ItemStack(Material.NETHER_STAR)), //lightning/thunder-struck
     Penna(new ItemStack(Material.FEATHER)), //Feather
     Aqua(new ItemStack(Material.WATER_BUCKET)), //Water
@@ -26,7 +27,7 @@ public enum Aspect {
     Sancto(new ItemStack(Material.GHAST_TEAR)), //Spirit
     Lignum(new ItemStack(Material.WOOD)), //Wood
     Veneficus(new ItemStack(Material.BLAZE_POWDER)), //Magic
-    Bestia(new HeadGetter("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjgzYTJhYTlkMzczNGI5MTlhYzI0Yzk2NTllNWUwZjg2ZWNhZmJmNjRkNDc4OGNmYTQzM2JiZWMxODllOCJ9fX0").getHead()), //Beast
+    Bestia(Main.getPlugin().getHeadGetter().getHeadS(HeadGetter.Head.Bestia)), //Beast
     Humanus(new ItemStack(Material.SKULL_ITEM, 1, (short) 3)), //Human
     Tenebras(new ItemStack(Material.FIREWORK_CHARGE)), //Darkness
     Venenum(new ItemStack(Material.RAW_FISH, 1, (short) 3)), //Poison

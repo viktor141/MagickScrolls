@@ -13,6 +13,7 @@ import ru.vixtor141.MagickScrolls.crafts.CauldronCraftsStorage;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
+import ru.vixtor141.MagickScrolls.utils.HeadGetter;
 
 import java.util.*;
 
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
     private final int subStr = 4;
     private long timeInterval;
     private DataBase dataBase;
+    private HeadGetter headGetter;
 
     public Main (){
         plugin = this;
@@ -41,6 +43,10 @@ public class Main extends JavaPlugin {
 
     public DataBase getDataBase() {
         return dataBase;
+    }
+
+    public HeadGetter getHeadGetter(){
+        return headGetter;
     }
 
     public int getSubStr(){
@@ -104,6 +110,8 @@ public class Main extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
             new PAPI(this).register();
         }
+
+        headGetter = new HeadGetter();
 
         initIOWork();
 
