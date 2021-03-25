@@ -3,10 +3,7 @@ package ru.vixtor141.MagickScrolls.scrolls;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -57,7 +54,7 @@ public class AstralPet implements Scroll, Runnable {
 
     private void damageTask(){
         if(damageCheck)damageTask.cancel();
-        List<Entity> entityList = player.getNearbyEntities(8,8,8).stream().filter(entity1 -> entity1 instanceof Monster).collect(Collectors.toList());
+        List<Entity> entityList = player.getNearbyEntities(8,8,8).stream().filter(entity1 -> entity1 instanceof LivingEntity && !(entity1 instanceof ArmorStand)).collect(Collectors.toList());
         if(entityList.isEmpty())return;
 
         LivingEntity entity = null;

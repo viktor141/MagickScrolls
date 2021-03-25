@@ -174,7 +174,8 @@ SPIDERWEB:
   name: "Spider Web Scroll"
   lore:
   - "Release a spider web compressed into a ball at the enemy."
-  - "If you successfully hit the target, the enemy will find himself with his head in a sticky net. "
+  - "If you successfully hit the target, "
+  - "the enemy will find himself with his head in a sticky net. "
   - "For a few seconds without a chance to escape."
 
 TRAP:
@@ -228,70 +229,92 @@ items:
   MAGIC_STAFF:
     name: "Magic staff"
     lore:
-      - "This staff spreads the magic"
+      - "This staff spreads the magic."
+      - "Smells like magic."
+      - "The most precious thing you have and will have in your entire life. "
 
   ARROWSTORM_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal for arrow storm scrolls"
+      - "Required for Scroll of Arrow Storm."
+      - "Yes how? Make such a storm from one arrow! "
+      - "Is this some kind of trick?"
+      - "This is not a trick, this is magic."
 
   LIGHTNING_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal lightning scrolls"
+      - "Required for Lightning Scrolls."
+      - "I can feel lightning going through my fingers. "
 
   NECROMANCY_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal Scroll for necromancy scrolls"
+      - "Required for the Scroll of Necromancy."
+      - "If you hold it in your hands for too long, you can become a slave to the lich."
+      - "However, these are just rumors."
 
   TELEPORTATION_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal for teleportation scrolls"
+      - "Required for a teleportation scroll. "
+      - "You know about the consequences?"
 
   VAMPIRIC_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal for vampirism scrolls"
+      - "Required for the scroll of vampirism. "
+      - "No, you won't burn under the sun."
+      - "Well ... Maybe ..."
 
   VORTEX_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal vortex scrolls"
+      - "Required for the vortex Scroll."
+      - "I was once a road of adventure."
+      - "And then I fell under the scroll of the vortex. "
+      - "Now, with a broken knee"
+      - "I better stay at home."
 
   SPIDERWEB_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal spiderweb scrolls"
+      - "Required for a spider web scroll."
+      - "Do you dislike killing unfortunate spiders? "
+      - "What did they do to you?"
 
   TRAP_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal trap scrolls"
+      - "Required for the trap scroll. "
+      - "Look, but don't touch."
 
   EARTH_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal earth scrolls"
+      - "Required for a scroll of earth."
+      - "Is it like the power of the earth? "
 
   ASTRAL_PET_MAGICSEAL:
     name: "Magic seal"
     lore:
       - "Magic seal astral pet scrolls"
+      - "Astral? Other dimensions? How complicated it is."
 
   METEORITE_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal Meteorite scrolls"
+      - "Required to summon a meteorite scroll."
+      - "It's time for real magic, meteorite is what you need. "
 
   SPECTRAL_SHIELD_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal Spectral shield scrolls"
+      - "Required for the Spectral Shield scroll. "
+      - "I like bats"
 
   WITCH_ARTIFACT:
-    name: "Witch Artifact"
+    name: "The witch's crystal"
     lore:
       - "Allow you starts a rituals"
       - "And take a witches in your Coven"
@@ -304,12 +327,14 @@ items:
   AIR_TRAP_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal Air Trap scrolls"
+      - "Required for the Air trap scroll. "
+      - "Blown away"
 
   CONFUSED_MAGICSEAL:
     name: "Magic seal"
     lore:
-      - "Magic seal Confused scrolls"
+      - "Required for a scroll of confusion. "
+      - "I'm little bit confused."
 
   RITUAL_BOOK:
     name: "Ritual Book"
@@ -331,6 +356,19 @@ items:
     lore:
       - "Looks disgusting"
 
+  ANCIENT_BOTTLE:
+    name: "Ancient Bottle"
+    lore:
+      - "The oldest artifact created by someone ancient."
+      - "Stores a huge amount of experience, "
+      - "so far no one has been able to fill this bottle completely. "
+
+  MANA_SHIELD:
+    name: "Mana Shield"
+    lore:
+      - "A shield from another world,"
+      - "capable of absorbing damage and transforming it into something useful. "
+
 #Rituals
 MANAUPFIRST:
   name: "Mana up Ritual I"
@@ -341,7 +379,7 @@ MANAUPFIRST:
     - "§3➤1 Gold ingot"
     - "§3➤1 Redstone"
 VILLAGER_CAST:
-  name: "Villager Cast"
+  name: "Cast a Villager"
   lore:
     - "§6✪ Summon up the Villager."
     - "§3➤1 Bone"

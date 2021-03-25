@@ -1,12 +1,14 @@
 package ru.vixtor141.MagickScrolls.mobs;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.metadata.LazyMetadataValue;
 import ru.vixtor141.MagickScrolls.Main;
@@ -25,6 +27,7 @@ public class VillagerIMP {
             Material.GLOWSTONE_DUST, Material.IRON_INGOT, Material.REDSTONE_BLOCK, Material.SADDLE, Material.OBSIDIAN, Material.PUMPKIN, Material.PRISMARINE, Material.SOUL_SAND,
             Material.SPIDER_EYE, Material.SHULKER_SHELL, Material.SLIME_BALL, Material.ROTTEN_FLESH};
     private final List<MerchantRecipe> merchantRecipes = new ArrayList<>();
+    private final Merchant merchant;
 
     public VillagerIMP(Player player, Location location){
         this.player = player;
@@ -39,9 +42,17 @@ public class VillagerIMP {
 
         for(int i = 0; i < 3; i++)recipeSet();
 
-        villager.setRecipes(merchantRecipes);
+        villager.setRecipes(new ArrayList<>());
+        merchant = Bukkit.createMerchant(name);
+        merchant.setRecipes(merchantRecipes);
 
-        villager.setMetadata("magickScrolls_IMP", new LazyMetadataValue(Main.getPlugin(), this::getPlayer));
+
+        villager.setMetadata("magickScrolls_IMP", new LazyMetadataValue(Main.getPlugin(), this::getMerchant));
+        villager.setMetadata("magickScrolls_IMP_player", new LazyMetadataValue(Main.getPlugin(), this::getPlayer));
+    }
+
+    private Merchant getMerchant(){
+        return merchant;
     }
 
     private Player getPlayer(){

@@ -22,8 +22,6 @@ import static ru.vixtor141.MagickScrolls.Misc.CheckUp.getPlayerMana;
 
 public class ACCrafts {
 
-    private final static FileConfiguration langF = Main.getPlugin().getLangCF();
-
     public enum ItemsCauldronCrafts{
         MAGIC_STAFF{
         },
@@ -104,8 +102,8 @@ public class ACCrafts {
             public ItemStack craftCauldronGetItem(){
                 ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
                 ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString("items." + this.name() + ".name"));
-                List<String> loreL = new ArrayList<>(langF.getStringList("items." + this.name() + ".lore"));
+                meta.setDisplayName(ChatColor.DARK_PURPLE + Main.getPlugin().getLangCF().getString("items." + this.name() + ".name"));
+                List<String> loreL = new ArrayList<>(Main.getPlugin().getLangCF().getStringList("items." + this.name() + ".lore"));
                 loreL.add("0");
                 loreL.add(ChatColor.BLUE +  "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
@@ -143,8 +141,8 @@ public class ACCrafts {
             public ItemStack craftCauldronGetItem(){
                 ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
                 ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString("items." + this.name() + ".name"));
-                List<String> loreL = new ArrayList<>(langF.getStringList("items." + this.name() + ".lore"));
+                meta.setDisplayName(ChatColor.DARK_PURPLE + Main.getPlugin().getLangCF().getString("items." + this.name() + ".name"));
+                List<String> loreL = new ArrayList<>(Main.getPlugin().getLangCF().getStringList("items." + this.name() + ".lore"));
                 loreL.add(ChatColor.GREEN + "0 " + LangVar.msg_lvl.getVar() + "(0)");
                 loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
@@ -176,11 +174,6 @@ public class ACCrafts {
         },
         BRAIN{
             @Override
-            public Research[] getResearch() {
-                return new Research[]{};
-            }
-
-            @Override
             public boolean isIgnoreRecipe(){
                 return true;
             }
@@ -189,8 +182,8 @@ public class ACCrafts {
             public ItemStack craftCauldronGetItem(){
                 ItemStack item = Main.getPlugin().getHeadGetter().getHeadS(HeadGetter.Head.Brain);
                 ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString("items." + this.name() + ".name"));
-                List<String> loreL = new ArrayList<>(langF.getStringList( "items." + this.name() +".lore"));
+                meta.setDisplayName(ChatColor.DARK_PURPLE + Main.getPlugin().getLangCF().getString("items." + this.name() + ".name"));
+                List<String> loreL = new ArrayList<>(Main.getPlugin().getLangCF().getStringList( "items." + this.name() +".lore"));
                 loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
                 loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
                 meta.setLore(loreL);
@@ -212,13 +205,13 @@ public class ACCrafts {
         public ItemStack craftCauldronGetItem(){
             ItemStack item = Main.getPlugin().getCauldronCF().getItemStack(this.name() + ".result");
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString("items." + this.name() + ".name"));
-            List<String> loreL = new ArrayList<>(langF.getStringList("items." +  this.name() +".lore"));
+            meta.setDisplayName(ChatColor.DARK_PURPLE + Main.getPlugin().getLangCF().getString("items." + this.name() + ".name"));
+            List<String> loreL = new ArrayList<>(Main.getPlugin().getLangCF().getStringList("items." +  this.name() +".lore"));
             loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
             loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
             meta.setLore(loreL);
             meta.addEnchant(Enchantment.DURABILITY, 1,true);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
             item.setItemMeta(meta);
             return item;
         }
@@ -302,8 +295,8 @@ public class ACCrafts {
         public ItemStack craftAltarResult(){
             ItemStack item = new ItemStack(Material.PAPER);
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(ChatColor.DARK_PURPLE + langF.getString(this.name() + ".name"));
-            List<String> loreL = new ArrayList<>(langF.getStringList(this.name() + ".lore"));
+            meta.setDisplayName(ChatColor.DARK_PURPLE + Main.getPlugin().getLangCF().getString(this.name() + ".name"));
+            List<String> loreL = new ArrayList<>(Main.getPlugin().getLangCF().getStringList(this.name() + ".lore"));
             loreL.add(ChatColor.BLUE + "" + ChatColor.MAGIC + this.name());
             loreL.add(ChatColor.YELLOW + LangVar.i_mi.getVar());
             meta.setLore(loreL);

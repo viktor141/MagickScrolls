@@ -126,8 +126,10 @@ public class UsualAltar implements AltarFace, Runnable {
             pillarBuilder();
             return;
         }
-        location.clone().add(r * cos(toRadians(j * 3 + (10 * (int)(j * 3/360)))) + 0.5, 0, r * sin(toRadians(j * 3 + (10 * (int)(j * 3/360)))) + 0.5).getBlock().setType(circle);
-        location.getWorld().spawnParticle(Particle.END_ROD, location.clone().add(r * cos(toRadians(j * 3)) + 0.5, 0, r * sin(toRadians(j * 3)) + 0.5), 10, 0,0,0, 0.1);
+        Location locationForAltarBlock = location.clone().add(r * cos(toRadians(j * 3 + (10 * (int)(j * 3/360)))) + 0.5, 0, r * sin(toRadians(j * 3 + (10 * (int)(j * 3/360)))) + 0.5);
+        location.getWorld().spawnParticle(Particle.END_ROD, locationForAltarBlock.clone().add(0,0.8,0), 10, 0,0,0, 0.1);
+        locationForAltarBlock.getBlock().setType(circle);
+
         j+=angle;
     }
 
@@ -137,7 +139,9 @@ public class UsualAltar implements AltarFace, Runnable {
             return;
         }
         if(s < 3) {
-            location.clone().add(r * cos(toRadians(k)) + 0.5, s, r * sin(toRadians(k)) + 0.5).getBlock().setType(pillar);
+            Location locationForAltarBlock = location.clone().add(r * cos(toRadians(k)) + 0.5, s, r * sin(toRadians(k)) + 0.5);
+            locationForAltarBlock.getBlock().setType(pillar);
+            location.getWorld().spawnParticle(Particle.END_ROD, locationForAltarBlock, 10, 0,0,0, 0.1);
             s++;
             return;
         }

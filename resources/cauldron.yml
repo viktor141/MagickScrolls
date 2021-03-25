@@ -338,7 +338,15 @@ ANCIENT_BOTTLE:
         amount: '1'
         data: '0'
         mstype: null
-      - type: GLASS_BOTTLE
+      - type: EXP_BOTTLE
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: SLIME_BALL
+        amount: '1'
+        data: '0'
+        mstype: null
+      - type: BLAZE_POWDER
         amount: '1'
         data: '0'
         mstype: null
@@ -399,7 +407,7 @@ MAGNET:
         data: '0'
         mstype: null
       - type: SULPHUR
-        amount: '1'
+        amount: '4'
         data: '0'
         mstype: null
   result:

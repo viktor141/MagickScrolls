@@ -128,25 +128,6 @@ public class IOWork {
         }
     }
 
-    /*private void LoadResearchData(){
-        researchDataSaver = new ResearchDataSaver();
-        for(Research research : Research.values()){
-            if(plugin.getConfig().getConfigurationSection(research.name() + ".mobsToKill") == null)continue;
-            Map<String, Object> maps = plugin.getConfig().getConfigurationSection(research.name() + ".mobsToKill").getValues(false);
-            if(maps.isEmpty()){
-                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! " + research.name() + " Kills Data is NULL fix that!");
-                continue;
-            }
-
-            try {
-                maps.forEach((string, integer) -> researchDataSaver.put(research, EntityType.valueOf(string),(Integer) integer));
-            }catch (IllegalArgumentException exception){
-                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "WARNING!!! " + research.name() + " entity type is wrong");
-            }
-        }
-
-    }*/
-
     public void playerJoin(Mana playerMana){
         FileConfiguration playerStats = plugin.getIoWork().loadPlayerStats(playerMana.getPlayer().getUniqueId().toString());
         playerMana.setCurrentMana(playerStats.getDouble("CurrentMana"));

@@ -11,11 +11,16 @@
   <component name="ChangeListManager">
     <list default="true" id="9b7f60fa-4460-433c-adb1-d31f8596fbf6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/cauldron.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/cauldron.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en_US.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en_US.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/aspects/Aspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/aspects/Aspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/IOWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/IOWork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/altars/UsualAltar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/altars/UsualAltar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/crafts/ACCrafts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/utils/HeadGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/utils/HeadGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/CraftStartEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/CraftStartEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ImpEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/events/ImpEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/mobs/VillagerIMP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/mobs/VillagerIMP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/scrolls/AstralPet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/vixtor141/MagickScrolls/scrolls/AstralPet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

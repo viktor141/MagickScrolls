@@ -6,7 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import ru.vixtor141.MagickScrolls.Main;
 import ru.vixtor141.MagickScrolls.bosses.Imp;
 import ru.vixtor141.MagickScrolls.chatPlay.ImpSay;
@@ -22,10 +24,10 @@ public class ImpEvent implements Listener {
     @EventHandler
     public void damage(EntityDamageByEntityEvent event){
         if(!(event.getDamager() instanceof Player))return;
-        if(event.getEntity().hasMetadata("magickScrolls_IMP")) {
+        if(event.getEntity().hasMetadata("magickScrolls_IMP_player")) {
             event.setCancelled(true);
             Player player = (Player) event.getDamager();
-            if (!player.getUniqueId().equals(((Player) event.getEntity().getMetadata("magickScrolls_IMP").get(0).value()).getUniqueId())) {
+            if (!player.getUniqueId().equals(((Player) event.getEntity().getMetadata("magickScrolls_IMP_player").get(0).value()).getUniqueId())) {
                 player.sendMessage(new ImpSay(LangVar.msg_ingtwtoyiweywcm.getVar()).changeMessage());
                 return;
             }
@@ -57,5 +59,12 @@ public class ImpEvent implements Listener {
             }
             player.sendMessage(new ImpSay(LangVar.msg_tyaltbofkgyftpas.getVar()).changeMessage());
         }
+    }
+
+    @EventHandler
+    public void use(PlayerInteractEntityEvent event){
+        if(!event.getRightClicked().hasMetadata("magickScrolls_IMP"))return;
+        Merchant merchant =(Merchant) event.getRightClicked().getMetadata("magickScrolls_IMP").get(0).value();
+        event.getPlayer().openMerchant(merchant, false);
     }
 }

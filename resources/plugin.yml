@@ -12,9 +12,9 @@ commands:
     aliases: ms
 permissions:
   magickscrolls.give:
-    description: giving a permission on /magickscolls give
+    description: giving a permission on /magickscolls give for scrolls
   magickscrolls.give.artifact:
-    description: giving a permission on /magickscolls give for artifacts
+    description: giving a permission on /magickscolls give for items
   magickscrolls.heal:
     description: giving a permission on /magickscolls heal
   magickscrolls.cdreset:
@@ -44,9 +44,9 @@ permissions:
   magickscrolls.other.aspect.set:
     description: giving a permission on /magickscolls aspect set for other players
   magickscrolls.research:
-    description: giving a permission on /magickscolls aspect set for other players
+    description: giving a permission on /magickscolls research set
   magickscrolls.research.other:
-    description: giving a permission on /magickscolls aspect set for other players
+    description: giving a permission on /magickscolls research set for other players
   magickscrolls.give.scroll.ARROWSTORM:
     description: giving a permission on /magickscolls give <player> ARROWSTORM
   magickscrolls.give.scroll.LIGHTNINGONE:
