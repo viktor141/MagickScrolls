@@ -6,6 +6,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
@@ -16,7 +17,7 @@ import java.util.*;
 
 import static java.lang.Math.*;
 
-public class AltarCrafting implements Runnable{
+public class AltarCrafting{
 
     private final List<Item> nearbyItemsIng = new ArrayList<>(0);
     private final Main plugin = Main.getPlugin();
@@ -39,21 +40,27 @@ public class AltarCrafting implements Runnable{
 
         location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX(), location.getY() + 0.875, location.getZ()),1,0.25, 1).stream().filter(entity -> entity instanceof Item).forEach(entity -> nearbyItemsIng.add(((Item)entity)));
         if(nearbyItemsIng.size() != 2)return;
-        for(Item ingr : nearbyItemsIng){
-            ingr.setPickupDelay(2000);
+        for(Item ingredient : nearbyItemsIng){
+            if(ingredient.hasMetadata("magickscrolls_altar_in_crafting_item")){
+                return;
+            }
+        }
+        for(Item ingredient : nearbyItemsIng){
+            ingredient.setPickupDelay(2000);
         }
         Optional<Item> optionalItemStack = nearbyItemsIng.parallelStream().filter(item -> !(item.getItemStack().getType().equals(Material.PAPER))).findFirst();
         Optional<Item> optionalItemStackPaper = nearbyItemsIng.parallelStream().filter(item -> (item.getItemStack().getType().equals(Material.PAPER))).findFirst();
 
         if(!optionalItemStack.isPresent() || !optionalItemStackPaper.isPresent()){
-            for(Item ingr : nearbyItemsIng){
-                ingr.setPickupDelay(0);
+            for(Item ingredient : nearbyItemsIng){
+                ingredient.setPickupDelay(0);
             }
             return;
         }
 
         ing = optionalItemStack.get();
         paper = optionalItemStackPaper.get();
+        setMetadata();
 
         boolean checkup = false;
 
@@ -77,6 +84,7 @@ public class AltarCrafting implements Runnable{
     private void setPickupDelayToZero(){
         ing.setPickupDelay(0);
         paper.setPickupDelay(0);
+        unSetMetadata();
     }
 
     private void craftStart(ACCrafts.ItemsCauldronCrafts itemsCauldronCrafts){
@@ -85,7 +93,6 @@ public class AltarCrafting implements Runnable{
             recipe.put(new ArrayList<> (plugin.getAltarCraftsStorage().getRecipes().get(scroll.ordinal())), scroll);
         }
         craftCheckTask = Bukkit.getScheduler().runTask(plugin, this::itemCheckUp);
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, this);
     }
 
     private void dropItemFromItemFrame(ItemFrame itemFrame){
@@ -184,8 +191,7 @@ public class AltarCrafting implements Runnable{
         }
 
         effectTask.cancel();
-        ing.setPickupDelay(0);
-        paper.setPickupDelay(0);
+        setPickupDelayToZero();
         Item droppedScroll = location.getWorld().dropItem(new Location(location.getWorld(), location.getX() + 0.5, location.getY() + 3, location.getZ() + 0.5), result);
         droppedScroll.setVelocity(new Vector(0,0,0));
         droppedScroll.setGravity(false);
@@ -228,11 +234,20 @@ public class AltarCrafting implements Runnable{
         for(Item item : droppedItems){
             item.setPickupDelay(0);
         }
-        ing.setPickupDelay(0);
-        paper.setPickupDelay(0);
+        setPickupDelayToZero();
     }
 
-    @Override
-    public void run() {
+    private void setMetadata(){
+        ing.setMetadata("magickscrolls_altar_in_crafting_item",  new LazyMetadataValue(Main.getPlugin(), this::getAltarCrafting));
+        paper.setMetadata("magickscrolls_altar_in_crafting_item", new LazyMetadataValue(Main.getPlugin(), this::getAltarCrafting));
+    }
+
+    private void unSetMetadata(){
+        ing.removeMetadata("magickscrolls_altar_in_crafting_item", plugin);
+        paper.removeMetadata("magickscrolls_altar_in_crafting_item", plugin);
+    }
+
+    private AltarCrafting getAltarCrafting(){
+        return this;
     }
 }
