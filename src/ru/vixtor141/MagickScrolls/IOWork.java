@@ -321,8 +321,9 @@ public class IOWork {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            }        }
-        langCF = loadConf(langFile, "lang" + File.separator + "en_US.yml");
+            }
+        }
+        langCF = loadConf(langFile, "lang/en_US.yml");
     }
 
     private void loadCauldronRecipes(){

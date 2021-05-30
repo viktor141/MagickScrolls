@@ -1,7 +1,6 @@
 package ru.vixtor141.MagickScrolls;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -131,7 +130,7 @@ public class Main extends JavaPlugin {
 
         timeInterval = getConfig().getInt("saveInterval");
 
-        this.getLogger().info(ChatColor.YELLOW+"Plugin has been enabled");
+        this.getLogger().info("\033[38;2;124;252;0m" + "Plugin has been enabled." + "\033[39m");
     }
 
 
@@ -162,7 +161,7 @@ public class Main extends JavaPlugin {
             }
         }
         getExistMobs().clear();
-        this.getLogger().info(ChatColor.GOLD+"Plugin has been disabled");
+        this.getLogger().info("\033[38;2;124;252;0m" + "Plugin has been disabled." + "\033[39m");
     }
 
     public void initIOWork(){
@@ -195,6 +194,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AccessoriesInventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new AspectsAdd(), this);
         Bukkit.getPluginManager().registerEvents(new DropCustomItems(), this);
+        //Bukkit.getPluginManager().registerEvents(new InteractWithPedestal(), this);
     }
 
     private void readManaMessageSetting(){
