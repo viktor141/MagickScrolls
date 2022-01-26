@@ -418,3 +418,8 @@ BRAIN:
   result:
     ==: org.bukkit.inventory.ItemStack
     type: STICK
+PEDESTAL:
+  recipe:
+  result:
+    ==: org.bukkit.inventory.ItemStack
+    type: BONE_BLOCK

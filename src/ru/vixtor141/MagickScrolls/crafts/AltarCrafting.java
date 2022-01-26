@@ -2,6 +2,7 @@ package ru.vixtor141.MagickScrolls.crafts;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.ItemFrame;
@@ -10,7 +11,9 @@ import org.bukkit.metadata.LazyMetadataValue;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 import ru.vixtor141.MagickScrolls.Main;
+import ru.vixtor141.MagickScrolls.effects.ParticleRay;
 import ru.vixtor141.MagickScrolls.effects.ShootingStarEffect;
+import ru.vixtor141.MagickScrolls.events.InteractWithPedestal;
 import ru.vixtor141.MagickScrolls.research.PlayerResearch;
 
 import java.util.*;
@@ -29,7 +32,7 @@ public class AltarCrafting{
     private Item paper;
     private boolean failCheck = true;
     private ACCrafts.CraftsOfScrolls scroll;
-    private int j = 0;
+    private int j = 0, particleCounter = 0;
     private final int radiusOfSpawnMeteor = 15;
     private final PlayerResearch playerResearch;
 
@@ -95,25 +98,24 @@ public class AltarCrafting{
         craftCheckTask = Bukkit.getScheduler().runTask(plugin, this::itemCheckUp);
     }
 
-    private void dropItemFromItemFrame(ItemFrame itemFrame){
-        ItemStack itemFromIF = itemFrame.getItem();
-        if(itemFromIF.getType().equals(Material.AIR))return;
-        itemFrame.setItem(new ItemStack(Material.AIR));
-        Item entityItemFromIF = itemFrame.getWorld().dropItem(new Location(location.getWorld(), location.getX() + 0.5, location.getY() + 3, location.getZ() + 0.5), itemFromIF);
-        entityItemFromIF.setGravity(false);
-        entityItemFromIF.setPickupDelay(2000);
-        entityItemFromIF.setVelocity(new Vector(0,0,0));
-        entityItemFromIF.setGravity(false);
-        droppedItems.add(entityItemFromIF);
+    private void dropItemFromPedestal(ArmorStand pedestal){
+        ItemStack itemFromPedestal = pedestal.getHelmet();
+        pedestal.remove();
+        Item entityItemFromPedestal = pedestal.getWorld().dropItem(new Location(location.getWorld(), location.getX() + 0.5, location.getY() + 3, location.getZ() + 0.5), itemFromPedestal);
+        entityItemFromPedestal.setGravity(false);
+        entityItemFromPedestal.setPickupDelay(2000);
+        entityItemFromPedestal.setVelocity(new Vector(0,0,0));
+        entityItemFromPedestal.setGravity(false);
+        droppedItems.add(entityItemFromPedestal);
     }
 
     private void itemCheckUp(){
         Optional<Entity> optionalEntity;
-        for(int i = -3; i <= 3; i= i+6){
-            for(int j = - 2; j <= 2; j= j+2){
-                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + i + 0.5, location.getY() + 1, location.getZ() + j + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
+        for(double i = -3.5; i <= 3.5; i= i+7){
+            for(int j = -2; j <= 2; j= j+2){
+                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + i, location.getY() + 1, location.getZ() + j + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ArmorStand).filter(entity -> entity.getName().equals(InteractWithPedestal.PedestalThing.PEDESTAL_ITEM.getName())).findFirst();
                 searchingProcess(optionalEntity, location.getX() + i + 0.5, location.getY() + 1 + 0.5, location.getZ() + j + 0.5);
-                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + j + 0.5, location.getY() + 1, location.getZ() + i + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
+                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + j + 0.5, location.getY() + 1, location.getZ() + i), 1,1,1).parallelStream().filter(entity -> entity instanceof ArmorStand).filter(entity -> entity.getName().equals(InteractWithPedestal.PedestalThing.PEDESTAL_ITEM.getName())).findFirst();
                 searchingProcess(optionalEntity, location.getX() + j + 0.5, location.getY() + 1 + 0.5, location.getZ() + i + 0.5);
             }
         }
@@ -124,9 +126,9 @@ public class AltarCrafting{
     private void searchingProcess(Optional<Entity> optionalEntity, double x, double y, double z){
         boolean found = false;
         if(optionalEntity.isPresent()){
-            ItemFrame itemFrame = (ItemFrame) optionalEntity.get();
+            ArmorStand pedestal = (ArmorStand) optionalEntity.get();
             for (List<ItemStack> itemStacks : recipe.keySet()) {
-                ItemStack realItem = itemFrame.getItem();
+                ItemStack realItem = pedestal.getHelmet();
                 for(int i = 0; i< itemStacks.size(); i++){
                     ItemStack recipeItem = itemStacks.get(i);
                     if(realItem.getType().equals(recipeItem.getType()) && realItem.getDurability() == recipeItem.getDurability()){
@@ -139,8 +141,8 @@ public class AltarCrafting{
                 }
             }
             if(found){
-                dropItemFromItemFrame(itemFrame);
-                spawnParticleEffect(x,y,z);
+                dropItemFromPedestal(pedestal);
+                spawnParticleEffect(x,y + 1,z);
             }
         }
     }
@@ -171,6 +173,8 @@ public class AltarCrafting{
         location.getWorld().spawnParticle(Particle.END_ROD, x, y, z, 6, 0,0,0, 0.1);
         location.getWorld().spawnParticle(Particle.SPELL_INSTANT, x, y, z, 6, 0,0,0, 0.1);
         location.getWorld().spawnParticle(Particle.DRAGON_BREATH, x, y, z, 6, 0.5,0.5,0.5, 0.1);
+        new ParticleRay(new Location(location.getWorld(), x, y, z), new Location(location.getWorld(), location.getX() + 0.5, location.getY() + 3.2, location.getZ() + 0.5), 8, 2, Particle.END_ROD, particleCounter).start();
+        particleCounter++;
     }
 
     private void craftFinishing(){
@@ -251,3 +255,57 @@ public class AltarCrafting{
         return this;
     }
 }
+
+/*
+private void itemCheckUp(){
+        Optional<Entity> optionalEntity;
+        for(int i = -3; i <= 3; i= i+6){
+            for(int j = -2; j <= 2; j= j+2){
+                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + i + 0.5, location.getY() + 1, location.getZ() + j + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
+                searchingProcess(optionalEntity, location.getX() + i + 0.5, location.getY() + 1 + 0.5, location.getZ() + j + 0.5);
+                optionalEntity = location.getWorld().getNearbyEntities(new Location(location.getWorld(), location.getX() + j + 0.5, location.getY() + 1, location.getZ() + i + 0.5), 1,1,1).parallelStream().filter(entity -> entity instanceof ItemFrame).findFirst();
+                searchingProcess(optionalEntity, location.getX() + j + 0.5, location.getY() + 1 + 0.5, location.getZ() + i + 0.5);
+            }
+        }
+        craftCheckupFinish();
+        craftCheckTask.cancel();
+    }
+
+    private void searchingProcess(Optional<Entity> optionalEntity, double x, double y, double z){
+        boolean found = false;
+        if(optionalEntity.isPresent()){
+            ItemFrame itemFrame = (ItemFrame) optionalEntity.get();
+            for (List<ItemStack> itemStacks : recipe.keySet()) {
+                ItemStack realItem = itemFrame.getItem();
+                for(int i = 0; i< itemStacks.size(); i++){
+                    ItemStack recipeItem = itemStacks.get(i);
+                    if(realItem.getType().equals(recipeItem.getType()) && realItem.getDurability() == recipeItem.getDurability()){
+                        if((!realItem.getItemMeta().hasLore() && !recipeItem.getItemMeta().hasLore()) || (realItem.getItemMeta().hasLore() && recipeItem.getItemMeta().hasLore() && recipeItem.getItemMeta().getLore().get(0).equals(realItem.getItemMeta().getLore().get(realItem.getItemMeta().getLore().size() - 2).substring(Main.getPlugin().getSubStr())))){
+                            itemStacks.remove(i);
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(found){
+                dropItemFromItemFrame(itemFrame);
+                spawnParticleEffect(x,y,z);
+            }
+        }
+    }
+
+    private void craftCheckupFinish(){
+        for (List<ItemStack> itemStacks : recipe.keySet()){
+            if(!itemStacks.isEmpty())continue;
+
+            recipe.forEach((itemStacks1, craftsOfScrolls1) -> equalsLists(itemStacks, itemStacks1, craftsOfScrolls1));
+        }
+        if(!failCheck){
+            Bukkit.getScheduler().runTaskLater(plugin, this::craftFinishing, 228);
+            effectTask = Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::craftResultSuccessfulEffects, 30, 4);
+        }else{
+            craftResultUnsuccessful();
+        }
+    }
+ */

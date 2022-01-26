@@ -9,6 +9,7 @@ import ru.vixtor141.MagickScrolls.Misc.RitualsRecipesStorage;
 import ru.vixtor141.MagickScrolls.commands.Commands;
 import ru.vixtor141.MagickScrolls.crafts.AltarCraftsStorage;
 import ru.vixtor141.MagickScrolls.crafts.CauldronCraftsStorage;
+import ru.vixtor141.MagickScrolls.crafts.WorkBenchCrafts;
 import ru.vixtor141.MagickScrolls.events.*;
 import ru.vixtor141.MagickScrolls.includeAPI.PAPI;
 import ru.vixtor141.MagickScrolls.tasks.CleanUpTask;
@@ -130,6 +131,8 @@ public class Main extends JavaPlugin {
 
         timeInterval = getConfig().getInt("saveInterval");
 
+        loadCustomCrafts();
+
         this.getLogger().info("\033[38;2;124;252;0m" + "Plugin has been enabled." + "\033[39m");
     }
 
@@ -194,7 +197,12 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new AccessoriesInventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new AspectsAdd(), this);
         Bukkit.getPluginManager().registerEvents(new DropCustomItems(), this);
-        //Bukkit.getPluginManager().registerEvents(new InteractWithPedestal(), this);
+        Bukkit.getPluginManager().registerEvents(new InteractWithPedestal(), this);
+    }
+
+    private void loadCustomCrafts(){
+        WorkBenchCrafts workBenchCrafts = new WorkBenchCrafts();
+        workBenchCrafts.getCustomRecipes().forEach(shapedRecipe -> getServer().addRecipe(shapedRecipe));
     }
 
     private void readManaMessageSetting(){

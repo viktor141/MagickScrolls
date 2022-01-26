@@ -192,6 +192,12 @@ public class ACCrafts {
                 item.setItemMeta(meta);
                 return item;
             }
+        },
+        PEDESTAL{
+            @Override
+            public boolean isIgnoreRecipe(){
+                return true;
+            }
         };
 
         public CraftsOfScrolls[] getScroll(){return new CraftsOfScrolls[0];}
